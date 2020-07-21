@@ -1,0 +1,51 @@
+
+
+/*OrderManagementPage*/
+.container {
+  margin: 1rem;
+}
+
+.order-management {
+    margin-bottom: 30px;
+  }
+
+
+/*Order*/
+.lists{
+  height:500px;
+  margin-top:1rem;
+  color:grey;
+  overflow-y: scroll;
+}
+.order{
+  color: black;
+}
+.list {
+  padding: 5px;
+  margin: 15px;
+}
+
+.minus{
+  color: grey;
+  margin-top:-3px;
+}
+
+/*OrderDetails*/
+.client-details {
+  margin-bottom: 35px;
+  padding-left: 10px;
+}
+
+.total {
+  padding-top: 10px;
+}
+
+.borderOrder {
+  border: 1px solid grey;
+  box-shadow: 2px 2px 2px;
+}
+
+.buttonArchive {
+  height: 2.3em;
+  font-size: 1.2em;
+}

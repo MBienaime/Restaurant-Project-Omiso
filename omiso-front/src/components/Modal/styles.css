@@ -1,0 +1,78 @@
+.div-modal-signup {
+  opacity: 0.9;
+  position: absolute; /* postulat de départ */
+  top: 50%; left: 50%; /* à 50%/50% du parent référent */
+  transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
+  height: 90%;
+  width: 90%;
+  z-index: 2;
+
+}
+.div-modal {
+  opacity: 0.9;
+  height: 90%;
+  width: 80%;
+  margin: 20% auto;
+}
+.escape {
+  cursor: pointer;
+}
+
+.createAccount {
+  cursor: pointer;
+}
+
+.createAccount:hover {
+  color: green;
+}
+
+.form {
+  background-color: #3B3839;
+}
+
+.label {
+  color: white;
+  font-size: 2em;
+  text-align: center;
+  margin: auto;
+}
+
+.modalHeader {
+  /* display: flex;
+  justify-content: space-around; */
+  margin-bottom: 3em;
+}
+
+.spanX {
+  color: white;
+  font-size: 1.8em;
+  margin-left: 90%;
+
+}
+
+.textarea {
+  width: 70%;
+  margin-bottom: 3em;
+  border-radius: 10px;
+}
+
+.button-form {
+  width: 20em;
+  height: 3em;
+  border-radius: 10px;
+  border: 1px solid black;
+  background: rgb(19, 92, 0) ;
+  color: white;
+  font-size: 1.5em;
+}
+
+.button-form-alert {
+  width: 20em;
+  height: 3em;
+  border-radius: 10px;
+  border: 1px solid black;
+  background: rgb(192, 3, 3) ;
+  color: white;
+  font-size: 1.5em;
+}
+

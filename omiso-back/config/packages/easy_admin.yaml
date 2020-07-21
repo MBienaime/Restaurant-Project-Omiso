@@ -1,0 +1,73 @@
+easy_admin:
+    user:
+        display_name: true
+        display_avatar: false
+        
+    site_name: 'oMiso Administration'
+
+    design:
+        menu: [
+            {entity: 'Product', icon: 'shopping-basket'},
+            {entity: 'User', icon: 'user'},
+            {entity: 'Order', icon: 'list'}
+            ]
+
+    entities:
+        Product:
+            class: App\Entity\Product
+            label: 'Produits'
+            disabled_actions: ['delete']
+            list:
+                fields:
+                    - 'id'
+                    - {property: 'name', label: 'Nom'}
+                    - 'description'
+                    - {property: 'image', type: 'image'}
+                    - {property: 'price', label: 'Prix'}
+                    - {property: 'category', label: 'Catégorie'}
+                    - {property: 'status', label: 'En stock'}
+            form:
+                fields:
+                    - {property: 'name', label: 'Nom'}
+                    - 'description'
+                    - 'image'
+                    - {property: 'price', label: 'Prix'}
+                    - {property: 'status', label: 'En stock'}
+                    - { property: 'category', type: 'choice',  label: 'Catégorie',  type_options: { expanded: true, multiple: false, choices: { 'Entree': 'Entree', 'Plat': 'Plat', 'Dessert': 'Dessert', 'Boisson': 'Boisson' }} }
+
+        Order:
+            class: App\Entity\Order
+            label: 'Commandes'
+            disabled_actions: ['edit','delete','new']
+            list:
+                fields:
+                    - 'status'
+                    - {property: 'comments', label: 'Commentaires'}
+                    - 'client'
+                    - {property: 'total_price', label: 'Prix total'}
+        User:
+            class: App\Entity\User
+            label: 'Utilisateurs'
+            disabled_actions: ['new']
+            list:
+                fields:
+                    - 'id'
+                    - {property: 'email', type: 'email'}
+                    - {property: 'lastname', label: 'Nom'}
+                    - {property: 'firstname', label: 'Prénom'}
+                    - {property: 'phone_number', label: 'Téléphone'}
+                    - {property: 'address', label: 'Adresse'}
+                    - {property: 'postal_code', label: 'Code Postale'}
+                    - {property: 'city', label: 'Ville'}
+                    - {property: 'role', label: 'Role'}
+            form:
+                fields:
+                    - {property: 'email', type: 'email'}
+                    - {property: 'lastname', label: 'Nom'}
+                    - {property: 'firstname', label: 'Prénom'}
+                    - {property: 'phone_number', label: 'Téléphone'}
+                    - {property: 'address', label: 'Adresse'}
+                    - {property: 'postal_code', label: 'Code Postale'}
+                    - {property: 'city', label: 'Ville'}
+                    - {property: 'role', label: 'role'}
+            
