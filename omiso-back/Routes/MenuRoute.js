@@ -35,17 +35,18 @@ router.post("/", (req, res, next) => {
     });
 });
 
-router.get("/:menuId", (req, res, next) => {
-  const id = req.params.menuId;
-  if (id === "1") {
-    res.status(200).json({
-      message: "GET request to menu/1",
+router.get("/:menuItemId", (req, res, next) => {
+  const id = req.params.menuItemId;
+  MenuItem.findById(id)
+    .exec()
+    .then((doc) => {
+      console.log(doc);
+      res.status(200).json(doc);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: err });
     });
-  } else {
-    res.status(200).json({
-      message: "new ID passed",
-    });
-  }
 });
 
 router.patch("/:menuId", (req, res, next) => {
