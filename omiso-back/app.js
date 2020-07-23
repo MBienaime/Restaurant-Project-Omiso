@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 //import route
 const OrderRoute = require('./Routes/OrderRoute');
+const MenuRoutes = require('./Routes/MenuRoute');
 
 
 //connection Data
@@ -34,5 +35,6 @@ app.use(express.json());
 //Route
 app.use('/', express.static(__dirname + '/public'));
 app.use('/order', OrderRoute);
+app.use('/menu', MenuRoutes);
 
 module.exports = app; 
