@@ -29,6 +29,8 @@ router.post("/", (req, res, next) => {
     quantity: req.body.quantity,
     status: req.body.status,
   });
+
+  // Save MenuItem in the database
   menuItem
     .save()
     .then((result) => {
@@ -55,10 +57,26 @@ router.get("/:menuItemId", (req, res, next) => {
     });
 });
 
-router.patch("/:menuId", (req, res, next) => {
-  res.status(200).json({
-    message: "Updated menu",
-  });
+// Update an existing menu item by its id
+router.patch("/:menuItemId", (req, res, next) => {
+  const id = req.params.menuItemId;
+  const updateOps = {};
+
+  for (const ops of req.body) {
+    updateOps[ops.propName] = ops.value;
+  }
+
+  MenuItem.update({ _id: id }, { $set: updateOps })
+    .exec()
+    .then((result) => {
+      res.status(200).json({ message: "Product updated" });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
+    });
 });
 
 // Delete menu item by id
