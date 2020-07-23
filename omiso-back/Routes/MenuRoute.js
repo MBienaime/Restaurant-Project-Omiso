@@ -5,9 +5,16 @@ const router = express.Router();
 const MenuItem = require("../Models/MenuItemModel");
 
 router.get("/", (req, res, next) => {
-  res.status(200).json({
-    message: "GET request to /menu-tems",
-  });
+  MenuItem.find()
+    .exec()
+    .then((docs) => {
+      res.status(200).json(docs);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err,
+      });
+    });
 });
 
 router.post("/", (req, res, next) => {
@@ -23,14 +30,12 @@ router.post("/", (req, res, next) => {
   menuItem
     .save()
     .then((result) => {
-      console.log(result);
       res.status(201).json({
         message: "POST request to /menuItem",
         createdMenuItem: result,
       });
     })
     .catch((err) => {
-      console.log(err);
       res.status(500).json({ error: err });
     });
 });
@@ -40,11 +45,9 @@ router.get("/:menuItemId", (req, res, next) => {
   MenuItem.findById(id)
     .exec()
     .then((doc) => {
-      console.log(doc);
       res.status(200).json(doc);
     })
     .catch((err) => {
-      console.log(err);
       res.status(500).json({ error: err });
     });
 });
