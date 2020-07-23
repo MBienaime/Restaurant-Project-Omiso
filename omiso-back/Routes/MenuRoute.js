@@ -4,6 +4,7 @@ const router = express.Router();
 
 const MenuItem = require("../Models/MenuItemModel");
 
+// Find all menu items
 router.get("/", (req, res, next) => {
   MenuItem.find()
     .exec()
@@ -17,6 +18,7 @@ router.get("/", (req, res, next) => {
     });
 });
 
+// Create new menu item
 router.post("/", (req, res, next) => {
   const menuItem = new MenuItem({
     _id: new mongoose.Types.ObjectId(),
@@ -40,6 +42,7 @@ router.post("/", (req, res, next) => {
     });
 });
 
+// Find menu item by id
 router.get("/:menuItemId", (req, res, next) => {
   const id = req.params.menuItemId;
   MenuItem.findById(id)
@@ -58,10 +61,19 @@ router.patch("/:menuId", (req, res, next) => {
   });
 });
 
-router.delete("/:menuId", (req, res, next) => {
-  res.status(200).json({
-    message: "Deleted menu",
-  });
+// Delete menu item by id
+router.delete("/:menuItemId", (req, res, next) => {
+  const id = req.params.menuItemId;
+  MenuItem.remove({ _id: id })
+    .exec()
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err,
+      });
+    });
 });
 
 module.exports = router;
