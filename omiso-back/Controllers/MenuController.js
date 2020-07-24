@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const MenuItem = require("../Models/MenuItemModel");
 
 
-
+// Routes logic
 exports.menuItems_get_all = (req, res, next) => {
   MenuItem.find()
     .select("_id name description price category quantity status")
@@ -47,7 +47,7 @@ exports.menuItems_create_item = (req, res, next) => {
     status: req.body.status,
   });
 
-  // Save MenuItem in the database
+  // Saves MenuItem in the database
   menuItem
     .save()
     .then((result) => {
