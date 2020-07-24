@@ -35,6 +35,6 @@ app.use(express.json());
 //Route
 app.use('/', express.static(__dirname + '/public'));
 app.use('/order', OrderRoute);
-app.use('/menu', MenuRoutes);
+app.use('/menu-Items', MenuRoutes);
 
 module.exports = app; 
