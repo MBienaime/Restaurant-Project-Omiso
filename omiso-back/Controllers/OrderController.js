@@ -13,8 +13,10 @@ exports.getOrder = (req, res) => {
 // Post Order
 
 exports.postOrder = (req, res) => {
-  const OrderItem = new Orders({
+console.log(req.body.OrderMenu);
+  const OrderItem = new Order({
     idUser: req.body.idUser,
+    OrderMenu: req.body.OrderMenu
   });
 
   OrderItem.save()
@@ -25,7 +27,7 @@ exports.postOrder = (req, res) => {
 // Delete Order
 
 exports.deleteOrder = (req, res) => {
-  Order.remove({ _id: req.params.id })
+  Order.deleteOne({ _id: req.params.id })
     .then((docs) => { res.status(200).json(docs); })
     .catch((err) => console.log(err.message));
 };
