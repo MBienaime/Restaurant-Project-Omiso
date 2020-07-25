@@ -27,7 +27,8 @@ mongoose.connect('mongodb://localhost:27017/omiso',
     next();
   });
 */
-// body-parser
+
+// parse incoming request bodies in the middleware
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -35,6 +36,6 @@ app.use(express.json());
 //Route
 app.use('/', express.static(__dirname + '/public'));
 app.use('/order', OrderRoute);
-app.use('/menu-Items', MenuRoutes);
+app.use('/menu-items', MenuRoutes);
 
 module.exports = app; 
