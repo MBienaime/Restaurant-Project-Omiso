@@ -16,7 +16,7 @@ OrderRoute.route('/')
 
 OrderRoute.route('/:id')
   .delete(OrderController.deleteOrder)
-  .get(OrderController.getOrderById);
- 
+  .get(OrderController.getOrder)
+  .patch(OrderController.updateOrderById); 
 
 module.exports = OrderRoute;
