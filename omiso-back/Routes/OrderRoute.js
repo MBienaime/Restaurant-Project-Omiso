@@ -6,17 +6,17 @@ const OrderRoute = express.Router();
 
 // import controler
 
-const OrderControleur = require('../Controllers/OrderController');
+const OrderController = require('../Controllers/OrderController');
 
 // Order Route
 
 OrderRoute.route('/')
-  .get(OrderControleur.getOrder)
-  .post(OrderControleur.postOrder);
+  .get(OrderController.getOrder)
+  .post(OrderController.postOrder);
 
 OrderRoute.route('/:id')
-  .delete(OrderControleur.deleteOrder)
-  .get(OrderControleur.getOrder);
- 
+  .delete(OrderController.deleteOrder)
+  .get(OrderController.getOrder)
+  .patch(OrderController.updateOrderById); 
 
 module.exports = OrderRoute;
