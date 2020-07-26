@@ -21,28 +21,18 @@ exports.postOrder = (req, res) => {
   });
 
   OrderItem.save()
-<<<<<<< HEAD
-    .then((docs) => { res.status(201).json(docs); })
-    .catch((err) => { res.status(500).json({error: err.message}); });
-=======
     .exec()
     .then((doc) => { res.status(201).json(doc); })
     .catch((err) => { res.status(500).json({ error: err})});
->>>>>>> updateOrder
 };
 
 // Delete Order
 
 exports.deleteOrder = (req, res) => {
   Order.deleteOne({ _id: req.params.id })
-<<<<<<< HEAD
-    .then((docs) => { res.status(200).json(docs); })
-    .catch((err) => { res.status(500).json({ error: err.message }); });
-=======
     .exec()
     .then((doc) => { res.status(200).json(doc); })
     .catch((err) => { res.status(500).json({ error: err})});
->>>>>>> updateOrder
 };
 
 //Update Order by id
