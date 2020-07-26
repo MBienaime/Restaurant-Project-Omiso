@@ -20,8 +20,7 @@ exports.postOrder = (req, res) => {
     OrderMenu: req.body.OrderMenu
   });
 
-  OrderItem.save()
-    .exec()
+  OrderItem.save()    
     .then((doc) => { res.status(201).json(doc); })
     .catch((err) => { res.status(500).json({ error: err})});
 };
@@ -35,20 +34,33 @@ exports.deleteOrder = (req, res) => {
     .catch((err) => { res.status(500).json({ error: err})});
 };
 
+//Get Order By id
+
+exports.getOrderById = (req,res)=>{
+  Order.findById(req.params.id,(err,doc)=>{
+    if (err){res.status(404).json({ error: "Menu no valid"})}
+      else{  
+        res.status(200).json(doc);
+      }
+        
+})
+}
+
+
+
 //Update Order by id
 
 exports.updateOrderById = (req, res) => {    
   Order.findById(req.params.id,(err,doc)=>{
-      if (err){res.status(404).json({ error: err})}
-        else{  
+    if (err){res.status(404).json({ error: err})}
+      else{  
 
-        doc.idUser= req.body.idUser;
-        doc.OrderMenu= req.body.OrderMenu;
-        
-        doc.save()
-          .then((docs) => { res.status(200).json(doc); })
-          .catch((err) => { res.status(500).json({ error: err})});
-        }
-  })
-   
+      doc.idUser= req.body.idUser;
+      doc.OrderMenu= req.body.OrderMenu;
+      
+      doc.save()
+        .then((docs) => { res.status(200).json(doc); })
+        .catch((err) => { res.status(500).json({ error: err})});
+      }
+  })   
 };

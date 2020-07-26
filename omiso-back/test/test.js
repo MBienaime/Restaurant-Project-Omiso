@@ -35,8 +35,8 @@ describe('Unit Test API Omiso',()=>{
             chai.request(app)
                 .get('/order/4')
                 .end((err, res) => {
-                 expect(res).to.have.status(500);
-                 expect(res.body).to.have.property('error').to.be.a('string');
+                 expect(res).to.have.status(404);
+                 expect(res.body).to.have.property('error');
                  done();
                 })
         })
@@ -66,7 +66,7 @@ describe('Unit Test API Omiso',()=>{
             .send({})
             .end((err, res) => {
              expect(res).to.have.status(500);
-             expect(res.body).to.have.property('error').to.be.a('string'); 
+             expect(res.body).to.have.property('error'); 
                 done();                                 
             })
         })
@@ -77,7 +77,7 @@ describe('Unit Test API Omiso',()=>{
                 .end((err, res) => {
                  expect(res).to.have.status(500);
                  expect(res.body).to.be.an('object');
-                 expect(res.body).to.have.property('error').to.be.a('string')
+                 expect(res.body).to.have.property('error')
                  done();
                 })
         })
@@ -139,7 +139,7 @@ describe('Unit Test API Omiso',()=>{
                 .get('/menu-items/5f1d2')
                 .end((err, res) => {
                  expect(res).to.have.status(500);                 
-                 expect(res.body).to.have.property('error').to.be.a('string');
+                 expect(res.body).to.have.property('error');
                  done();
                 })
         })
@@ -172,7 +172,7 @@ describe('Unit Test API Omiso',()=>{
             .send({})
             .end((err, res) => {
              expect(res).to.have.status(500);
-             expect(res.body).to.have.property('error').to.be.a('string'); 
+             expect(res.body).to.have.property('error'); 
                 done();                                 
             })
         })
@@ -183,7 +183,7 @@ describe('Unit Test API Omiso',()=>{
                 .end((err, res) => {
                  expect(res).to.have.status(500);
                  expect(res.body).to.be.an('object');
-                 expect(res.body).to.have.property('error').to.be.a('string')
+                 expect(res.body).to.have.property('error')
                  done();
                 })
         })
