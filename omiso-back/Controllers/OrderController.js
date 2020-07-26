@@ -46,8 +46,6 @@ exports.getOrderById = (req,res)=>{
 })
 }
 
-
-
 //Update Order by id
 
 exports.updateOrderById = (req, res) => {    

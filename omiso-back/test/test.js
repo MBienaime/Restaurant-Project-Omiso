@@ -1,3 +1,8 @@
+// Import models Data Base
+const mongoose = require("mongoose");
+const Order = require('../Models/OrderModel');
+const MenuItem = require("../Models/MenuItemModel");
+
 //import
 const chai = require('chai');
 const chaihttp = require ('chai-http');
@@ -11,7 +16,7 @@ chai.use(chaihttp);
 describe('Unit Test API Omiso',()=>{
     describe('#Test Order route', ()=>{
         
-        it('should GET all the Order', (done)=>{
+        it('should GET all Order', (done)=>{
             chai.request(app)
                 .get('/order')
                 .end((err, res) => {
@@ -19,30 +24,9 @@ describe('Unit Test API Omiso',()=>{
                  expect(res.body).to.be.an('array');
                  done();
                 })
-        })
+        }) 
 
-        it('should GET valide Order by id', (done)=>{
-            chai.request(app)
-                .get('/order/5f1c2d31d718ec0588d42e34')
-                .end((err, res) => {
-                 expect(res).to.have.status(200);
-                 expect(res.body).to.be.an('object');
-                 done();
-                })
-        })
-
-        it('should GET invalide Order by id', (done)=>{
-            chai.request(app)
-                .get('/order/4')
-                .end((err, res) => {
-                 expect(res).to.have.status(404);
-                 expect(res.body).to.have.property('error');
-                 done();
-                })
-        })
-
-
-        it('should POST valide Order', (done)=>{
+        it('should POST Order', (done)=>{
 
         const post_Order = {
             idUser: '122222',
@@ -59,39 +43,36 @@ describe('Unit Test API Omiso',()=>{
             })
         })
 
-        it('should POST invalide order',(done)=>{
+        it('should GET Order by id', (done)=>{
 
-            chai.request(app)
-            .post('/order')
-            .send({})
-            .end((err, res) => {
-             expect(res).to.have.status(500);
-             expect(res.body).to.have.property('error'); 
-                done();                                 
-            })
-        })
+            Order.findOne({idUser:'122222'})
+                 .then((doc) => {                     
+                    chai.request(app)
+                        .get("/order/"+ doc._id)
+                        .end((err, res) => {
+                        expect(res).to.have.status(200);
+                        expect(res.body).to.be.an('object');
+                        done();
+                        })
+                 })            
+        }) 
 
-        it('should DELETE invalide Order', (done)=>{
-            chai.request(app)
-                .delete('/order/4545')
-                .end((err, res) => {
-                 expect(res).to.have.status(500);
-                 expect(res.body).to.be.an('object');
-                 expect(res.body).to.have.property('error')
-                 done();
-                })
-        })
+        it('should DELETE Order', (done)=>{
 
+            Order.findOne({idUser:'122222'})
+                 .then((doc) => {
 
-        it('should DELETE valide Order', (done)=>{
-            chai.request(app)
-                .delete('/order/5f1c28bf29a21a1978acff51')
-                .end((err, res) => {
-                 expect(res).to.have.status(200);
-                 expect(res.body).to.be.an('object');
-                 expect(res.body).to.have.property('n')
-                 done();
-                })
+                    chai.request(app)
+                    .delete("/order/"+ doc._id)
+                    .end((err, res) => {
+                    expect(res).to.have.status(200);
+                    expect(res.body).to.be.an('object');
+                    expect(res.body).to.have.property('n')
+                    done();
+                    }) 
+
+                 })
+
         })
 
 //describe Route Items 
@@ -116,38 +97,10 @@ describe('Unit Test API Omiso',()=>{
                 })
         })
 
-        it('should GET valide menu-items by id', (done)=>{
-            chai.request(app)
-                .get('/menu-items/5f1d224efccaf30d106c571f')
-                .end((err, res) => {
-                 expect(res).to.have.status(200);
-                 expect(res.body).to.be.an('object');
-                 expect(res.body.menuItem).to.have.property('_id');
-                 expect(res.body.menuItem).to.have.property('name');
-                 expect(res.body.menuItem).to.have.property('description');
-                 expect(res.body.menuItem).to.have.property('price');
-                 expect(res.body.menuItem).to.have.property('category');
-                 expect(res.body.menuItem).to.have.property('quantity');
-                 expect(res.body.menuItem).to.have.property('status');
-                 expect(res.body).to.have.property('request');
-                 done();
-                })
-        })
-
-        it('should GET invalide menu-items by id', (done)=>{
-            chai.request(app)
-                .get('/menu-items/5f1d2')
-                .end((err, res) => {
-                 expect(res).to.have.status(500);                 
-                 expect(res.body).to.have.property('error');
-                 done();
-                })
-        })
-
-        it('should POST valide the menuItems', (done)=>{
+        it('should POST menuItems', (done)=>{
             
             const post_order={
-                "name": "test name",
+                "name": "testName",
                 "description": "test description",
                 "price": 4,
                 "category": " test category",
@@ -165,49 +118,53 @@ describe('Unit Test API Omiso',()=>{
                 })
         })
 
-        it('should POST invalide menuItems',(done)=>{
+        it('should GET menu-items by id', (done)=>{
 
-            chai.request(app)
-            .post('/menu-items')
-            .send({})
-            .end((err, res) => {
-             expect(res).to.have.status(500);
-             expect(res.body).to.have.property('error'); 
-                done();                                 
-            })
-        })
-
-        it('should DELETE invalide menu-items by id', (done)=>{
-            chai.request(app)
-                .delete('/menu-items/4545')
-                .end((err, res) => {
-                 expect(res).to.have.status(500);
-                 expect(res.body).to.be.an('object');
-                 expect(res.body).to.have.property('error')
-                 done();
+            MenuItem.findOne({name:"testName"})
+                .then((doc)=>{
+                    chai.request(app)
+                        .get('/menu-items/'+doc._id)
+                        .end((err, res) => {
+                            expect(res).to.have.status(200);
+                            expect(res.body).to.be.an('object');
+                            expect(res.body.menuItem).to.have.property('_id');
+                            expect(res.body.menuItem).to.have.property('name');
+                            expect(res.body.menuItem).to.have.property('description');
+                            expect(res.body.menuItem).to.have.property('price');
+                            expect(res.body.menuItem).to.have.property('category');
+                            expect(res.body.menuItem).to.have.property('quantity');
+                            expect(res.body.menuItem).to.have.property('status');
+                            expect(res.body).to.have.property('request');
+                            done();
+                    });
+                    
                 })
         })
 
+        it('should DELETE menu-items by id', (done)=>{
 
-        it('should DELETE valide menu-items by id', (done)=>{
-            chai.request(app)
-                .delete('/menu-items/5f1d224efccaf30d106c571f')
-                .end((err, res) => {
-                 expect(res).to.have.status(200);
-                 expect(res.body).to.be.an('object');
-                 expect(res.body).to.have.property('message')
-                 done();
+            MenuItem.findOne({name: "testName"})
+                .then((doc)=>{
+                    chai.request(app)
+                        .delete('/menu-items/'+doc._id)
+                        .end((err, res) => {
+                        expect(res).to.have.status(200);
+                        expect(res.body).to.be.an('object');
+                        expect(res.body).to.have.property('message')
+                        done();
+                    })
                 })
-        })
-
-
-
+        })        
+    })
+    describe('#Test User route',()=>{
 
         
+
     })
+    describe('#Test checkAuth route',()=>{
 
 
-
+    })
 
     })
 });
