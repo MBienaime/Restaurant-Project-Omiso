@@ -31,7 +31,7 @@ exports.menuItems_get_all = (req, res, next) => {
     })
     .catch((err) => {
       res.status(500).json({
-        error: err,
+        error: err.message
       });
     });
 };
@@ -69,7 +69,7 @@ exports.menuItems_create_item = (req, res, next) => {
       });
     })
     .catch((err) => {
-      res.status(500).json({ error: err });
+      res.status(500).json({error: err.message});
     });
 };
 
@@ -95,7 +95,7 @@ exports.menuItems_get_item = (req, res, next) => {
       }
     })
     .catch((err) => {
-      res.status(500).json({ error: err });
+      res.status(500).json({ error: err.message});
     });
 };
 
@@ -103,9 +103,11 @@ exports.menuItems_update_item = (req, res, next) => {
   const id = req.params.menuItemId;
   const updateObj = {};
 
-  for (const key of Object.keys(req.body)) {
-    updateObj[key.propName] = key.value;
-  }
+  for (const key of Object.keys(req.body)) {    
+    updateObj[key.propName] = key.value; 
+}
+
+console.log(updateObj);
 
   MenuItem.update({ _id: id }, { $set: updateObj })
     .exec()
@@ -114,21 +116,21 @@ exports.menuItems_update_item = (req, res, next) => {
         message: "Item updated",
         request: {
           type: "GET",
-          url: "https://omiso.com/menu-items/" + doc._id,
+          url: "https://omiso.com/menu-items/" + result._id,
         },
       });
     })
     .catch((err) => {
       console.log(err);
       res.status(500).json({
-        error: err,
+        error: err.message
       });
     });
 };
 
 exports.menuItems_delete_item = (req, res, next) => {
   const id = req.params.menuItemId;
-  MenuItem.remove({ _id: id })
+  MenuItem.deleteOne({ _id: id })
     .exec()
     .then((result) => {
       res.status(200).json({
@@ -150,7 +152,7 @@ exports.menuItems_delete_item = (req, res, next) => {
     })
     .catch((err) => {
       res.status(500).json({
-        error: err,
+        error: err.message
       });
     });
 };
