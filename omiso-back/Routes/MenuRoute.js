@@ -1,42 +1,21 @@
+//Imports
 const express = require("express");
-
 const router = express.Router();
+const MenuController = require("../Controllers/MenuController");
 
-router.get("/", (req, res, next) => {
-  res.status(200).json({
-    message: "GET request to /menu",
-  });
-});
+// Find all menu items
+router.get("/", MenuController.menuItems_get_all);
 
-router.post("/", (req, res, next) => {
-  res.status(201).json({
-    message: "POST request to /menu",
-  });
-});
+// Create new menu item
+router.post("/", MenuController.menuItems_create_item);
 
-router.get("/:menuId", (req, res, next) => {
-  const id = req.params.menuId;
-  if (id === "1") {
-    res.status(200).json({
-      message: "GET request to menu/1",
-    });
-  } else {
-    res.status(200).json({
-      message: "new ID passed",
-    });
-  }
-});
+// Find menu item by id
+router.get("/:menuItemId", MenuController.menuItems_get_item);
 
-router.patch("/:menuId", (req, res, next) => {
-  res.status(200).json({
-    message: "Updated menu",
-  });
-});
+// Update an existing menu item by its id
+router.patch("/:menuItemId", MenuController.menuItems_update_item);
 
-router.delete("/:menuId", (req, res, next) => {
-  res.status(200).json({
-    message: "Deleted menu",
-  });
-});
+// Delete menu item by id
+router.delete("/:menuItemId", MenuController.menuItems_delete_item);
 
 module.exports = router;

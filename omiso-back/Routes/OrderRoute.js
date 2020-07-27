@@ -4,15 +4,19 @@ const express = require('express');
 
 const OrderRoute = express.Router();
 
-// Route
+// import controler
+
+const OrderController = require('../Controllers/OrderController');
+
+// Order Route
 
 OrderRoute.route('/')
-  .get((req,res)=>{ res.status(200).json('test route get');})
-  .post((req,res)=>{ res.status(200).json('test route post');});
+  .get(OrderController.getOrder)
+  .post(OrderController.postOrder);
 
 OrderRoute.route('/:id')
-  .delete((req,res)=>{ res.status(200).json('test route id delete');})
-  .get((req,res)=>{ res.status(200).json('test route id get');});
- 
+  .delete(OrderController.deleteOrder)
+  .get(OrderController.getOrderById)
+  .patch(OrderController.updateOrderById); 
 
 module.exports = OrderRoute;

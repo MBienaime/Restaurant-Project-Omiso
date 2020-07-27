@@ -26,14 +26,20 @@ mongoose
   });
 */
 
+
+// parse incoming request bodies in the middleware
+
+
 // Parses incoming request bodies in the middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //Route
+
 app.use("/", express.static(__dirname + "/public"));
 app.use("/order", OrderRoute);
 app.use("/menu", MenuRoutes);
 app.use("/user", userRoutes);
+
 
 module.exports = app;
