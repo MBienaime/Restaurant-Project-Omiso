@@ -17,5 +17,6 @@ const userSchema = mongoose.Schema({
   city: { type: String},
   role: { type: Boolean, required: true }, 
 });
-
+mongoose.set('useCreateIndex', true);
 module.exports = mongoose.model("User", userSchema);
+
