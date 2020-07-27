@@ -81,7 +81,7 @@ describe('Unit Test API Omiso',()=>{
 
         it('should GET all menu-items', (done)=>{
             chai.request(app)
-                .get('/menu-items')
+                .get('/menu')
                 .end((err, res) => {
                  expect(res).to.have.status(200);
                  expect(res.body.menuItems).to.be.an('array');
@@ -109,7 +109,7 @@ describe('Unit Test API Omiso',()=>{
               } 
 
             chai.request(app)
-                .post('/menu-items')
+                .post('/menu')
                 .send(post_order)
                 .end((err, res) => {
                  expect(res).to.have.status(201);
@@ -123,7 +123,7 @@ describe('Unit Test API Omiso',()=>{
             MenuItem.findOne({name:"testName"})
                 .then((doc)=>{
                     chai.request(app)
-                        .get('/menu-items/'+doc._id)
+                        .get('/menu/'+doc._id)
                         .end((err, res) => {
                             expect(res).to.have.status(200);
                             expect(res.body).to.be.an('object');
@@ -146,7 +146,7 @@ describe('Unit Test API Omiso',()=>{
             MenuItem.findOne({name: "testName"})
                 .then((doc)=>{
                     chai.request(app)
-                        .delete('/menu-items/'+doc._id)
+                        .delete('/menu/'+doc._id)
                         .end((err, res) => {
                         expect(res).to.have.status(200);
                         expect(res.body).to.be.an('object');
