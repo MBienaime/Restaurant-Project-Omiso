@@ -2,7 +2,6 @@
 const mongoose = require("mongoose");
 const MenuItem = require("../Models/MenuItemModel");
 
-
 // Routes logic
 exports.menuItems_get_all = (req, res, next) => {
   MenuItem.find()
@@ -31,7 +30,7 @@ exports.menuItems_get_all = (req, res, next) => {
     })
     .catch((err) => {
       res.status(500).json({
-        error: err.message
+        error: err.message,
       });
     });
 };
@@ -69,7 +68,7 @@ exports.menuItems_create_item = (req, res, next) => {
       });
     })
     .catch((err) => {
-      res.status(500).json({error: err.message});
+      res.status(500).json({ error: err.message });
     });
 };
 
@@ -95,7 +94,7 @@ exports.menuItems_get_item = (req, res, next) => {
       }
     })
     .catch((err) => {
-      res.status(500).json({ error: err.message});
+      res.status(500).json({ error: err.message });
     });
 };
 
@@ -103,11 +102,9 @@ exports.menuItems_update_item = (req, res, next) => {
   const id = req.params.menuItemId;
   const updateObj = {};
 
-  for (const key of Object.keys(req.body)) {    
-    updateObj[key.propName] = key.value; 
-}
-
-console.log(updateObj);
+  for (const key of Object.keys(req.body)) {
+    updateObj[key.propName] = key.value;
+  }
 
   MenuItem.update({ _id: id }, { $set: updateObj })
     .exec()
@@ -121,9 +118,8 @@ console.log(updateObj);
       });
     })
     .catch((err) => {
-      console.log(err);
       res.status(500).json({
-        error: err.message
+        error: err.message,
       });
     });
 };
@@ -152,7 +148,7 @@ exports.menuItems_delete_item = (req, res, next) => {
     })
     .catch((err) => {
       res.status(500).json({
-        error: err.message
+        error: err.message,
       });
     });
 };
