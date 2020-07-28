@@ -1,0 +1,10 @@
+#DATA BASE
+DB_HOST="locahost"
+BD_USER=
+DB_PASSWORD=
+
+#JWT
+JWT_PASSWORD="test"
+
+#BCRIPT
+BC_PASSWORD="BCtest"
