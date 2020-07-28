@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const OrderRoute = require("./Routes/OrderRoute");
 const MenuRoutes = require("./Routes/MenuRoute");
 const userRoutes = require('./Routes/UserRoute');
+const imagesRoutes = require('./Routes/imagesRoute')
 
 //connection to DataBase
 mongoose
@@ -26,7 +27,6 @@ mongoose
   });
 */
 
-
 // parse incoming request bodies in the middleware
 
 
@@ -40,6 +40,7 @@ app.use("/", express.static(__dirname + "/public"));
 app.use("/order", OrderRoute);
 app.use("/menu", MenuRoutes);
 app.use("/user", userRoutes);
+//app.use("/images",imagesRoutes);
 
 
 module.exports = app;

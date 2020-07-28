@@ -1,6 +1,6 @@
 //Import
 const multer = require("multer");
-const Image = multer({dest : '../Images'})
+const Image = multer({dest : '../Public/images'})
 
 // Mime types of the files
 const MIME_TYPES = {
