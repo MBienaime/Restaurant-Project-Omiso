@@ -125,7 +125,7 @@ exports.user_login = (req, res, next) => {
               userId: user._id,
               role: "",
             },
-            "keytoken",
+            process.env.JWT_KEY,
             {
               expiresIn: "1h",
             }

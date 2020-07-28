@@ -9,9 +9,12 @@ const MenuRoutes = require("./Routes/MenuRoute");
 const userRoutes = require('./Routes/UserRoute');
 const imagesRoutes = require('./Routes/imagesRoute')
 
+
+
 //connection to DataBase
+
 mongoose
-  .connect("mongodb://localhost:27017/omiso", {
+  .connect('mongodb://'+process.env.DB_HOST+':27017/omiso', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
