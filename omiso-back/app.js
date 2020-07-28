@@ -35,8 +35,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //Route
-
 app.use("/", express.static(__dirname + "/public"));
+app.use('/upload',express.static(__dirname +'/upload'));
 app.use("/order", OrderRoute);
 app.use("/menu", MenuRoutes);
 app.use("/user", userRoutes);

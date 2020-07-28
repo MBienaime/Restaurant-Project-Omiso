@@ -2,12 +2,11 @@
 const mongoose = require("mongoose");
 const MenuItem = require("../Models/MenuItemModel");
 
-
 // Routes logic
 exports.menuItems_get_all = (req, res, next) => {
 //if (req.userDataToken.role !== "admin" ){res.status(401).json('')};
   MenuItem.find()
-    .select("_id name description price category quantity status")
+    .select("_id name description price category quantity status image")
     .exec()
     .then((docs) => {
       const response = {
@@ -32,12 +31,13 @@ exports.menuItems_get_all = (req, res, next) => {
     })
     .catch((err) => {
       res.status(500).json({
-        error: err.message
+        error: err.message,
       });
     });
 };
 
 exports.menuItems_create_item = (req, res, next) => {
+  console.log(req.file);
   const menuItem = new MenuItem({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
@@ -46,6 +46,7 @@ exports.menuItems_create_item = (req, res, next) => {
     category: req.body.category,
     quantity: req.body.quantity,
     status: req.body.status,
+    image : req.file.path 
   });
 
   // Saves MenuItem in the database
@@ -70,7 +71,7 @@ exports.menuItems_create_item = (req, res, next) => {
       });
     })
     .catch((err) => {
-      res.status(500).json({error: err.message});
+      res.status(500).json({ error: err.message });
     });
 };
 
@@ -96,7 +97,7 @@ exports.menuItems_get_item = (req, res, next) => {
       }
     })
     .catch((err) => {
-      res.status(500).json({ error: err.message});
+      res.status(500).json({ error: err.message });
     });
 };
 
@@ -104,11 +105,9 @@ exports.menuItems_update_item = (req, res, next) => {
   const id = req.params.menuItemId;
   const updateObj = {};
 
-  for (const key of Object.keys(req.body)) {    
-    updateObj[key.propName] = key.value; 
-}
-
-console.log(updateObj);
+  for (const key of Object.keys(req.body)) {
+    updateObj[key.propName] = key.value;
+  }
 
   MenuItem.update({ _id: id }, { $set: updateObj })
     .exec()
@@ -122,9 +121,8 @@ console.log(updateObj);
       });
     })
     .catch((err) => {
-      console.log(err);
       res.status(500).json({
-        error: err.message
+        error: err.message,
       });
     });
 };
@@ -153,7 +151,7 @@ exports.menuItems_delete_item = (req, res, next) => {
     })
     .catch((err) => {
       res.status(500).json({
-        error: err.message
+        error: err.message,
       });
     });
 };
