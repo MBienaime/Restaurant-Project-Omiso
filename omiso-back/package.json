@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": { 
-    "start": "node -r dotenv/config server.js dotenv_config_path=./Config/config.env"
+    "start": "nodemon -r dotenv/config server.js dotenv_config_path=./Config/config.env"
     },
   "dependencies": {
     "bcrypt": "^5.0.0",
