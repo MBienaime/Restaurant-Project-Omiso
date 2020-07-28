@@ -3,7 +3,6 @@ const https = require('https');
 const app = require('./app');
 const fs = require('fs');
 
-
 // Certificates
 const options = {
     key: fs.readFileSync('./Config/Certificates/Keyomiso.key'),
