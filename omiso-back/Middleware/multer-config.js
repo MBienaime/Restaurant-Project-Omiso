@@ -1,6 +1,8 @@
 //Import
 const multer = require("multer");
+
 const upload = multer({dest : '../upload'});
+
 
 
 // Mime types of the files

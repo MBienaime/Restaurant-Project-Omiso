@@ -4,6 +4,7 @@ const MenuItem = require("../Models/MenuItemModel");
 
 // Routes logic
 exports.menuItems_get_all = (req, res, next) => {
+//if (req.userDataToken.role !== "admin" ){res.status(401).json('')};
   MenuItem.find()
     .select("_id name description price category quantity status image")
     .exec()
