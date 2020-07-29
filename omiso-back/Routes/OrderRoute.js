@@ -2,6 +2,7 @@
 
 const express = require('express');
 const checkAuth = require("../Middleware/CheckAuth");
+const checkRoles = require('../Middleware/CheckRoles');
 
 const OrderRoute = express.Router();
 
