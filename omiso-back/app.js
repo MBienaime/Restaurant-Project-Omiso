@@ -13,7 +13,7 @@ const imagesRoutes = require('./Routes/imagesRoute')
 
 //connection to DataBase
 
-mongoose
+ mongoose
   .connect('mongodb://'+process.env.DB_HOST+':27017/omiso', {
     useNewUrlParser: true,
     useUnifiedTopology: true,

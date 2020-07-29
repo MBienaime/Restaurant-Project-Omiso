@@ -6,13 +6,13 @@ const checkAuth = require('../Middleware/CheckAuth');
 const upload = require('../Middleware/multer-config');
 
 // Find all menu items
-router.get("/",checkAuth, MenuController.menuItems_get_all);
+router.get("/", MenuController.menuItems_get_all);
 
 // Create new menu item
-router.post("/",upload.single('image'), MenuController.menuItems_create_item);
+router.post("/",checkAuth,upload.single('image'), MenuController.menuItems_create_item);
 
 // Find menu item by id
-router.get("/:menuItemId", MenuController.menuItems_get_item);
+router.get("/:menuItemId",checkAuth, MenuController.menuItems_get_item);
 
 // Update an existing menu item by its id
 router.patch("/:menuItemId",checkAuth, MenuController.menuItems_update_item);

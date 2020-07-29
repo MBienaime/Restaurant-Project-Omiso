@@ -1,6 +1,7 @@
 // import
 
 const express = require('express');
+const checkAuth = require("../Middleware/CheckAuth");
 
 const OrderRoute = express.Router();
 
@@ -11,12 +12,12 @@ const OrderController = require('../Controllers/OrderController');
 // Order Route
 
 OrderRoute.route('/')
-  .get(OrderController.getOrder)
-  .post(OrderController.postOrder);
+  .get(checkAuth,OrderController.getOrder)
+  .post(checkAuth,OrderController.postOrder);
 
-OrderRoute.route('/:id')
-  .delete(OrderController.deleteOrder)
-  .get(OrderController.getOrderById)
-  .patch(OrderController.updateOrderById); 
+OrderRoute.route('/:id',checkAuth)
+  .delete(checkAuth,OrderController.deleteOrder)
+  .get(checkAuth,OrderController.getOrderById)
+  .patch(checkAuth,OrderController.updateOrderById); 
 
 module.exports = OrderRoute;
