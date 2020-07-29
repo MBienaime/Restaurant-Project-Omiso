@@ -12,12 +12,12 @@ const OrderController = require('../Controllers/OrderController');
 // Order Route
 
 OrderRoute.route('/')
-  .get(checkAuth,OrderController.getOrder)
-  .post(checkAuth,OrderController.postOrder);
+  .get(checkAuth,checkRoles(["admin"]),OrderController.getOrder)
+  .post(checkAuth,checkRoles(["admin"]),OrderController.postOrder);
 
 OrderRoute.route('/:id',checkAuth)
-  .delete(checkAuth,OrderController.deleteOrder)
-  .get(checkAuth,OrderController.getOrderById)
-  .patch(checkAuth,OrderController.updateOrderById); 
+  .delete(checkAuth,checkRoles(["admin"]),OrderController.deleteOrder)
+  .get(checkAuth,checkRoles(["admin"]),OrderController.getOrderById)
+  .patch(checkAuth,checkRoles(["admin"]),OrderController.updateOrderById); 
 
 module.exports = OrderRoute;
