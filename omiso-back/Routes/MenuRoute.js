@@ -4,12 +4,13 @@ const router = express.Router();
 const MenuController = require("../Controllers/MenuController");
 const checkAuth = require('../Middleware/CheckAuth');
 const upload = require('../Middleware/multer-config');
+const checkRoles = require('../Middleware/CheckRoles');
 
 // Find all menu items
 router.get("/", MenuController.menuItems_get_all);
 
 // Create new menu item
-router.post("/",checkAuth,upload.single('image'), MenuController.menuItems_create_item);
+router.post("/",checkAuth,checkRoles(["admin","aff"]),upload.single('image'), MenuController.menuItems_create_item);
 
 // Find menu item by id
 router.get("/:menuItemId",checkAuth, MenuController.menuItems_get_item);

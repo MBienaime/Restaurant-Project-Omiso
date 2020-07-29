@@ -123,7 +123,7 @@ exports.user_login = (req, res, next) => {
             {
               email: user.email,
               userId: user._id,
-              role: "",
+              role: "aff",
             },
             process.env.JWT_KEY,
             {

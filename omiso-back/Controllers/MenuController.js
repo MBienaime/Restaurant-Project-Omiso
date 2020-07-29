@@ -37,7 +37,7 @@ exports.menuItems_get_all = (req, res, next) => {
 };
 
 exports.menuItems_create_item = (req, res, next) => {
-  console.log(req.file);
+ 
   const menuItem = new MenuItem({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
@@ -46,7 +46,7 @@ exports.menuItems_create_item = (req, res, next) => {
     category: req.body.category,
     quantity: req.body.quantity,
     status: req.body.status,
-    image : req.file.path 
+    //image : req.file.path 
   });
 
   // Saves MenuItem in the database
