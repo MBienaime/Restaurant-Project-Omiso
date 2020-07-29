@@ -4,17 +4,18 @@ const app = express();
 const mongoose = require("mongoose");
 
 //import routes
-const OrderRoute = require("./Routes/OrderRoute");
-const MenuRoutes = require("./Routes/MenuRoute");
-const userRoutes = require('./Routes/UserRoute');
-const imagesRoutes = require('./Routes/imagesRoute')
+const OrderRouter = require("./Routes/OrderRoute");
+const MenuRouter = require("./Routes/MenuRoute");
+const userRouter = require('./Routes/UserRoute');
+const imagesRouter = require('./Routes/imagesRoute');
+const adminRouter = require('./Routes/AdminRoute');
 
 
 
 //connection to DataBase
 
 mongoose
-  .connect('mongodb://'+process.env.DB_HOST+':27017/omiso', {
+  .connect('mongodb://localhost:27017/omiso', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -40,10 +41,11 @@ app.use(express.json());
 //Route
 app.use("/", express.static(__dirname + "/public"));
 app.use('/upload',express.static(__dirname +'/upload'));
-app.use("/order", OrderRoute);
-app.use("/menu", MenuRoutes);
-app.use("/user", userRoutes);
-//app.use("/images",imagesRoutes);
+app.use("/order", OrderRouter);
+app.use("/menu", MenuRouter);
+app.use("/user", userRouter);
+//app.use("/images",imagesRouter);
+app.use("/admin", adminRouter);
 
 
 module.exports = app;
