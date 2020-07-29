@@ -22,7 +22,7 @@ exports.menuItems_get_all = (req, res, next) => {
             status: doc.status,
             request: {
               type: "GET",
-              url: "https://omiso.com/menu-items/" + doc._id,
+              url: "https://omiso.com/menu/" + doc._id,
             },
           };
         }),
@@ -65,7 +65,7 @@ exports.menuItems_create_item = (req, res, next) => {
           status: result.status,
           request: {
             type: "GET",
-            url: "https://omiso.com/menu-items/" + result._id,
+            url: "https://omiso.com/menu/" + result._id,
           },
         },
       });
@@ -87,7 +87,7 @@ exports.menuItems_get_item = (req, res, next) => {
           request: {
             type: "GET",
             description: "",
-            url: "https://omiso.com/menu-items/" + doc._id,
+            url: "https://omiso.com/menu/" + doc._id,
           },
         });
       } else {
@@ -116,7 +116,7 @@ exports.menuItems_update_item = (req, res, next) => {
         message: "Item updated",
         request: {
           type: "GET",
-          url: "https://omiso.com/menu-items/" + result._id,
+          url: "https://omiso.com/menu/" + result._id,
         },
       });
     })
@@ -137,7 +137,7 @@ exports.menuItems_delete_item = (req, res, next) => {
         // gives the possibility to create a new item
         request: {
           type: "POST",
-          url: "https://omiso.com/menu-items/",
+          url: "https://omiso.com/menu/",
           body: {
             name: String,
             description: String,
