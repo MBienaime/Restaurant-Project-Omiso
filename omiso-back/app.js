@@ -11,18 +11,14 @@ const imagesRouter = require('./Routes/imagesRoute');
 const adminRouter = require('./Routes/AdminRoute');
 
 
-
 //connection to DataBase
 
-
- mongoose
-  .connect('mongodb://'+process.env.DB_USER+':'+process.env.DB_PASSWORD+'@'+process.env.DB_HOST+':27017/'+process.env.DB+'', {
-
+mongoose.connect('mongodb://'+process.env.DB_USER+':'+process.env.DB_PASSWORD+'@'+process.env.DB_HOST+':27017/'+process.env.DB+'', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("Connexion à MongoDB réussie !"))
-  .catch(() => console.log("Connexion à MongoDB échouée !"));
+    .then(() => console.log("Connexion à MongoDB réussie !"))    
+    .catch(() => console.log("Connexion à MongoDB échouée !"));
 
 // Cors
 /*app.use((req, res, next) => {

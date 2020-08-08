@@ -2,6 +2,7 @@
 const mongoose = require("mongoose");
 const Order = require('../Models/OrderModel');
 const MenuItem = require("../Models/MenuItemModel");
+require('dotenv').config({path:'./Config/config.env'})
 
 //import
 const chai = require('chai');
@@ -13,6 +14,7 @@ const expect = require('chai').expect;
 chai.use(chaihttp);
 
 
+
 describe('Unit Test API Omiso',()=>{
     describe('#Test Order route', ()=>{
         
@@ -20,7 +22,7 @@ describe('Unit Test API Omiso',()=>{
             chai.request(app)
                 .get('/order')
                 .end((err, res) => {
-                 expect(res).to.have.status(200);
+                 expect(res).to.have.status(401);
                  expect(res.body).to.be.an('array');
                  done();
                 })
@@ -75,7 +77,7 @@ describe('Unit Test API Omiso',()=>{
 
         })
 
-//describe Route Items 
+//describe Route Menu 
 
     describe('#Test Menu-items route', ()=>{
 
