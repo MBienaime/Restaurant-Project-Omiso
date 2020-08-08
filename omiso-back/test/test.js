@@ -13,9 +13,26 @@ const expect = require('chai').expect;
 
 chai.use(chaihttp);
 
-
-
 describe('Unit Test API Omiso',()=>{
+    
+    //test user signup
+
+    describe('#Test connexion user',()=>{
+
+        it('should login user', (done)=>{
+            chai.request(app)
+                .post('/user/signup')
+                .end((err, res) => {
+                 expect(res).to.have.status(201);
+                 expect(res.body).to.be.an('object')
+                 expect(res.body).to.have.property('message');
+                 done();
+                })
+    })})
+
+
+    //test route order
+
     describe('#Test Order route', ()=>{
         
         it('should GET all Order', (done)=>{
@@ -81,7 +98,7 @@ describe('Unit Test API Omiso',()=>{
 
     describe('#Test Menu-items route', ()=>{
 
-        it('should GET all menu-items', (done)=>{
+        it('should GET all menu', (done)=>{
             chai.request(app)
                 .get('/menu')
                 .end((err, res) => {
@@ -99,7 +116,7 @@ describe('Unit Test API Omiso',()=>{
                 })
         })
 
-        it('should POST menuItems', (done)=>{
+        it('should POST menu', (done)=>{
             
             const post_order={
                 "name": "testName",
@@ -120,7 +137,7 @@ describe('Unit Test API Omiso',()=>{
                 })
         })
 
-        it('should GET menu-items by id', (done)=>{
+        it('should GET menu by id', (done)=>{
 
             MenuItem.findOne({name:"testName"})
                 .then((doc)=>{
@@ -143,7 +160,7 @@ describe('Unit Test API Omiso',()=>{
                 })
         })
 
-        it('should DELETE menu-items by id', (done)=>{
+        it('should DELETE menu by id', (done)=>{
 
             MenuItem.findOne({name: "testName"})
                 .then((doc)=>{
@@ -163,10 +180,9 @@ describe('Unit Test API Omiso',()=>{
         
 
     })
-    describe('#Test checkAuth route',()=>{
 
 
-    })
+
 
     })
 });
