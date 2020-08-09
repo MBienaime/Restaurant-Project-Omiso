@@ -2,7 +2,10 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const mailgun = require('mailgun-js')({apiKey: process.env.API_KEY, domain: process.env.DOMAIN});
 
+
+//Model
 const User = require("../Models/UserModel");
 
 //user routes logic
@@ -64,7 +67,8 @@ exports.user_get_user = (req, res, next) => {
 //Sign Up route : creates a new user
 exports.user_signup = (req, res, next) => {
   // Checking if email already exists
-  User.find({ email: req.body.email })
+  const email = req.params.email;
+  User.find(email)
     .exec()
     .then((user) => {
       if (user.length >= 1) {
@@ -103,7 +107,8 @@ exports.user_signup = (req, res, next) => {
 
 //User Login
 exports.user_login = (req, res, next) => {
-  User.find({ email: req.body.email })
+  const email = req.params.email;
+  User.find(email)
     .exec()
     .then((user) => {
       if (user.length < 1) {
@@ -137,7 +142,6 @@ exports.user_login = (req, res, next) => {
         }
         res.status(401).json({
           message: "Auth failed",
-
         });
       });
     })
@@ -146,6 +150,53 @@ exports.user_login = (req, res, next) => {
         error: err,
       });
     });
+};
+
+// Forgotten password
+exports.reset_password = (req, res, next) => {
+  const email = req.params.email;
+  User.findOne(email)
+  .exec()
+  .then((user) => {
+    if (!user) {
+      return res
+        .status(400)
+        .json({ error: "User with this email does not exist" });
+    }
+
+    const token = jwt.sign(
+      { _id: req.params.userId },
+      process.env.RESET_PASSWORD_KEY,
+      { expiresIn: "20m" }
+    );
+
+    const data = {
+      from: "no-reply@omiso.com",
+      to: "lmyriam.ab@gmail.com",
+      subject: "Reset-password-test-nodejs",
+      text: "le contenu du mail",
+      html: `
+      <h4>Your request to reset your password</h4>
+      <p>Clink on this <a href = "https://omiso.com/user/reset-password/${token}" >link<a/>to reset your password</p>`,
+    };
+
+    return User.updateOne({resetLink : token}, function (err, succe){
+      if (!user) {
+        return res
+          .status(400)
+          .json({ error: "Error linked to reset password link" });
+      } else {
+        mailgun.messages().send(data, (error, body) => {
+          if (err) {
+            return res.json({error : err.message})
+          }
+        });
+      }
+      return res.json({message: 'Email has been sent'})
+    })
+  
+    });
+    
 };
 
 //Delete user by its id

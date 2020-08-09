@@ -6,6 +6,8 @@ const checkAuth = require("../Middleware/CheckAuth");
 // User controllers
 const UserController = require("../Controllers/UserController");
 
+
+
 // Find all users
 router.get("/", checkAuth,UserController.user_get_all);
 
@@ -17,6 +19,9 @@ router.post("/signup", UserController.user_signup);
 
 //User login route
 router.post("/login", UserController.user_login);
+
+//Forgotten password
+router.post("/reset-password", UserController.reset_password);
 
 //Delete user by its id
 router.delete("/:userId", UserController.user_delete);
