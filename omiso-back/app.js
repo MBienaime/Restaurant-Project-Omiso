@@ -17,7 +17,7 @@ mongoose.connect('mongodb://'+process.env.DB_USER+':'+process.env.DB_PASSWORD+'@
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-    .then(() => console.log("Connexion à MongoDB réussie !"))    
+ //   .then(() => console.log("Connexion à MongoDB réussie !"))    
     .catch(() => console.log("Connexion à MongoDB échouée !"));
 
 // Cors

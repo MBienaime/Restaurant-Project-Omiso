@@ -16,207 +16,770 @@ chai.use(chaihttp);
 
 describe('Unit Test API Omiso',()=>{
 
-    User.deleteOne({ email: 'fabtest@gmail.com' })
-    .then()
-    .catch();
-    
-    //test route user 
-
-    describe('#Test connexion user',()=>{
-
-        it('should signup user', (done)=>{
-            const userTest = {
-                email: 'fabtest@gmail.com',
-                password: 'toto'
-                }
-            chai.request(app)
-                .post('/user/signup')
-                .send(userTest)
-                .end((err, res) => {
-                 expect(res).to.have.status(201);
-                 expect(res.body).to.be.an('object')
-                 expect(res.body).to.have.property('message');
-                 done();
-            })
-        })
-
-        it('should login user', (done)=>{
-            const userTest = {
-                email: 'fabtest@gmail.com',
-                password: 'toto'
-                }
-            chai.request(app)
-                .post('/user/login')
-                .send(userTest)
-                .end((err, res) => {
-                 expect(res).to.have.status(200);
-                 expect(res.body).to.be.an('object')
-                 expect(res.body).to.have.property('message')
-                 expect(res.body).to.have.property('token');
-                 tokentest = res.body.token;
-                 done(); 
-            })   
-        }) 
+    after(function () {
+        Order.deleteMany({idUser:"122222"})
+            .then((e)=>{console.log(e)})
+            .catch((e)=>{console.log("erre"+e)});
+        Menu.deleteMany({name:"testName"})
+            .then((e)=>{console.log(e)})
+            .catch((e)=>{console.log("erre"+e)}); 
+        User.deleteMany({email:"usertest@gmail.com"})
+            .then((e)=>{console.log(e)})
+            .catch((e)=>{console.log("erre"+e)}); 
+        User.deleteMany({email:"employétest@gmail.com"})
+            .then((e)=>{console.log(e)})
+            .catch((e)=>{console.log("erre"+e)});        
+      });
         
-                    
+    describe('#Test admin',()=>{
 
-    })
+        //test route user 
 
-    //test route order
-
-    describe('#Test Order route', ()=>{        
-        
-        it('should GET all Order (User Admin)', (done)=>{
-            chai.request(app)
-                .get('/order')  
-                .set("Authorization",'bearer '+tokentest)                             
-                .end((err, res) => {
-                 expect(res).to.have.status(200);
-                 expect(res.body).to.be.an('array');
-                 done();
-                })
-        })
-
-        it('should POST Order (user admin)', (done)=>{
-
-        const post_Order = {
-            idUser: '122222',
-            OrderMenu: {menu:'menu test',description:'description test'}
-            }
-
-        chai.request(app)
-            .post('/order')
-            .set("Authorization",'bearer '+tokentest)
-            .send(post_Order)
-            .end((err, res) => {
-                expect(res).to.have.status(201);
-                expect(res).to.be.a('object');                                  
+        describe('#Test connexion',()=>{
+            it('should signup user', (done)=>{
+                const userTest = {
+                    email: 'admintest@gmail.com',
+                    password: 'toto',
+                    role:'admin',
+                    }
+                chai.request(app)
+                    .post('/user/signup')
+                    .send(userTest)
+                    .end((err, res) => {
+                    expect(res).to.have.status(201);
+                    expect(res.body).to.be.an('object')
+                    expect(res.body).to.have.property('message');
                     done();
+                })
             })
-        })
 
-        it('should GET Order by id (user admin)', (done)=>{
+            it('should login user', (done)=>{
+                const userTest = {
+                    email: 'admintest@gmail.com',
+                    password: 'toto'
+                    }
+                chai.request(app)
+                    .post('/user/login')
+                    .send(userTest)
+                    .end((err, res) => {
+                    expect(res).to.have.status(200);
+                    expect(res.body).to.be.an('object')
+                    expect(res.body).to.have.property('message')
+                    expect(res.body).to.have.property('token');
+                    tokentest = res.body.token;
+                    done(); 
+                })   
+            }) 
 
-            Order.findOne({idUser:'122222'})
-                 .then((doc) => {                     
+            it.skip('should Find all users', (done)=>{
+                chai.request(app)
+                    .get('/')
+                    .set("Authorization",'bearer '+tokentest) 
+                    .end((err, res) => {
+                        expect(res).to.have.status(200);
+                        expect(res.body).to.have.property('users');
+                        expect(res.body.users).to.be.an('array');
+                        done();
+                        })
+            })
+            it('should Find user by id', (done)=>{
+
+                User.findOne({email:'admintest@gmail.com'})
+                    .then((doc) => {                     
+                        chai.request(app)
+                            .get("/user/"+ doc._id)
+                            .set("Authorization",'bearer '+tokentest)
+                            .end((err, res) => {
+                            expect(res).to.have.status(200);
+                            expect(res.body).to.be.an('object');
+                            done();
+                            })
+                    })
+
+            })
+
+            it('should Delete user by id', (done)=>{
+                User.findOne({ email: 'admintest@gmail.com' })
+                .then((doc) => {                     
                     chai.request(app)
-                        .get("/order/"+ doc._id)
+                        .delete("/user/"+ doc._id)
                         .set("Authorization",'bearer '+tokentest)
                         .end((err, res) => {
                         expect(res).to.have.status(200);
                         expect(res.body).to.be.an('object');
                         done();
                         })
-                 })            
-        }) 
+                })
 
-        it('should DELETE Order', (done)=>{
+            })
 
-            Order.findOne({idUser:'122222'})
-                 .then((doc) => {
-                    chai.request(app)                    
-                    .delete("/order/"+ doc._id)
-                    .set("Authorization",'bearer '+tokentest)
+        })
+
+        //test route order
+
+        describe('#Test Order route', ()=>{        
+            
+            it('should GET all Order ', (done)=>{
+                chai.request(app)
+                    .get('/order')  
+                    .set("Authorization",'bearer '+tokentest)                             
                     .end((err, res) => {
                     expect(res).to.have.status(200);
-                    expect(res.body).to.be.an('object');
-                    expect(res.body).to.have.property('n')                    
-                    });
-                     done();
+                    expect(res.body).to.be.an('array');
+                    done();
+                    })
+            })
 
-                 })
+            it('should POST Order ', (done)=>{
 
-        })
-
-//describe Route Menu 
-
-    describe('#Test Menu route', ()=>{
-
-        it('should POST menu', (done)=>{
-            
-            const post_order={
-                "name": "testName",
-                "description": "test description",
-                "price": 4,
-                "category": " test category",
-                "quantity": 2,
-                "status": "tesr status"
-              } 
+            const post_Order = {
+                idUser: '122222',
+                OrderMenu: {menu:'menu test',description:'description test'}
+                }
 
             chai.request(app)
-                .post('/menu')
+                .post('/order')
                 .set("Authorization",'bearer '+tokentest)
-                .send(post_order)
+                .send(post_Order)
                 .end((err, res) => {
-                 expect(res).to.have.status(201);
-                 expect(res.body.createdMenuItem).to.be.an('object');
-                 done();
+                    expect(res).to.have.status(201);
+                    expect(res).to.be.a('object');                                  
+                        done();
                 })
-        })
+            })
 
-        it('should GET all menu', (done)=>{
-            chai.request(app)
-                .get('/menu')                
-                .end((err, res) => {
-                 expect(res).to.have.status(200);
-                 expect(res.body.menuItems).to.be.an('array');
-                 expect(res.body.menuItems[0]).to.have.property('_id');
-                 expect(res.body.menuItems[0]).to.have.property('name');
-                 expect(res.body.menuItems[0]).to.have.property('description');
-                 expect(res.body.menuItems[0]).to.have.property('price');
-                 expect(res.body.menuItems[0]).to.have.property('category');
-                 expect(res.body.menuItems[0]).to.have.property('quantity');
-                 expect(res.body.menuItems[0]).to.have.property('status');
-                 expect(res.body.menuItems[0]).to.have.property('request');
-                 done();
-                })
-        })
+            it('should GET Order by id ', (done)=>{
 
-        
-
-        it('should GET menu by id', (done)=>{
-
-            Menu.findOne({name:"testName"})
-                .then((doc)=>{
-                    chai.request(app)
-                        .get('/menu/'+doc._id)
-                        .set("Authorization",'bearer '+tokentest)
-                        .end((err, res) => {
+                Order.findOne({idUser:'122222'})
+                    .then((doc) => {                     
+                        chai.request(app)
+                            .get("/order/"+ doc._id)
+                            .set("Authorization",'bearer '+tokentest)
+                            .end((err, res) => {
                             expect(res).to.have.status(200);
                             expect(res.body).to.be.an('object');
-                            expect(res.body.menuItem).to.have.property('_id');
-                            expect(res.body.menuItem).to.have.property('name');
-                            expect(res.body.menuItem).to.have.property('description');
-                            expect(res.body.menuItem).to.have.property('price');
-                            expect(res.body.menuItem).to.have.property('category');
-                            expect(res.body.menuItem).to.have.property('quantity');
-                            expect(res.body.menuItem).to.have.property('status');
-                            expect(res.body).to.have.property('request');
                             done();
-                    });
-                    
-                })
-        })
+                            })
+                    })            
+            }) 
 
-        it('should DELETE menu by id', (done)=>{
+            it('should DELETE Order ', (done)=>{
 
-            Menu.findOne({name: "testName"})
-                .then((doc)=>{
-                    chai.request(app)
-                        .delete('/menu/'+doc._id)
+                Order.findOne({idUser:'122222'})
+                    .then((doc) => {
+                        chai.request(app)                    
+                        .delete("/order/"+ doc._id)
                         .set("Authorization",'bearer '+tokentest)
                         .end((err, res) => {
                         expect(res).to.have.status(200);
                         expect(res.body).to.be.an('object');
-                        expect(res.body).to.have.property('message')
+                        expect(res.body).to.have.property('n')                    
+                        });
                         done();
-                    });
-                })
+
+                    })
+
+            })
+        })
+
+        //test route menu
+
+        describe('#Test Menu route', ()=>{
+
+            it('should POST menu ', (done)=>{
                 
-        })        
+                const post_order={
+                    "name": "testName",
+                    "description": "test description",
+                    "price": 4,
+                    "category": " test category",
+                    "quantity": 2,
+                    "status": "tesr status"
+                } 
+
+                chai.request(app)
+                    .post('/menu')
+                    .set("Authorization",'bearer '+tokentest)
+                    .send(post_order)
+                    .end((err, res) => {
+                    expect(res).to.have.status(201);
+                    expect(res.body.createdMenuItem).to.be.an('object');
+                    done();
+                    })
+            })
+
+            it('should GET all menu ', (done)=>{
+                chai.request(app)
+                    .get('/menu')                
+                    .end((err, res) => {
+                    expect(res).to.have.status(200);
+                    expect(res.body.menuItems).to.be.an('array');
+                    expect(res.body.menuItems[0]).to.have.property('_id');
+                    expect(res.body.menuItems[0]).to.have.property('name');
+                    expect(res.body.menuItems[0]).to.have.property('description');
+                    expect(res.body.menuItems[0]).to.have.property('price');
+                    expect(res.body.menuItems[0]).to.have.property('category');
+                    expect(res.body.menuItems[0]).to.have.property('quantity');
+                    expect(res.body.menuItems[0]).to.have.property('status');
+                    expect(res.body.menuItems[0]).to.have.property('request');
+                    done();
+                    })
+            })
+
+            it('should GET menu by id ', (done)=>{
+
+                Menu.findOne({name:"testName"})
+                    .then((doc)=>{
+                        chai.request(app)
+                            .get('/menu/'+doc._id)
+                            .set("Authorization",'bearer '+tokentest)
+                            .end((err, res) => {
+                                expect(res).to.have.status(200);
+                                expect(res.body).to.be.an('object');
+                                expect(res.body.menuItem).to.have.property('_id');
+                                expect(res.body.menuItem).to.have.property('name');
+                                expect(res.body.menuItem).to.have.property('description');
+                                expect(res.body.menuItem).to.have.property('price');
+                                expect(res.body.menuItem).to.have.property('category');
+                                expect(res.body.menuItem).to.have.property('quantity');
+                                expect(res.body.menuItem).to.have.property('status');
+                                expect(res.body).to.have.property('request');
+                                done();
+                        });
+                        
+                    })
+            })
+
+            it('should DELETE menu by id ', (done)=>{
+
+                Menu.findOne({name: "testName"})
+                    .then((doc)=>{
+                        chai.request(app)
+                            .delete('/menu/'+doc._id)
+                            .set("Authorization",'bearer '+tokentest)
+                            .end((err, res) => {
+                            expect(res).to.have.status(200);
+                            expect(res.body).to.be.an('object');
+                            expect(res.body).to.have.property('message')
+                            done();
+                        });
+                    })
+                    
+            })        
+        })
     })
-    describe('#Test User route',()=>{        
+
+    describe('#Test  Employé',()=>{
+
+        // runs once before the first test in this block 
+        before(function () {                                   
+            const OrderItem = new Order({
+                _id: new mongoose.Types.ObjectId(),
+                idUser: '122222',
+                OrderMenu: 'req.body.OrderMenu'
+            });
+            OrderItem.save();
+
+            const menuItem = new Menu({
+                _id: new mongoose.Types.ObjectId(),
+                name: "testName",
+                description: "req.body.description",
+                price: 5,
+                category: "req.body.category",
+                quantity: 2,
+                status: "req.body.status",
+                //image : req.file.path 
+              });
+            
+              // Saves MenuItem in the database
+              menuItem.save();
+
+        });
+
+        // runs once before the first test in this block
+
+        //test route user 
+
+        describe('#Test connexion ',()=>{
+
+            it('should signup user', (done)=>{
+                const userTest = {
+                    email: 'employétest@gmail.com',
+                    password: 'toto',
+                    role:'employé'
+                    }
+                chai.request(app)
+                    .post('/user/signup')
+                    .send(userTest)
+                    .end((err, res) => {
+                    expect(res).to.have.status(201);
+                    expect(res.body).to.be.an('object')
+                    expect(res.body).to.have.property('message')
+                    expect(res.body.message).to.equal("User created");
+                    done();
+                })
+            })
+
+            it('should login user', (done)=>{
+                const userTest = {
+                    email: 'employétest@gmail.com',
+                    password: 'toto'
+                    }
+                chai.request(app)
+                    .post('/user/login')
+                    .send(userTest)
+                    .end((err, res) => {
+                    expect(res).to.have.status(200);
+                    expect(res.body).to.be.an('object')
+                    expect(res.body).to.have.property('message')
+                    expect(res.body).to.have.property('token');
+                    tokentest = res.body.token;
+                    done(); 
+                })   
+            }) 
+
+            it.skip('should Find all users', (done)=>{
+                chai.request(app)
+                    .get('/')
+                    .set("Authorization",'bearer '+tokentest) 
+                    .end((err, res) => {
+                        expect(res).to.have.status(200);
+                        expect(res.body).to.have.property('users');
+                        expect(res.body.users).to.be.an('array');
+                        done();
+                        })
+            })
+            it('should Find user by id', (done)=>{
+                User.findOne({ email: 'employétest@gmail.com' })
+                    .then((doc) => {                     
+                        chai.request(app)
+                            .get("/user/"+ doc._id)
+                            .set("Authorization",'bearer '+tokentest)
+                            .end((err, res) => {
+                            expect(res).to.have.status(200);
+                            expect(res.body).to.be.an('object');
+                            done();
+                            })
+                    })
+
+            })
+
+            it('should not Delete user by id', (done)=>{
+                User.findOne({ email: 'employétest@gmail.com' })
+                .then((doc) => {                     
+                    chai.request(app)
+                        .delete("/user/"+ doc._id)
+                        .set("Authorization",'bearer '+tokentest)
+                        .end((err, res) => {
+                        expect(res).to.have.status(401);                        
+                        expect(res.body).to.have.property('message')
+                        expect(res.body.message).to.equal('Unauthorized');
+                        done();
+                        })
+                })
+
+            })
+
+        })
+
+        //test route order
+
+        describe('#Test Order route', ()=>{ 
+
+            it('should GET all Order ', (done)=>{
+                chai.request(app)
+                    .get('/order')  
+                    .set("Authorization",'bearer '+tokentest)                             
+                    .end((err, res) => {
+                    expect(res).to.have.status(200);
+                    expect(res.body).to.be.an('array');                    
+                    done();
+                    })
+            })
+
+            it('should not POST Order ', (done)=>{
+
+            const post_Order = {
+                idUser: '122222',
+                OrderMenu: {menu:'menu test',description:'description test'}
+                }
+
+            chai.request(app)
+                .post('/order')
+                .set("Authorization",'bearer '+tokentest)
+                .send(post_Order)
+                .end((err, res) => {
+                    expect(res).to.have.status(401);                        
+                    expect(res.body).to.have.property('message')
+                    expect(res.body.message).to.equal('Unauthorized');                                  
+                    done();                    
+                });
+            })
+
+            it('should GET Order by id ', (done)=>{
+
+                Order.findOne({idUser:'122222'})
+                    .then((doc) => {                     
+                        chai.request(app)
+                            .get("/order/"+ doc._id)
+                            .set("Authorization",'bearer '+tokentest)
+                            .end((err, res) => {
+                            expect(res).to.have.status(200);
+                            expect(res.body).to.be.an('object');
+                            done();
+                            })
+                    })            
+            }) 
+
+            it('should not DELETE Order ', (done)=>{
+
+                Order.findOne({idUser:'122222'})
+                    .then((doc) => {
+                        chai.request(app)                    
+                        .delete("/order/"+ doc._id)
+                        .set("Authorization",'bearer '+tokentest)
+                        .end((err, res) => {
+                            expect(res).to.have.status(401);                        
+                            expect(res.body).to.have.property('message')
+                            expect(res.body.message).to.equal('Unauthorized');
+                            done();                   
+                        });
+                        
+
+                    })
+
+            })
+        })
+
+        //test route menu
+
+        describe('#Test Menu route', ()=>{
+
+            it('should not POST menu ', (done)=>{
+                
+                const post_order={
+                    "name": "testName",
+                    "description": "test description",
+                    "price": 4,
+                    "category": " test category",
+                    "quantity": 2,
+                    "status": "tesr status"
+                } 
+                chai.request(app)
+                    .post('/menu')
+                    .set("Authorization",'bearer '+tokentest)
+                    .send(post_order)
+                    .end((err, res) => {
+                    expect(res).to.have.status(401);                        
+                    expect(res.body).to.have.property('message')
+                    expect(res.body.message).to.equal('Unauthorized');
+                    done();
+                    })
+            })
+
+            it('should GET all menu ', (done)=>{
+                chai.request(app)
+                    .get('/menu')                
+                    .end((err, res) => {
+                    expect(res).to.have.status(200);
+                    expect(res.body.menuItems).to.be.an('array');
+                    done();
+                    })
+            })
+
+            it('should not GET menu by id ', (done)=>{
+
+                Menu.findOne({name:"testName"})
+                    .then((doc)=>{
+                        chai.request(app)
+                            .get('/menu/'+doc._id)
+                            .set("Authorization",'bearer '+tokentest)
+                            .end((err, res) => {
+                            expect(res).to.have.status(401);                        
+                            expect(res.body).to.have.property('message')
+                            expect(res.body.message).to.equal('Unauthorized');
+                            done();
+                        });
+                        
+                    })
+            })
+
+            it('should not DELETE menu by id ', (done)=>{
+
+                Menu.findOne({name: "testName"})
+                    .then((doc)=>{
+                        chai.request(app)
+                            .delete('/menu/'+doc._id)
+                            .set("Authorization",'bearer '+tokentest)
+                            .end((err, res) => {
+                            expect(res).to.have.status(401);                        
+                            expect(res.body).to.have.property('message')
+                            expect(res.body.message).to.equal('Unauthorized');
+                            done();
+                        });
+                    })
+                    
+            })        
+        })
 
     })
+
+    describe('#Test User ',()=>{
+
+    // runs once before the first test in this block 
+    before(function () {                                   
+        const OrderItem = new Order({
+            _id: new mongoose.Types.ObjectId(),
+            idUser: '122222',
+            OrderMenu: 'req.body.OrderMenu'
+        });
+        OrderItem.save();
+
+        const menuItem = new Menu({
+            _id: new mongoose.Types.ObjectId(),
+            name: "testName",
+            description: "req.body.description",
+            price: 5,
+            category: "req.body.category",
+            quantity: 2,
+            status: "req.body.status",
+            //image : req.file.path 
+          });
+        
+          // Saves MenuItem in the database
+          menuItem.save();
+    });
+    // runs once before the first test in this block
+
+        //test route user 
+
+        describe('#Test connexion ',()=>{
+
+            it('should signup user', (done)=>{
+                const userTest = {
+                    email: 'usertest@gmail.com',
+                    password: 'toto',
+                    role:''
+                    }
+                chai.request(app)
+                    .post('/user/signup')
+                    .send(userTest)
+                    .end((err, res) => {
+                    expect(res).to.have.status(201);
+                    expect(res.body).to.be.an('object')
+                    expect(res.body).to.have.property('message')
+                    expect(res.body.message).to.equal("User created");
+                    done();
+                })
+            })
+
+            it('should login user', (done)=>{
+                const userTest = {
+                    email: 'usertest@gmail.com',
+                    password: 'toto'
+                    }
+                chai.request(app)
+                    .post('/user/login')
+                    .send(userTest)
+                    .end((err, res) => {
+                    expect(res).to.have.status(200);
+                    expect(res.body).to.be.an('object')
+                    expect(res.body).to.have.property('message')
+                    expect(res.body).to.have.property('token');
+                    tokentest = res.body.token;
+                    done(); 
+                })   
+            }) 
+
+            it.skip('should not Find all users', (done)=>{
+                chai.request(app)
+                    .get('/')
+                    .set("Authorization",'bearer '+tokentest) 
+                    .end((err, res) => {
+                    expect(res).to.have.status(401);                        
+                    expect(res.body).to.have.property('message')
+                    expect(res.body.message).to.equal('Unauthorized');;
+                    done();
+                        })
+            })
+            it('should Find not user by id', (done)=>{
+                User.findOne({ email: 'usertest@gmail.com' })
+                    .then((doc) => {                     
+                        chai.request(app)
+                            .get("/user/"+ doc._id)
+                            .set("Authorization",'bearer '+tokentest)
+                            .end((err, res) => {
+                            expect(res).to.have.status(401);                        
+                            expect(res.body).to.have.property('message')
+                            expect(res.body.message).to.equal('Unauthorized');
+                            done();
+                            })
+                    })
+
+            })
+
+            it('should not Delete user by id', (done)=>{
+                User.findOne({ email: 'usertest@gmail.com' })
+                .then((doc) => {                     
+                    chai.request(app)
+                        .delete("/user/"+ doc._id)
+                        .set("Authorization",'bearer '+tokentest)
+                        .end((err, res) => {
+                        expect(res).to.have.status(401);                        
+                        expect(res.body).to.have.property('message')
+                        expect(res.body.message).to.equal('Unauthorized');
+                        done();
+                        })
+                })
+
+            })
+
+        })
+
+        //test route order
+
+        describe('#Test Order route', ()=>{ 
+
+
+
+            it('should not GET all Order ', (done)=>{
+                chai.request(app)
+                    .get('/order')  
+                    .set("Authorization",'bearer '+tokentest)                             
+                    .end((err, res) => {
+                    expect(res).to.have.status(401);                        
+                    expect(res.body).to.have.property('message')
+                    expect(res.body.message).to.equal('Unauthorized');                    
+                    done();
+                    })
+            })
+
+            it('should not POST Order ', (done)=>{
+
+            const post_Order = {
+                idUser: '122222',
+                OrderMenu: {menu:'menu test',description:'description test'}
+                }
+
+            chai.request(app)
+                .post('/order')
+                .set("Authorization",'bearer '+tokentest)
+                .send(post_Order)
+                .end((err, res) => {
+                    expect(res).to.have.status(401);                        
+                    expect(res.body).to.have.property('message')
+                    expect(res.body.message).to.equal('Unauthorized');                                  
+                    done();                    
+                });
+            })
+
+            it('should not GET Order by id ', (done)=>{
+
+                Order.findOne({idUser:'122222'})
+                    .then((doc) => {                     
+                        chai.request(app)
+                            .get("/order/"+ doc._id)
+                            .set("Authorization",'bearer '+tokentest)
+                            .end((err, res) => {
+                            expect(res).to.have.status(401);                        
+                            expect(res.body).to.have.property('message')
+                            expect(res.body.message).to.equal('Unauthorized');
+                            done();
+                            })
+                    })            
+            }) 
+
+            it('should not DELETE Order ', (done)=>{
+
+                Order.findOne({idUser:'122222'})
+                    .then((doc) => {
+                        chai.request(app)                    
+                        .delete("/order/"+ doc._id)
+                        .set("Authorization",'bearer '+tokentest)
+                        .end((err, res) => {
+                            expect(res).to.have.status(401);                        
+                            expect(res.body).to.have.property('message')
+                            expect(res.body.message).to.equal('Unauthorized');
+                            done();                   
+                        });
+                        
+
+                    })
+
+            })
+        })
+
+        //test route menu
+
+        describe('#Test Menu route', ()=>{
+
+            it('should not POST menu ', (done)=>{
+                
+                const post_order={
+                    "name": "testName",
+                    "description": "test description",
+                    "price": 4,
+                    "category": " test category",
+                    "quantity": 2,
+                    "status": "tesr status"
+                } 
+                chai.request(app)
+                    .post('/menu')
+                    .set("Authorization",'bearer '+tokentest)
+                    .send(post_order)
+                    .end((err, res) => {
+                    expect(res).to.have.status(401);                        
+                    expect(res.body).to.have.property('message')
+                    expect(res.body.message).to.equal('Unauthorized');
+                    done();
+                    })
+            })
+
+            it('should GET all menu ', (done)=>{
+                chai.request(app)
+                    .get('/menu')                
+                    .end((err, res) => {
+                    expect(res).to.have.status(200);
+                    expect(res.body.menuItems).to.be.an('array');
+                    done();
+                    })
+            })
+
+            it('should not GET menu by id ', (done)=>{
+
+                Menu.findOne({name:"testName"})
+                    .then((doc)=>{
+                        chai.request(app)
+                            .get('/menu/'+doc._id)
+                            .set("Authorization",'bearer '+tokentest)
+                            .end((err, res) => {
+                            expect(res).to.have.status(401);                        
+                            expect(res.body).to.have.property('message')
+                            expect(res.body.message).to.equal('Unauthorized');
+                            done();
+                        });
+                        
+                    })
+            })
+
+            it('should not DELETE menu by id ', (done)=>{
+
+                Menu.findOne({name: "testName"})
+                    .then((doc)=>{
+                        chai.request(app)
+                            .delete('/menu/'+doc._id)
+                            .set("Authorization",'bearer '+tokentest)
+                            .end((err, res) => {
+                            expect(res).to.have.status(401);                        
+                            expect(res.body).to.have.property('message')
+                            expect(res.body.message).to.equal('Unauthorized');
+                            done();
+                        });
+                    })
+                    
+            })        
+        })
     })
+
+    
 });

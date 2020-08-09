@@ -9,22 +9,23 @@ const User = require("../Models/UserModel");
 
 // find all users
 exports.user_get_all = (req, res, next) => {
+  
   User.find()
     .select("firstname lastname email _id ")
     .exec()
-    .then((docs) => {
+    .then((docs) => {      
       const response = {
         count: docs.length,
-        users: docs.map((doc) => {
+        users: docs.map((doc) => {          
           return {
             ...doc,
             request: {
               type: "GET",
               url: "https://omiso.com/user/" + doc._id,
             },
-          };
+          };          
         }),
-      };
+      };      
       res.status(200).json(response);
     })
     .catch((err) => {
@@ -37,6 +38,7 @@ exports.user_get_all = (req, res, next) => {
 // find user by its id
 exports.user_get_user = (req, res, next) => {
   const id = req.params.userId;
+  
   User.findById(id)
     .select("firstname lastname email _id ")
     .exec()
@@ -82,6 +84,7 @@ exports.user_signup = (req, res, next) => {
               _id: new mongoose.Types.ObjectId(),
               email: req.body.email,
               password: hash,
+              role:req.body.role,
             });
             user
               .save()
@@ -105,7 +108,7 @@ exports.user_signup = (req, res, next) => {
 exports.user_login = (req, res, next) => {
   User.find({ email: req.body.email })
     .exec()
-    .then((user) => {
+    .then((user) => {      
       if (user.length < 1) {
         return res.status(401).json({
           message: "Auth failed",
@@ -118,21 +121,13 @@ exports.user_login = (req, res, next) => {
             message: "Auth failed",
           });
         }
-        if (result) {
-          const token = jwt.sign(
-            {
-              email: user.email,
-              userId: user._id,
-              role: "admin",
-            },
-            process.env.JWT_KEY,
-            {
-              expiresIn: "1h",
-            }
-          );
+        if (result) {         
+          
+          const token = jwt.sign({email: user[0].email, userId: user[0]._id, role:user[0].role }, process.env.JWT_KEY, {expiresIn: "1h"});
+          
           return res.status(200).json({
             message: "Auth successful",
-            token: token,
+            token: token,            
           });
         }
         res.status(401).json({

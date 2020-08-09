@@ -18,5 +18,5 @@ const userSchema = mongoose.Schema({
   role: { type: String, default: 'user'}, 
 });
 mongoose.set('useCreateIndex', true);
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Users", userSchema);
 

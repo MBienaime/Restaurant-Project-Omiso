@@ -8,10 +8,10 @@ const checkRoles = require('../Middleware/CheckRoles');
 const UserController = require("../Controllers/UserController");
 
 // Find all users
-router.get("/",checkAuth,checkRoles(["admin"]),UserController.user_get_all);
+router.get("/",checkAuth,checkRoles(["admin","employé"]),UserController.user_get_all);
 
 // Find user by id
-router.get("/:userId",checkAuth,checkRoles(["admin"]), UserController.user_get_user);
+router.get("/:userId",checkAuth,checkRoles(["admin","employé"]), UserController.user_get_user);
 
 //Sign Up route : creates a new user
 router.post("/signup", UserController.user_signup);
