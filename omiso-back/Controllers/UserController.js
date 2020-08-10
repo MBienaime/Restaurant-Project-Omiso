@@ -153,9 +153,9 @@ exports.user_login = (req, res, next) => {
 };
 
 // Forgotten password
-exports.reset_password = (req, res, next) => {
-  const email = req.params.email;
-  User.findOne(email)
+exports.forget_password = (req, res, next) => {
+  const email = req.body.email;
+  User.find({email: email})
   .exec()
   .then((user) => {
     if (!user) {
@@ -172,32 +172,25 @@ exports.reset_password = (req, res, next) => {
 
     const data = {
       from: "no-reply@omiso.com",
-      to: "lmyriam.ab@gmail.com",
+      to: email,
       subject: "Reset-password-test-nodejs",
-      text: "le contenu du mail",
       html: `
       <h4>Your request to reset your password</h4>
-      <p>Clink on this <a href = "https://omiso.com/user/reset-password/${token}" >link<a/>to reset your password</p>`,
+      <p>Clink on this <a href = "https://omiso.com/user/forget-password/${token}" >link<a/>to reset your password</p>`,
     };
 
-    return User.updateOne({resetLink : token}, function (err, succe){
-      if (!user) {
-        return res
-          .status(400)
-          .json({ error: "Error linked to reset password link" });
-      } else {
-        mailgun.messages().send(data, (error, body) => {
+  
+    mailgun.messages().send(data, (err, body) => {
+          console.log(data);
           if (err) {
-            return res.json({error : err.message})
+            return res.json({error : err})
+          } else {
+            return res.json({message: 'Email has been sent'})
           }
         });
+      });
       }
-      return res.json({message: 'Email has been sent'})
-    })
-  
-    });
-    
-};
+      
 
 //Delete user by its id
 exports.user_delete = (req, res, next) => {

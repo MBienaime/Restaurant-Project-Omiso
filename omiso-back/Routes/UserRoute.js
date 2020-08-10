@@ -21,7 +21,7 @@ router.post("/signup", UserController.user_signup);
 router.post("/login", UserController.user_login);
 
 //Forgotten password
-router.post("/reset-password", UserController.reset_password);
+router.post("/forget-password", UserController.forget_password);
 
 //Delete user by its id
 router.delete("/:userId", UserController.user_delete);
