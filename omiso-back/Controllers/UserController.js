@@ -17,8 +17,8 @@ exports.user_get_all = (req, res, next) => {
       const response = {
         count: docs.length,
         users: docs.map((doc) => {          
-          return {
-            ...doc,
+             return {
+            ...doc._doc,
             request: {
               type: "GET",
               url: "https://omiso.com/user/" + doc._id,

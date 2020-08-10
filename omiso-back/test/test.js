@@ -71,11 +71,11 @@ describe('Unit Test API Omiso',()=>{
                 })   
             }) 
 
-            it.skip('should Find all users', (done)=>{
+            it('should Find all users', (done)=>{
                 chai.request(app)
-                    .get('/')
+                    .get('/user')
                     .set("Authorization",'bearer '+tokentest) 
-                    .end((err, res) => {
+                    .end((err, res) => {                       
                         expect(res).to.have.status(200);
                         expect(res.body).to.have.property('users');
                         expect(res.body.users).to.be.an('array');
@@ -338,9 +338,9 @@ describe('Unit Test API Omiso',()=>{
                 })   
             }) 
 
-            it.skip('should Find all users', (done)=>{
+            it('should Find all users', (done)=>{
                 chai.request(app)
-                    .get('/')
+                    .get('/user')
                     .set("Authorization",'bearer '+tokentest) 
                     .end((err, res) => {
                         expect(res).to.have.status(200);
@@ -591,9 +591,9 @@ describe('Unit Test API Omiso',()=>{
                 })   
             }) 
 
-            it.skip('should not Find all users', (done)=>{
+            it('should not Find all users', (done)=>{
                 chai.request(app)
-                    .get('/')
+                    .get('/user')
                     .set("Authorization",'bearer '+tokentest) 
                     .end((err, res) => {
                     expect(res).to.have.status(401);                        
