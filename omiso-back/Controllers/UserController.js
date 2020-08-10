@@ -2,8 +2,11 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const mailgun = require('mailgun-js')({apiKey: process.env.API_KEY, domain: process.env.DOMAIN});
-
+const mailgun = require("mailgun-js")({
+  apiKey: process.env.API_KEY,
+  domain: process.env.DOMAIN,
+});
+const _ = require('lodash');
 
 //Model
 const User = require("../Models/UserModel");
@@ -154,43 +157,83 @@ exports.user_login = (req, res, next) => {
 
 // Forgotten password
 exports.forget_password = (req, res, next) => {
+
+  //checking if user exists
   const email = req.body.email;
-  User.find({email: email})
-  .exec()
-  .then((user) => {
-    if (!user) {
-      return res
-        .status(400)
-        .json({ error: "User with this email does not exist" });
-    }
+  User.find({ email: email })
+    .exec()
+    .then((user) => {
+      if (!user) {
+        return res.status(400).json({ error: "User with this email does not exist" });
+      }
 
-    const token = jwt.sign(
-      { _id: req.params.userId },
-      process.env.RESET_PASSWORD_KEY,
-      { expiresIn: "20m" }
-    );
+      // Creates token 
+      const token = jwt.sign({ _id: req.params.userId },process.env.RESET_PASSWORD_KEY,{ expiresIn: "20m" });
 
-    const data = {
-      from: "no-reply@omiso.com",
-      to: email,
-      subject: "Reset-password-test-nodejs",
-      html: `
+      // Creates data to be sent and pass token in url
+      const data = {
+        from: "no-reply@omiso.com",
+        to: email,
+        subject: "Reset-password-test-nodejs",
+        html: `
       <h4>Your request to reset your password</h4>
       <p>Clink on this <a href = "https://omiso.com/user/forget-password/${token}" >link<a/>to reset your password</p>`,
-    };
+      };
 
-  
-    mailgun.messages().send(data, (err, body) => {
-          console.log(data);
-          if (err) {
-            return res.json({error : err})
-          } else {
-            return res.json({message: 'Email has been sent'})
-          }
-        });
-      });
+      // token stored in user schema
+      User.updateOne({resetLink : token}, function (error, success) {
+        if(err) {
+          return res.status(400).json({error: 'Error link'});
+        } else {
+
+      // send email to user
+          mongoose.messages().send(data, function (error, body) {
+            console.log(data);
+            if(error){
+              return res.json({
+                error: err
+              })
+            }
+            return res.json({message : 'Email has been sent'})
+          })
+        }
+      })
+
+    });
+  }
+
+// Reset password
+exports.reset_password = (resq, res, next) => {
+  const{resetLink, newPassword} = req.body;
+  //check if resetLing/token exists in user schema + comparing user token and token in link
+  if(resertLink) {
+    jwt.verify(resetLink, process.env.RESET_PASSWORD_KEY, function(error, decodedData) {
+      if (error) {
+        return res.status(401).json({error: 'token incorrect or expired'});
       }
       
+      User.findOne({resetLink}, (error, user) => {
+        if(!user) {
+          return res.status(400).json({error:'user with this token does not exist'});
+        }
+        // create new password object 
+        const obj = {
+          password : newPassword
+        }
+
+        //Save 
+        user=_.extend(user, obj);
+        User.save((err, result) => {
+          if(err) {
+            return res.status(400).json({error: 'reset password error'});
+          } else {
+              return res.status(200).json({message : 'Your password has been changed'})
+          }
+        })
+      })
+    })
+  }
+};
 
 //Delete user by its id
 exports.user_delete = (req, res, next) => {
