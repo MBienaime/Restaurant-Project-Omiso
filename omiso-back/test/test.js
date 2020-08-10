@@ -18,16 +18,16 @@ describe('Unit Test API Omiso',()=>{
 
     after(function () {
         Order.deleteMany({idUser:"122222"})
-            .then((e)=>{console.log(e)})
+            .then()
             .catch((e)=>{console.log("erre"+e)});
         Menu.deleteMany({name:"testName"})
-            .then((e)=>{console.log(e)})
+            .then()
             .catch((e)=>{console.log("erre"+e)}); 
         User.deleteMany({email:"usertest@gmail.com"})
-            .then((e)=>{console.log(e)})
+            .then()
             .catch((e)=>{console.log("erre"+e)}); 
         User.deleteMany({email:"employétest@gmail.com"})
-            .then((e)=>{console.log(e)})
+            .then()
             .catch((e)=>{console.log("erre"+e)});        
       });
         
