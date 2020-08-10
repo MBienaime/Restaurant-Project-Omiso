@@ -6,7 +6,6 @@ const mailgun = require("mailgun-js")({
   apiKey: process.env.API_KEY,
   domain: process.env.DOMAIN,
 });
-const _ = require('lodash');
 
 //Model
 const User = require("../Models/UserModel");
@@ -221,8 +220,8 @@ exports.reset_password = (resq, res, next) => {
           password : newPassword
         }
 
-        //Save 
-        user=_.extend(user, obj);
+        //Save
+        User.assign(user, obj);
         User.save((err, result) => {
           if(err) {
             return res.status(400).json({error: 'reset password error'});
