@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const mailgun = require("mailgun-js")({
-  apiKey: process.env.API_KEY,
-  domain: process.env.DOMAIN,
+  apiKey: "aceaf29dc755cad08dd7fca89f3606fc-f7d0b107-989d6c23",
+  domain: "sandboxb321a73c34db489bb7afc26b9adee6dd.mailgun.org",
 });
 
 //Model
@@ -156,18 +156,23 @@ exports.user_login = (req, res, next) => {
 
 // Forgotten password
 exports.forget_password = (req, res, next) => {
-
   //checking if user exists
   const email = req.body.email;
   User.find({ email: email })
     .exec()
     .then((user) => {
       if (!user) {
-        return res.status(400).json({ error: "User with this email does not exist" });
+        return res
+          .status(400)
+          .json({ error: "User with this email does not exist" });
       }
 
-      // Creates token 
-      const token = jwt.sign({ _id: req.params.userId },process.env.RESET_PASSWORD_KEY,{ expiresIn: "20m" });
+      // Creates token
+      const token = jwt.sign(
+        { _id: req.params.userId },
+        "thisIsTheResetPasswordKey",
+        { expiresIn: "20m" }
+      );
 
       // Creates data to be sent and pass token in url
       const data = {
@@ -180,57 +185,70 @@ exports.forget_password = (req, res, next) => {
       };
 
       // token stored in user schema
-      User.updateOne({resetLink : token}, function (error, success) {
-        if(err) {
-          return res.status(400).json({error: 'Error link'});
+      User.updateOne({ resetLink: token }, function (error, success) {
+        if (error) {
+          return res.status(400).json({ error: "Error link" });
         } else {
-
-      // send email to user
-          mongoose.messages().send(data, function (error, body) {
-            console.log(data);
-            if(error){
+          // send email to user
+          mailgun.messages().send(data, function (error, body) {
+            if (error) {
               return res.json({
-                error: err
-              })
+                error: error,
+              });
             }
-            return res.json({message : 'Email has been sent'})
-          })
+            return res.json({ message: "Email has been sent" });
+          });
         }
-      })
-
+      });
     });
-  }
+};
 
 // Reset password
-exports.reset_password = (resq, res, next) => {
-  const{resetLink, newPassword} = req.body;
-  //check if resetLing/token exists in user schema + comparing user token and token in link
-  if(resertLink) {
-    jwt.verify(resetLink, process.env.RESET_PASSWORD_KEY, function(error, decodedData) {
+exports.reset_password = (req, res, next) => {
+  const { resetLink, newPassword } = req.body;
+  //check if resetLink/token exists in user schema + comparing user token and token in link
+  if (resetLink) {
+    jwt.verify(resetLink, "thisIsTheResetPasswordKey", function (
+      error,
+      decodedData
+    ) {
       if (error) {
-        return res.status(401).json({error: 'token incorrect or expired'});
+        return res.status(401).json({ error: "token incorrect or expired" });
       }
-      
-      User.findOne({resetLink}, (error, user) => {
-        if(!user) {
-          return res.status(400).json({error:'user with this token does not exist'});
-        }
-        // create new password object 
-        const obj = {
-          password : newPassword
-        }
 
-        //Save
-        User.assign(user, obj);
-        User.save((err, result) => {
-          if(err) {
-            return res.status(400).json({error: 'reset password error'});
+      User.findOne({ resetLink }, (error, user) => {
+        if (!user) {
+          return res
+            .status(400)
+            .json({ error: "user with this token does not exist" });
+        }
+        // create new password
+
+        bcrypt.hash(req.body.newPassword, 10, (err, hash) => {
+          if (err) {
+            return res.status(500).json({
+              error: err,
+            });
           } else {
-              return res.status(200).json({message : 'Your password has been changed'})
+            const obj = {
+              password: hash,
+            };
+
+            Object.assign(user, obj);
+            user.save((err, result) => {
+              if (err) {
+                return res.status(400).json({ error: "reset password error" });
+              } else {
+                return res
+                  .status(200)
+                  .json({ message: "Your password has been changed" });
+              }
+            });
           }
-        })
-      })
-    })
+        });
+
+      });
+    });
   }
 };
 

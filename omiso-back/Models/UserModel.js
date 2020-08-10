@@ -16,7 +16,9 @@ const userSchema = mongoose.Schema({
   postal_code: { type: Number },
   city: { type: String },
   role: { type: String },
-  resetLink: { type: String }
+  resetLink: { 
+  data: String,
+  default: '' }
 });
 mongoose.set("useCreateIndex", true);
 module.exports = mongoose.model("User", userSchema);
