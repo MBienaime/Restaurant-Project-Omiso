@@ -29,10 +29,12 @@ mongoose.connect('mongodb://'+process.env.DB_USER+':'+process.env.DB_PASSWORD+'@
   });
 */
 
-// parse incoming request bodies in the middleware
 
+
+app.use("/admin", adminRouter);
 
 // Parses incoming request bodies in the middleware
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -43,7 +45,7 @@ app.use("/order", OrderRouter);
 app.use("/menu", MenuRouter);
 app.use("/user", userRouter);
 //app.use("/images",imagesRouter);
-app.use("/admin", adminRouter);
+
 
 
 module.exports = app;
