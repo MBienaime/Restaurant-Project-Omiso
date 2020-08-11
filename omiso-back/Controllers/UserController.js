@@ -41,7 +41,7 @@ exports.user_get_all = (req, res, next) => {
 
 // find user by its id
 exports.user_get_user = (req, res, next) => {
-  const id = req.body.userId;
+  const id = req.params.userId;
   
   User.findById(id)
     .select("firstname lastname email _id ")

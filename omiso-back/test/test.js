@@ -130,7 +130,7 @@ describe('Unit Test API Omiso',()=>{
                     })
             })
 
-            it('should POST Order ', (done)=>{
+            it.skip('should POST Order ', (done)=>{
 
             const post_Order = {
                 idUser: '122222',
@@ -148,7 +148,7 @@ describe('Unit Test API Omiso',()=>{
                 })
             })
 
-            it('should GET Order by id ', (done)=>{
+            it.skip('should GET Order by id ', (done)=>{
 
                 Order.findOne({idUser:'122222'})
                     .then((doc) => {                     
@@ -163,7 +163,7 @@ describe('Unit Test API Omiso',()=>{
                     })            
             }) 
 
-            it('should DELETE Order ', (done)=>{
+            it.skip('should DELETE Order ', (done)=>{
 
                 Order.findOne({idUser:'122222'})
                     .then((doc) => {
@@ -384,7 +384,7 @@ describe('Unit Test API Omiso',()=>{
 
         //test route order
 
-        describe('#Test Order route', ()=>{ 
+        describe.skip('#Test Order route', ()=>{ 
 
             it('should GET all Order ', (done)=>{
                 chai.request(app)
@@ -638,7 +638,7 @@ describe('Unit Test API Omiso',()=>{
 
         //test route order
 
-        describe('#Test Order route', ()=>{ 
+        describe.skip('#Test Order route', ()=>{ 
 
 
 
