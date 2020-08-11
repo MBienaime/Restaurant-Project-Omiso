@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const mailgun = require("mailgun-js")({
-  apiKey: "aceaf29dc755cad08dd7fca89f3606fc-f7d0b107-989d6c23",
-  domain: "sandboxb321a73c34db489bb7afc26b9adee6dd.mailgun.org",
+  apiKey: process.env.API_KEY,
+  domain: process.env.DOMAIN
 });
 
 //Model
@@ -171,7 +171,7 @@ exports.forget_password = (req, res, next) => {
       // Creates token
       const token = jwt.sign(
         { _id: req.params.userId },
-        "thisIsTheResetPasswordKey",
+       process.env.RESET_PASSWORD_KEY,
         { expiresIn: "20m" }
       );
 
@@ -209,7 +209,7 @@ exports.reset_password = (req, res, next) => {
   const { resetLink, newPassword } = req.body;
   //check if resetLink/token exists in user schema + comparing user token and token in link
   if (resetLink) {
-    jwt.verify(resetLink, "thisIsTheResetPasswordKey", function (
+    jwt.verify(resetLink, process.env.RESET_PASSWORD_KEY, function (
       error,
       decodedData
     ) {
