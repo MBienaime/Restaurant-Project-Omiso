@@ -9,14 +9,18 @@ const userSchema = mongoose.Schema({
     match: /[a-z0-9!#$%&'*+\=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
   },
   password: { type: String, required: true },
-  lastname: { type: String  },
+  lastname: { type: String },
   firstname: { type: String },
-  phone_number: { type: String  },
-  address: { type: String},
-  postal_code: { type: Number},
-  city: { type: String},
-  role: { type: String, default: 'user'}, 
+
+  phone_number: { type: String },
+  address: { type: String },
+  postal_code: { type: Number },
+  city: { type: String },
+  role: { type: String },
+  resetLink: { 
+  data: String,
+  default: '' }
 });
-mongoose.set('useCreateIndex', true);
-module.exports = mongoose.model("Users", userSchema);
+mongoose.set("useCreateIndex", true);
+module.exports = mongoose.model("User", userSchema);
 
