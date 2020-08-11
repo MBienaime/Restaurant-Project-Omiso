@@ -11,6 +11,7 @@ const userSchema = mongoose.Schema({
   password: { type: String, required: true },
   lastname: { type: String },
   firstname: { type: String },
+
   phone_number: { type: String },
   address: { type: String },
   postal_code: { type: Number },
@@ -22,3 +23,4 @@ const userSchema = mongoose.Schema({
 });
 mongoose.set("useCreateIndex", true);
 module.exports = mongoose.model("User", userSchema);
+

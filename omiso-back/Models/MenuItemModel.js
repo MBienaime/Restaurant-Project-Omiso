@@ -14,4 +14,4 @@ const menuItemSchema = mongoose.Schema({
 });
 
 //Converts menuItemSchema into a Model + exports it
-module.exports = mongoose.model("MenuItem", menuItemSchema);
+module.exports = mongoose.model("Menu", menuItemSchema);

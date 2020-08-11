@@ -1,5 +1,5 @@
 #DATA BASE
-DB_HOST="locahost"
+DB_HOST="localhost"
 BD_USER=
 DB_PASSWORD=
 
