@@ -1,6 +1,7 @@
 // Import models Data Base
 const mongoose = require("mongoose");
 const Order = require('../Models/OrderModel');
+const User = require("../Models/UserModel");
 
 // Get Order
 
@@ -13,16 +14,32 @@ exports.getOrder = (req, res) => {
 // Post Order
 
 exports.postOrder = (req, res) => {
-  
-  const OrderItem = new Order({
-    _id: new mongoose.Types.ObjectId(),
-    idUser: req.body.idUser,
-    OrderMenu: req.body.OrderMenu
-  });
 
-  OrderItem.save()    
-    .then((doc) => { res.status(201).json(doc); })
-    .catch((err) => { res.status(500).json({ error: err})});
+  User.findById(req.dataToken.userId)
+  .exec()
+  .then((user)=>{
+
+    const OrderItem = new Order({
+      _id: new mongoose.Types.ObjectId(),
+      lastName_User:user.lastname,
+      firstName_User:user.firstname,
+      phoneNumber_User:user.phone_number,
+      email_User:user.email,
+      date_Order:Date() ,
+      total_Amount:5 ,
+      order_Menu:req.body.order
+    });
+  
+    OrderItem.save()    
+      .then((doc) => { res.status(201).json(doc); })
+      .catch((err) => { res.status(500).json({ error: err})});
+
+
+  })
+  .catch((err)=>{res.status(404).json({ error: err})})
+
+  
+
 };
 
 // Delete Order

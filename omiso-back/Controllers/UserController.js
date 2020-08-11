@@ -84,6 +84,12 @@ exports.user_signup = (req, res, next) => {
               _id: new mongoose.Types.ObjectId(),
               email: req.body.email,
               password: hash,
+              lastname:req.body.lastname,
+              firstname:req.body.firstname,
+              phone_number:req.body.phone_number,
+              address:req.body.adsress,
+              postal_code:req.body.postal_code,
+              city:req.body.city,
               role:req.body.role,
             });
             user
@@ -123,7 +129,7 @@ exports.user_login = (req, res, next) => {
         }
         if (result) {         
           
-          const token = jwt.sign({email: user[0].email, userId: user[0]._id, role:user[0].role }, process.env.JWT_KEY, {expiresIn: "1h"});
+          const token = jwt.sign({userId:user[0]._id, role:user[0].role }, process.env.JWT_KEY, {expiresIn:"1h"});
           
           return res.status(200).json({
             message: "Auth successful",
