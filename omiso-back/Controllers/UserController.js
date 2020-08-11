@@ -14,7 +14,6 @@ const User = require("../Models/UserModel");
 
 // find all users
 exports.user_get_all = (req, res, next) => {
-  
   User.find()
     .select("firstname lastname email _id ")
     .exec()
@@ -42,7 +41,7 @@ exports.user_get_all = (req, res, next) => {
 
 // find user by its id
 exports.user_get_user = (req, res, next) => {
-  const id = req.params.userId;
+  const id = req.body.userId;
   
   User.findById(id)
     .select("firstname lastname email _id ")
@@ -71,8 +70,8 @@ exports.user_get_user = (req, res, next) => {
 //Sign Up route : creates a new user
 exports.user_signup = (req, res, next) => {
   // Checking if email already exists
-  const email = req.params.email;
-  User.find(email)
+  const email = req.body.email;
+  User.find({email: email})
     .exec()
     .then((user) => {
       if (user.length >= 1) {
@@ -118,8 +117,8 @@ exports.user_signup = (req, res, next) => {
 
 //User Login
 exports.user_login = (req, res, next) => {
-  const email = req.params.email;
-  User.find(email)
+  const email = req.body.email;
+  User.find({email: email})
     .exec()
     .then((user) => {      
       if (user.length < 1) {
@@ -136,7 +135,7 @@ exports.user_login = (req, res, next) => {
         }
         if (result) {         
           
-          const token = jwt.sign({userId:user[0]._id, role:user[0].role }, process.env.JWT_KEY, {expiresIn:"1h"});
+          const token = jwt.sign({userId:user[0]._id, role:user[0].role }, process.env.JWT_PASSWORD, {expiresIn:"1h"});
           
           return res.status(200).json({
             message: "Auth successful",
@@ -170,7 +169,7 @@ exports.forget_password = (req, res, next) => {
 
       // Creates token
       const token = jwt.sign(
-        { _id: req.params.userId },
+        { _id: req.body.userId },
        process.env.RESET_PASSWORD_KEY,
         { expiresIn: "20m" }
       );
@@ -255,7 +254,7 @@ exports.reset_password = (req, res, next) => {
 
 //Delete user by its id
 exports.user_delete = (req, res, next) => {
-  User.deleteOne({ _id: req.params.userId })
+  User.deleteOne({ _id: req.body.userId })
     .exec()
     .then((result) => {
       res.status(200).json({
