@@ -19,14 +19,16 @@ exports.postOrder = (req, res) => {
   .exec()
   .then((user)=>{
 
+    
+
     const OrderItem = new Order({
       _id: new mongoose.Types.ObjectId(),
       lastName_User:user.lastname,
       firstName_User:user.firstname,
       phoneNumber_User:user.phone_number,
       email_User:user.email,
-      date_Order:Date() ,
-      total_Amount:5 ,
+      date_Order:Date(),
+      total_Amount:5,
       order_Menu:req.body.order
     });
   
@@ -34,11 +36,8 @@ exports.postOrder = (req, res) => {
       .then((doc) => { res.status(201).json(doc); })
       .catch((err) => { res.status(500).json({ error: err})});
 
-
   })
-  .catch((err)=>{res.status(404).json({ error: err})})
-
-  
+  .catch((err)=>{res.status(404).json({ error: err})})  
 
 };
 
