@@ -1,31 +1,29 @@
-//Imports
-const mongoose = require("mongoose");
-const MenuItem = require("../Models/MenuItemModel");
+// Imports
+const mongoose = require('mongoose');
+const MenuItem = require('../Models/MenuItemModel');
 
 // Routes logic
 exports.menuItems_get_all = (req, res, next) => {
-//if (req.userDataToken.role !== "admin" ){res.status(401).json('')};
+// if (req.userDataToken.role !== "admin" ){res.status(401).json('')};
   MenuItem.find()
-    .select("_id name description price category quantity status image")
+    .select('_id name description price category quantity status image')
     .exec()
     .then((docs) => {
       const response = {
         count: docs.length,
-        menuItems: docs.map((doc) => {
-          return {
-            _id: doc._id,
-            name: doc.name,
-            description: doc.description,
-            price: doc.price,
-            category: doc.category,
-            quantity: doc.quantity,
-            status: doc.status,
-            request: {
-              type: "GET",
-              url: "https://omiso.com/menu/" + doc._id,
-            },
-          };
-        }),
+        menuItems: docs.map((doc) => ({
+          _id: doc._id,
+          name: doc.name,
+          description: doc.description,
+          price: doc.price,
+          category: doc.category,
+          quantity: doc.quantity,
+          status: doc.status,
+          request: {
+            type: 'GET',
+            url: `https://omiso.com/menu/${doc._id}`,
+          },
+        })),
       };
       res.status(200).json(response);
     })
@@ -37,7 +35,6 @@ exports.menuItems_get_all = (req, res, next) => {
 };
 
 exports.menuItems_create_item = (req, res, next) => {
- 
   const menuItem = new MenuItem({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
@@ -46,7 +43,7 @@ exports.menuItems_create_item = (req, res, next) => {
     category: req.body.category,
     quantity: req.body.quantity,
     status: req.body.status,
-    //image : req.file.path 
+    // image : req.file.path
   });
 
   // Saves MenuItem in the database
@@ -54,7 +51,7 @@ exports.menuItems_create_item = (req, res, next) => {
     .save()
     .then((result) => {
       res.status(201).json({
-        message: "Item created successfully",
+        message: 'Item created successfully',
         createdMenuItem: {
           _id: result.id,
           name: result.name,
@@ -64,8 +61,8 @@ exports.menuItems_create_item = (req, res, next) => {
           quantity: result.quantity,
           status: result.status,
           request: {
-            type: "GET",
-            url: "https://omiso.com/menu/" + result._id,
+            type: 'GET',
+            url: `https://omiso.com/menu/${result._id}`,
           },
         },
       });
@@ -78,22 +75,22 @@ exports.menuItems_create_item = (req, res, next) => {
 exports.menuItems_get_item = (req, res, next) => {
   const id = req.params.menuItemId;
   MenuItem.findById(id)
-    .select("_id name description price category quantity status")
+    .select('_id name description price category quantity status')
     .exec()
     .then((doc) => {
       if (doc) {
         res.status(200).json({
           menuItem: doc,
           request: {
-            type: "GET",
-            description: "",
-            url: "https://omiso.com/menu/" + doc._id,
+            type: 'GET',
+            description: '',
+            url: `https://omiso.com/menu/${doc._id}`,
           },
         });
       } else {
         res
           .status(404)
-          .json({ message: "No valid entry found for provided id" });
+          .json({ message: 'No valid entry found for provided id' });
       }
     })
     .catch((err) => {
@@ -113,10 +110,10 @@ exports.menuItems_update_item = (req, res, next) => {
     .exec()
     .then((result) => {
       res.status(200).json({
-        message: "Item updated",
+        message: 'Item updated',
         request: {
-          type: "GET",
-          url: "https://omiso.com/menu/" + result._id,
+          type: 'GET',
+          url: `https://omiso.com/menu/${result._id}`,
         },
       });
     })
@@ -133,11 +130,11 @@ exports.menuItems_delete_item = (req, res, next) => {
     .exec()
     .then((result) => {
       res.status(200).json({
-        message: "Item deleted",
+        message: 'Item deleted',
         // gives the possibility to create a new item
         request: {
-          type: "POST",
-          url: "https://omiso.com/menu/",
+          type: 'POST',
+          url: 'https://omiso.com/menu/',
           body: {
             name: String,
             description: String,
