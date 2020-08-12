@@ -2,6 +2,13 @@
 const mongoose = require("mongoose");
 const Order = require('../Models/OrderModel');
 const User = require("../Models/UserModel");
+const paypal = require('paypal-rest-sdk');
+
+paypal.configure({
+  'mode': 'sandbox', 
+  'client_id': process.env.PAYMENT_CLIENT_ID,
+  'client_secret': process.env.PAYMENT_CLIENT_SECRET
+});
 
 // Get Order
 
@@ -33,11 +40,38 @@ exports.postOrder = (req, res) => {
     });
   
     OrderItem.save()    
-      .then((doc) => { res.status(201).json(doc); })
+      .then((doc) => { 
+
+        /////
+        const create_payment_json = {
+          "intent": "sale",
+          "payer": {
+              "payment_method": "paypal"
+          },
+          "redirect_urls": {
+              "return_url": "https://omiso.com/success",
+              "cancel_url": "https://omiso.com/cancel"
+          },
+          "transactions": [{
+
+              "amount": {
+                  "currency": "EUR",
+                  "total": doc.total_Price
+              },
+              "description": "Beautiful hats."
+          }]
+      };
+
+      
+
+        /////
+
+
+        res.status(201).json(doc); 
+      })
       .catch((err) => { res.status(500).json({ error: err})});
-
-
-
+    
+    
 
   })
   .catch((err)=>{res.status(404).json({ error: err})})  
