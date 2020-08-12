@@ -43,6 +43,7 @@ exports.postOrder = (req, res) => {
       .then((doc) => { 
 
         /////
+
         const create_payment_json = {
           "intent": "sale",
           "payer": {
@@ -58,16 +59,27 @@ exports.postOrder = (req, res) => {
                   "currency": "EUR",
                   "total": doc.total_Price
               },
-              "description": "Beautiful hats."
+              "description": "Sushi"
           }]
       };
 
-      
+      paypal.payment.create(create_payment_json, function (error, payment) {
+        if (error) {
+            throw error;
+        } else {
+          console.log(payment.links);          
+          for(let i = 0; i < payment.links.length; i++){
+            if (payment.links[i].rel === 'approval_url') {
+                res.redirect(payment.links[i].href);
+            }
+          }
+        }
+    });
 
         /////
 
 
-        res.status(201).json(doc); 
+       // res.status(201).json(doc); 
       })
       .catch((err) => { res.status(500).json({ error: err})});
     
