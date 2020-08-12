@@ -16,8 +16,9 @@ OrderRoute.route('/').get(OrderController.getOrder);
 
 OrderRoute.route('/').post(checkAuth,checkRoles(["admin"]),OrderController.postOrder);
 
- OrderRoute.route('/checkout-success')
-  .get(OrderController.checkout_success);
+ OrderRoute.route('/checkout-success').get(OrderController.checkout_success);
+
+OrderRoute.route('/cancel').get(OrderController.checkout_cancel);
 
 OrderRoute.route('/:id',checkAuth)
   .delete(checkAuth,checkRoles(["admin"]),OrderController.deleteOrder)

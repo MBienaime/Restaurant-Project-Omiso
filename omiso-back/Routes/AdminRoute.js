@@ -17,6 +17,7 @@ const adminBro = new AdminBro({
 
 const router = AdminBroExpress.buildAuthenticatedRouter(adminBro, {
   cookieName: process.env.ADMIN_COOKIE_NAME,
+  
   authenticate: async (email, password) => {
     const user = await User.findOne({ email:email })
     if (user) {
@@ -28,6 +29,8 @@ const router = AdminBroExpress.buildAuthenticatedRouter(adminBro, {
     return false
   },
   cookiePassword: process.env.ADMIN_COOKIE_PASSWORD
+  
+
 })
 
 module.exports = router

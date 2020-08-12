@@ -11,7 +11,10 @@ const oderSchema = mongoose.Schema({
   total_Price: { type : Number, },
   total_Items: { type : Number, },
   order_Menu: {type : Array},
-  validatedOrder : { type : Boolean}
+  validatedOrder : { type : Boolean},
+  payment_id:{ 
+    type: String,
+  default :'' }
   });
 
 module.exports = mongoose.model('Order', oderSchema);

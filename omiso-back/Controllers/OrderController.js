@@ -22,67 +22,64 @@ exports.getOrder = (req, res) => {
 
 exports.postOrder = (req, res) => {
 
+const total_Price = req.body.order.map((selection) => selection.quantity * selection.price).reduce((total, number) => total + number, 0).toFixed(2);
+
   User.findById(req.dataToken.userId)
   .exec()
-  .then((user)=>{   
-
-    const OrderItem = new Order({
-      _id: new mongoose.Types.ObjectId(),
-      id_User:req.dataToken.userId,
-      lastName_User:user.lastname,
-      firstName_User:user.firstname,
-      phoneNumber_User:user.phone_number,
-      email_User:user.email,
-      date_Order:Date(),
-      total_Price:5,
-      total_Items:4,
-      order_Menu:req.body.order
-    });
-  
-    OrderItem.save()    
-      .then((doc) => { 
-
-        /////
-
-        const create_payment_json = {
+  .then((user)=>{ 
+////////
+        const create_payment_json = {                    
           "intent": "sale",
           "payer": {
               "payment_method": "paypal"
           },
           "redirect_urls": {
               "return_url": "https://omiso.com/order/checkout-success",
-              "cancel_url": "https://omiso.com/cancel"
+              "cancel_url": "https://omiso.com/order/cancel"
           },
           "transactions": [{
 
               "amount": {
                   "currency": "EUR",
-                  "total": doc.total_Price
+                  "total": total_Price
               },
               "description": "Sushi"
           }]
-      };
+        };
 
-      paypal.payment.create(create_payment_json, function (error, payment) {
+        paypal.payment.create(create_payment_json, function (error, payment) {
         if (error) {
             throw error;
-        } else {
-          console.log(payment.links);          
-          for(let i = 0; i < payment.links.length; i++){
+        } else {                  
+          const OrderItem = new Order({
+            _id: new mongoose.Types.ObjectId(),
+            id_User:req.dataToken.userId,
+            lastName_User:user.lastname,
+            firstName_User:user.firstname,
+            phoneNumber_User:user.phone_number,
+            email_User:user.email,
+            date_Order:Date(),
+            total_Price: total_Price,
+            total_Items:req.body.order.length,
+            order_Menu:req.body.order,
+            payment_id: payment.id
+          });
+        
+          OrderItem.save()    
+            .then((doc) => {          })
+            .catch((err) => { res.status(500).json({ error: err})});  
+
+            console.log( payment.links)
+            for(let i = 0; i < payment.links.length; i++){
             if (payment.links[i].rel === 'approval_url') {
                 res.redirect(payment.links[i].href);
+              }
             }
-          }
+
+
         }
-    });
-
-        /////
-
-      })
-      .catch((err) => { res.status(500).json({ error: err})});
-    
-    
-
+        });
+///////
   })
   .catch((err)=>{res.status(404).json({ error: err})})  
 
@@ -95,28 +92,50 @@ exports.postOrder = (req, res) => {
 exports.checkout_success = (req,res)=>{  
 
  const payerId = req.query.PayerID;
-  const paymentId = req.query.paymentId;
+ const paymentId = req.query.paymentId;
+console.log(paymentId);
+//////
 
-  const execute_payment_json = {
-    "payer_id": payerId,
-    "transactions": [{
-        "amount": {
-            "currency": "EUR",
-            "total": "5.00"
+Order.find({payment_id: paymentId})
+.exec()
+.then((doc) => {  
+  console.log(doc[0].total_Price);
+        const execute_payment_json = {
+        "payer_id": payerId,
+        "transactions": [{
+            "amount": {
+                "currency": "EUR",
+                "total": doc[0].total_Price
+            }
+        }]
+      };
+
+      paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
+        if (error) {        
+            throw error;
+        } else {
+           // console.log(JSON.stringify(payment));
+            res.status(200).json({ message: "success"});
         }
-    }]
-  };
+      });
+})
+.catch((err) => { res.status(500).json({ error: err})})
 
-  paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
-    if (error) {        
-        throw error;
-    } else {
-        console.log(JSON.stringify(payment));
-        res.send('Success');
-    }
-  });
+
+/////
+
+
+
 }
 
+// checkout cancel
+
+exports.checkout_cancel = (req,res) => {
+
+  res.redirect('/')
+  
+
+};
 
 // Delete Order
 
