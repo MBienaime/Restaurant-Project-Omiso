@@ -50,7 +50,7 @@ exports.postOrder = (req, res) => {
               "payment_method": "paypal"
           },
           "redirect_urls": {
-              "return_url": "https://omiso.com/success",
+              "return_url": "https://omiso.com/order/checkout-success",
               "cancel_url": "https://omiso.com/cancel"
           },
           "transactions": [{
@@ -78,8 +78,6 @@ exports.postOrder = (req, res) => {
 
         /////
 
-
-       // res.status(201).json(doc); 
       })
       .catch((err) => { res.status(500).json({ error: err})});
     
@@ -91,6 +89,34 @@ exports.postOrder = (req, res) => {
 
 
 };
+
+//chekout success
+
+exports.checkout_success = (req,res)=>{  
+
+ const payerId = req.query.PayerID;
+  const paymentId = req.query.paymentId;
+
+  const execute_payment_json = {
+    "payer_id": payerId,
+    "transactions": [{
+        "amount": {
+            "currency": "EUR",
+            "total": "5.00"
+        }
+    }]
+  };
+
+  paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
+    if (error) {        
+        throw error;
+    } else {
+        console.log(JSON.stringify(payment));
+        res.send('Success');
+    }
+  });
+}
+
 
 // Delete Order
 
