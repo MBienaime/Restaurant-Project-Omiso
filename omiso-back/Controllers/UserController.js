@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const mailgun = require("mailgun-js")({
   apiKey: process.env.API_KEY,
-  domain: process.env.DOMAIN
+ domain: process.env.DOMAIN
 });
 
 //Model
