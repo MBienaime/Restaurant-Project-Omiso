@@ -1,10 +1,11 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-underscore-dangle */
 // Imports
 const mongoose = require('mongoose');
 const MenuItem = require('../Models/MenuItemModel');
 
 // Routes logic
-exports.menuItems_get_all = (req, res, next) => {
-// if (req.userDataToken.role !== "admin" ){res.status(401).json('')};
+exports.menuItems_get_all = (req, res) => {
   MenuItem.find()
     .select('_id name description price category quantity status image')
     .exec()
@@ -34,7 +35,7 @@ exports.menuItems_get_all = (req, res, next) => {
     });
 };
 
-exports.menuItems_create_item = (req, res, next) => {
+exports.menuItems_create_item = (req, res) => {
   const menuItem = new MenuItem({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
@@ -72,7 +73,8 @@ exports.menuItems_create_item = (req, res, next) => {
     });
 };
 
-exports.menuItems_get_item = (req, res, next) => {
+// Get MenuItem by id in the database
+exports.menuItems_get_item = (req, res) => {
   const id = req.params.menuItemId;
   MenuItem.findById(id)
     .select('_id name description price category quantity status')
@@ -98,7 +100,8 @@ exports.menuItems_get_item = (req, res, next) => {
     });
 };
 
-exports.menuItems_update_item = (req, res, next) => {
+// Update MenuItem by id in the database
+exports.menuItems_update_item = (req, res) => {
   const id = req.params.menuItemId;
   const updateObj = {};
 
@@ -124,11 +127,12 @@ exports.menuItems_update_item = (req, res, next) => {
     });
 };
 
-exports.menuItems_delete_item = (req, res, next) => {
+// Delete MenuItem by id in the database
+exports.menuItems_delete_item = (req, res) => {
   const id = req.params.menuItemId;
   MenuItem.deleteOne({ _id: id })
     .exec()
-    .then((result) => {
+    .then(() => {
       res.status(200).json({
         message: 'Item deleted',
         // gives the possibility to create a new item

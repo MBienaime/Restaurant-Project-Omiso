@@ -1,9 +1,14 @@
+/* eslint-disable no-shadow */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-plusplus */
+/* eslint-disable camelcase */
 // Import models Data Base
 const mongoose = require('mongoose');
 const paypal = require('paypal-rest-sdk');
 const Order = require('../Models/OrderModel');
 const User = require('../Models/UserModel');
 
+// Configuration paypal
 paypal.configure({
   mode: 'sandbox',
   client_id: process.env.PAYMENT_CLIENT_ID,
@@ -22,12 +27,12 @@ exports.getOrder = (req, res) => {
 // Post Order
 
 exports.postOrder = (req, res) => {
-  const total_Price = req.body.order.map((selection) => selection.quantity * selection.price).reduce((total, number) => total + number, 0).toFixed(2);
+  const total_Price = req.body.order.map((selection) => selection.quantity * selection.price)
+    .reduce((total, number) => total + number, 0).toFixed(2);
 
   User.findById(req.dataToken.userId)
     .exec()
     .then((user) => {
-      /// /////
       const create_payment_json = {
         intent: 'sale',
         payer: {
@@ -66,10 +71,9 @@ exports.postOrder = (req, res) => {
           });
 
           OrderItem.save()
-            .then((doc) => { })
+            .then()
             .catch((err) => { res.status(500).json({ error: err }); });
 
-          console.log(payment.links);
           for (let i = 0; i < payment.links.length; i++) {
             if (payment.links[i].rel === 'approval_url') {
               res.redirect(payment.links[i].href);
@@ -77,7 +81,6 @@ exports.postOrder = (req, res) => {
           }
         }
       });
-      /// ////
     })
     .catch((err) => { res.status(404).json({ error: err }); });
 };
@@ -87,13 +90,10 @@ exports.postOrder = (req, res) => {
 exports.checkout_success = (req, res) => {
   const payerId = req.query.PayerID;
   const { paymentId } = req.query;
-  console.log(paymentId);
-  /// ///
 
   Order.find({ payment_id: paymentId })
     .exec()
     .then((doc) => {
-      console.log(doc[0].total_Price);
       const execute_payment_json = {
         payer_id: payerId,
         transactions: [{
@@ -104,18 +104,15 @@ exports.checkout_success = (req, res) => {
         }],
       };
 
-      paypal.payment.execute(paymentId, execute_payment_json, (error, payment) => {
+      paypal.payment.execute(paymentId, execute_payment_json, (error) => {
         if (error) {
           throw error;
         } else {
-          // console.log(JSON.stringify(payment));
           res.status(200).json({ message: 'success' });
         }
       });
     })
     .catch((err) => { res.status(500).json({ error: err }); });
-
-  /// //
 };
 
 // checkout cancel

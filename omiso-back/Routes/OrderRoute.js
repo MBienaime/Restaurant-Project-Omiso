@@ -1,7 +1,7 @@
-// imports
+// import
 
 const express = require('express');
-const checkAuth = require('../Middleware/CheckAuth');
+const checkAuth = require("../Middleware/CheckAuth");
 const checkRoles = require('../Middleware/CheckRoles');
 
 const OrderRoute = express.Router();
@@ -10,24 +10,15 @@ const OrderRoute = express.Router();
 
 const OrderController = require('../Controllers/OrderController');
 
-// Order Routes
+// Order Route
 
 OrderRoute.route('/')
-// Find all Order
-  .get(checkAuth, checkRoles(['admin', 'employé']), OrderController.getOrder)
-// Create newOrder
-  .post(checkAuth, checkRoles(['admin']), OrderController.postOrder);
+  .get(checkAuth,checkRoles(["admin","employé"]),OrderController.getOrder)
+  .post(checkAuth,checkRoles(["admin"]),OrderController.postOrder);
 
-OrderRoute.route('/:id', checkAuth)
-// Delete order by id
-  .delete(checkAuth, checkRoles(['admin']), OrderController.deleteOrder)
-// Find order by id
-  .get(checkAuth, checkRoles(['admin', 'employé']), OrderController.getOrderById)
-// Update an existing order by its id
-  .patch(checkAuth, checkRoles(['admin', 'employé']), OrderController.updateOrderById);
-
-// Payment routes
-OrderRoute.route('/paiement-reussi').get(OrderController.checkout_success);
-OrderRoute.route('/annulation').get(OrderController.checkout_cancel);
+OrderRoute.route('/:id',checkAuth)
+  .delete(checkAuth,checkRoles(["admin"]),OrderController.deleteOrder)
+  .get(checkAuth,checkRoles(["admin","employé"]),OrderController.getOrderById)
+  .patch(checkAuth,checkRoles(["admin","employé"]),OrderController.updateOrderById); 
 
 module.exports = OrderRoute;
