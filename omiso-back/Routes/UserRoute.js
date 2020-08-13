@@ -1,7 +1,9 @@
-// Import
+// Imports
 const express = require('express');
 
 const router = express.Router();
+
+// Middlewares
 const checkAuth = require('../Middleware/CheckAuth');
 const checkRoles = require('../Middleware/CheckRoles');
 
@@ -15,16 +17,16 @@ router.get('/', checkAuth, checkRoles(['admin', 'employé']), UserController.use
 router.get('/:userId', checkAuth, checkRoles(['admin', 'employé']), UserController.user_get_user);
 
 // Sign Up route : creates a new user
-router.post('/signup', UserController.user_signup);
+router.post('/inscription', UserController.user_signup);
 
 // User login route
 router.post('/login', UserController.user_login);
 
 // Forgotten password
-router.put('/forget-password', UserController.forget_password);
+router.put('/mdp-oublie', UserController.forget_password);
 
 // Reset password
-router.put('/reset-password', UserController.reset_password);
+router.put('/mdp-reset', UserController.reset_password);
 
 // Delete user by its id
 router.delete('/:userId', checkAuth, checkRoles(['admin']), UserController.user_delete);

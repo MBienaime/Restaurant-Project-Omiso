@@ -22,4 +22,5 @@ router.patch('/:menuItemId', checkAuth, checkRoles(['admin']), MenuController.me
 // Delete menu item by id
 router.delete('/:menuItemId', checkAuth, checkRoles(['admin']), MenuController.menuItems_delete_item);
 
+// Export
 module.exports = router;

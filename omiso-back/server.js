@@ -1,4 +1,4 @@
-// import
+// imports
 const https = require('https');
 const fs = require('fs');
 const app = require('./app');
@@ -9,6 +9,6 @@ const options = {
   cert: fs.readFileSync('./Config/Certificates/omiso.crt'),
 };
 
-// Server listen
+// Server listener
 const server = https.createServer(options, app);
 server.listen(443, console.log('Server listen port: 443'));

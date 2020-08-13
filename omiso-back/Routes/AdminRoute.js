@@ -1,3 +1,4 @@
+// imports
 const AdminBro = require('admin-bro');
 const AdminBroExpress = require('admin-bro-expressjs');
 const AdminBroMongoose = require('admin-bro-mongoose');
@@ -6,13 +7,16 @@ const User = require('../Models/UserModel');
 const Order = require('../Models/OrderModel');
 const MenuItem = require('../Models/MenuItemModel');
 
+// Handles ressources
 AdminBro.registerAdapter(AdminBroMongoose);
 
+// Admin-bro parameters
 const adminBro = new AdminBro({
   resources: [User, Order, MenuItem],
   rootPath: '/admin',
 });
 
+// To protect the routes with a session authentication
 const router = AdminBroExpress.buildAuthenticatedRouter(adminBro, {
   cookieName: process.env.ADMIN_COOKIE_NAME,
 
