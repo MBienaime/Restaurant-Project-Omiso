@@ -1,0 +1,68 @@
+.commande{
+    background-color: rgb(12, 10, 10);
+    opacity: 0.5;
+    width:350px;
+    color:rgb(224, 188, 188);    
+   
+}
+.titre_commande{
+    text-align: center;
+    font-size: 2em;
+    display: flex;
+    justify-content: space-around;    
+    border-bottom-style: solid;
+    border-width: 5px;    
+    margin: 0px 20px;
+}
+.item_commande{
+    display: flex;
+    justify-content: space-between;
+    border-bottom-style: solid;
+    margin: 0px 30px;
+    border-width: 1px;    
+    padding: 12px 0;
+
+}
+.totale_commande{
+    font-size: 2em;
+    display: flex;
+    justify-content: space-around;
+    border-top-style: solid;
+    border-width: 4px;    
+    margin: 0px 20px;
+}
+.item_commande_detail{
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+    
+}
+
+.item_commande_titre{    
+    width: 70%;
+    
+    
+
+}
+.item_commande_quantity{
+
+}
+.item_commande_price{
+
+}
+
+.totale_commande_prix{
+
+}
+
+.totale_commande_titre{
+
+}
+
+.Commande_button{
+    margin: 5px auto;
+    display: block;
+    padding: 5px ;
+    border-radius: 8px;
+
+}

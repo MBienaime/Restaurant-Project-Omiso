@@ -1,0 +1,32 @@
+
+
+.P404{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center; 
+    background-image: url('../../assets/image/plain_background.png'); 
+    background-size: cover; 
+    height: 100vh;
+    color: white;    
+}
+
+.P404-left{
+font-size: 4em;
+min-width: 400px;
+    
+}
+.p404-left-logo{    
+    background-image: url('../../assets/image/logo.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: auto;
+    height: 200px ;
+}
+
+.P404-right{ 
+       
+    color: orange;
+
+}

@@ -2,6 +2,13 @@
 
 
 /* Specific */
-body {
 
+body{
+    height:100%; /* force the BODY element to match the height of the HTML element */
 }
+#root{
+        margin-left: auto;
+        margin-right: auto;
+        width: 1200px;    
+      }
+

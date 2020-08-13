@@ -1,0 +1,33 @@
+
+.menuitem{
+    width: 350px;
+}
+.menuitem_detail{
+    display: flex;
+}
+.menuitem_detail_left{
+    padding: 0 10px;
+    
+}
+.menuitem_descrition{
+    margin: 30px 0px;
+    font-size: 1.2em;
+}
+.menuitem_titre{
+    font-size: 1.7em;
+}
+.menuitem_detail_right{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+}
+.menuitem_detail_price{
+    text-align: center;
+    font-size: 2em;
+    margin: 20px 0;
+}
+.menuitem_detail_amount{
+    font-size: 1.7em;
+    text-align: center;
+}
