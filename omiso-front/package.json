@@ -11,11 +11,11 @@
     "test:watch": "NODE_PATH=./ mocha --watch --require tests/.setup.js tests/**/*.test.js"
   },
   "devDependencies": {
-    "@babel/core": "*",
+    "@babel/core": "^7.11.1",
     "@babel/plugin-proposal-class-properties": "*",
     "@babel/plugin-proposal-object-rest-spread": "*",
-    "@babel/preset-env": "*",
-    "@babel/preset-react": "*",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
     "@babel/register": "*",
     "babel-eslint": "*",
     "babel-loader": "*",
