@@ -1,0 +1,130 @@
+.checkout{
+    display: flex;   
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;    
+    margin: 20px 0;
+    background-image: url('../../assets/image/plain_background.png');
+    padding: 30px;
+    height: 900px;
+}
+
+.checkout-left:nth-child(1){
+    flex:2;
+    display: flex;
+    flex-direction: column;
+    background-color: ivory;
+    height: 100%;
+    margin:20px;
+
+}
+
+.checkout-right:nth-child(2){
+    flex:1;
+    display: flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content: space-around;
+    font-size: large;
+    background-color:rgb(254, 77, 0);
+    text-align: center;   
+    height: 100%;
+    margin:20px;
+    color: lightgray;
+    font-weight: bold;
+}
+
+.checkout-right-total{
+    font-size: xxx-large;
+}
+.checkout-right-button{    
+    height: 80px;
+    width: 180px;
+    background-color: rgb(66, 58, 58);
+    border: none;
+    border-radius: 20px;    
+    font-size: x-large;
+    color: lightyellow;
+    font-weight: bold;
+}
+
+.checkout-left-comment{
+    display:flex;
+    flex-direction: column;
+    font-size: x-large;
+    color:rgb(254, 77, 0);
+    margin: 20px;
+
+}
+.checkout-left-input{
+    background-color: gainsboro;
+    border:none;
+    border-radius: 20px;
+    height: 100px;    
+    margin: 40px 0;
+}
+.checkout-left-table{  
+    height: 100%;      
+}
+
+.checkout-left-table-image{
+    height: 100px;       
+    background-color: rgb(218, 209, 209);
+    background-image: url('../../assets/image/photo-removebg-preview.png');
+    background-size: contain, cover;
+    background-repeat: no-repeat;
+    background-position: center
+
+}
+table {
+    display: flex;
+    flex-direction: column;
+    margin:auto;
+    width: 100%;
+ }
+ thead tbody{
+    display: flex;
+    flex-direction: column;        
+ }
+
+ .checkout-left-table-cell {
+    min-width: 90px;        
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+   }   
+
+tr{
+    display: flex;
+    justify-content: space-around; 
+    margin:15px;    
+    font-weight: bold; 
+   } 
+th .checkout-left-table-cell-description {
+    font-size: xx-large; 
+     
+   }  
+   .checkout-left-table-title{
+       font-size: x-large;
+       margin: 30px 0;       
+   }
+
+   .checkout-left-table-buttonp{
+       border:none;
+       font-size: xx-large;
+       font-weight: bold;
+   }
+   .checkout-left-table-buttonm{
+    border:none;
+    font-size: xx-large;
+    font-weight:bolder ;
+}
+
+.blod {
+    font-weight:bolder ;
+    font-size: x-large;    
+
+}
+
+  
