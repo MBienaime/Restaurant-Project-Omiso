@@ -13,11 +13,12 @@ const adminBro = new AdminBro({
   resources: [
     {resource: User,
       options:{
-        properties:{
+        properties:{                  
           _id:{
             isVisible:{list: false, filter: false, show: false, edit: false}, 
           },
           role:{
+            name:'role',
             isVisible:{list: false, filter: false, show: false, edit: true},
             availableValues: [
               {value: 'admin', label: 'Administrateur'},
@@ -25,7 +26,29 @@ const adminBro = new AdminBro({
               {value: 'employé', label: 'Employée'},
             ]
           },
+          password:{isVisible:{list: false, filter: false, show: false, edit: false},
+          },
         },
+
+      locale: {
+        language: 'pl',
+        translations: {
+          actions: {
+            new: 'Stwórz nowy',
+            edit: 'Edytuj',
+            show: 'Detale',            
+          },
+          resources:{
+            User:{
+              properties: {
+                lastname: 'Tytuł',
+              }
+            }
+          },
+        }
+      }
+
+
       },
     },
     {resource: Order,
@@ -44,6 +67,9 @@ const adminBro = new AdminBro({
         },
       },
     },],
+    branding: {
+      companyName: 'OMISO',
+    },
   rootPath: '/admin',
 })
 

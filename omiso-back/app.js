@@ -7,7 +7,6 @@ const mongoose = require("mongoose");
 const OrderRouter = require("./Routes/OrderRoute");
 const MenuRouter = require("./Routes/MenuRoute");
 const userRouter = require('./Routes/UserRoute');
-const imagesRouter = require('./Routes/imagesRoute');
 const adminRouter = require('./Routes/AdminRoute');
 
 
