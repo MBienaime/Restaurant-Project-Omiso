@@ -10,37 +10,26 @@ import './styles.css';
 const Menuitem = () =>(
 
 <div className="menuitem">
-    <div className="menuitem_photo">
-
-    </div>
-    <div className="menuitem_detail">
-        <div className="menuitem_detail_left">
-            <div className="menuitem_titre">
-                shuishi et maki
+    <div className="menuitem-image"></div>
+    <div className="menutitem-animate">
+        <div className="menutitem-animate-transparent"></div>
+        <div className="menutitem-animate-description">
+            <div className="flex border-bottom">
+            <h1 className="title ">Sushi aux raisin </h1>
+            <p className="title ">2€</p>
             </div>
-            <div className="menuitem_descrition">
-                algue fruit legume viande algue fruit legume viande
-            </div>
-        </div>
-        <div className="menuitem_detail_right">
-            <div className="menuitem_detail_price">
-                3€
-            </div>
-            <div className="menuitem_detail_amount">                
-                <button>
-                    +
-                </button>
-                <div >
-                    3
-                </div>
-                <button>
-                    +
-                </button>
+            <p className=' descrition'>descrition du sushzi audfffffkjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjffffffffffffffsdfdfdsfdsdfdf raisin</p>            
+            <div className='flex '>
+            <button className=" button ">-</button>
+            <p className="title ">5</p>
+            <button className=" button ">+</button>
             </div>
         </div>
     </div>
-    <button>ajout panier</button>
 </div>
+
+
+
 
 
 )

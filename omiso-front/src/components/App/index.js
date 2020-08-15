@@ -2,7 +2,6 @@
 import React from 'react';
 import P404 from '../404';
 import Panier from '../Panier';
-import PanierO from '../PanierO';
 import Menuitem from '../Menuitem'
 
 // == Import Style
@@ -12,10 +11,9 @@ import './styles.scss';
 // == Import npm
 const App = () =>(
   <>
-    <P404/>
-    <Panier/>
+    <P404/>    
     <Menuitem/>
-    <PanierO/>
+    <Panier/>
   </>
 )
 

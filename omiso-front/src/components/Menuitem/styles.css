@@ -1,34 +1,73 @@
-
 .menuitem{
-    width: 350px;
+    height: 500px;
+    width: 380px;
+    background-color: rgb(214, 218, 214);
+    position: relative;
 }
-.menuitem_detail{
-    display: flex;
+
+.menutitem-animate:hover  {      
+    opacity: 0.8;  
+    transition: 1s;
 }
-.menuitem_detail_left{
-    padding: 0 10px;
-    
+
+.menuitem-image{
+    background-image: url('../../assets/image/photo-removebg-preview.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 100%;
+    width: 100%;   
 }
-.menuitem_descrition{
-    margin: 15px 0px;
-    font-size: 1.2em;
-    color:grey;
+.menutitem-animate{
+    height: 100%;
+    width: 100%;   
+    position: absolute; 
+    bottom:0;    
+    opacity: 0;
 }
-.menuitem_titre{
-    font-size: 1.7em;
+.menutitem-animate-transparent{
+    height: 50%;
+    width: 100%;
+    opacity: 0;
 }
-.menuitem_detail_right{
+.menutitem-animate-description{
+    height: 50%;
+    width: 100%;
+    background-color: rgb(16, 17, 16);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    
+    color: white
+
 }
-.menuitem_detail_price{
-    text-align: center;
-    font-size: 2em;
-    margin: 20px 0;
+
+.title{
+    font-size: 2rem;       
 }
-.menuitem_detail_amount{
-    font-size: 1.7em;
-    text-align: center;
+.descrition{
+    font-size: 1.6rem;
+    margin:  0 30px;
+    opacity: 0.9;
+    overflow-wrap: break-word;
+}
+
+
+.button{
+    border:none;
+    background-color:rgb(254, 77, 0);
+    height: 40px;
+    width: 70px;  
+    color: white;
+    opacity: 0.9;
+    border-radius: 5px;
+}
+
+.flex{
+    display: flex;
+    justify-content: space-around;
+}
+.border-bottom{
+    border-bottom: solid grey;
+    margin:  0 12px 0 12px;
+
 }
