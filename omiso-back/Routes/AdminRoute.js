@@ -10,7 +10,40 @@ const MenuItem = require("../Models/MenuItemModel");
 AdminBro.registerAdapter(AdminBroMongoose);
 
 const adminBro = new AdminBro({
-  resources: [User,Order,MenuItem],
+  resources: [
+    {resource: User,
+      options:{
+        properties:{
+          _id:{
+            isVisible:{list: false, filter: false, show: false, edit: false}, 
+          },
+          role:{
+            isVisible:{list: false, filter: false, show: false, edit: true},
+            availableValues: [
+              {value: 'admin', label: 'Administrateur'},
+              {value: 'user', label: 'Utilisateur'},
+              {value: 'employé', label: 'Employée'},
+            ]
+          },
+        },
+      },
+    },
+    {resource: Order,
+      options:{
+        properties:{
+          _id:{isVisible:{list: false, filter: false, show: false, edit: false},
+          }
+        },
+      },
+    },
+    {resource: MenuItem,
+      options:{
+        properties:{
+          _id:{isVisible:{list: false, filter: false, show: false, edit: false},
+          }
+        },
+      },
+    },],
   rootPath: '/admin',
 })
 
