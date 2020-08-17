@@ -1,21 +1,59 @@
 // == Import npm
 import React from 'react';
-import P404 from '../404';
+
+import {useState, useEffect } from 'react';
+import axios from 'axios';
+
+// Local imports 
+import Home from '../Home';
+import MenuItems from '../MenuItems';
 import Panier from '../Panier';
-import Menuitem from '../Menuitem'
+
+
 
 // == Import Style
 import './styles.scss';
 
+
+
 // commande recuperation API
 // == Import npm
-const App = () =>(
+const App = () => {
+  
+  const [data, setData] = useState([]);  
+
+    const getApiData = () => {
+      const url = `https://omiso.com/menu/`;
+      axios.get(url)
+      .then((resp) => {
+        setData(resp.data.menuItems)
+      })
+      .catch((error) => {
+        console.log('error', error);
+      });  
+    } 
+    useEffect(getApiData, []);    
+      
+
+  return (
   <>
-    <P404/>    
-    <Menuitem/>
+   <Home /> 
+   <div className="sectionMenu">
+     { data.map( (d) =>(<MenuItems 
+        title = {d.name}
+        description = {d.description}
+        price = {d.price}
+        Image = ''
+        key={d._id}
+     />)) }      
+  </div>
+  
     <Panier/>
   </>
-)
+  )
+}
 
 // == Export
 export default App;
+
+
