@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const paypal = require('paypal-rest-sdk');
 const Order = require('../Models/OrderModel');
 const User = require('../Models/UserModel');
+const Menu = require('../Models/OrderModel');
 
 // Configuration paypal
 paypal.configure({
@@ -27,61 +28,64 @@ exports.getOrder = (req, res) => {
 // Post Order
 
 exports.postOrder = (req, res) => {
-  const total_Price = req.body.order.map((selection) => selection.quantity * selection.price)
-    .reduce((total, number) => total + number, 0).toFixed(2);
+  const OrderItem = new Order({
+    _id: new mongoose.Types.ObjectId(),
+    id_User: req.dataToken.userId,
+    date_Order: Date(),
+    // total_Price,
+    total_Items: req.body.order_Menu.length,
+    order_Menu: req.body.order_Menu,
+  });
 
-  User.findById(req.dataToken.userId)
-    .exec()
-    .then((user) => {
-      const create_payment_json = {
-        intent: 'sale',
-        payer: {
-          payment_method: 'paypal',
-        },
-        redirect_urls: {
-          return_url: 'https://omiso.com/order/checkout-success',
-          cancel_url: 'https://omiso.com/order/cancel',
-        },
-        transactions: [{
+  OrderItem
+    .save()
+    .then((o) => {
+      Order.findById(o._id)
+        .populate('id_User')
+        .populate('order_Menu.menu')
+        .then((e) => {
+          const total_Price = e.order_Menu.map((selection) => selection.Number_MenuItem * selection.menu.price)
+            .reduce((total, number) => total + number, 0).toFixed(2);
 
-          amount: {
-            currency: 'EUR',
-            total: total_Price,
-          },
-          description: 'Sushi',
-        }],
-      };
-      paypal.payment.create(create_payment_json, (error, payment) => {
-        if (error) {
-          throw error;
-        } else {
-          const OrderItem = new Order({
-            _id: new mongoose.Types.ObjectId(),
-            id_User: req.dataToken.userId,
-            lastName_User: user.lastname,
-            firstName_User: user.firstname,
-            phoneNumber_User: user.phone_number,
-            email_User: user.email,
-            date_Order: Date(),
-            total_Price,
-            total_Items: req.body.order.length,
-            order_Menu: req.body.order,
-            payment_id: payment.id,
-          });
+          const create_payment_json = {
+            intent: 'sale',
+            payer: {
+              payment_method: 'paypal',
+            },
+            redirect_urls: {
+              return_url: 'https://omiso.com/commande/checkout-success',
+              cancel_url: 'https://omiso.com/commande/cancel',
+            },
+            transactions: [{
 
-          OrderItem.save()
-            .then()
-            .catch((err) => { res.status(500).json({ error: err }); });
+              amount: {
+                currency: 'EUR',
+                total: total_Price,
+              },
+              description: 'Sushi',
+            }],
+          };
 
-          for (let i = 0; i < payment.links.length; i++) {
-            if (payment.links[i].rel === 'approval_url') {
-              res.redirect(payment.links[i].href);
+          paypal.payment.create(create_payment_json, (error, payment) => {
+            if (error) {
+              throw error;
+            } else {
+              console.log(payment);
+              Order.findByIdAndUpdate(e._id, { payment_id: payment.id })
+                .then()
+                .catch((err) => { res.status(500).json({ error: err }); });
+
+              for (let i = 0; i < payment.links.length; i++) {
+                if (payment.links[i].rel === 'approval_url') {
+                  res.redirect(payment.links[i].href);
+                }
+              }
             }
-          }
-        }
-      });
+          });
+        })
+        .catch((err) => { res.status(500).json({ error: err }); });
     })
-    .catch((err) => { res.status(404).json({ error: err }); });
+    .catch((err) => { res.status(500).json({ error: err }); });
 };
 
 // chekout success
