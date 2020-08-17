@@ -51,7 +51,6 @@ exports.postOrder = (req, res) => {
           description: 'Sushi',
         }],
       };
-
       paypal.payment.create(create_payment_json, (error, payment) => {
         if (error) {
           throw error;
