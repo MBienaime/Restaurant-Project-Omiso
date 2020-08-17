@@ -23,6 +23,7 @@ const App = () => {
   const [data, setData] = useState([]);  
   const [ModalConnexion, setModalConnexion] = useState(false );
   const [ModalPanier, setModalPanier] = useState(true );
+  const [user, setuser]= useState({email: "", lastmane:"", firstname:"",password:"",phone_number:"",address:"",postal_code:"",city:""});
 
 
     const getApiData = () => {
@@ -35,10 +36,12 @@ const App = () => {
         console.log('error', error);
       });  
     }
+
     
+//get data menu 
     useEffect(getApiData, []);    
 
-
+//modal connexion
    const showModalConnexion = () => {
       setModalConnexion(true);
     };
@@ -47,19 +50,25 @@ const App = () => {
       setModalConnexion(false);
     };
 
+//modal Panier
     const showModalPanier = () => {
       setModalPanier(true);
     };
     const hideModalPanier = () => {
       setModalPanier(false);
-    };
+    }; 
+    
+    
+//connexion users
 
-
-      
+const handleInputChange = (e) => setuser({
+  ...user,
+  [e.currentTarget.name]: e.currentTarget.value
+})
 
   return (
   <>
-   <Modal show={ModalConnexion} hideModal={hideModalConnexion} />
+   <Modal show={ModalConnexion} hideModal={hideModalConnexion}  />
    <Home showModalConnexion={showModalConnexion} showModalPanier={showModalPanier}/> 
    <div className="sectionMenu">
      { data.map( (d) =>(<MenuItems 
