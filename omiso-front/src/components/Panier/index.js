@@ -39,6 +39,41 @@ const Panier = () =>(
             </tr>
 
             <tr>
+              <td className="checkout-left-table-cell-description">
+                <div>
+                  <div className="checkout-left-table-image"></div>
+                  <span className="checkout-left-table-title">plats</span><br></br>
+                  Ici le nom du plats              
+                </div> 
+              </td>
+              <td className="checkout-left-table-cell blod">15 €</td>
+              <td className="checkout-left-table-cell blod">
+                <button className="checkout-left-table-buttonm">-</button>
+                  2 
+                <button className="checkout-left-table-buttonp">+</button>
+                </td>
+              <td className="checkout-left-table-cell blod">30€</td>
+            </tr>
+
+            
+            <tr>
+              <td className="checkout-left-table-cell-description">
+                <div>
+                  <div className="checkout-left-table-image"></div>
+                  <span className="checkout-left-table-title">plats</span><br></br>
+                  Ici le nom du plats              
+                </div> 
+              </td>
+              <td className="checkout-left-table-cell blod">15 €</td>
+              <td className="checkout-left-table-cell blod">
+                <button className="checkout-left-table-buttonm">-</button>
+                  2 
+                <button className="checkout-left-table-buttonp">+</button>
+                </td>
+              <td className="checkout-left-table-cell blod">30€</td>
+            </tr>
+
+            <tr>
               <td className="checkout-left-table-cell">
                 <div>
                   <div className="checkout-left-table-image">
