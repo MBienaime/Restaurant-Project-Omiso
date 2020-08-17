@@ -12,7 +12,66 @@ AdminBro.registerAdapter(AdminBroMongoose);
 
 // Admin-bro parameters
 const adminBro = new AdminBro({
-  resources: [User, Order, MenuItem],
+  resources: [
+    {resource: User,
+      options:{
+        properties:{                  
+          _id:{
+            isVisible:{list: false, filter: false, show: false, edit: false}, 
+          },
+          role:{
+            name:'role',
+            isVisible:{list: false, filter: false, show: false, edit: true},
+            availableValues: [
+              {value: 'admin', label: 'Administrateur'},
+              {value: 'user', label: 'Utilisateur'},
+              {value: 'employé', label: 'Employée'},
+            ]
+          },
+          password:{isVisible:{list: false, filter: false, show: false, edit: false},
+          },
+        },
+
+      locale: {
+        language: 'pl',
+        translations: {
+          actions: {
+            new: 'Stwórz nowy',
+            edit: 'Edytuj',
+            show: 'Detale',            
+          },
+          resources:{
+            User:{
+              properties: {
+                lastname: 'Tytuł',
+              }
+            }
+          },
+        }
+      }
+
+
+      },
+    },
+    {resource: Order,
+      options:{
+        properties:{
+          _id:{isVisible:{list: false, filter: false, show: false, edit: false},
+          }
+        },
+      },
+    },
+    {resource: MenuItem,
+      options:{
+        properties:{
+          _id:{isVisible:{list: false, filter: false, show: false, edit: false},
+          }
+        },
+      },
+    },],
+    branding: {
+      companyName: 'OMISO',
+    },
   rootPath: '/admin',
 });
 
