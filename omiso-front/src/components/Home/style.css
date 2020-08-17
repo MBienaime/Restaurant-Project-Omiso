@@ -76,11 +76,11 @@ body {
 }
 
 /*********************************Presentation*****************************/
-.presentation {
+.home {
   width: 90%;
   height: 90vh;
   margin: auto;
-  background: url("./images/simple-bg.jpg") no-repeat center center/cover;
+  background: url("../../assets/image/simple-bg.jpg") no-repeat center center/cover;
   display: flex;
   justify-content: flex-end;
 }
@@ -112,12 +112,7 @@ font-weight: bold;
 }
 
 /*********************************Button*****************************/
-.button {
-  padding: 75px 0 0 0;
-  font-family: var(--main-font);
-  display: flex;
-  justify-content: center;
-}
+
 
 .btn_menu {
   /* background-color: palegreen; */
