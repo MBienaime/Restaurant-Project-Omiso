@@ -49,10 +49,17 @@
   font-size: 18px;
   color: white;
 }
+.nav_link:hover {
+  color: var(--signature-color);
+}
 
 .cart {
   justify-content: center;
   color: var(--signature-color);
+}
+
+.cart:hover {
+  color: var(--color-white);
 }
 
 /*********************************Media queries*****************************/
