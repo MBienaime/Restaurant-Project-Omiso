@@ -57,19 +57,11 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "bootstrap": "^4.4.1",
-    "font-awesome": "^4.7.0",
     "jwt-decode": "^2.2.0",
-    "moment": "^2.24.0",
     "prop-types": "*",
     "react": "*",
     "react-dom": "*",
-    "react-icons": "^3.9.0",
-    "react-redux": "*",
-    "react-router-dom": "^5.1.2",
-    "react-switch": "^5.0.1",
-    "redux": "*",
-    "semantic-ui-react": "^0.88.2",
+    "react-icons": "^3.10.0",
     "uuid": "^7.0.3"
   }
 }

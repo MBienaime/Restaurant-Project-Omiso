@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --main-font: "Quicksand", sans-serif;
+  --secondary-font: "Roboto", sans-serif;
+  --color-white: #ffff;
+  --color-dark: #302e2c;
+  --signature-color: #fe4d00;
+}
+
+body {
+  font-family: var(--main-font);
+  background: var(--color-dark);
+  color: var(--color-white);
+  line-height: 1.6;
+}
+
+/*********************************Media queries*****************************/
+@media screen and (max-width: 1024px) {
+  body {
+    margin: 0 0 55px 0;
+  }
+
+}
