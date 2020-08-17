@@ -2,7 +2,7 @@
 
 .presentation {
   background: url("../../assets/image/simple-bg.jpg") no-repeat center center/cover;
-  width: 90%;
+  width: 100%;
   height: 90vh;
   margin: auto;
   display: flex;
@@ -36,8 +36,6 @@ font-weight: bold;
 }
 
 /*********************************Button*****************************/
-
-
 .btn_menu {
   /* background-color: palegreen; */
   width: 150px;

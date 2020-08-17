@@ -2,7 +2,7 @@
 /*********************************Navigation*****************************/
 .navbar {
   position: sticky;
-  width: 90%;
+  width: 100%;
   margin: auto;
   height: 10vh;
   background: #000;

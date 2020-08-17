@@ -14,7 +14,7 @@ const Header = () => (
     <a className="nav_link" href="#"> Contact </a>
     <a className="nav_link" href="#"> Connexion </a>
     </div>
-    <div class="cart"><FaShoppingCart/></div>
+    <div className="cart"><FaShoppingCart/></div>
   </nav>
 );
 // == Export
