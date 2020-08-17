@@ -1,11 +1,16 @@
 // == Import npm
 import React from 'react';
+
+import {useState, useEffect } from 'react';
+import axios from 'axios';
+
+// Local imports 
+import Home from '../Home';
+import MenuItems from '../MenuItems';
 import P404 from '../404';
 import Panier from '../Panier';
-import Menuitem from '../Menuitem';
-import Home from '../Home';
-import {useState} from 'react';
-import axios from 'axios';
+
+
 
 // == Import Style
 import './styles.scss';
@@ -18,20 +23,32 @@ const App = () => {
   
   const [data, setData] = useState([]);
   
-    const url = `https://omiso.com/menu/`;
-    axios.get(url)
+    const getApiData = () => {
+      const url = `https://omiso.com/menu/`;
+      axios.get(url)
       .then((resp) => {
-        console.log(resp);
+        setData(resp.data)
       })
       .catch((error) => {
         console.log('error', error);
       });  
+    } 
+    
+      useEffect(getApiData, []);
+      console.log(data);
+      
 
   return (
   <>
-   <Home/>
-    <P404/>    
-    <Menuitem/>
+   <Home />
+   <MenuItems 
+     title = "testitre"
+     description = "test descrition"
+     price = {10}
+     Image = ''
+   />
+    <P404/> 
+    
     <Panier/>
   </>
   )

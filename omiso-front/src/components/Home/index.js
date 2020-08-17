@@ -3,11 +3,12 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaTripadvisor } from 'react-icons/
 // Local import 
 import Header from "../Header";
 
+
 // == Import Style
 import "./style.css";
 
 // commande recuperation API
-// == Import npm
+//p == Import npm
 const Home = () => (
   <div className="home">
   <Header/>
@@ -16,7 +17,7 @@ const Home = () => (
   <div className="social_icons">
      <a href="#" className="icon_link"><FaFacebookF className ="link_icons"/></a>
      <a href="#" className="icon_link"><FaTwitter className ="link_icons"/></a>
-      <a href="#" className="icon_link"><FaInstagram className ="link_icons"/></a>
+     <a href="#" className="icon_link"><FaInstagram className ="link_icons"/></a>
      <a href="#" className="icon_link"><FaTripadvisor className ="link_icons"/></a>
   </div>
 
@@ -34,6 +35,7 @@ const Home = () => (
         <button className="btn_menu">Notre carte</button>
 </div>
 </div>
+  
 </div>
 )
 // == Export
