@@ -8,7 +8,7 @@ import axios from 'axios';
 import Home from '../Home';
 import MenuItems from '../MenuItems';
 import Panier from '../Panier';
-
+import Modal from '../Modal';
 
 
 // == Import Style
@@ -21,6 +21,9 @@ import './styles.scss';
 const App = () => {
   
   const [data, setData] = useState([]);  
+  const [ModalConnexion, setModalConnexion] = useState(false );
+  const [ModalPanier, setModalPanier] = useState(true );
+
 
     const getApiData = () => {
       const url = `https://omiso.com/menu/`;
@@ -31,13 +34,33 @@ const App = () => {
       .catch((error) => {
         console.log('error', error);
       });  
-    } 
+    }
+    
     useEffect(getApiData, []);    
+
+
+   const showModalConnexion = () => {
+      setModalConnexion(true);
+    };
+  
+   const hideModalConnexion = () => {
+      setModalConnexion(false);
+    };
+
+    const showModalPanier = () => {
+      setModalPanier(true);
+    };
+    const hideModalPanier = () => {
+      setModalPanier(false);
+    };
+
+
       
 
   return (
   <>
-   <Home /> 
+   <Modal show={ModalConnexion} hideModal={hideModalConnexion} />
+   <Home showModalConnexion={showModalConnexion} showModalPanier={showModalPanier}/> 
    <div className="sectionMenu">
      { data.map( (d) =>(<MenuItems 
         title = {d.name}
@@ -46,9 +69,8 @@ const App = () => {
         Image = ''
         key={d._id}
      />)) }      
-  </div>
-  
-    <Panier/>
+  </div>  
+    <Panier show={ModalPanier} hideModal={hideModalPanier}/>
   </>
   )
 }
