@@ -1,87 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
-@import url('https://kit.fontawesome.com/f158d309d9.js" crossorigin="anonymous');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-:root {
-  --main-font: "Quicksand", sans-serif;
-  --secondary-font: "Roboto", sans-serif;
-  --color-white: #ffff;
-  --color-dark: #302e2c;
-  --signature-color: #fe4d00;
-}
-
-body {
-  font-family: var(--main-font);
-  background: var(--color-dark);
-  color: var(--color-white);
-  line-height: 1.6;
-}
-
-/*********************************Navigation*****************************/
-.navbar {
-  position: sticky;
-  width: 90%;
-  margin: auto;
-  height: 10vh;
-  background: #000;
-  opacity: 0.8;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.logo,
-.nav_links,
-.cart {
-  display: flex;
-}
-
-.logo,
-.cart {
-  flex: 1;
-}
-
-.logo,
-.cart:hover {
-  cursor: pointer;
-}
-
-.logo img {
-  width: 250px;
-  height: 250px;
-  position: absolute;
-  top: -90px !important;
-}
-
-.nav_links {
-  justify-content: space-around;
-  list-style: none;
-  flex: 2;
-}
-
-.nav_link {
-  text-decoration: none;
-  font-size: 18px;
-  color: white;
-}
-
-.cart {
-  justify-content: center;
-  color: var(--signature-color);
-}
-
 /*********************************Presentation*****************************/
+
+
 .presentation {
-  width: 90%;
+  background: url("../../assets/image/simple-bg.jpg") no-repeat center center/cover;
+  width: 100%;
   height: 90vh;
   margin: auto;
-  background: url("./images/simple-bg.jpg") no-repeat center center/cover;
   display: flex;
   justify-content: flex-end;
 }
@@ -113,13 +37,6 @@ font-weight: bold;
 }
 
 /*********************************Button*****************************/
-.button {
-  padding: 75px 0 0 0;
-  font-family: var(--main-font);
-  display: flex;
-  justify-content: center;
-}
-
 .btn_menu {
   /* background-color: palegreen; */
   width: 150px;
@@ -128,11 +45,12 @@ font-weight: bold;
   font-size: 16px;
   background-color: var(--signature-color);
   color: var(--color-white);
-
   border: none;
   border-radius: 1.8rem;
   border: none;
+  margin-top: 100px;
 }
+
 
 /*********************************Social-media icons*****************************/
 
@@ -144,10 +62,6 @@ font-weight: bold;
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-}
-
-.icon_items {
-  list-style: none;
 }
 
 .icon_link {
@@ -164,8 +78,12 @@ font-weight: bold;
     -0.2rem -0.2rem 1rem rgba(255, 255, 255, 0.5);
 }
 
-.icon_link i {
+.link_icons {
   margin: auto;
+}
+
+.link_icons:hover { 
+color: var(--color-white);
 }
 
 .icon_link:focus {
@@ -176,51 +94,11 @@ font-weight: bold;
 /*********************************Media queries*****************************/
 
 @media screen and (max-width: 1024px) {
-  body {
-    margin: 0 0 55px 0;
-  }
 
-  .navbar {
-    position: fixed;
-    bottom: 0;
-    z-index: 1;
-    width: 100%;
-    height: 55px;
-    background: black;
-    
-  }
-  .nav_links {
-      
-    display: flex;
-    align-items: center;
-    justify-content: center space-between;
-  }
-
-  .nav_link {
-    font-weight: bold;
-    font-family: var(--main-font);
-    font-size: 13px;
-    color: var(--signature-color);
-    text-decoration: none;
-  }
-
-  .nav_link:hover {
-      color: white;
-  }
-
-  .cart {
-    font-size: 20px;
-    color: var(--color-white);
-    justify-content: center;
-  }
-  .logo {
-    display: none;
-  }
   .social_icons {
     display: none;
   }
 
-  
   .presentation {
     flex-direction: column;
     height: fit-content;
@@ -283,11 +161,3 @@ font-weight: bold;
   animation: scale-in-hor-left 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 8s both;
 }
 
-/*********************************Footer*****************************/
-footer {
-    width: 90%;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
