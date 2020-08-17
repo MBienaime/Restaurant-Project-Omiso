@@ -3,6 +3,7 @@
     width: 380px;
     background-color: rgb(214, 218, 214);
     position: relative;
+    margin:10px;
 }
 
 .menutitem-animate:hover  {      
@@ -71,8 +72,8 @@
     margin:  0 12px 0 12px;
 
 }
-.sectionMenu {
-    margin:50px 0;
+
+
+.menuitem {
+  align-self:stretch;
 }
-
-

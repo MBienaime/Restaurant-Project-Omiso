@@ -1,15 +1,15 @@
 // == Import npm
 import React from 'react';
-
+import PropTypes from 'prop-types';
 
 // == Import Style
 import './styles.css';
 
 // commande recuperation API
 // == Import npm
-const Menuitem = ({title, description, price, image}) =>(
+const Menuitems = ({title, description, price, image}) =>(
 
-<div className='sectionMenu'>
+
     <div className="menuitem">
         <div className="menuitem-image"></div>
         <div className="menutitem-animate">
@@ -26,12 +26,13 @@ const Menuitem = ({title, description, price, image}) =>(
             </div>
         </div>
     </div>
-</div>
-
-
-
 
 )
+Menuitems.propTypes = { 
+    title : PropTypes.string.isRequired,
+    price : PropTypes.number.isRequired,
+    description :  PropTypes.string.isRequired
+}
 
 // == Export
-export default Menuitem;
+export default Menuitems;

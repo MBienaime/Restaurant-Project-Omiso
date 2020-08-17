@@ -7,7 +7,6 @@ import axios from 'axios';
 // Local imports 
 import Home from '../Home';
 import MenuItems from '../MenuItems';
-import P404 from '../404';
 import Panier from '../Panier';
 
 
@@ -21,34 +20,34 @@ import './styles.scss';
 // == Import npm
 const App = () => {
   
-  const [data, setData] = useState([]);
-  
+  const [data, setData] = useState([]);  
+
     const getApiData = () => {
       const url = `https://omiso.com/menu/`;
       axios.get(url)
       .then((resp) => {
-        setData(resp.data)
+        setData(resp.data.menuItems)
       })
       .catch((error) => {
         console.log('error', error);
       });  
     } 
-    
-      useEffect(getApiData, []);
-      console.log(data);
+    useEffect(getApiData, []);    
       
 
   return (
   <>
-   <Home />
-   <MenuItems 
-     title = "testitre"
-     description = "test descrition"
-     price = {10}
-     Image = ''
-   />
-    <P404/> 
-    
+   <Home /> 
+   <div className="sectionMenu">
+     { data.map( (d) =>(<MenuItems 
+        title = {d.name}
+        description = {d.description}
+        price = {d.price}
+        Image = ''
+        key={d._id}
+     />)) }      
+  </div>
+  
     <Panier/>
   </>
   )
@@ -56,3 +55,5 @@ const App = () => {
 
 // == Export
 export default App;
+
+

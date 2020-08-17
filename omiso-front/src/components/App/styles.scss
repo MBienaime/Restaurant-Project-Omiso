@@ -22,6 +22,12 @@ body {
   line-height: 1.6;
 }
 
+.sectionMenu{
+  display:flex;
+  flex-wrap: wrap;
+
+}
+
 /*********************************Media queries*****************************/
 @media screen and (max-width: 1024px) {
   body {
