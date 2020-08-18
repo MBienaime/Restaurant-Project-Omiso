@@ -10,7 +10,6 @@ import MenuItems from '../MenuItems';
 import Panier from '../Panier';
 
 
-
 // == Import Style
 import './styles.scss';
 
@@ -21,6 +20,10 @@ import './styles.scss';
 const App = () => {
   
   const [data, setData] = useState([]);  
+  const [ModalConnexion, setModalConnexion] = useState(false );
+  const [ModalPanier, setModalPanier] = useState(true );
+  const [user, setuser]= useState({email: "", lastmane:"", firstname:"",password:"",phone_number:"",address:"",postal_code:"",city:""});
+
 
     const getApiData = () => {
       const url = `https://omiso.com/menu/`;
@@ -31,13 +34,41 @@ const App = () => {
       .catch((error) => {
         console.log('error', error);
       });  
-    } 
+    }
+
+    
+//get data menu 
     useEffect(getApiData, []);    
-      
+
+//modal connexion
+   const showModalConnexion = () => {
+      setModalConnexion(true);
+    };
+  
+   const hideModalConnexion = () => {
+      setModalConnexion(false);
+    };
+
+//modal Panier
+    const showModalPanier = () => {
+      setModalPanier(true);
+    };
+    const hideModalPanier = () => {
+      setModalPanier(false);
+    }; 
+    
+    
+//connexion users
+
+const handleInputChange = (e) => setuser({
+  ...user,
+  [e.currentTarget.name]: e.currentTarget.value
+})
 
   return (
   <>
-   <Home /> 
+   <Modal show={ModalConnexion} hideModal={hideModalConnexion}  />
+   <Home showModalConnexion={showModalConnexion} showModalPanier={showModalPanier}/> 
    <div className="sectionMenu">
      { data.map( (d) =>(<MenuItems 
         title = {d.name}
@@ -46,9 +77,7 @@ const App = () => {
         Image = ''
         key={d._id}
      />)) }      
-  </div>
-  
-    <Panier/>
+
   </>
   )
 }
