@@ -58,11 +58,37 @@ const handleInputChange = (e) => setuser({
   [e.currentTarget.name]: e.currentTarget.value
 })
 
+const handleUserInscription = () =>{   
+  const url= "https://omiso.com/utilisateur/inscription"
+  axios({
+    method:"post",
+    url:url,
+    data: user,
+  })
+  .then((e)=>console.log(e))
+  .catch( (e)=>console.log(e));
+}
+
+const handleUserConnection = () =>{   
+  const url= "https://omiso.com/utilisateur/login"
+  axios({
+    method:"post",
+    url:url,
+    data: user,
+  })
+  .then((e)=>{
+    console.log(e.data.token);
+    localStorage.setItem('UserTokenOmiso', e.data.token)
+  })
+  .catch( (e)=>console.log(e));
+}
+
+
   return (
 <>
    <Home showModalConnexion={showModalConnexion}/> 
 
-   {ModalConnexion && <Connection hideModalConnexion={hideModalConnexion} handleInputChange={handleInputChange} user={user}/>}
+   {ModalConnexion && <Connection hideModalConnexion={hideModalConnexion} handleInputChange={handleInputChange} user={user} handleUserInscription={handleUserInscription} handleUserConnection={handleUserConnection} handleUserforgetPassword={handleUserforgetPassword}/>}
 
    <div className="sectionMenu">
      { data.map( (d) =>(<MenuItems 
