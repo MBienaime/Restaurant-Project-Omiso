@@ -10,9 +10,9 @@ import "./styles.css";
 
 // commande recuperation API
 //p == Import npm
-const Home = ({showModal, showModalConnexion, showModalPanier}) => (
+const Home = () => (
   <div className="home">
-  <Header showModalConnexion={showModalConnexion} showModalPanier={showModalPanier}/> 
+  <Header /> 
    <div className="presentation ">
    
   <div className="social_icons">

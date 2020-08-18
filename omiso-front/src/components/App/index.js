@@ -7,7 +7,9 @@ import axios from 'axios';
 // Local imports 
 import Home from '../Home';
 import MenuItems from '../MenuItems';
-import Panier from '../Panier';
+import Connection from '../Connection';
+
+
 
 
 // == Import Style
@@ -20,9 +22,8 @@ import './styles.scss';
 const App = () => {
   
   const [data, setData] = useState([]);  
-  const [ModalConnexion, setModalConnexion] = useState(false );
-  const [ModalPanier, setModalPanier] = useState(true );
-  const [user, setuser]= useState({email: "", lastmane:"", firstname:"",password:"",phone_number:"",address:"",postal_code:"",city:""});
+  const [ModalConnexion, setModalConnexion] = useState(true ); 
+  const [user, setuser]= useState({email: "", lastmane:"", firstname:"",password:"",phone_number:""});
 
 
     const getApiData = () => {
@@ -49,15 +50,6 @@ const App = () => {
       setModalConnexion(false);
     };
 
-//modal Panier
-    const showModalPanier = () => {
-      setModalPanier(true);
-    };
-    const hideModalPanier = () => {
-      setModalPanier(false);
-    }; 
-    
-    
 //connexion users
 
 const handleInputChange = (e) => setuser({
@@ -66,9 +58,11 @@ const handleInputChange = (e) => setuser({
 })
 
   return (
-  <>
-   <Modal show={ModalConnexion} hideModal={hideModalConnexion}  />
-   <Home showModalConnexion={showModalConnexion} showModalPanier={showModalPanier}/> 
+<>
+   <Home /> 
+
+   {ModalConnexion && <Connection />}
+
    <div className="sectionMenu">
      { data.map( (d) =>(<MenuItems 
         title = {d.name}
@@ -76,9 +70,9 @@ const handleInputChange = (e) => setuser({
         price = {d.price}
         Image = ''
         key={d._id}
-     />)) }      
-
-  </>
+     />)) } 
+     </div>  
+ </>
   )
 }
 

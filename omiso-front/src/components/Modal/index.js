@@ -2,20 +2,21 @@ import React from "react";
 
 // == Import Style
 import "./styles.css";
+import Connection from '../Connection';
 
 // commande recuperation API
 //p == Import npm
-const Modal = ({show, hideModal}) => {
+const Modal = () => {
 const showHideClassName = show ? "modal display-block" : "modal display-none";
 
 return (
 
   <div className={showHideClassName}>
       <div className='modal-main'>
-          <button onClick={()=>hideModal()}>
-              cloture modal
+          <button >
+              X Fermer
           </button>
-          modal  
+         <Connection />  
       </div>
      
   </div>
