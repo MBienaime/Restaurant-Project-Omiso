@@ -8,6 +8,7 @@ import axios from 'axios';
 import Home from '../Home';
 import MenuItems from '../MenuItems';
 import Panier from '../Panier';
+import Connection from '../Connection';
 
 
 
@@ -49,6 +50,8 @@ const App = () => {
   </div>
   
     <Panier/>
+    <Connection/>
+
   </>
   )
 }
