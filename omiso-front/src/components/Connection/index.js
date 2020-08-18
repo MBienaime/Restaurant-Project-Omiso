@@ -2,14 +2,15 @@ import React, {useState} from 'react';
 import './style.css';
 
 
-const Connection= ({hideModalConnexion}) => {
+const Connection= ({hideModalConnexion, handleInputChange, user}) => {
 
  const [showPanel, setShowPanel] = useState("right-panel-active");
  const handleClick = () => setShowPanel (" ");
  const Clickhandler = () => setShowPanel ("right-panel-active");
+ console.log(user.lastname);
 
-  
   return (
+
 
  <div className='modal-main '>
 		<div className={`connection-container ${showPanel}`} >
@@ -17,11 +18,11 @@ const Connection= ({hideModalConnexion}) => {
 			<div className = "close" onClick={hideModalConnexion}>X</div>
 			<form action="#">
 				<h1>Créer un compte</h1>
-				<input type="text" placeholder="Nom" />
-				<input type="text" placeholder="Prénom" />
-				<input type="email" placeholder="Email" />
-				<input type="password" placeholder="Mot de passe"/>
-				<input type="number" placeholder="Téléphone" />
+				<input type="text" name="lastname" onChange={(e)=>handleInputChange(e)} placeholder="Nom" value={user.lastname} />
+				<input type="text" name ="firstname" onChange={(e)=>handleInputChange(e)} placeholder="Prénom" value={user.firstname}   />
+				<input type="email" name ="email" onChange={(e)=>handleInputChange(e)} placeholder="Email" value={user.email} />
+				<input type="password" name ="password"onChange={(e)=>handleInputChange(e)} placeholder="Mots de passe" value={user.password}  />
+				<input type="tel" name ="phone_number"onChange={(e)=>handleInputChange(e)} placeholder="Téléphone"  value={user.phone_number}  />
 				<button className ="container-button">Inscription</button>
 			</form>
 		</div>
@@ -30,8 +31,8 @@ const Connection= ({hideModalConnexion}) => {
 		<div className = "close" onClick={hideModalConnexion}>X</div>
 			<form action="#">
 				<h1>Se connecter</h1>
-				<input type="email" placeholder="Email" />
-				<input type="password" placeholder="Mot de passe" />
+				<input type="email" name ="email" onChange={(e)=>handleInputChange(e)} placeholder="Email" value={user.email}  />
+				<input type="password"  name ="password"onChange={(e)=>handleInputChange(e)} placeholder="Mots de passe" value={user.password} />
 				<a href="#">Mot de passe oublié ?</a>
 				<button className ="container-button">Connexion</button>
 			</form>

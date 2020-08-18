@@ -18,11 +18,12 @@ import './styles.scss';
 
 
 // commande recuperation API
-// == Import npm
+// == Import npme
 const App = () => {
   
   const [data, setData] = useState([]);  
-  const [ModalConnexion, setModalConnexion] = useState(false); 
+  const [ModalConnexion, setModalConnexion] = useState(false);
+
   const [user, setuser]= useState({email: "", lastmane:"", firstname:"",password:"",phone_number:""});
 
 
@@ -61,7 +62,7 @@ const handleInputChange = (e) => setuser({
 <>
    <Home showModalConnexion={showModalConnexion}/> 
 
-   {ModalConnexion && <Connection hideModalConnexion={hideModalConnexion}/>}
+   {ModalConnexion && <Connection hideModalConnexion={hideModalConnexion} handleInputChange={handleInputChange} user={user}/>}
 
    <div className="sectionMenu">
      { data.map( (d) =>(<MenuItems 
