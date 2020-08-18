@@ -6,7 +6,7 @@ import { FaShoppingCart } from 'react-icons/fa';
 import "./styles.css";
 
 // == Import npm
-const Header = () => (
+const Header = ({showModalConnexion}) => (
   <>
   <nav className="navbar">
 
@@ -15,7 +15,7 @@ const Header = () => (
     <div className = "nav_links">
     <a className="nav_link" href="#"> Accueil</a>
     <a className="nav_link" href="#"> Contact </a>
-    <a className="nav_link" href="#" > Connexion </a>
+    <a className="nav_link" href="#" onClick={showModalConnexion} > Connexion </a>
     </div>
     <div className="cart" ><FaShoppingCart/></div>
   </nav>  

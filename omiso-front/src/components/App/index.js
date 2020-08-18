@@ -22,7 +22,7 @@ import './styles.scss';
 const App = () => {
   
   const [data, setData] = useState([]);  
-  const [ModalConnexion, setModalConnexion] = useState(true ); 
+  const [ModalConnexion, setModalConnexion] = useState(false); 
   const [user, setuser]= useState({email: "", lastmane:"", firstname:"",password:"",phone_number:""});
 
 
@@ -59,9 +59,9 @@ const handleInputChange = (e) => setuser({
 
   return (
 <>
-   <Home /> 
+   <Home showModalConnexion={showModalConnexion}/> 
 
-   {ModalConnexion && <Connection />}
+   {ModalConnexion && <Connection hideModalConnexion={hideModalConnexion}/>}
 
    <div className="sectionMenu">
      { data.map( (d) =>(<MenuItems 

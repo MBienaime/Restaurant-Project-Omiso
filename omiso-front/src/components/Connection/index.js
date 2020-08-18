@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './style.css';
 
 
-const Connection= () => {
+const Connection= ({hideModalConnexion}) => {
 
  const [showPanel, setShowPanel] = useState("right-panel-active");
  const handleClick = () => setShowPanel (" ");
@@ -11,9 +11,10 @@ const Connection= () => {
   
   return (
 
- <div className='modal-main display-none'>
+ <div className='modal-main '>
 		<div className={`connection-container ${showPanel}`} >
 		<div className="form-container sign-up-container">
+			<div className = "close" onClick={hideModalConnexion}>X</div>
 			<form action="#">
 				<h1>Créer un compte</h1>
 				<input type="text" placeholder="Nom" />
@@ -26,6 +27,7 @@ const Connection= () => {
 		</div>
 
 		<div className="form-container sign-in-container">
+		<div className = "close" onClick={hideModalConnexion}>X</div>
 			<form action="#">
 				<h1>Se connecter</h1>
 				<input type="email" placeholder="Email" />
