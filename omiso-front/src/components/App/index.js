@@ -8,7 +8,6 @@ import axios from 'axios';
 import Home from '../Home';
 import MenuItems from '../MenuItems';
 import Panier from '../Panier';
-import Modal from '../Modal';
 
 
 // == Import Style
@@ -78,8 +77,7 @@ const handleInputChange = (e) => setuser({
         Image = ''
         key={d._id}
      />)) }      
-  </div>  
-    <Panier show={ModalPanier} hideModal={hideModalPanier}/>
+
   </>
   )
 }
