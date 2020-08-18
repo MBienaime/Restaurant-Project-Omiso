@@ -4,14 +4,15 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaTripadvisor } from 'react-icons/
 import Header from "../Header";
 
 
+
 // == Import Style
-import "./style.css";
+import "./styles.css";
 
 // commande recuperation API
 //p == Import npm
-const Home = () => (
+const Home = ({showModal, showModalConnexion, showModalPanier}) => (
   <div className="home">
-  <Header/>
+  <Header showModalConnexion={showModalConnexion} showModalPanier={showModalPanier}/> 
    <div className="presentation ">
    
   <div className="social_icons">

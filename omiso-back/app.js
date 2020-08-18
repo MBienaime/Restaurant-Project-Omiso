@@ -20,6 +20,8 @@ mongoose
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
+  
+
 // Admin-bro : route to administration panel
 app.use('/admin', adminRouter);
 
