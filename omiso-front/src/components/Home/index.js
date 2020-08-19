@@ -7,9 +7,9 @@ import Header from "../Header";
 import "./styles.css";
 
 
-const Home = ({showModalConnexion}) => (
+const Home = () => (
   <div className="home">
-  <Header showModalConnexion={showModalConnexion} /> 
+  
    <div className="presentation ">
    
   <div className="social_icons">
