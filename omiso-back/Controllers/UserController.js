@@ -29,7 +29,7 @@ exports.user_get_all = (req, res) => {
           ...doc._doc,
           request: {
             type: 'GET',
-            url: `https://omiso.com/user/${doc._id}`,
+            url: `https://omiso.com/utilisateur/${doc._id}`,
           },
         })),
       };
@@ -56,7 +56,7 @@ exports.user_get_user = (req, res) => {
           request: {
             type: 'GET',
             description: '',
-            url: `https://omiso.com/user/${doc._id}`,
+            url: `https://omiso.com/utilisateur/${doc._id}`,
           },
         });
       } else {
@@ -72,6 +72,7 @@ exports.user_get_user = (req, res) => {
 
 // Sign Up route : creates a new user
 exports.user_signup = (req, res) => {
+
   // Checking if email already exists
   const { email } = req.body;
   User.find({ email })
@@ -88,6 +89,7 @@ exports.user_signup = (req, res) => {
             error: err,
           });
         }
+
         const newUser = new User({
           _id: new mongoose.Types.ObjectId(),
           email: req.body.email,
