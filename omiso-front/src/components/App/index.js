@@ -1,8 +1,8 @@
 // == Import npm
 import React from 'react';
-
-import {useState, useEffect } from 'react';
 import axios from 'axios';
+import {useState, useEffect } from 'react';
+
 
 // Local imports 
 import Home from '../Home';
@@ -20,13 +20,7 @@ const App = () => {
   const [data, setData] = useState([]);  
   const [ModalConnexion, setModalConnexion] = useState(false);
 
-  const [user, setuser]= useState({
-    email : "", 
-    lastmane : "", 
-    firstname : "",
-    password : "",
-    phone_number : ""
-  });
+ 
 
 
   //API call
@@ -52,58 +46,15 @@ const App = () => {
   
    const hideModalConnexion = () => {
       setModalConnexion(false);
-    };
-
-
-// users connection
-const handleInputChange = (e) => setuser({
-  ...user,
-  [e.currentTarget.name]: e.currentTarget.value
-})
-
- //API call
-const handleUserInscription = () =>{   
-  const url= "https://omiso.com/utilisateur/inscription"
-  axios({
-    method:"post",
-    url:url,
-    data: user,
-  })
-  .then((e)=>console.log(e))
-  .catch( (e)=>console.log(e));
-}
-
- //API call
-const handleUserConnection = () =>{   
-  const url= "https://omiso.com/utilisateur/login"
-  axios({
-    method:"post",
-    url:url,
-    data: user,
-  })
-  .then((e)=>{
-    console.log(e.data.token);
-    localStorage.setItem('UserTokenOmiso', e.data.token)
-  })
-  .catch( (e)=>console.log(e));
-}
-
-
+     };
 
   return (
 <>
    <Home showModalConnexion={showModalConnexion}/> 
 
    {
-    ModalConnexion && 
-   <Connection 
-   hideModalConnexion={hideModalConnexion} 
-   handleInputChange={handleInputChange} 
-   user={user} 
-   handleUserInscription={handleUserInscription}
-   handleUserConnection={handleUserConnection} 
-   handleUserforgetPassword={handleUserforgetPassword}
-   />
+    ModalConnexion &&
+   <Connection hideModalConnexion={hideModalConnexion}/>
    }
 
    <div className="sectionMenu">

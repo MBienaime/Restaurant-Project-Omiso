@@ -1,34 +1,34 @@
 import React, {useState} from 'react';
 import './style.css';
 
+import {handleUserInscription,handleUserConnection,handleUserforgetPassword} from './userAPI';
 
-const Connection= ({
-  hideModalConnexion, 
-  handleInputChange, 
-  user, 
-  handleUserInscription, 
-  handleUserConnection
-}) => {
+const Connection= ({hideModalConnexion}) => {
+////
+	const [user, setuser]= useState({
+		email : "", 
+		lastmane : "", 
+		firstname : "",
+		password : "",
+		phone_number : ""
+	  });
+
+// users connection
+const handleInputChange = (e) => setuser({
+	...user,
+	[e.currentTarget.name]: e.currentTarget.value
+  });  
+
+//////
+
 
  const [showPanel, setShowPanel] = useState("right-panel-active");
  const handleClick = () => setShowPanel (" ");
  const Clickhandler = () => setShowPanel ("right-panel-active"); 
 
  const [showPanelForgetPassword, setshowPanelForgetPassword] = useState("display-none-forget");
- const handleClickForgetPassword = () => setshowPanelForgetPassword("display-block-forget ");
-
- //Axios request
- const handleUserforgetPassword = () =>{   
-	const url= "https://omiso.com/utilisateur/mdp-oublie"
-	axios({
-	  method:"put",
-	  url:url,
-	  data: user,
-	})
-	.then((e)=>{ console.log(e);})
-	.catch( (e)=>console.log(e));
-  }
-  
+ const handleClickForgetPassword_block = () => setshowPanelForgetPassword("display-block-forget "); 
+ const handleClickForgetPassword_none = () => setshowPanelForgetPassword("display-none-forget ")
 
 
   return (
@@ -41,7 +41,7 @@ const Connection= ({
      name ="email" 
      onChange={(e)=>handleInputChange(e)} 
      placeholder="Email" value={user.email} />
-		 <button className ="container-button" > Valider</button>
+		 <button className ="container-button" onClick={()=>{handleUserforgetPassword(user); handleClickForgetPassword_none()}}> Valider</button>
 		 </div>
 
 
@@ -83,7 +83,8 @@ const Connection= ({
         name ="phone_number"onChange={(e)=>handleInputChange(e)}
         placeholder="Téléphone" 
         value={user.phone_number} />
-				<button className ="container-button" onClick={(evt)=>{evt.preventDefault();handleUserInscription();hideModalConnexion()}}>Inscription</button>
+				<button className ="container-button" onClick={(evt)=>{evt.preventDefault();handleUserInscription(user)}}>
+        Inscription</button>
 			</form>
 		</div>
     
@@ -102,8 +103,9 @@ const Connection= ({
         name ="password"onChange={(e)=>handleInputChange(e)} 
         placeholder="Mots de passe" 
         value={user.password} />
-				<a href="#" onClick={()=>handleClickForgetPassword()}>Mot de passe oublié ?</a> 
-				<button className ="container-button" onClick={(evt)=>{evt.preventDefault();handleUserConnection();hideModalConnexion()}}>Connexion</button>
+				<a href="#" onClick={()=>handleClickForgetPassword_block()}>Mot de passe oublié ?</a> 
+				<button className ="container-button" onClick={(evt)=>{evt.preventDefault();handleUserConnection(user);hideModalConnexion()}}>
+        Connexion</button>
 			</form>
 		</div>
 
@@ -112,12 +114,14 @@ const Connection= ({
 				<div className="overlay-panel overlay-left">
 					<h1>Bonjour!</h1>
 					<p>Cliquez sur le bouton pour vous connecter</p>
-					<button className="container-button transparent" onClick={handleClick}>Connexion</button>
+					<button className="container-button transparent" onClick={handleClick}>
+          Connexion</button>
 				</div>
 				<div className="overlay-panel overlay-right">
 					<h1>Bienvenue!</h1>
 					<p>Cliquez sur le bouton pour vous inscrire</p>
-					<button className="container-button transparent" onClick={Clickhandler}>Inscription</button>
+					<button className="container-button transparent" onClick={Clickhandler}>
+          Inscription</button>
 				</div>
 			</div>
 		</div>
@@ -129,3 +133,5 @@ const Connection= ({
 }
 
 export default Connection;
+
+	
