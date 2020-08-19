@@ -9,7 +9,9 @@ import './styles.scss';
 // Local imports 
 import Home from '../Home';
 import MenuItems from '../MenuItems';
+
 import Header from'../Header';
+
 
 
 
@@ -24,6 +26,7 @@ const App = () => {
 </>
 
 )}
+
 
 // == Export
 export default App;
