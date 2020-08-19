@@ -8,6 +8,7 @@ import axios from 'axios';
 import Home from '../Home';
 import MenuItems from '../MenuItems';
 import Connection from '../Connection';
+import CardMenus from '../CardMenus';
 
 
 
@@ -62,6 +63,8 @@ const handleInputChange = (e) => setuser({
    <Home showModalConnexion={showModalConnexion}/> 
 
    {ModalConnexion && <Connection hideModalConnexion={hideModalConnexion}/>}
+
+   <CardMenus />
 
    <div className="sectionMenu">
      { data.map( (d) =>(<MenuItems 

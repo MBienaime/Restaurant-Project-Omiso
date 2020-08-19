@@ -1,0 +1,78 @@
+.CardMenus{    
+    height: 150px;
+    max-width: 400px;
+    position: relative;      
+    border-left: 2px;
+    border-bottom: 3px;
+    border-style: solid;
+    border-left-color: rgba(240, 129, 13, 0.39);
+    border-bottom-color: rgba(240, 129, 13, 0.39);
+    border-radius: 10px;   
+    padding: 10px;
+}
+
+.CardMenus-ajout{
+background-image: url('../../assets/image/photo-removebg-preview.png');
+background-repeat: no-repeat;
+background-size: contain;
+height:100% ;
+width: 100%;
+position: absolute;
+bottom:0;
+opacity: 0;
+left: 0;
+display:flex;
+justify-content: space-around;
+align-items: center;
+padding: 5px;
+
+}
+
+.CardMenus-order{
+/* background-color: palegreen; */
+width: 100px;
+height: 40px;
+cursor: pointer;
+font-size: 16px;
+font-weight: bold;
+border: 1px solid var(--signature-color);
+background-color: var(--signature-color);
+border-radius: 1.8rem;
+text-transform: uppercase;
+color: var(--color-white);
+
+
+}
+
+.CardMenus-ajout:hover  {  
+    background-color: rgba(90, 51, 9, 0.815);    
+    opacity: 0.9;  
+    transition: 1s;
+    border-radius: 10px;
+    
+}
+.CardMenus-title{
+    color: rgb(240, 129, 13);
+    font-size: 1.5em;
+}
+
+.CardMenus-description{
+    margin: 5px 0 0 0;
+    color: ghostwhite;
+    font-size: 1.2em;
+}
+
+.CardMenus-span{
+    float:right
+}
+
+.section-Menu{
+    height: 100%;
+    width: 100%;
+    background-image: url('../../assets/image/plain_background.png');
+    background-repeat: no-repeat;
+    background-size: auto ;
+    padding: 10px;
+
+
+}
