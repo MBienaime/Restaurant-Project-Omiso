@@ -3,13 +3,10 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaTripadvisor } from 'react-icons/
 // Local import 
 import Header from "../Header";
 
-
-
 // == Import Style
 import "./styles.css";
 
-// commande recuperation API
-//p == Import npm
+
 const Home = ({showModalConnexion}) => (
   <div className="home">
   <Header showModalConnexion={showModalConnexion} /> 

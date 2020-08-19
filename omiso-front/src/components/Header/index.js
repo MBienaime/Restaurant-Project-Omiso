@@ -17,7 +17,7 @@ const Header = ({showModalConnexion}) => (
     <a className="nav_link" href="#"> Contact </a>
     <a className="nav_link" href="#" onClick={showModalConnexion} > Connexion </a>
     </div>
-    <div className="cart" ><FaShoppingCart/></div>
+    <div className="cart"><FaShoppingCart/></div>
   </nav>  
   </>
 );
