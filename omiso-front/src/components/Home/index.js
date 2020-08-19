@@ -1,11 +1,10 @@
 import React from "react";
 import { FaFacebookF, FaTwitter, FaInstagram, FaTripadvisor } from 'react-icons/fa';
-// Local import 
-import Header from "../Header";
 
 // == Import Style
 import "./styles.css";
 
+import Header from "../Header";
 
 const Home = () => (
   <div className="home">
@@ -29,7 +28,7 @@ const Home = () => (
         <p><span> 3  </span>Connectez vous pour régler votre achat.</p>
         <p><span> 4  </span>Récupérez votre commande sur place.</p>
     </div>
- 
+    
         <button className="btn_menu">Notre carte</button>
 </div>
 </div>

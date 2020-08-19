@@ -1,14 +1,13 @@
 import React from "react";
 import { FaShoppingCart } from 'react-icons/fa';
-import Connection from '../Connection';
 import {useState, useEffect } from 'react';
 
 // == Import Style
 import "./styles.css";
 
+import Connection from '../Connection/'
 
 
-// == Import npm
 const Header = () => {
   
 const [ModalConnexion, setModalConnexion] = useState(false);
