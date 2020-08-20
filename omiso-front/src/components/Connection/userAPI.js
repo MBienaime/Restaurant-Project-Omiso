@@ -43,9 +43,9 @@ export function handleUserInscription(user){
 
  //API call : reset-password
  export function handleResetPassword(user){   
-	const url= "https://omiso.com/utilisateur/mdp-reset"
+	const url= "https://omiso.com/utilisateur/mdp-reset/:token"
 	axios({
-	  method:"put",
+	  method:"get",
 	  url:url,
 	  data: user,
 	})
