@@ -1,5 +1,7 @@
 // == Import npm
 import React, {useState,useEffect} from 'react';
+import axios from 'axios';
+
 
 // == Import Style
 import './styles.scss';
@@ -11,35 +13,51 @@ import Header from '../Header';
 import Cart from '../Cart';
 
 
-
-
 const App = () => {
 
-  const [userOrder, setOrder] = useState([{_id:" " ,quantity: 1}]);
-  const [useshowModalCart, setshowModalCart] = useState(false)
+  const [useshowModalCart, setshowModalCart] = useState(false);  
+  const [data, setData] = useState([{_id:""}]);   
+
+
+  //API call
+ const getApiData = () =>{
+const url = `https://omiso.com/menu/`;
+    axios.get(url)
+    .then((resp) => {
+      const addquantity = resp.data.menuItems.map((e)=>({...e,quantity:0}))
+      setData(addquantity)
+    })
+    .catch((error) => {
+      console.log('error', error);
+    });  
+  };
   
-  const addOrder = (data)=>{
-  const newOrder = userOrder.map((order)=> ((data._id === order._id)?({...data, quantity:order.quantity+1 }):({...data, quantity:1}))); 
-  setOrder([...userOrder]);     
-  };
+  //getting menu data
+  useEffect(getApiData, []) ;
+ 
+const addOrder = (d)=>{  
+const newdata = data.map((e)=>((e._id===d)?({...e,quantity:e.quantity+1,}):({...e,})));
+ setData(newdata);
+}
 
-  const removeOrder = (data)=>{
-  const newOrder = userOrder.map((order)=> ((data._id === order._id)?({...data, quantity:order.quantity-1 }):({...data, quantity:1})));  
+const RemoveOrder = (d)=>{  
+const newdata = data.map((e)=>((e._id===d)?({...e,quantity:e.quantity-1,}):({...e,})));
+ setData(newdata);
+}
 
-  setOrder(newOrder);       
-  };
+const DataOrder= data.filter((e)=>(e.quantity>0));
 
   const showModalCart = () => {setshowModalCart(true);};
   const hideModalCart = () => {setshowModalCart(false);};
 
-  console.log(userOrder);
+  
 
 return (
 <>
 <Header showModalCart={showModalCart}/> 
-{useshowModalCart &&<Cart hideModalCart={hideModalCart} userOrder={userOrder}/>}
+{useshowModalCart &&<Cart hideModalCart={hideModalCart}  DataOrder={DataOrder} addOrder={addOrder} RemoveOrder={RemoveOrder}/>}
 <Home/> 
-<MenuItems addOrder={addOrder}/> 
+<MenuItems addOrder={addOrder} data={data}/> 
 
 
 </>

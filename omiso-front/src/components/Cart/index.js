@@ -1,10 +1,10 @@
 // == Import npm
-import React, { useEffect } from "react";
+import React, { useEffect,  } from "react";
 
 // == Import Style
 import "./styles.css";
 
-const Cart = ({ hideModalCart, userOrder }) => {
+const Cart = ({ hideModalCart, DataOrder, RemoveOrder, addOrder }) => {
   return (
     <div className="modal display-block">
       <div className="checkout modal-main">
@@ -20,7 +20,7 @@ const Cart = ({ hideModalCart, userOrder }) => {
             </thead>
             <tbody>
 
-{ userOrder.map((order)=>(          
+{ DataOrder.map((order)=>(          
        <tr>
                 <td className="checkout-left-table-cell-description">
                   <div>
@@ -36,9 +36,9 @@ const Cart = ({ hideModalCart, userOrder }) => {
                   {order.price} €
                 </td>
                 <td className="checkout-left-table-cell blod">
-                  <button className="checkout-left-table-buttonm">-</button>
+                  <button className="checkout-left-table-buttonm" onClick={()=>(RemoveOrder(order._id))}>-</button>
                   {order.quantity}
-                  <button className="checkout-left-table-buttonp">+</button>
+                  <button className="checkout-left-table-buttonp" onClick={()=>(addOrder(order._id))}>+</button>
                 </td>
                 <td className="checkout-left-table-cell blod">30€</td>
               </tr>
