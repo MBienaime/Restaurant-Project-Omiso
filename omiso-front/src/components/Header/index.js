@@ -5,21 +5,30 @@ import {useState, useEffect } from 'react';
 // == Import Style
 import "./styles.css";
 
-import Connection from '../Connection/'
+import Connection from '../Connection/';
+import Cart from '../Cart';
 
 
 const Header = () => {
   
-const [ModalConnexion, setModalConnexion] = useState(false);
+const [useModalConnexion, setModalConnexion] = useState(false);
+const [useModalCart,setModalCart ] = useState(false);
   //modal connexion
-  const showModalConnexion = () => {setModalConnexion(true);};
+const showModalConnexion = () => {setModalConnexion(true);};
+const hideModalConnexion = () => {setModalConnexion(false);};
 
- const hideModalConnexion = () => {setModalConnexion(false);};
+  //modal Cart
+  const showModalCart = () => {setModalCart(true);};
+  const hideModalCart = () => {setModalCart(false);};
 
 return(  
   <>
+    {
+    useModalCart &&
+   <Cart hideModalCart={hideModalCart}/>
+   }
   {
-    ModalConnexion &&
+    useModalConnexion &&
    <Connection hideModalConnexion={hideModalConnexion}/>
    }
   <nav className="navbar">
@@ -29,7 +38,7 @@ return(
     <a className="nav_link" href="#"> Contact </a>
     <a className="nav_link" href="#" onClick={showModalConnexion} > Connexion </a>
     </div>
-    <div className="cart"><FaShoppingCart/></div>
+    <div className="cart" onClick={showModalCart}><FaShoppingCart/></div>
   </nav>  
   </>
 )};

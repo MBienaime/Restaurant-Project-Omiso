@@ -7,12 +7,12 @@ import './styles.css';
 
 // commande recuperation API
 // == Import npm
-const Panier = ({show, hideModal}) =>{
-  const showHideClassName = show ? "modal display-block" : "modal display-none";
+const Cart = ({hideModalCart}) =>{
+ 
 
 
   return (
-  <div className= {showHideClassName}  >
+  <div className= "modal display-block"  >
     <div className="checkout modal-main">
       <div className="checkout-left">        
           <table className="checkout-left-table">
@@ -132,10 +132,10 @@ const Panier = ({show, hideModal}) =>{
           VALIDER
         </button>
       </div>
-      <button onClick={()=>hideModal()}>Close</button>
+      <button onClick={()=>hideModalCart()}>X</button>
     </div> 
   </div>
 )}
 
 // == Export
-export default Panier;
+export default Cart;
