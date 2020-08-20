@@ -11,7 +11,7 @@ import Connection from '../Connection/'
 const Header = () => {
   
 const [ModalConnexion, setModalConnexion] = useState(false);
-  //modal connexion
+  //connection modal
   const showModalConnexion = () => {setModalConnexion(true);};
 
  const hideModalConnexion = () => {setModalConnexion(false);};

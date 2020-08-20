@@ -5,7 +5,7 @@ import React from 'react';
 // == Import Style
 import './styles.css';
 
-// commande recuperation API
+// commande recuperation APIcd cd
 // == Import npm
 const Panier = ({show, hideModal}) =>{
   const showHideClassName = show ? "modal display-block" : "modal display-none";

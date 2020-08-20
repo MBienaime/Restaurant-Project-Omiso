@@ -4,7 +4,7 @@ import './style.css';
 import {handleUserInscription,handleUserConnection,handleUserforgetPassword} from './userAPI';
 
 const Connection= ({hideModalConnexion}) => {
-////
+
 	const [user, setuser]= useState({
 		email : "", 
 		lastmane : "", 
@@ -19,8 +19,6 @@ const handleInputChange = (e) => setuser({
 	[e.currentTarget.name]: e.currentTarget.value
   });  
 
-//////
-
 
  const [showPanel, setShowPanel] = useState("right-panel-active");
  const handleClick = () => setShowPanel (" ");
@@ -29,7 +27,6 @@ const handleInputChange = (e) => setuser({
  const [showPanelForgetPassword, setshowPanelForgetPassword] = useState("display-none-forget");
  const handleClickForgetPassword_block = () => setshowPanelForgetPassword("display-block-forget "); 
  const handleClickForgetPassword_none = () => setshowPanelForgetPassword("display-none-forget ")
-
 
   return (
  <div className='modal-main'>
@@ -41,11 +38,12 @@ const handleInputChange = (e) => setuser({
      name ="email" 
      onChange={(e)=>handleInputChange(e)} 
      placeholder="Email" value={user.email} />
-		 <button className ="container-button" onClick={()=>{handleUserforgetPassword(user); handleClickForgetPassword_none()}}> Valider</button>
+		 <button className ="container-button"
+     onClick={()=>{ handleUserforgetPassword(user); handleClickForgetPassword_none()}}> Valider</button>
 		 </div>
-
-
 	 </div>
+
+
 		<div className={`connection-container ${showPanel}`} >
 		<div className="form-container sign-up-container">
 			<div className = "close" 
