@@ -1,22 +1,16 @@
 // == Import npm
-import React from 'react';
-
+import React, { useEffect } from "react";
 
 // == Import Style
-import './styles.css';
+import "./styles.css";
 
-// commande recuperation API
-// == Import npm
-const Cart = ({hideModalCart}) =>{
- 
-
-
+const Cart = ({ hideModalCart, userOrder }) => {
   return (
-  <div className= "modal display-block"  >
-    <div className="checkout modal-main">
-      <div className="checkout-left">        
+    <div className="modal display-block">
+      <div className="checkout modal-main">
+        <div className="checkout-left">
           <table className="checkout-left-table">
-          <thead>
+            <thead>
               <tr>
                 <th className="checkout-left-table-cell">Produit</th>
                 <th className="checkout-left-table-cell">Prix</th>
@@ -25,117 +19,53 @@ const Cart = ({hideModalCart}) =>{
               </tr>
             </thead>
             <tbody>
-              <tr>
+
+{ userOrder.map((order)=>(          
+       <tr>
                 <td className="checkout-left-table-cell-description">
                   <div>
                     <div className="checkout-left-table-image"></div>
-                    <span className="checkout-left-table-title">plats</span><br></br>
-                    Ici le nom du plats              
-                  </div> 
+                    <span className="checkout-left-table-title">
+                      {order.category}
+                    </span>
+                    <br></br>
+                  {order.name}
+                  </div>
                 </td>
-                <td className="checkout-left-table-cell blod">15 €</td>
+                <td className="checkout-left-table-cell blod">
+                  {order.price} €
+                </td>
                 <td className="checkout-left-table-cell blod">
                   <button className="checkout-left-table-buttonm">-</button>
-                    2 
+                  {order.quantity}
                   <button className="checkout-left-table-buttonp">+</button>
-                  </td>
+                </td>
                 <td className="checkout-left-table-cell blod">30€</td>
               </tr>
 
-              <tr>
-                <td className="checkout-left-table-cell-description">
-                  <div>
-                    <div className="checkout-left-table-image"></div>
-                    <span className="checkout-left-table-title">plats</span><br></br>
-                    Ici le nom du plats              
-                  </div> 
-                </td>
-                <td className="checkout-left-table-cell blod">15 €</td>
-                <td className="checkout-left-table-cell blod">
-                  <button className="checkout-left-table-buttonm">-</button>
-                    2 
-                  <button className="checkout-left-table-buttonp">+</button>
-                  </td>
-                <td className="checkout-left-table-cell blod">30€</td>
-              </tr>
 
-              
-              <tr>
-                <td className="checkout-left-table-cell-description">
-                  <div>
-                    <div className="checkout-left-table-image"></div>
-                    <span className="checkout-left-table-title">plats</span><br></br>
-                    Ici le nom du plats              
-                  </div> 
-                </td>
-                <td className="checkout-left-table-cell blod">15 €</td>
-                <td className="checkout-left-table-cell blod">
-                  <button className="checkout-left-table-buttonm">-</button>
-                    2 
-                  <button className="checkout-left-table-buttonp">+</button>
-                  </td>
-                <td className="checkout-left-table-cell blod">30€</td>
-              </tr>
+)
+)
 
-              <tr>
-                <td className="checkout-left-table-cell">
-                  <div>
-                    <div className="checkout-left-table-image">
-                      
-                    </div>
-                    <span className="checkout-left-table-title">Dessert</span><br></br>
-                    Ici le nom du plats              
-                  </div> 
-                </td>
-                <td className="checkout-left-table-cell">15 €</td>
-                <td className="checkout-left-table-cell">
-                <button>-</button>
-                    2 
-                  <button>+</button>
-                  </td>
-                <td className="checkout-left-table-cell">30€</td>
-              </tr>
-
-              <tr>
-                <td className="checkout-left-table-cell">
-                  <div>
-                    <div className="checkout-left-table-image">
-                      
-                    </div>
-                    <span className="checkout-left-table-title">Entree</span><br></br>
-                    Ici le nom du plats              
-                  </div> 
-                </td>
-                <td className="checkout-left-table-cell">15 €</td>
-                <td className="checkout-left-table-cell"> 
-                  <button>-</button>
-                    2 
-                  <button>+</button></td>
-                <td className="checkout-left-table-cell">30€</td>
-              </tr>
+}
             </tbody>
-
           </table>
 
-
-        
-        <div className="checkout-left-comment">        
-            Ajouter un Commentaire        
-          <input className="checkout-left-input">
-          </input>
+          <div className="checkout-left-comment">
+            Ajouter un Commentaire
+            <input className="checkout-left-input"></input>
+          </div>
         </div>
-      </div >
-      <div className="checkout-right">
-        <a href="#"> TOTAL A REGLER </a>
-        <span className="checkout-right-total">33€</span>
-        <button className="checkout-right-button">
-          VALIDER
-        </button>
+        <div className="checkout-right">
+          <a href="#"> TOTAL A REGLER </a>
+          <span className="checkout-right-total">33€</span>
+          <button className="checkout-right-button">Payer</button>
+        </div>
+        <button onClick={() => hideModalCart()}>X</button>
       </div>
-      <button onClick={()=>hideModalCart()}>X</button>
-    </div> 
-  </div>
-)}
+    </div>
+  );
+};
 
 // == Export
 export default Cart;

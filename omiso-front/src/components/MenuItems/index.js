@@ -46,7 +46,7 @@ data.map( (data) =>(
                 </div>
                 <p className=' descrition'>{data.description}</p>            
                 <div className='flex '>
-                <button className=" button " onClick={()=>addOrder(data._id)} >Ajouter</button>
+                <button className=" button " onClick={()=>addOrder(data)} >Ajouter</button>
                 </div>
             </div>
         </div>

@@ -1,32 +1,26 @@
 import React from "react";
 import { FaShoppingCart } from 'react-icons/fa';
-import {useState, useEffect } from 'react';
+import {useState, } from 'react';
 
 // == Import Style
 import "./styles.css";
 
 import Connection from '../Connection/';
-import Cart from '../Cart';
 
 
-const Header = () => {
+
+const Header = ({showModalCart}) => {
   
 const [useModalConnexion, setModalConnexion] = useState(false);
-const [useModalCart,setModalCart ] = useState(false);
+
   //modal connexion
 const showModalConnexion = () => {setModalConnexion(true);};
 const hideModalConnexion = () => {setModalConnexion(false);};
 
-  //modal Cart
-  const showModalCart = () => {setModalCart(true);};
-  const hideModalCart = () => {setModalCart(false);};
 
 return(  
   <>
-    {
-    useModalCart &&
-   <Cart hideModalCart={hideModalCart}/>
-   }
+ 
   {
     useModalConnexion &&
    <Connection hideModalConnexion={hideModalConnexion}/>

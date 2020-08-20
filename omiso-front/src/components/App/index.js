@@ -1,5 +1,5 @@
 // == Import npm
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 
 // == Import Style
 import './styles.scss';
@@ -8,32 +8,40 @@ import './styles.scss';
 import Home from '../Home';
 import MenuItems from '../MenuItems';
 import Header from '../Header';
+import Cart from '../Cart';
 
 
 
 
 const App = () => {
 
-  const [userOrder, setOrder] = useState([{menu:" " ,nbrmenu:0}]);
-  console.log(userOrder); 
+  const [userOrder, setOrder] = useState([{_id:" " ,quantity: 1}]);
+  const [useshowModalCart, setshowModalCart] = useState(false)
   
-
-  const addOrder = (id)=>{
-    console.log(id); 
-    const newOrder = userOrder.map((order)=> ((order.menu === id) ? ({...order,nbrmenu:order.nbrmenu +1 }) : ({...order, menu:id}) ));
-    setOrder(newOrder);   
-  };
-  const removeOrder = (id)=>{
-    console.log(id); 
-    const newOrder = userOrder.map((order)=> ((order.menu === id) ? ({...order,nbrmenu:order.nbrmenu -1 }) : ({...order, menu:id}) ));
-    setOrder(newOrder);   
+  const addOrder = (data)=>{
+  const newOrder = userOrder.map((order)=> ((data._id === order._id)?({...data, quantity:order.quantity+1 }):({...data, quantity:1}))); 
+  setOrder([...userOrder]);     
   };
 
-  return (
+  const removeOrder = (data)=>{
+  const newOrder = userOrder.map((order)=> ((data._id === order._id)?({...data, quantity:order.quantity-1 }):({...data, quantity:1})));  
+
+  setOrder(newOrder);       
+  };
+
+  const showModalCart = () => {setshowModalCart(true);};
+  const hideModalCart = () => {setshowModalCart(false);};
+
+  console.log(userOrder);
+
+return (
 <>
-<Header/> 
+<Header showModalCart={showModalCart}/> 
+{useshowModalCart &&<Cart hideModalCart={hideModalCart} userOrder={userOrder}/>}
 <Home/> 
 <MenuItems addOrder={addOrder}/> 
+
+
 </>
 
 )}
