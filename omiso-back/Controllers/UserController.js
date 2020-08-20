@@ -15,6 +15,7 @@ const mailgun = require('mailgun-js')({
 // import Model
 const User = require('../Models/UserModel');
 
+
 // user routes logic
 
 // find all users
@@ -160,18 +161,17 @@ exports.user_login = (req, res) => {
 exports.forget_password = (req, res) => {
   // checking if user exists
   const { email } = req.body;
-  User.find({ email })
+  User.findOne({ email })
     .exec()
     .then((user) => {
       if (!user) {
         return res
           .status(400)
           .json({ error: 'User with this email does not exist' });
-      }
-
+      }     
       // Creates token
       const token = jwt.sign(
-        { _id: req.body.userId },
+        { id: user._id },
         process.env.RESET_PASSWORD_KEY,
         { expiresIn: '20m' },
       );
@@ -183,7 +183,7 @@ exports.forget_password = (req, res) => {
         subject: 'Reset-password-test-nodejs',
         html: `
       <h4>Your request to reset your password</h4>
-      <p>Clink on this <a href = "https://omiso.com/user/forget-password/${token}" >link<a/>to reset your password</p>`,
+      <p>Clink on this <a href = "https://omiso.com/utilisateur/mdp-reset/${token}" >link<a/>to reset your password</p>`,
       };
 
       // token stored in user schema
@@ -206,7 +206,9 @@ exports.forget_password = (req, res) => {
 
 // Reset password
 exports.reset_password = (req, res) => {
-  const { resetLink } = req.body;
+ 
+  console.log(req.params.token);  
+  const  resetLink= req.params.token;
   // check if resetLink/token exists in user schema + comparing user token and token in link
   if (resetLink) {
     jwt.verify(resetLink, process.env.RESET_PASSWORD_KEY, (
@@ -216,14 +218,14 @@ exports.reset_password = (req, res) => {
         return res.status(401).json({ error: 'token incorrect or expired' });
       }
 
-      User.findOne({ resetLink }, (user) => {
+      User.findOne(resetLink , (user) => {
         if (!user) {
           return res
             .status(400)
             .json({ error: 'user with this token does not exist' });
         }
         // create new password
-
+        
         bcrypt.hash(req.body.newPassword, 10, (err, hash) => {
           if (err) {
             return res.status(500).json({
@@ -233,6 +235,9 @@ exports.reset_password = (req, res) => {
           const obj = {
             password: hash,
           };
+
+          
+
 
           Object.assign(user, obj);
           user.save((err) => {
@@ -247,6 +252,7 @@ exports.reset_password = (req, res) => {
       });
     });
   }
+ 
 };
 
 // Delete user by its id
