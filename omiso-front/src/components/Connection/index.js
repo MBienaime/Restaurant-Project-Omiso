@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './style.css';
 
-import {handleUserInscription,handleUserConnection,handleUserforgetPassword} from './userAPI';
+import {handleUserInscription,handleUserConnection,handleUserforgetPassword, handleResetPassword} from './userAPI';
 
 const Connection= ({hideModalConnexion}) => {
 
@@ -28,6 +28,16 @@ const handleInputChange = (e) => setuser({
  const handleClickForgetPassword_block = () => setshowPanelForgetPassword("display-block-forget "); 
  const handleClickForgetPassword_none = () => setshowPanelForgetPassword("display-none-forget ")
 
+
+
+
+//   const [useResetPanel, setResetPanel] = useState("reset-display-none");
+//  const handleClickReset_block = () => setResetPanel("reset-display-block"); 
+//  const handleClickReset_none = () => setResetPanel("reset-display-none")
+
+
+
+
   return (
  <div className='modal-main'>
 
@@ -42,6 +52,27 @@ const handleInputChange = (e) => setuser({
      onClick={()=>{ handleUserforgetPassword(user); handleClickForgetPassword_none()}}> Valider</button>
 		 </div>
 	 </div>
+
+
+
+   {/* <div  className={`modal-reset ${useResetPanel}`}>
+		 <div className="modal-main-reset">
+		 <input 
+     type="email" 
+     name ="email" 
+     onChange={(e)=>handleInputChange(e)} 
+     placeholder="Email" value={user.email} />
+     <input 
+      type="password" 
+      name ="password"onChange={(e)=>handleInputChange(e)} 
+      placeholder="Mots de passe" 
+      value={user.password}  />
+		 <button className ="container-button"
+     onClick={()=>{ handleResetPassword(user);}}>Envoyer</button>
+		 </div>
+	 </div> */}
+
+
 
 
 		<div className={`connection-container ${showPanel}`} >
