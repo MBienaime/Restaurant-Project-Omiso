@@ -20,7 +20,7 @@ const userSchema = mongoose.Schema({
   postal_code: { type: Number },
   city: { type: String },
   role: { type: String, required: ['admin', 'client', 'employé'], default: 'client' },
-  resetLink: { data: String, default: '' },
+  resetLinkToken: { data: String, default: '' },
 });
 
 mongoose.set('useCreateIndex', true);

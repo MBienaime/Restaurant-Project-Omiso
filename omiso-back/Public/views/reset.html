@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="default-src 'none'; width=device-width, initial-scale=1.0 ">
+    <title>Réinitialisation du mot de passe</title>
+   
+</head>
+<body>
+    <div class="reset-container">   
+<form action="#">
+    <label for="email"><b>Email</b></label>
+    <input type="email" name ="email" placeholder="Email"/>
+    <label for="psw"><b>Password</b></label>
+    <input type="password" name ="password" placeholder="Mots de passe" />
+    <button type="submit" class ="reset-btn">Envoyer</button>
+</form>
+</div>
+
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+:root {
+--main-font: "Quicksand", sans-serif;
+--secondary-font : "Roboto", sans-serif;
+--color-white: #ffff;
+--color-dark: #302e2c;
+--signature-color: #fe4d00;
+}
+.reset-container {
+width: 100vw;
+height: 100vh;
+display: flex;
+justify-content: center;
+}
+
+
+form {
+background-color:var(--color-white);
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+padding: 0 50px;
+height: 100%;
+width: 50%;
+text-align: center;
+}
+label {
+font-weight: bold;
+margin: 0;
+font-family: var( --secondary-font)
+} 
+
+input {
+background-color: #eee;
+border: none;
+padding: 12px 15px;
+margin: 8px 0;
+width: 100%;
+}
+
+.reset-btn {
+border-radius: 20px;
+border: 1px solid var(--signature-color);
+background-color: var(--signature-color);
+color:var(--color-white);
+font-size: 12px;
+font-weight: bold;
+padding: 12px 45px;
+letter-spacing: 1px;
+text-transform: uppercase;
+transition: transform 80ms ease-in;
+}
+.reset-btn:active {
+transform: scale(0.95);
+}
+
+.reset-btn:focus {
+outline: none;
+}
+
+</style>
+</body>
+</html>

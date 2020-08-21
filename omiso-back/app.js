@@ -1,6 +1,5 @@
 // Imports
 const express = require('express');
-
 const app = express();
 const mongoose = require('mongoose');
 
@@ -9,6 +8,8 @@ const OrderRouter = require('./Routes/OrderRoute');
 const MenuRouter = require('./Routes/MenuRoute');
 const userRouter = require('./Routes/UserRoute');
 const adminRouter = require('./Routes/AdminRoute');
+const path = require('path')
+
 
 // connection to DataBase
 mongoose
@@ -34,8 +35,15 @@ app.use('/admin', adminRouter);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+
+const viewsPath = path.join(__dirname, '../views') 
+app.set('view engine','ejs')
+
 // Routes
 app.use('/', express.static(`${__dirname}/public`));
+app.set('views', __dirname + '/public/views');
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 app.use('/upload', express.static(`${__dirname}/upload`));
 app.use('/commande', OrderRouter);
 app.use('/menu', MenuRouter);
