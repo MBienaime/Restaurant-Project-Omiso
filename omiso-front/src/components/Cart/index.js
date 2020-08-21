@@ -5,6 +5,10 @@ import React, { useEffect,  } from "react";
 import "./styles.css";
 
 const Cart = ({ hideModalCart, DataOrder, RemoveOrder, addOrder }) => {
+
+const sumOrder = DataOrder.map((e) => e.quantity*e.price).reduce((totale, number) => totale + number, 0).toFixed(2);
+
+
   return (
     <div className="modal display-block">
       <div className="checkout modal-main">
@@ -40,7 +44,7 @@ const Cart = ({ hideModalCart, DataOrder, RemoveOrder, addOrder }) => {
                   {order.quantity}
                   <button className="checkout-left-table-buttonp" onClick={()=>(addOrder(order._id))}>+</button>
                 </td>
-                <td className="checkout-left-table-cell blod">30€</td>
+                <td className="checkout-left-table-cell blod">{order.price*order.quantity}€</td>
               </tr>
 
 
@@ -58,7 +62,7 @@ const Cart = ({ hideModalCart, DataOrder, RemoveOrder, addOrder }) => {
         </div>
         <div className="checkout-right">
           <a href="#"> TOTAL A REGLER </a>
-          <span className="checkout-right-total">33€</span>
+          <span className="checkout-right-total">{sumOrder}€</span>
           <button className="checkout-right-button">Payer</button>
         </div>
         <button onClick={() => hideModalCart()}>X</button>

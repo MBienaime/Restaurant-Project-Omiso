@@ -18,8 +18,15 @@ const App = () => {
   const [useshowModalCart, setshowModalCart] = useState(false);  
   const [data, setData] = useState([{_id:""}]);   
 
+  ////
+ co
+  ////
 
-  //API call
+  const showModalCart = () => {setshowModalCart(true);};
+  const hideModalCart = () => {setshowModalCart(false);};
+
+
+  //API call data menu
  const getApiData = () =>{
 const url = `https://omiso.com/menu/`;
     axios.get(url)
@@ -35,6 +42,7 @@ const url = `https://omiso.com/menu/`;
   //getting menu data
   useEffect(getApiData, []) ;
  
+
 const addOrder = (d)=>{  
 const newdata = data.map((e)=>((e._id===d)?({...e,quantity:e.quantity+1,}):({...e,})));
  setData(newdata);
@@ -45,10 +53,12 @@ const newdata = data.map((e)=>((e._id===d)?({...e,quantity:e.quantity-1,}):({...
  setData(newdata);
 }
 
+//selector order menu
 const DataOrder= data.filter((e)=>(e.quantity>0));
 
-  const showModalCart = () => {setshowModalCart(true);};
-  const hideModalCart = () => {setshowModalCart(false);};
+
+
+
 
   
 
@@ -58,8 +68,6 @@ return (
 {useshowModalCart &&<Cart hideModalCart={hideModalCart}  DataOrder={DataOrder} addOrder={addOrder} RemoveOrder={RemoveOrder}/>}
 <Home/> 
 <MenuItems addOrder={addOrder} data={data}/> 
-
-
 </>
 
 )}
