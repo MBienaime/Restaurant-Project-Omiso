@@ -1,6 +1,6 @@
 // == Import npm
-import React, {useState,useEffect} from 'react';
-import axios from 'axios';
+import React, {useState,} from 'react';
+
 
 
 // == Import Style
@@ -15,59 +15,34 @@ import Cart from '../Cart';
 
 const App = () => {
 
-  const [useshowModalCart, setshowModalCart] = useState(false);  
-  const [data, setData] = useState([{_id:""}]);   
+const [useshowModalCart, setshowModalCart] = useState(false); 
 
-  ////
- co
-  ////
+const showModalCart = () => {setshowModalCart(true);};
+const hideModalCart = () => {setshowModalCart(false);}
 
-  const showModalCart = () => {setshowModalCart(true);};
-  const hideModalCart = () => {setshowModalCart(false);};
+const [useorder, setorder] = useState([]);
 
-
-  //API call data menu
- const getApiData = () =>{
-const url = `https://omiso.com/menu/`;
-    axios.get(url)
-    .then((resp) => {
-      const addquantity = resp.data.menuItems.map((e)=>({...e,quantity:0}))
-      setData(addquantity)
-    })
-    .catch((error) => {
-      console.log('error', error);
-    });  
-  };
-  
-  //getting menu data
-  useEffect(getApiData, []) ;
- 
-
-const addOrder = (d)=>{  
-const newdata = data.map((e)=>((e._id===d)?({...e,quantity:e.quantity+1,}):({...e,})));
- setData(newdata);
+const addOrder = (d)=>{ 
+if (!useorder.some((e)=>e._id === d._id)){ setorder([...useorder,{...d, quantity:1}]) }
+else{ const newdata = useorder.map((e)=>((e._id===d._id)?({...e,quantity:e.quantity+1,}):({...e,}))); setorder(newdata); };
 }
 
-const RemoveOrder = (d)=>{  
-const newdata = data.map((e)=>((e._id===d)?({...e,quantity:e.quantity-1,}):({...e,})));
- setData(newdata);
+const RemoveOrder = (d)=>{
+if (!useorder.some((e)=>e._id === d._id)){ setorder([...useorder,{...d, quantity:1}]) }
+else{ const newdata = useorder.map((e)=>((e._id===d._id)?({...e,quantity:e.quantity-1,}):({...e,}))); setorder(newdata); };
 }
+ console.log(useorder)
 
 //selector order menu
-const DataOrder= data.filter((e)=>(e.quantity>0));
+const usefilterorder= useorder.filter((e)=>(e.quantity>0));
 
-
-
-
-
-  
 
 return (
 <>
 <Header showModalCart={showModalCart}/> 
-{useshowModalCart &&<Cart hideModalCart={hideModalCart}  DataOrder={DataOrder} addOrder={addOrder} RemoveOrder={RemoveOrder}/>}
+{useshowModalCart &&<Cart hideModalCart={hideModalCart}  DataOrder={usefilterorder} addOrder={addOrder} RemoveOrder={RemoveOrder}/>}
 <Home/> 
-<MenuItems addOrder={addOrder} data={data}/> 
+<MenuItems addOrder={addOrder} /> 
 </>
 
 )}

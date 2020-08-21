@@ -40,9 +40,9 @@ const sumOrder = DataOrder.map((e) => e.quantity*e.price).reduce((totale, number
                   {order.price} €
                 </td>
                 <td className="checkout-left-table-cell blod">
-                  <button className="checkout-left-table-buttonm" onClick={()=>(RemoveOrder(order._id))}>-</button>
+                  <button className="checkout-left-table-buttonm" onClick={()=>(RemoveOrder(order))}>-</button>
                   {order.quantity}
-                  <button className="checkout-left-table-buttonp" onClick={()=>(addOrder(order._id))}>+</button>
+                  <button className="checkout-left-table-buttonp" onClick={()=>(addOrder(order))}>+</button>
                 </td>
                 <td className="checkout-left-table-cell blod">{order.price*order.quantity}€</td>
               </tr>

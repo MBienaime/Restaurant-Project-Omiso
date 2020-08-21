@@ -1,14 +1,31 @@
 // == Import npm
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 
 
 // == Import Style
 import './styles.css';
 
+const Menuitems = ({addOrder}) =>{
 
+    const [data, setData] = useState([{_id:""}]);  
 
-const Menuitems = ({addOrder,data}) =>{
+  //API call data menu
+  const getApiData = () =>{
+    const url = `https://omiso.com/menu/`;
+        axios.get(url)
+        .then((resp) => {
+          const addquantity = resp.data.menuItems.map((e)=>({...e,quantity:0}))
+          setData(addquantity)
+        })
+        .catch((error) => {
+          console.log('error', error);
+        });  
+      };
+      
+      //getting menu data
+      useEffect(getApiData, []) ;
 
 return(
 
@@ -26,7 +43,7 @@ data.map( (data) =>(
                 </div>
                 <p className=' descrition'>{data.description}</p>            
                 <div className='flex '>
-                <button className=" button " onClick={()=>(addOrder(data._id))} >Ajouter</button>
+                <button className=" button " onClick={()=>(addOrder(data))} >Ajouter</button>
                 </div>
             </div>
         </div>
