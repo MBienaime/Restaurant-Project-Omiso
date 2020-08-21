@@ -40,23 +40,27 @@ width: 100vw;
 height: 100vh;
 display: flex;
 justify-content: center;
+align-items: center;
+background-color:var(--color-dark);
 }
 
 
 form {
 background-color:var(--color-white);
+border-radius:20px;
 display: flex;
 align-items: center;
 justify-content: center;
 flex-direction: column;
 padding: 0 50px;
-height: 100%;
-width: 50%;
+height: 50%;
+width: 60%;
 text-align: center;
 }
 label {
+align-self: flex-start;
 font-weight: bold;
-margin: 0;
+margin: 10px 0;
 font-family: var( --secondary-font)
 } 
 
@@ -64,11 +68,12 @@ input {
 background-color: #eee;
 border: none;
 padding: 12px 15px;
-margin: 8px 0;
+margin-bottom: 10px ;
 width: 100%;
 }
 
 .reset-btn {
+margin-top:10px;
 border-radius: 20px;
 border: 1px solid var(--signature-color);
 background-color: var(--signature-color);
