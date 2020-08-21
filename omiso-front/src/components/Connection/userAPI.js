@@ -1,7 +1,7 @@
 import axios from 'axios';
  
 
- //API call
+ //API call : Signin
 export function handleUserInscription(user){   
 	const url= "https://omiso.com/utilisateur/inscription"
 	axios({
@@ -13,7 +13,7 @@ export function handleUserInscription(user){
 	.catch( (e)=>console.log(e));
   }
   
-   //API call
+   //API call : login
    export function handleUserConnection  (user) {   
 	const url= "https://omiso.com/utilisateur/login"
 	axios({
@@ -28,7 +28,7 @@ export function handleUserInscription(user){
 	.catch( (e)=>console.log(e));
   }
 
-  //Axios request
+  //API call : forget-password
   export function handleUserforgetPassword (user){   
 	const url= "https://omiso.com/utilisateur/mdp-oublie"
 	axios({
@@ -41,3 +41,14 @@ export function handleUserInscription(user){
   }
 
 
+ //API call : reset-password
+ export function handleResetPassword(user){   
+	const url= "https://omiso.com/utilisateur/mdp-reset/:token"
+	axios({
+	  method:"get",
+	  url:url,
+	  data: user,
+	})
+	.then((e)=>{ console.log(e);})
+	.catch( (e)=>console.log(e));
+  }

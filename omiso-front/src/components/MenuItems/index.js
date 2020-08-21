@@ -6,16 +6,18 @@ import axios from 'axios';
 // == Import Style
 import './styles.css';
 
-// commande recuperation API
-// == Import npm
-const Menuitems = ( ) =>{
+import Connection from '../Connection';
+
+
+
+const Menuitems = ({addOrder}) =>{
 
 const [data, setData] = useState([]);   
 
 
   //API call
  const getApiData = () =>{
-    const url = `https://omiso.com/menu/`;
+const url = `https://omiso.com/menu/`;
     axios.get(url)
     .then((resp) => {
       setData(resp.data.menuItems)
@@ -44,7 +46,7 @@ data.map( (data) =>(
                 </div>
                 <p className=' descrition'>{data.description}</p>            
                 <div className='flex '>
-                <button className=" button ">Ajouter</button>
+                <button className=" button " onClick={()=>addOrder(data._id)} >Ajouter</button>
                 </div>
             </div>
         </div>
