@@ -35,15 +35,13 @@ app.use('/admin', adminRouter);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
-const viewsPath = path.join(__dirname, '../views') 
-app.set('view engine','ejs')
-
 // Routes
-app.use('/', express.static(`${__dirname}/public`));
+
 app.set('views', __dirname + '/public/views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
+
+app.use('/', express.static(`${__dirname}/public`));
 app.use('/upload', express.static(`${__dirname}/upload`));
 app.use('/commande', OrderRouter);
 app.use('/menu', MenuRouter);
