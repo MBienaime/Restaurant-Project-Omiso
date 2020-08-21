@@ -1,25 +1,28 @@
 import React from "react";
 import { FaShoppingCart } from 'react-icons/fa';
-import {useState, useEffect } from 'react';
+import {useState, } from 'react';
 
 // == Import Style
 import "./styles.css";
 
-import Connection from '../Connection/'
+import Connection from '../Connection/';
 
 
-const Header = () => {
+
+const Header = ({showModalCart}) => {
   
-const [ModalConnexion, setModalConnexion] = useState(false);
-  //connection modal
-  const showModalConnexion = () => {setModalConnexion(true);};
+const [useModalConnexion, setModalConnexion] = useState(false);
 
- const hideModalConnexion = () => {setModalConnexion(false);};
+  //modal connexion
+const showModalConnexion = () => {setModalConnexion(true);};
+const hideModalConnexion = () => {setModalConnexion(false);};
+
 
 return(  
   <>
+ 
   {
-    ModalConnexion &&
+    useModalConnexion &&
    <Connection hideModalConnexion={hideModalConnexion}/>
    }
   <nav className="navbar">
@@ -29,7 +32,7 @@ return(
     <a className="nav_link" href="#"> Contact </a>
     <a className="nav_link" href="#" onClick={showModalConnexion} > Connexion </a>
     </div>
-    <div className="cart"><FaShoppingCart/></div>
+    <div className="cart" onClick={showModalCart}><FaShoppingCart/></div>
   </nav>  
   </>
 )};

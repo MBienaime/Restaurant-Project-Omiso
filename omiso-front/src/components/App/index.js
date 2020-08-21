@@ -1,5 +1,7 @@
 // == Import npm
-import React, {useState} from 'react';
+import React, {useState,} from 'react';
+
+
 
 // == Import Style
 import './styles.scss';
@@ -8,31 +10,39 @@ import './styles.scss';
 import Home from '../Home';
 import MenuItems from '../MenuItems';
 import Header from '../Header';
-
+import Cart from '../Cart';
 
 
 const App = () => {
 
-  const [userOrder, setOrder] = useState([{menu:" " ,nbrmenu:0}]);
-  console.log(userOrder); 
-  
+const [useshowModalCart, setshowModalCart] = useState(false); 
 
-  const addOrder = (id)=>{
-    console.log(id); 
-    const newOrder = userOrder.map((order)=> ((order.menu === id) ? ({...order,nbrmenu:order.nbrmenu +1 }) : ({...order, menu:id}) ));
-    setOrder(newOrder);   
-  };
-  const removeOrder = (id)=>{
-    console.log(id); 
-    const newOrder = userOrder.map((order)=> ((order.menu === id) ? ({...order,nbrmenu:order.nbrmenu -1 }) : ({...order, menu:id}) ));
-    setOrder(newOrder);   
-  };
+const showModalCart = () => {setshowModalCart(true);};
+const hideModalCart = () => {setshowModalCart(false);}
 
-  return (
+const [useorder, setorder] = useState([]);
+
+const addOrder = (d)=>{ 
+if (!useorder.some((e)=>e._id === d._id)){ setorder([...useorder,{...d, quantity:1}]) }
+else{ const newdata = useorder.map((e)=>((e._id===d._id)?({...e,quantity:e.quantity+1,}):({...e,}))); setorder(newdata); };
+}
+
+const RemoveOrder = (d)=>{
+if (!useorder.some((e)=>e._id === d._id)){ setorder([...useorder,{...d, quantity:1}]) }
+else{ const newdata = useorder.map((e)=>((e._id===d._id)?({...e,quantity:e.quantity-1,}):({...e,}))); setorder(newdata); };
+}
+ console.log(useorder)
+
+//selector order menu
+const usefilterorder= useorder.filter((e)=>(e.quantity>0));
+
+
+return (
 <>
-<Header/> 
+<Header showModalCart={showModalCart}/> 
+{useshowModalCart &&<Cart hideModalCart={hideModalCart}  DataOrder={usefilterorder} addOrder={addOrder} RemoveOrder={RemoveOrder}/>}
 <Home/> 
-<MenuItems addOrder={addOrder}/> 
+<MenuItems addOrder={addOrder} /> 
 </>
 
 )}
