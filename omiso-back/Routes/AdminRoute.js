@@ -13,65 +13,89 @@ AdminBro.registerAdapter(AdminBroMongoose);
 // Admin-bro parameters
 const adminBro = new AdminBro({
   resources: [
-    {resource: User,
-      options:{
-        properties:{                  
-          _id:{
-            isVisible:{list: false, filter: false, show: false, edit: false}, 
+    {
+      resource: User,
+      options: {
+        properties: {
+          _id: {
+            isVisible: false,
           },
-          role:{
-            name:'role',
-            isVisible:{list: false, filter: false, show: false, edit: true},
+          role: {
+            name: 'role',
+            isVisible: {
+              list: false, filter: false, show: false, edit: true,
+            },
             availableValues: [
-              {value: 'admin', label: 'Administrateur'},
-              {value: 'user', label: 'Utilisateur'},
-              {value: 'employé', label: 'Employée'},
-            ]
+              { value: 'admin', label: 'Administrateur' },
+              { value: 'user', label: 'Utilisateur' },
+              { value: 'employé', label: 'Employée' },
+            ],
           },
-          password:{isVisible:{list: false, filter: false, show: false, edit: false},
+          password: {
+            isVisible: false,
           },
+          resetLinkToken: {
+            isVisible: false,
+          },
+          postal_code: {
+            isVisible: {
+              list: false, filter: false, show: false, edit: true,
+            },
+          },
+          address: {
+            isVisible: {
+              list: false, filter: false, show: false, edit: true,
+            },
+          },
+          city: {
+            isVisible: {
+              list: false, filter: false, show: false, edit: true,
+            },
+          },
+
         },
-
-      locale: {
-        language: 'pl',
-        translations: {
-          actions: {
-            new: 'Stwórz nowy',
-            edit: 'Edytuj',
-            show: 'Detale',            
-          },
-          resources:{
-            User:{
-              properties: {
-                lastname: 'Tytuł',
-              }
-            }
-          },
-        }
-      }
-
 
       },
     },
-    {resource: Order,
-      options:{
-        properties:{
-          _id:{isVisible:{list: false, filter: false, show: false, edit: false},
-          }
+    {
+      resource: Order,
+      options: {
+        properties: {
+          _id: {
+            isVisible: false,
+          },
+          payment_id: {
+            isVisible: false,
+          },
+
         },
       },
     },
-    {resource: MenuItem,
-      options:{
-        properties:{
-          _id:{isVisible:{list: false, filter: false, show: false, edit: false},
-          }
+
+    {
+      resource: MenuItem,
+      options: {
+        properties: {
+          _id: {
+            isVisible: false,
+          },
+          image: {
+            isVisible: false,
+          },
+          category: {
+            availableValues: [
+              { value: 'Plat', label: 'Plat' },
+              { value: 'Boisson', label: 'Boisson' },
+              { value: 'Entree', label: 'Entree' },
+              { value: 'Dessert', label: 'Dessert' },
+            ],
+          },
         },
       },
-    },],
-    branding: {
-      companyName: 'OMISO',
-    },
+    }],
+  branding: {
+    companyName: 'OMISO',
+  },
   rootPath: '/admin',
 });
 

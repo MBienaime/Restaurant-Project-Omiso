@@ -5,13 +5,12 @@ const { Schema } = mongoose;
 
 // Schema defines the shape of the documents in the dataBase collection
 const oderSchema = mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
+  // _id: mongoose.Schema.Types.ObjectId,
   id_User: { type: Schema.ObjectId, ref: 'User' },
   date_Order: { type: Date, required: true },
   total_Price: { type: Number },
   total_Items: { type: Number, required: true },
   order_Menu: [{ menu: { type: Schema.ObjectId, ref: 'Menu' }, Number_MenuItem: { type: Number } }],
-  validatedOrder: { type: Boolean },
   payment_id: { type: String, default: '' },
 });
 
