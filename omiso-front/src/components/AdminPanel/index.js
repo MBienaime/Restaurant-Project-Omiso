@@ -3,9 +3,9 @@ import React from 'react';
 
 import {    BrowserRouter as Router,    Switch,    Route,    Link  } from "react-router-dom";
 
-import Menus from './Menus';
-import Orders from './Orders'
-import Users from './Users'
+import Menus from './Menus/Menus';
+import Orders from './Orders/Orders'
+import Users from './Users/Users'
 
 
 
@@ -33,8 +33,7 @@ return(
           <li>
             <Link to="/Users">Users</Link>
           </li>
-        </ul>
-        <hr />
+        </ul>        
         <Switch>
           <Route exact path="/">            
           </Route>
