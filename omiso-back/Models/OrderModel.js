@@ -10,7 +10,7 @@ const oderSchema = mongoose.Schema({
   date_Order: { type: Date, required: true },
   total_Price: { type: Number },
   total_Items: { type: Number },
-  order_Menu: [{ menu: { type: Schema.ObjectId, ref: 'Menu' }, Number_MenuItem: { type: Number } }],
+  order_Menu: [{ menu: { type: Schema.ObjectId, ref: 'Menu', required: true }, Number_MenuItem: { type: Number } }],
   payment_id: { type: String, default: '' },
 });
 
