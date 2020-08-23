@@ -1,5 +1,6 @@
 // == Import npm
-import React from 'react';
+import React,{useState, useEffect} from 'react';
+import axios from 'axios';
 
 
 
@@ -10,7 +11,31 @@ import './styles.css';
 
 const Users = () => {
 
+  const [useDataUsers, setDataUsers] = useState([ ]);  
+
+  //API call data menu
+  const getApiDataUsers = () =>{
+
+    const url = `https://omiso.com/utilisateur/`;
+        axios.get(url)
+        .then((resp) => {            
+          setDataUsers(resp)
+        })
+        .catch((error) => {
+          console.log('error', error);
+        });  
+      };
+      
+      //getting menu data
+      useEffect(getApiDataUsers, []) ;
+      
+
 return(
+
+
+
+
+
 
 
 
@@ -61,13 +86,13 @@ return(
     </div>
     <div className="ResultSelectAdminMenu">
         <div>Utilisateur</div>
-        <label for="Nom">Nom</label>
+        
         <input type="text" id="Nom" name="Nom" required></input>
-        <label for="Prenom">Prenom</label>
+       
         <input type="text" id="Prenom" name="Prenom" required></input>
-        <label for="prix">Email</label>
+        
         <input type="text" id="Email" name="Email" required></input>
-        <label for="TEL">TEL</label>
+        
         <input type="text" id="TEL" name="TEL" required></input>      
     
     </div>

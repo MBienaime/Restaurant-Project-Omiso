@@ -1,18 +1,27 @@
 ul{
     display: flex;
-    justify-content: space-around;
-    background: url("../../assets/image/plain_background.png") no-repeat center center/cover;
+    justify-content: space-around;   
 
 }
 li{
-    background-color: tomato;
-    height: 50px; 
+    background-color: rgb(225, 120, 17);
+    height: 30px; 
     width: 100px;   
     border-radius: 20px;
-    text-align: center;    
-    font-size: x-large;
-    font-weight: bolder;
+    text-align: center;
+    align-content: center;    
+    font-size: large;
+    font-weight: bold;
 }
 
+.adminPanel{
+    border-color: rgb(244, 247, 245);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    min-width: 100%;
+    padding: 20px;
+    background: url("../../assets/image/plain_background.png") no-repeat center center/cover;
 
+}
     

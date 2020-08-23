@@ -5,7 +5,7 @@
     
     color: rgb(241, 229, 229);
     
-    background: url("../../../assets/image/plain_background.png") no-repeat center center/cover;
+   
     
     
 }
@@ -23,7 +23,7 @@ table {
     flex-direction: column;
     
     width: auto;
-    height: 100%;
+    height:90%;
     border: solid;
     border-color: rgb(231, 223, 223);
     border-radius: 20px;
@@ -62,6 +62,7 @@ td th{
     flex-direction: column;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.363);
+    height:90%;
 
 }
 input {

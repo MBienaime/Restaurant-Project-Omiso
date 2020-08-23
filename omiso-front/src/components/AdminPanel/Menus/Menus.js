@@ -1,6 +1,7 @@
 // == Import npm
 import React,{useState, useEffect} from 'react';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 
 
@@ -11,15 +12,14 @@ import './styles.css';
 
 const Menus = () => {
 
-const [dataAdmin, setDataAdmin] = useState([{_id:""}]);  
+const [useDataMenus, setDataMenus] = useState([{_id:""}]);  
 
     //API call data menu
     const getApiData = () =>{
       const url = `https://omiso.com/menu/`;
           axios.get(url)
-          .then((resp) => {
-            const addquantity = resp.data.menuItems.map((e)=>({...e,quantity:0}))
-            setData(addquantity)
+          .then((resp) => {            
+            setDataMenus(resp.data.menuItems)
           })
           .catch((error) => {
             console.log('error', error);
@@ -28,6 +28,7 @@ const [dataAdmin, setDataAdmin] = useState([{_id:""}]);
         
         //getting menu data
         useEffect(getApiData, []) ;
+        
 
 return(
 
@@ -48,18 +49,19 @@ return(
               </tr>
             </thead>
             <tbody>
-              <tr>
+{ useDataMenus.map((d)=>(
+              <tr key={uuidv4()}>
                 <td >                  
-                    Nom du plats
+                    {d.name}
                 </td>
                 <td >
-                    15 €
+                   {d.price} €
                 </td>
                 <td>
-                    Dessert
+                    {d.category}
                 </td>
                 <td >
-                    tres bon plat
+                    {d.description}
                 </td>
                 <td >
                 <button>Supprimer</button><br></br>
@@ -68,48 +70,7 @@ return(
 
               </tr>    
 
-
-              <tr>
-                <td >                  
-                    Nom du plats
-                </td>
-                <td >
-                    15 €
-                </td>
-                <td>
-                    Dessert
-                </td>
-                <td >
-                    tres bon plat
-                </td>
-                <td >
-                <button>Supprimer</button><br></br>
-                    <button>Update</button>
-                </td>
-
-              </tr>       
-
-
-              <tr>
-                <td >                  
-                    Nom du plats
-                </td>
-                <td >
-                    15 €
-                </td>
-                <td>
-                    Dessert
-                </td>
-                <td >
-                    tres bon plat
-                </td>
-                <td >
-                    <button>Supprimer</button><br></br>
-                    <button>Update</button>
-                </td>
-
-              </tr>              
-  
+)) }
             </tbody>
 
           </table>
@@ -120,15 +81,15 @@ return(
     </div>
     <div className="ResultSelectAdminMenu">
         <div>Nouveau Menu</div>
-        <label for="titre">titre</label>
+       
         <input type="text" id="titre" name="titre" required></input>
-        <label for="description">description</label>
+  
         <input type="text" id="description" name="descrition" required></input>
-        <label for="prix">prix</label>
+      
         <input type="text" id="prix" name="prix" required></input>
-        <label for="categorie">categorie</label>
+     
         <input type="text" id="categorie" name="categorie" required></input>
-        <label for="image">image</label>
+        
         <input type="text" id="image" name="image" required></input>
         <button>ajouter</button>
     </div>

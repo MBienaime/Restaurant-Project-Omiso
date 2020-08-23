@@ -18,12 +18,9 @@ const AdminPanel = () => {
 
     
 return(
-       
+    <div className="adminPanel">  
     <Router>
         <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
           <li>
             <Link to="/Menus">Menus</Link>
           </li>
@@ -34,9 +31,7 @@ return(
             <Link to="/Users">Users</Link>
           </li>
         </ul>        
-        <Switch>
-          <Route exact path="/">            
-          </Route>
+        <Switch> 
           <Route exact path="/Menus">
             <Menus/>
           </Route>
@@ -48,6 +43,7 @@ return(
           </Route>
         </Switch> 
     </Router>
+    </div>  
     
 )};
 
