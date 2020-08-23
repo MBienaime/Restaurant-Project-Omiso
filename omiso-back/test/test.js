@@ -19,30 +19,37 @@ describe('Unit Test API Omiso', () => {
   after(() => {
     Order.deleteMany({ idUser: '122222' })
       .then()
-      .catch((e) => { console.log(`erre${e}`); });
+      .catch((e) => { console.log(e); });
     Menu.deleteMany({ name: 'testName' })
       .then()
-      .catch((e) => { console.log(`erre${e}`); });
+      .catch((e) => { console.log(e); });
     User.deleteMany({ email: 'usertest@gmail.com' })
       .then()
-      .catch((e) => { console.log(`erre${e}`); });
+      .catch((e) => { console.log(e); });
     User.deleteMany({ email: 'employétest@gmail.com' })
       .then()
-      .catch((e) => { console.log(`erre${e}`); });
+      .catch((e) => { console.log(e); });
+
+    User.deleteMany({ email: 'admintest@gmail.com' })
+      .then()
+      .catch((e) => { console.log(e); });
   });
 
   describe('#Test admin', () => {
-    // test route user
+    // test route admin
 
     describe('#Test connexion', () => {
       it('should signup user', (done) => {
         const userTest = {
           email: 'admintest@gmail.com',
+          lastname: 'utilisateur test',
+          firstname: 'uilisateur test',
           password: 'toto',
           role: 'admin',
+          phone_number: '065520605252',
         };
         chai.request(app)
-          .post('/user/signup')
+          .post('/utilisateur/inscription')
           .send(userTest)
           .end((err, res) => {
             expect(res).to.have.status(201);
@@ -58,7 +65,7 @@ describe('Unit Test API Omiso', () => {
           password: 'toto',
         };
         chai.request(app)
-          .post('/user/login')
+          .post('/utilisateur/login')
           .send(userTest)
           .end((err, res) => {
             expect(res).to.have.status(200);
@@ -72,7 +79,7 @@ describe('Unit Test API Omiso', () => {
 
       it('should Find all users', (done) => {
         chai.request(app)
-          .get('/user')
+          .get('/utilisateur')
           .set('Authorization', `bearer ${tokentest}`)
           .end((err, res) => {
             expect(res).to.have.status(200);
@@ -85,7 +92,7 @@ describe('Unit Test API Omiso', () => {
         User.findOne({ email: 'admintest@gmail.com' })
           .then((doc) => {
             chai.request(app)
-              .get(`/user/${doc._id}`)
+              .get(`/utilisateur/${doc._id}`)
               .set('Authorization', `bearer ${tokentest}`)
               .end((err, res) => {
                 expect(res).to.have.status(200);
@@ -99,81 +106,20 @@ describe('Unit Test API Omiso', () => {
         User.findOne({ email: 'admintest@gmail.com' })
           .then((doc) => {
             chai.request(app)
-              .delete(`/user/${doc._id}`)
+              .delete(`/utilisateur/${doc._id}`)
               .set('Authorization', `bearer ${tokentest}`)
               .end((err, res) => {
                 expect(res).to.have.status(200);
                 expect(res.body).to.be.an('object');
                 done();
               });
-          });
-      });
-    });
-
-    // test route order
-
-    describe('#Test Order route', () => {
-      it('should GET all Order ', (done) => {
-        chai.request(app)
-          .get('/order')
-          .set('Authorization', `bearer ${tokentest}`)
-          .end((err, res) => {
-            expect(res).to.have.status(200);
-            expect(res.body).to.be.an('array');
-            done();
-          });
-      });
-
-      it.skip('should POST Order ', (done) => {
-        const post_Order = {
-          idUser: '122222',
-          OrderMenu: { menu: 'menu test', description: 'description test' },
-        };
-
-        chai.request(app)
-          .post('/order')
-          .set('Authorization', `bearer ${tokentest}`)
-          .send(post_Order)
-          .end((err, res) => {
-            expect(res).to.have.status(201);
-            expect(res).to.be.a('object');
-            done();
-          });
-      });
-
-      it.skip('should GET Order by id ', (done) => {
-        Order.findOne({ idUser: '122222' })
-          .then((doc) => {
-            chai.request(app)
-              .get(`/order/${doc._id}`)
-              .set('Authorization', `bearer ${tokentest}`)
-              .end((err, res) => {
-                expect(res).to.have.status(200);
-                expect(res.body).to.be.an('object');
-                done();
-              });
-          });
-      });
-
-      it.skip('should DELETE Order ', (done) => {
-        Order.findOne({ idUser: '122222' })
-          .then((doc) => {
-            chai.request(app)
-              .delete(`/order/${doc._id}`)
-              .set('Authorization', `bearer ${tokentest}`)
-              .end((err, res) => {
-                expect(res).to.have.status(200);
-                expect(res.body).to.be.an('object');
-                expect(res.body).to.have.property('n');
-              });
-            done();
           });
       });
     });
 
     // test route menu
 
-    describe('#Test Menu route', () => {
+    describe.skip('#Test Menu route', () => {
       it('should POST menu ', (done) => {
         const post_order = {
           name: 'testName',
@@ -252,6 +198,71 @@ describe('Unit Test API Omiso', () => {
     });
   });
 
+  // test route order
+
+  describe('#Test Order route', () => {
+    it('should GET all Order ', (done) => {
+      chai.request(app)
+        .get('/commande')
+        .set('Authorization', `bearer ${tokentest}`)
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an('array');
+          done();
+        });
+    });
+
+    it('should POST Order ', (done) => {
+      const post_Order = {
+        idUser: '122222',
+        order_Menu: [{ menu: '5f305acf4e56382fe806fc84', Number_MenuItem: 1 }],
+        date_Order: Date(),
+        total_Price: 41,
+        total_Items: 4,
+
+      };
+
+      chai.request(app)
+        .post('/commande')
+        .set('Authorization', `bearer ${tokentest}`)
+        .send(post_Order)
+        .end((err, res) => {
+          expect(res).to.have.status(201);
+          expect(res).to.be.a('object');
+          done();
+        });
+    });
+
+    it('should GET Order by id ', (done) => {
+      Order.findOne({ idUser: '122222' })
+        .then((doc) => {
+          chai.request(app)
+            .get(`/commande/${doc._id}`)
+            .set('Authorization', `bearer ${tokentest}`)
+            .end((err, res) => {
+              expect(res).to.have.status(200);
+              expect(res.body).to.be.an('object');
+              done();
+            });
+        });
+    });
+
+    it('should DELETE Order ', (done) => {
+      Order.findOne({ idUser: '122222' })
+        .then((doc) => {
+          chai.request(app)
+            .delete(`/commande/${doc._id}`)
+            .set('Authorization', `bearer ${tokentest}`)
+            .end((err, res) => {
+              expect(res).to.have.status(200);
+              expect(res.body).to.be.an('object');
+              expect(res.body).to.have.property('n');
+            });
+          done();
+        });
+    });
+  });
+
   describe('#Test  Employé', () => {
     // runs once before the first test in this block
     before(() => {
@@ -285,11 +296,14 @@ describe('Unit Test API Omiso', () => {
       it('should signup user', (done) => {
         const userTest = {
           email: 'employétest@gmail.com',
+          lastname: 'utilisateur test',
+          firstname: 'uilisateur test',
           password: 'toto',
+          phone_number: '065520605252',
           role: 'employé',
         };
         chai.request(app)
-          .post('/user/signup')
+          .post('/usilisateur/inscription')
           .send(userTest)
           .end((err, res) => {
             expect(res).to.have.status(201);
@@ -306,7 +320,7 @@ describe('Unit Test API Omiso', () => {
           password: 'toto',
         };
         chai.request(app)
-          .post('/user/login')
+          .post('/utilisateur/login')
           .send(userTest)
           .end((err, res) => {
             expect(res).to.have.status(200);
@@ -320,7 +334,7 @@ describe('Unit Test API Omiso', () => {
 
       it('should Find all users', (done) => {
         chai.request(app)
-          .get('/user')
+          .get('/utilisateur')
           .set('Authorization', `bearer ${tokentest}`)
           .end((err, res) => {
             expect(res).to.have.status(200);
@@ -333,7 +347,7 @@ describe('Unit Test API Omiso', () => {
         User.findOne({ email: 'employétest@gmail.com' })
           .then((doc) => {
             chai.request(app)
-              .get(`/user/${doc._id}`)
+              .get(`/utilisateur/${doc._id}`)
               .set('Authorization', `bearer ${tokentest}`)
               .end((err, res) => {
                 expect(res).to.have.status(200);
@@ -347,7 +361,7 @@ describe('Unit Test API Omiso', () => {
         User.findOne({ email: 'employétest@gmail.com' })
           .then((doc) => {
             chai.request(app)
-              .delete(`/user/${doc._id}`)
+              .delete(`/utilisateur/${doc._id}`)
               .set('Authorization', `bearer ${tokentest}`)
               .end((err, res) => {
                 expect(res).to.have.status(401);
@@ -364,7 +378,7 @@ describe('Unit Test API Omiso', () => {
     describe.skip('#Test Order route', () => {
       it('should GET all Order ', (done) => {
         chai.request(app)
-          .get('/order')
+          .get('/commande')
           .set('Authorization', `bearer ${tokentest}`)
           .end((err, res) => {
             expect(res).to.have.status(200);
@@ -380,7 +394,7 @@ describe('Unit Test API Omiso', () => {
         };
 
         chai.request(app)
-          .post('/order')
+          .post('/commande')
           .set('Authorization', `bearer ${tokentest}`)
           .send(post_Order)
           .end((err, res) => {
@@ -395,7 +409,7 @@ describe('Unit Test API Omiso', () => {
         Order.findOne({ idUser: '122222' })
           .then((doc) => {
             chai.request(app)
-              .get(`/order/${doc._id}`)
+              .get(`/commande/${doc._id}`)
               .set('Authorization', `bearer ${tokentest}`)
               .end((err, res) => {
                 expect(res).to.have.status(200);
@@ -409,7 +423,7 @@ describe('Unit Test API Omiso', () => {
         Order.findOne({ idUser: '122222' })
           .then((doc) => {
             chai.request(app)
-              .delete(`/order/${doc._id}`)
+              .delete(`/commande/${doc._id}`)
               .set('Authorization', `bearer ${tokentest}`)
               .end((err, res) => {
                 expect(res).to.have.status(401);
@@ -487,7 +501,7 @@ describe('Unit Test API Omiso', () => {
     });
   });
 
-  describe('#Test User ', () => {
+  describe.skip('#Test User ', () => {
     // runs once before the first test in this block
     before(() => {
       const OrderItem = new Order({
