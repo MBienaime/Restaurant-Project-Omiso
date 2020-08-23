@@ -1,5 +1,8 @@
 // == Import npm
 import React from 'react';
+
+import {    BrowserRouter as Router,    Switch,    Route,    Link  } from "react-router-dom";
+
 import Menus from './Menus';
 import Orders from './Orders'
 import Users from './Users'
@@ -15,12 +18,38 @@ const AdminPanel = () => {
 
     
 return(
-<>
-
-    <Menus/>
-    <Orders/>
-    <Users/>
-</>
+       
+    <Router>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/Menus">Menus</Link>
+          </li>
+          <li>
+            <Link to="/Orders">Orders</Link>
+          </li>
+          <li>
+            <Link to="/Users">Users</Link>
+          </li>
+        </ul>
+        <hr />
+        <Switch>
+          <Route exact path="/">            
+          </Route>
+          <Route exact path="/Menus">
+            <Menus/>
+          </Route>
+          <Route exact path="/Orders">
+             <Orders/>
+          </Route>
+          <Route exact path="/Users">
+             <Users/>
+          </Route>
+        </Switch> 
+    </Router>
+    
 )};
 
 
