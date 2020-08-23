@@ -1,6 +1,8 @@
+/* eslint-disable import/order */
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-undef */
 // Import models Data Base
-const mongoose = require('mongoose');
+
 const Order = require('../Models/OrderModel');
 const Menu = require('../Models/MenuItemModel');
 const User = require('../Models/UserModel');
@@ -10,9 +12,8 @@ require('dotenv').config({ path: './Config/config.env' });
 const chai = require('chai');
 const chaihttp = require('chai-http');
 const app = require('../app');
-const { request } = require('chai');
+
 const { expect } = require('chai');
-const { findOne } = require('../Models/UserModel');
 
 chai.use(chaihttp);
 
@@ -40,12 +41,11 @@ describe('Unit Test API Omiso', () => {
       .then()
       .catch((e) => { console.log(e); });
   });
+  describe('#Unit test user admin', () => {
+    // test route user admin
 
-  describe('#Test admin', () => {
-    // test route admin
-
-    describe('#Test connexion', () => {
-      it('should signup user', (done) => {
+    describe('#Test Route Utilisateur #user admin', () => {
+      it('Admin should register as admin', (done) => {
         const userTest = {
           email: 'admintest@gmail.com',
           lastname: 'utilisateur test',
@@ -65,7 +65,7 @@ describe('Unit Test API Omiso', () => {
           });
       });
 
-      it('should login user', (done) => {
+      it('Admin should login as admin', (done) => {
         const userTest = {
           email: 'admintest@gmail.com',
           password: 'toto',
@@ -83,7 +83,7 @@ describe('Unit Test API Omiso', () => {
           });
       });
 
-      it('should Find all users', (done) => {
+      it('Admin should Find all users', (done) => {
         chai.request(app)
           .get('/utilisateur')
           .set('Authorization', `bearer ${tokentest}`)
@@ -94,7 +94,7 @@ describe('Unit Test API Omiso', () => {
             done();
           });
       });
-      it('should Find user by id', (done) => {
+      it('Admin should find user by id', (done) => {
         User.findOne({ email: 'admintest@gmail.com' })
           .then((doc) => {
             chai.request(app)
@@ -108,7 +108,7 @@ describe('Unit Test API Omiso', () => {
           });
       });
 
-      it('should Delete user by id', (done) => {
+      it('Admin should  Delete user by id', (done) => {
         User.findOne({ email: 'admintest@gmail.com' })
           .then((doc) => {
             chai.request(app)
@@ -123,10 +123,10 @@ describe('Unit Test API Omiso', () => {
       });
     });
 
-    // test route menu
+    // test route menu user  admin
 
-    describe('#Test Menu route', () => {
-      it('should POST menu ', (done) => {
+    describe('#Test Menu route #user admin', () => {
+      it('Admin should POST menu ', (done) => {
         const post_order = {
           name: 'testMenu',
           description: 'test description',
@@ -145,7 +145,7 @@ describe('Unit Test API Omiso', () => {
           });
       });
 
-      it('should GET all menu ', (done) => {
+      it('Admin should GET all menu ', (done) => {
         chai.request(app)
           .get('/menu')
           .end((err, res) => {
@@ -160,7 +160,7 @@ describe('Unit Test API Omiso', () => {
           });
       });
 
-      it('should GET menu by id ', (done) => {
+      it('Admin shouldGET menu by id ', (done) => {
         Menu.findOne({ name: 'testMenu' })
           .then((doc) => {
             chai.request(app)
@@ -179,7 +179,7 @@ describe('Unit Test API Omiso', () => {
           });
       });
 
-      it('should DELETE menu by id ', (done) => {
+      it('Admin should DELETE menu by id ', (done) => {
         Menu.findOne({ name: 'testMenu' })
           .then((doc) => {
             chai.request(app)
@@ -195,10 +195,10 @@ describe('Unit Test API Omiso', () => {
       });
     });
 
-    // test route order
+    // test route order user admin
 
-    describe('#Test Order route', () => {
-      it('should GET all Order ', (done) => {
+    describe('#Test Commande route #user admin', () => {
+      it('Admin should GET all Order ', (done) => {
         chai.request(app)
           .get('/commande')
           .set('Authorization', `bearer ${tokentest}`)
@@ -209,7 +209,7 @@ describe('Unit Test API Omiso', () => {
           });
       });
 
-      it('should POST Order ', (done) => {
+      it('Admin should POST Order ', (done) => {
         const post_Order = {
           order_Menu: [{ menu: '5f305acf4e56382fe806fc84', Number_MenuItem: 1 }],
 
@@ -225,7 +225,7 @@ describe('Unit Test API Omiso', () => {
         setTimeout(done(), 3000);
       });
 
-      it('should GET Order by id ', (done) => {
+      it('Admin should GET Order by id ', (done) => {
         User.findOne({ email: 'admintest@gmail.com' })
           .then((user) => {
             Order.findOne({ id_User: user._id })
@@ -242,7 +242,7 @@ describe('Unit Test API Omiso', () => {
           });
       });
 
-      it('should DELETE Order ', (done) => {
+      it('Admin should DELETE Order ', (done) => {
         User.findOne({ email: 'admintest@gmail.com' })
           .then((user) => {
             Order.findOne({ id_User: user._id })
@@ -261,7 +261,7 @@ describe('Unit Test API Omiso', () => {
       });
     });
   });
-  describe('#Test  Employé', () => {
+  describe('#Unit test user employé', () => {
     // runs once before the first test in this block
     before(() => {
       const menuItem = new Menu({
@@ -291,7 +291,7 @@ describe('Unit Test API Omiso', () => {
                 total_Price: 4,
                 total_Items: 52,
                 id_User: user._id,
-                order_Menu: [{ menu: '5f4222de689ea61214629dea', Number_MenuItem: 1 }],
+                order_Menu: [{ menu: menu._id, Number_MenuItem: 1 }],
                 payment_id: 'test pyd',
 
               });
@@ -302,10 +302,10 @@ describe('Unit Test API Omiso', () => {
 
     // runs once before the first test in this block
 
-    // test route user
+    // test route c
 
-    describe('#Test connexion ', () => {
-      it('should signup user', (done) => {
+    describe('#Test Route utilisateur user employé', () => {
+      it('Employé should signup employé', (done) => {
         const userTest = {
           email: 'employetest@gmail.com',
           lastname: 'utilisateur test',
@@ -326,7 +326,7 @@ describe('Unit Test API Omiso', () => {
           });
       });
 
-      it('should login user', (done) => {
+      it('Employé should login employé', (done) => {
         const userTest = {
           email: 'employetest@gmail.com',
           password: 'toto',
@@ -344,7 +344,7 @@ describe('Unit Test API Omiso', () => {
           });
       });
 
-      it('should Find all users', (done) => {
+      it('Employé should Find all users', (done) => {
         chai.request(app)
           .get('/utilisateur')
           .set('Authorization', `bearer ${tokentest}`)
@@ -355,7 +355,7 @@ describe('Unit Test API Omiso', () => {
             done();
           });
       });
-      it('should Find user by id', (done) => {
+      it('Employé should Find user by id', (done) => {
         User.findOne({ email: 'employetest@gmail.com' })
           .then((doc) => {
             chai.request(app)
@@ -369,7 +369,7 @@ describe('Unit Test API Omiso', () => {
           });
       });
 
-      it('should not Delete user by id', (done) => {
+      it('Employé should not Delete user by id', (done) => {
         User.findOne({ email: 'employetest@gmail.com' })
           .then((doc) => {
             chai.request(app)
@@ -385,10 +385,10 @@ describe('Unit Test API Omiso', () => {
       });
     });
 
-    // test route order
+    // test route order user Employé
 
-    describe('#Test Order route', () => {
-      it('should GET all Order ', (done) => {
+    describe('#Test Commande route user employé', () => {
+      it('Employé should GET all Order ', (done) => {
         chai.request(app)
           .get('/commande')
           .set('Authorization', `bearer ${tokentest}`)
@@ -399,7 +399,7 @@ describe('Unit Test API Omiso', () => {
           });
       });
 
-      it('should not POST Order ', (done) => {
+      it('Employé should not POST Order ', (done) => {
         const post_Order = {
 
           OrderMenu: { menu: 'menu test', description: 'description test' },
@@ -417,7 +417,7 @@ describe('Unit Test API Omiso', () => {
           });
       });
 
-      it('should GET Order by id ', (done) => {
+      it('Employé should GET Order by id ', (done) => {
         Order.findOne({ total_Items: 1 })
           .then((doc) => {
             chai.request(app)
@@ -431,7 +431,7 @@ describe('Unit Test API Omiso', () => {
           });
       });
 
-      it('should not DELETE Order ', (done) => {
+      it('Employé should not DELETE Order ', (done) => {
         Order.findOne({ total_Items: 1 })
           .then((doc) => {
             chai.request(app)
@@ -447,10 +447,10 @@ describe('Unit Test API Omiso', () => {
       });
     });
 
-    // test route menu
+    // test route menu user Employé
 
-    describe('#Test Menu route', () => {
-      it('should not POST menu ', (done) => {
+    describe('#Test Menu route user employé', () => {
+      it('Employé should not POST menu ', (done) => {
         const postMenu = {
           name: 'testName',
           description: 'test description',
@@ -471,7 +471,7 @@ describe('Unit Test API Omiso', () => {
           });
       });
 
-      it('should GET all menu ', (done) => {
+      it('Employé should GET all menu ', (done) => {
         chai.request(app)
           .get('/menu')
           .end((err, res) => {
@@ -481,7 +481,7 @@ describe('Unit Test API Omiso', () => {
           });
       });
 
-      it('should not GET menu by id ', (done) => {
+      it('Employé should not GET menu by id ', (done) => {
         Menu.findOne({ name: 'testName' })
           .then((doc) => {
             chai.request(app)
@@ -496,7 +496,7 @@ describe('Unit Test API Omiso', () => {
           });
       });
 
-      it('should not DELETE menu by id ', (done) => {
+      it('Employé should not DELETE menu by id ', (done) => {
         Menu.findOne({ name: 'testName' })
           .then((doc) => {
             chai.request(app)
@@ -512,8 +512,7 @@ describe('Unit Test API Omiso', () => {
       });
     });
   });
-
-  describe('#Test User ', () => {
+  describe('#Unit test user client', () => {
     // runs once before the first test in this block
     before(() => {
       const menuItem = new Menu({
@@ -556,8 +555,8 @@ describe('Unit Test API Omiso', () => {
 
     // test route user
 
-    describe('#Test connexion ', () => {
-      it('should signup user', (done) => {
+    describe('#Test utilisateur route user client ', () => {
+      it('Client should signup Client', (done) => {
         const userTest = {
           email: 'usertest@gmail.com',
           lastname: 'utilisateur test',
@@ -577,7 +576,7 @@ describe('Unit Test API Omiso', () => {
           });
       });
 
-      it('should login user', (done) => {
+      it('Client should login Client', (done) => {
         const userTest = {
           email: 'usertest@gmail.com',
           password: 'toto',
@@ -595,7 +594,7 @@ describe('Unit Test API Omiso', () => {
           });
       });
 
-      it('should not Find all users', (done) => {
+      it('Client should not Find all users', (done) => {
         chai.request(app)
           .get('/utilisateur')
           .set('Authorization', `bearer ${tokentest}`)
@@ -606,7 +605,7 @@ describe('Unit Test API Omiso', () => {
             done();
           });
       });
-      it('should Find not user by id', (done) => {
+      it('Client should Find not user by id', (done) => {
         User.findOne({ email: 'usertest@gmail.com' })
           .then((doc) => {
             chai.request(app)
@@ -621,7 +620,7 @@ describe('Unit Test API Omiso', () => {
           });
       });
 
-      it('should not Delete user by id', (done) => {
+      it('Client should not Delete user by id', (done) => {
         User.findOne({ email: 'usertest@gmail.com' })
           .then((doc) => {
             chai.request(app)
@@ -639,7 +638,7 @@ describe('Unit Test API Omiso', () => {
 
     // test route order
 
-    describe('#Test Order route', () => {
+    describe('#Test Commande route user client', () => {
       it('should not GET all Order ', (done) => {
         chai.request(app)
           .get('/commande')
@@ -705,8 +704,8 @@ describe('Unit Test API Omiso', () => {
 
     // test route menu
 
-    describe('#Test Menu route', () => {
-      it('should not POST menu ', (done) => {
+    describe('#Test Menu route user client', () => {
+      it('Client should not POST menu ', (done) => {
         const post_order = {
           name: 'testName',
           description: 'test description',
@@ -727,7 +726,7 @@ describe('Unit Test API Omiso', () => {
           });
       });
 
-      it('should GET all menu ', (done) => {
+      it('Client should GET all menu ', (done) => {
         chai.request(app)
           .get('/menu')
           .end((err, res) => {
@@ -737,7 +736,7 @@ describe('Unit Test API Omiso', () => {
           });
       });
 
-      it('should not GET menu by id ', (done) => {
+      it('Client should not GET menu by id ', (done) => {
         Menu.findOne({ name: 'testName' })
           .then((doc) => {
             chai.request(app)
@@ -752,7 +751,7 @@ describe('Unit Test API Omiso', () => {
           });
       });
 
-      it('should not DELETE menu by id ', (done) => {
+      it('Client should not DELETE menu by id ', (done) => {
         Menu.findOne({ name: 'testName' })
           .then((doc) => {
             chai.request(app)
