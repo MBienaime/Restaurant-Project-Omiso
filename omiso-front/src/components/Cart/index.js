@@ -1,22 +1,44 @@
 // == Import npm
 import React, { useEffect } from "react";
-import PaypalButton from '../CheckoutButton'
+import PaypalButton from '../CheckoutButton';
+import Axios from 'axios';
 
 // == Import Style
 import "./styles.css";
 
 const Cart = ({ hideModalCart, DataOrder, RemoveOrder, addOrder }) => {
+
   const sumOrder = DataOrder.map((e) => e.quantity * e.price)
     .reduce((total, number) => total + number, 0)
     .toFixed(2);
 
-// Paypal payment
+    console.log(DataOrder);
+
+
+const PaymentOrder =()=>{
+const ListOrder = DataOrder.map((e)=>({order_Menu:e._id, Number_MenuItem:e.quantity}))
+const token = window.localStorage.getItem('UserTokenOmiso');
+console.log(token);
+
+  Axios.post('https://omiso.com/commande/', ListOrder, {headers: {'Authorization': `Bearer ${token}`}})
+  .then(res => {
+    if (res.data.success)
+      { alert('Le paiement a été fait avec succès.')}
+    else 
+      {alert('Le paiement a échoué.')}
+      })
+      .catch((e)=>(console.log(e)))
+  }
+
+
+ 
+/*// Paypal payment
 const transactionSuccess = (sumOrder) => {
   const paymentDetails = {
     paymenData : sumOrder,
       }
 
-  Axios.post('https://omiso.com/commande/checkout-success', paymentDetails)
+  Axios.post('https://omiso.com/commande/', paymentDetails)
   .then(res => {
     if (res.data.success)
       { alert('Le paiement a été fait avec succès.')}
@@ -25,7 +47,7 @@ const transactionSuccess = (sumOrder) => {
       })
   }
   const transactionError = () => {console.log("Une erreur est survenue");}
-  const transactionCancel = () => {console.log("Le paiement a été annulé");}
+  const transactionCancel = () => {console.log("Le paiement a été annulé");}*/
   
 
   return (
@@ -89,12 +111,13 @@ const transactionSuccess = (sumOrder) => {
           <a href="#"> TOTAL A REGLER </a>
           <span className="checkout-right-total">{sumOrder}€</span>
          
-          <PaypalButton
+     {   /*  <PaypalButton
             // total = {sumOrder}
             onSuccess = {transactionSuccess}
             onError = {transactionError}
             onCancle = {transactionCancel}
-          />
+          />*/}
+          <button onClick={() => PaymentOrder()} >paiment </button>
         </div>
         <button onClick={() => hideModalCart()}>X</button>
       </div>
