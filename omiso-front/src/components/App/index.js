@@ -13,6 +13,8 @@ import Header from '../Header';
 import CardMenus from '../CardMenus';
 import Cart from '../Cart';
 
+import AdminPanel from '../AdminPanel/index';
+
 
 
 const App = () => {
@@ -45,6 +47,7 @@ return (
 <Home/>
 <CardMenus/> 
 <MenuItems addOrder={addOrder} /> 
+<AdminPanel/>
 </>
 
 )}

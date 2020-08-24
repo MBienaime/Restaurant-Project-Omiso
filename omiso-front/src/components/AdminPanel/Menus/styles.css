@@ -1,0 +1,71 @@
+.sectionAdminMenu{
+    display: flex;
+    height: 90vh;
+    width: 100%;
+    
+    color: rgb(241, 229, 229);
+    
+   
+    
+    
+}
+
+.fetchAdminMenu{
+    
+    width: 60%;
+}
+.ResultSelectAdminMenu{    
+    width: 40%;
+
+}
+table {
+    display:flex;
+    flex-direction: column;
+    
+    width: auto;
+    height:90%;
+    border: solid;
+    border-color: rgb(231, 223, 223);
+    border-radius: 20px;
+    margin: 20px;
+    background-color: rgba(0, 0, 0, 0.363);
+    
+}
+thead tbody{
+    display:flex;
+    flex-direction: column;    
+    width: 100%;
+    height: 400px;
+    justify-content: center;
+    align-items: center;
+}
+tr {
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: white;
+    border-bottom-style: solid;
+}
+td th{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+.ResultSelectAdminMenu{
+    border: solid;
+    border-color: rgb(231, 223, 223);
+    border-radius: 20px;
+    margin: 20px;  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.363);
+    height:90%;
+
+}
+input {
+    width: 95%;
+
+}

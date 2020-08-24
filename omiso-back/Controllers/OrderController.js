@@ -70,14 +70,13 @@ exports.postOrder = (req, res) => {
             if (error) {
               throw error;
             } else {
-              console.log(payment);
               Order.findByIdAndUpdate(e._id, { payment_id: payment.id })
                 .then()
                 .catch((err) => { res.status(500).json({ error: err }); });
 
               for (let i = 0; i < payment.links.length; i++) {
                 if (payment.links[i].rel === 'approval_url') {
-                  res.redirect(payment.links[i].href);
+                  res.status(302).redirect(payment.links[i].href);
                 }
               }
             }
