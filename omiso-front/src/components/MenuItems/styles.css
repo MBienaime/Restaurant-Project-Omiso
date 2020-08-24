@@ -1,6 +1,6 @@
 .menuitem{
-    height: 500px;
-    width: 380px;
+    height: 250px;
+    width: 200px;
     background-color: rgb(214, 218, 214);
     position: relative;
     margin:10px;
@@ -76,4 +76,22 @@
 
 .menuitem {
   align-self:stretch;
+}
+
+.sectionMenu{
+    display: flex;
+    flex-direction: column;
+}
+
+.sectionMenuNav{
+    display: flex;
+    justify-content: space-around;
+
+
+}
+
+.sectionMenuDisplayFliter{
+    display: flex;    
+    flex-wrap: wrap;    
+    width: 70%;
 }

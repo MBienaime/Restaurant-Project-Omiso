@@ -10,6 +10,7 @@ import './styles.css';
 const Menuitems = ({addOrder}) =>{
 
     const [data, setData] = useState([{_id:""}]);  
+    const [category, setCategory] =useState("");
 
   //API call data menu
   const getApiData = () =>{
@@ -27,11 +28,22 @@ const Menuitems = ({addOrder}) =>{
       //getting menu data
       useEffect(getApiData, []) ;
 
+      const filterCategory = (data, category)=>{if(!category){return data }else {return (data.filter((e)=>(e.category===category)))}};
+
 return(
 
 <div className="sectionMenu">
+    
+    <div className="sectionMenuNav">
+    <button className=" button " onClick={()=>(setCategory('Plat'))}>Plat</button>
+    <button className=" button " onClick={()=>(setCategory('Boisson'))}>Boisson</button>
+    <button className=" button " onClick={()=>(setCategory('Entree'))}>Entree</button>
+    <button className=" button " onClick={()=>(setCategory('Dessert'))}>Dessert</button>
+  </div>
+  <div className='sectionMenuDisplayFliter'>
+  
 { 
-data.map( (data) =>(
+filterCategory(data,category).map( (data) =>(
     <div className="menuitem" key={uuidv4()}>
         <div className="menuitem-image"></div>
         <div className="menutitem-animate">
@@ -49,6 +61,7 @@ data.map( (data) =>(
         </div>
     </div>
 ))} 
+</div>
 </div>
 
 
