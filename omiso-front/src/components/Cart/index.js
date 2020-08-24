@@ -1,13 +1,54 @@
 // == Import npm
-import React, { useEffect,  } from "react";
+import React, { useEffect } from "react";
+import PaypalButton from '../CheckoutButton';
+import Axios from 'axios';
 
 // == Import Style
 import "./styles.css";
 
 const Cart = ({ hideModalCart, DataOrder, RemoveOrder, addOrder }) => {
 
-const sumOrder = DataOrder.map((e) => e.quantity*e.price).reduce((totale, number) => totale + number, 0).toFixed(2);
+  const sumOrder = DataOrder.map((e) => e.quantity * e.price)
+    .reduce((total, number) => total + number, 0)
+    .toFixed(2);
 
+    console.log(DataOrder);
+
+
+const PaymentOrder =()=>{
+const ListOrder = DataOrder.map((e)=>({order_Menu:e._id, Number_MenuItem:e.quantity}))
+const token = window.localStorage.getItem('UserTokenOmiso');
+console.log(token);
+
+  Axios.post('https://omiso.com/commande/', ListOrder, {headers: {'Authorization': `Bearer ${token}`}})
+  .then(res => {
+    if (res.data.success)
+      { alert('Le paiement a été fait avec succès.')}
+    else 
+      {alert('Le paiement a échoué.')}
+      })
+      .catch((e)=>(console.log(e)))
+  }
+
+
+ 
+/*// Paypal payment
+const transactionSuccess = (sumOrder) => {
+  const paymentDetails = {
+    paymenData : sumOrder,
+      }
+
+  Axios.post('https://omiso.com/commande/', paymentDetails)
+  .then(res => {
+    if (res.data.success)
+      { alert('Le paiement a été fait avec succès.')}
+    else 
+      {alert('Le paiement a échoué.')}
+      })
+  }
+  const transactionError = () => {console.log("Une erreur est survenue");}
+  const transactionCancel = () => {console.log("Le paiement a été annulé");}*/
+  
 
   return (
     <div className="modal display-block">
@@ -23,35 +64,41 @@ const sumOrder = DataOrder.map((e) => e.quantity*e.price).reduce((totale, number
               </tr>
             </thead>
             <tbody>
-
-{ DataOrder.map((order)=>(          
-       <tr>
-                <td className="checkout-left-table-cell-description">
-                  <div>
-                    <div className="checkout-left-table-image"></div>
-                    <span className="checkout-left-table-title">
-                      {order.category}
-                    </span>
-                    <br></br>
-                  {order.name}
-                  </div>
-                </td>
-                <td className="checkout-left-table-cell blod">
-                  {order.price} €
-                </td>
-                <td className="checkout-left-table-cell blod">
-                  <button className="checkout-left-table-buttonm" onClick={()=>(RemoveOrder(order))}>-</button>
-                  {order.quantity}
-                  <button className="checkout-left-table-buttonp" onClick={()=>(addOrder(order))}>+</button>
-                </td>
-                <td className="checkout-left-table-cell blod">{order.price*order.quantity}€</td>
-              </tr>
-
-
-)
-)
-
-}
+              {DataOrder.map((order) => (
+                <tr>
+                  <td className="checkout-left-table-cell-description">
+                    <div>
+                      <div className="checkout-left-table-image"></div>
+                      <span className="checkout-left-table-title">
+                        {order.category}
+                      </span>
+                      <br></br>
+                      {order.name}
+                    </div>
+                  </td>
+                  <td className="checkout-left-table-cell blod">
+                    {order.price} €
+                  </td>
+                  <td className="checkout-left-table-cell blod">
+                    <button
+                      className="checkout-left-table-buttonm"
+                      onClick={() => RemoveOrder(order)}
+                    >
+                      -
+                    </button>
+                    {order.quantity}
+                    <button
+                      className="checkout-left-table-buttonp"
+                      onClick={() => addOrder(order)}
+                    >
+                      +
+                    </button>
+                  </td>
+                  <td className="checkout-left-table-cell blod">
+                    {order.price * order.quantity}€
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
 
@@ -63,7 +110,14 @@ const sumOrder = DataOrder.map((e) => e.quantity*e.price).reduce((totale, number
         <div className="checkout-right">
           <a href="#"> TOTAL A REGLER </a>
           <span className="checkout-right-total">{sumOrder}€</span>
-          <button className="checkout-right-button">Payer</button>
+         
+     {   /*  <PaypalButton
+            // total = {sumOrder}
+            onSuccess = {transactionSuccess}
+            onError = {transactionError}
+            onCancle = {transactionCancel}
+          />*/}
+          <button onClick={() => PaymentOrder()} >paiment </button>
         </div>
         <button onClick={() => hideModalCart()}>X</button>
       </div>

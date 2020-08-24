@@ -9,6 +9,7 @@
     border-bottom-color: rgba(240, 129, 13, 0.39);
     border-radius: 10px;   
     padding: 10px;
+    background-color: rgba(31, 27, 18, 0.767); 
 }
 
 .CardMenus-ajout{
@@ -68,8 +69,8 @@ color: var(--color-white);
 
 .section-Menu{
     height: 100%;
-    width: 100%;
-    background-image: url('../../assets/image/plain_background.png');
+    width: 100%;   
+    
     background-repeat: no-repeat;
     background-size: auto ;
     padding: 10px;
