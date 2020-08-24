@@ -12,6 +12,8 @@ import MenuItems from '../MenuItems';
 import Header from '../Header';
 import Cart from '../Cart';
 
+import AdminPanel from '../AdminPanel/index';
+
 
 const App = () => {
 
@@ -43,6 +45,7 @@ return (
 {useshowModalCart &&<Cart hideModalCart={hideModalCart}  DataOrder={usefilterorder} addOrder={addOrder} RemoveOrder={RemoveOrder}/>}
 <Home/> 
 <MenuItems addOrder={addOrder} /> 
+<AdminPanel/>
 </>
 
 )}
