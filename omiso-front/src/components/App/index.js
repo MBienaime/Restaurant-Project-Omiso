@@ -1,6 +1,6 @@
 // == Import npm
 import React, {useState,} from 'react';
-
+import { Route, Switch } from 'react-router-dom';
 
 
 // == Import Style
@@ -10,19 +10,13 @@ import './styles.scss';
 import Home from '../Home';
 import MenuItems from '../MenuItems';
 import Header from '../Header';
-import CardMenus from '../CardMenus';
 import Cart from '../Cart';
-
+import Connection from '../Connection';
 import AdminPanel from '../AdminPanel/index';
 
 
 
 const App = () => {
-
-const [useshowModalCart, setshowModalCart] = useState(false); 
-
-const showModalCart = () => {setshowModalCart(true);};
-const hideModalCart = () => {setshowModalCart(false);}
 
 const [useorder, setorder] = useState([]);
 
@@ -42,11 +36,22 @@ const usefilterorder= useorder.filter((e)=>(e.quantity>0));
 
 return (
 <>
-<Header showModalCart={showModalCart}/> 
-{useshowModalCart && <Cart hideModalCart={hideModalCart}  DataOrder={usefilterorder} addOrder={addOrder} RemoveOrder={RemoveOrder}/>}
+<Header/> 
 <Home/>
-<CardMenus/> 
-<MenuItems addOrder={addOrder} /> 
+<Switch>
+        <Route path="/">
+            <MenuItems addOrder={addOrder} /> 
+          </Route>
+          <Route path="/Connexion">
+            <Connection />
+          </Route>
+          <Route path="/Panier">
+            <Cart  DataOrder={usefilterorder} addOrder={addOrder} RemoveOrder={RemoveOrder}/>
+          </Route>
+</Switch>
+{/*<CardMenus/>*/ }
+
+
 <AdminPanel/>
 </>
 

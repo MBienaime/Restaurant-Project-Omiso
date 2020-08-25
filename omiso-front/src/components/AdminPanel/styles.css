@@ -3,7 +3,7 @@ ul{
     justify-content: space-around;   
 
 }
-li{
+#li{
     background-color: rgb(225, 120, 17);
     height: 30px; 
     width: 100px;   

@@ -1,10 +1,11 @@
 window.localStorage.getItem('user');
 import React, {useState} from 'react';
 import './style.css';
+import {Link} from 'react-router-dom';
 
-import {handleUserInscription,handleUserConnection,handleUserforgetPassword, handleResetPassword} from './userAPI';
+import {handleUserInscription,handleUserConnection,handleUserforgetPassword} from './userAPI';
 
-const Connection= ({hideModalConnexion}) => {
+const Connection= () => {
 
 	const [user, setuser]= useState({
 		email : "", 
@@ -31,16 +32,8 @@ const handleInputChange = (e) => setuser({
 
 
 
-
-//   const [useResetPanel, setResetPanel] = useState("reset-display-none");
-//  const handleClickReset_block = () => setResetPanel("reset-display-block"); 
-//  const handleClickReset_none = () => setResetPanel("reset-display-none")
-
-
-
-
   return (
- <div className='modal-main'>
+ <div className='modal-main display-block'>
 
 	 <div  className={`modal-forget ${showPanelForgetPassword}`}>
 		 <div className="modal-main-forget">
@@ -55,31 +48,9 @@ const handleInputChange = (e) => setuser({
 	 </div>
 
 
-
-   {/* <div  className={`modal-reset ${useResetPanel}`}>
-		 <div className="modal-main-reset">
-		 <input 
-     type="email" 
-     name ="email" 
-     onChange={(e)=>handleInputChange(e)} 
-     placeholder="Email" value={user.email} />
-     <input 
-      type="password" 
-      name ="password"onChange={(e)=>handleInputChange(e)} 
-      placeholder="Mots de passe" 
-      value={user.password}  />
-		 <button className ="container-button"
-     onClick={()=>{ handleResetPassword(user);}}>Envoyer</button>
-		 </div>
-	 </div> */}
-
-
-
-
 		<div className={`connection-container ${showPanel}`} >
 		<div className="form-container sign-up-container">
-			<div className = "close" 
-      onClick={hideModalConnexion}>X</div>
+		<Link to="/" className='close'>X</Link>
 
 			<form action="#">
 				<h1>Créer un compte</h1>
@@ -120,7 +91,7 @@ const handleInputChange = (e) => setuser({
     
 
 		<div className="form-container sign-in-container">
-		<div className = "close" onClick={hideModalConnexion}>X</div>
+		<Link to="/" className='close'>X</Link>
 			<form action="#">
 				<h1>Se connecter</h1>
 				<input 

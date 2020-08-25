@@ -29,7 +29,7 @@ const Home = () => (
         <p><span> 4  </span>Récupérez votre commande sur place.</p>
     </div>
     
-        <button className="btn_menu">Notre carte</button>
+        <button className="btn_menu"><a href="#Menu">Notre carte</a></button>
 </div>
 </div>
   
