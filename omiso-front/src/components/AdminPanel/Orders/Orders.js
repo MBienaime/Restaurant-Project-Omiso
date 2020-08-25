@@ -4,6 +4,7 @@ import axios from 'axios';
 
 
 
+
 // == Import Style
 import './styles.css';
 
@@ -27,7 +28,8 @@ const Orders = () => {
         
         //getting menu data
         useEffect(getApiDataOrder, []) ;
-        
+
+               
 
 
 
@@ -59,7 +61,7 @@ return(
                     06525214
                 </td>
                 <td>
-                    jean.dupont@gmail.com
+                    lolol
                 </td>
                 <td >
                    39€

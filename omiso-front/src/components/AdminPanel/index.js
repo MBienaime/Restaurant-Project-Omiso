@@ -1,7 +1,7 @@
 // == Import npm
 import React from 'react';
 
-import {    BrowserRouter as Router,    Switch,    Route,    Link  } from "react-router-dom";
+import {     Switch,    Route,    Link  } from "react-router-dom";
 
 import Menus from './Menus/Menus';
 import Orders from './Orders/Orders'
@@ -19,30 +19,33 @@ const AdminPanel = () => {
     
 return(
     <div className="adminPanel">  
-    <Router>
+    
         <ul>
           <li>
             <Link to="/Menus">Menus</Link>
           </li>
           <li>
-            <Link to="/Orders">Orders</Link>
+            <Link to="/commande">Orders</Link>
           </li>
           <li>
-            <Link to="/Users">Users</Link>
+            <Link to="/Utilisateurs">Users</Link>
           </li>
         </ul>        
         <Switch> 
+        <Route exact path="/:id">
+            <Menus />
+          </Route>
           <Route exact path="/Menus">
             <Menus/>
           </Route>
-          <Route exact path="/Orders">
+          <Route exact path="/commande/:id">
              <Orders/>
           </Route>
-          <Route exact path="/Users">
+          <Route exact path="/Utilisateurs">
              <Users/>
           </Route>
         </Switch> 
-    </Router>
+    
     </div>  
     
 )};

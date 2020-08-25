@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 
+
 // == Import Style
 import './styles.css';
 
@@ -28,6 +29,8 @@ const [useDataMenus, setDataMenus] = useState([{_id:""}]);
         
         //getting menu data
         useEffect(getApiData, []) ;
+
+       
         
 
 return(
@@ -45,7 +48,7 @@ return(
                 <th >Prix</th>
                 <th >Catagorie</th>
                 <th >Description</th>
-                <th >Action</th>
+                <th >action</th>
               </tr>
             </thead>
             <tbody>

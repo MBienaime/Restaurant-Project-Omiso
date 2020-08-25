@@ -53,7 +53,7 @@ exports.postOrder = (req, res) => {
               payment_method: 'paypal',
             },
             redirect_urls: {
-              return_url: 'https://omiso.com/commande/checkout-success',
+              return_url: 'https://omiso.com/',
               cancel_url: 'https://omiso.com/commande/cancel',
             },
             transactions: [{
@@ -76,7 +76,7 @@ exports.postOrder = (req, res) => {
 
               for (let i = 0; i < payment.links.length; i++) {
                 if (payment.links[i].rel === 'approval_url') {
-                  res.json({forwardLink:payment.links[i].href});
+                  res.json({ forwardLink: payment.links[i].href });
                 }
               }
             }

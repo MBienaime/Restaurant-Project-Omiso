@@ -13,7 +13,7 @@ const OrderController = require('../Controllers/OrderController');
 // Order Route
 
 OrderRoute.route('/')
-  .get(checkAuth, checkRoles(['admin', 'employé']), OrderController.getOrder)
+  .get(checkAuth, checkRoles(['admin', 'employé','client']), OrderController.getOrder)
   .post(checkAuth, checkRoles(['admin']), OrderController.postOrder);
 
 OrderRoute.route('/:id', checkAuth)

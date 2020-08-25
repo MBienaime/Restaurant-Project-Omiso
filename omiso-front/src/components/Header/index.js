@@ -27,13 +27,14 @@ return(
    }
   <nav className="navbar">
     <div className="nav_logo"></div>
-    <div className = "nav_links">
+    <div className = "nav_links">    
     <a className="nav_link" href="#"> Accueil</a>
     <a className="nav_link" href="#"> Contact </a>
     <a className="nav_link" href="#" onClick={showModalConnexion} > Connexion </a>
     </div>
     <div className="cart" onClick={showModalCart}><FaShoppingCart/></div>
   </nav>  
+
   </>
 )};
 // == Export
