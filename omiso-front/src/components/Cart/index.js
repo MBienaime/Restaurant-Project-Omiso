@@ -1,6 +1,5 @@
 // == Import npm
-import React, { useEffect } from "react";
-import PaypalButton from '../CheckoutButton';
+import React, { useEffect,useState } from "react";
 import Axios from 'axios';
 
 // == Import Style
@@ -8,19 +7,24 @@ import "./styles.css";
 
 const Cart = ({ hideModalCart, DataOrder, RemoveOrder, addOrder }) => {
 
+const [useComment, setComment] =useState("toto");
+
+const handleChange = (event) => {
+  setComment(event.target.value)
+}
   const sumOrder = DataOrder.map((e) => e.quantity * e.price)
     .reduce((total, number) => total + number, 0)
     .toFixed(2);
 
-    console.log(DataOrder);
 
 
 const PaymentOrder =()=>{
 const ListOrder = DataOrder.map((e)=>({menu:e._id, Number_MenuItem:e.quantity}))
+const Orders ={menus:ListOrder, comment:useComment};
 const token = window.localStorage.getItem('UserTokenOmiso');
 console.log(token);
 
-  Axios.post('https://omiso.com/commande/', {ListOrder}, {headers: {'Authorization': `Bearer ${token}`}})
+  Axios.post('https://omiso.com/commande/', {Orders}, {headers: {'Authorization': `Bearer ${token}`}})
   .then(res => {
     console.log(res.data.forwardLink);
     if (res.data.forwardLink)
@@ -31,24 +35,6 @@ console.log(token);
       .catch((e)=>(console.log(e)))
   }
 
-
- 
-/*// Paypal payment
-const transactionSuccess = (sumOrder) => {
-  const paymentDetails = {
-    paymenData : sumOrder,
-      }
-
-  Axios.post('https://omiso.com/commande/', paymentDetails)
-  .then(res => {
-    if (res.data.success)
-      { alert('Le paiement a été fait avec succès.')}
-    else 
-      {alert('Le paiement a échoué.')}
-      })
-  }
-  const transactionError = () => {console.log("Une erreur est survenue");}
-  const transactionCancel = () => {console.log("Le paiement a été annulé");}*/
   
 
   return (
@@ -105,19 +91,14 @@ const transactionSuccess = (sumOrder) => {
 
           <div className="checkout-left-comment">
             Ajouter un Commentaire
-            <input className="checkout-left-input"></input>
+            <input className="checkout-left-input" value={useComment} onChange={(e)=>handleChange(e)}></input>
           </div>
         </div>
         <div className="checkout-right">
           <a href="#"> TOTAL A REGLER </a>
           <span className="checkout-right-total">{sumOrder}€</span>
          
-     {   /*  <PaypalButton
-            // total = {sumOrder}
-            onSuccess = {transactionSuccess}
-            onError = {transactionError}
-            onCancle = {transactionCancel}
-          />*/}
+   
           <button onClick={() => PaymentOrder()} >paiment </button>
         </div>
         <button onClick={() => hideModalCart()}>X</button>
