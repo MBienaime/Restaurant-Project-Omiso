@@ -1,41 +1,45 @@
 // == Import npm
-import React, { useEffect,useState } from "react";
-import Axios from 'axios';
+import React, { useEffect, useState } from "react";
+import Axios from "axios";
+import { Link } from "react-router-dom";
 
 // == Import Style
 import "./styles.css";
 
-const Cart = ({ hideModalCart, DataOrder, RemoveOrder, addOrder }) => {
+const Cart = ({ DataOrder, RemoveOrder, addOrder }) => {
+  const [useComment, setComment] = useState("Ici votre commentaire...");
 
-const [useComment, setComment] =useState("toto");
-
-const handleChange = (event) => {
-  setComment(event.target.value)
-}
+  const handleChange = (event) => {
+    setComment(event.target.value);
+  };
   const sumOrder = DataOrder.map((e) => e.quantity * e.price)
     .reduce((total, number) => total + number, 0)
     .toFixed(2);
 
+  const PaymentOrder = () => {
+    const ListOrder = DataOrder.map((e) => ({
+      menu: e._id,
+      Number_MenuItem: e.quantity,
+    }));
+    const Orders = { menus: ListOrder, comment: useComment };
+    const token = window.localStorage.getItem("UserTokenOmiso");
+    console.log(token);
 
-
-const PaymentOrder =()=>{
-const ListOrder = DataOrder.map((e)=>({menu:e._id, Number_MenuItem:e.quantity}))
-const Orders ={menus:ListOrder, comment:useComment};
-const token = window.localStorage.getItem('UserTokenOmiso');
-console.log(token);
-
-  Axios.post('https://omiso.com/commande/', {Orders}, {headers: {'Authorization': `Bearer ${token}`}})
-  .then(res => {
-    console.log(res.data.forwardLink);
-    if (res.data.forwardLink)
-    {window.location=res.data.forwardLink}
-    else 
-      {alert('Le paiement a échoué.')}
+    Axios.post(
+      "https://omiso.com/commande/",
+      { Orders },
+      { headers: { Authorization: `Bearer ${token}` } }
+    )
+      .then((res) => {
+        console.log(res.data.forwardLink);
+        if (res.data.forwardLink) {
+          window.location = res.data.forwardLink;
+        } else {
+          alert("Le paiement a échoué.");
+        }
       })
-      .catch((e)=>(console.log(e)))
-  }
-
-  
+      .catch((e) => console.log(e));
+  };
 
   return (
     <div className="modal display-block">
@@ -91,17 +95,22 @@ console.log(token);
 
           <div className="checkout-left-comment">
             Ajouter un Commentaire
-            <input className="checkout-left-input" value={useComment} onChange={(e)=>handleChange(e)}></input>
+            <input
+              className="checkout-left-input"
+              value={useComment}
+              onChange={(e) => handleChange(e)}
+            ></input>
           </div>
         </div>
         <div className="checkout-right">
           <a href="#"> TOTAL A REGLER </a>
           <span className="checkout-right-total">{sumOrder}€</span>
-         
-   
-          <button onClick={() => PaymentOrder()} >paiment </button>
+
+          <button onClick={() => PaymentOrder()}>paiment </button>
         </div>
-        <button onClick={() => hideModalCart()}>X</button>
+        <Link to="/" className="close">
+          X
+        </Link>
       </div>
     </div>
   );
