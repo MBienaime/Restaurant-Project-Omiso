@@ -33,8 +33,8 @@ exports.postOrder = (req, res) => {
     id_User: req.dataToken.userId,
     date_Order: Date(),
     // total_Price,
-    total_Items: req.body.order_Menu.length,
-    order_Menu: req.body.order_Menu,
+    total_Items: req.body.ListOrder.length,
+    order_Menu: req.body.ListOrder,
   });
 
   OrderItem
@@ -76,7 +76,7 @@ exports.postOrder = (req, res) => {
 
               for (let i = 0; i < payment.links.length; i++) {
                 if (payment.links[i].rel === 'approval_url') {
-                  res.status(302).redirect(payment.links[i].href);
+                  res.json({forwardLink:payment.links[i].href});
                 }
               }
             }

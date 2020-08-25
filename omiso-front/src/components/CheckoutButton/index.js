@@ -1,5 +1,5 @@
-import React from 'react';
-import PaypalExpressBtn from "react-paypal-express-checkout";
+/*import React from 'react';
+
 
 
 const PaypalButton = () => {
@@ -35,4 +35,4 @@ return (
 
 };
 
-export default PaypalButton; 
+export default PaypalButton; */

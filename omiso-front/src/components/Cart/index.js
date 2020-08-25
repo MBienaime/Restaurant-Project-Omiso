@@ -16,14 +16,15 @@ const Cart = ({ hideModalCart, DataOrder, RemoveOrder, addOrder }) => {
 
 
 const PaymentOrder =()=>{
-const ListOrder = DataOrder.map((e)=>({order_Menu:e._id, Number_MenuItem:e.quantity}))
+const ListOrder = DataOrder.map((e)=>({menu:e._id, Number_MenuItem:e.quantity}))
 const token = window.localStorage.getItem('UserTokenOmiso');
 console.log(token);
 
-  Axios.post('https://omiso.com/commande/', ListOrder, {headers: {'Authorization': `Bearer ${token}`}})
+  Axios.post('https://omiso.com/commande/', {ListOrder}, {headers: {'Authorization': `Bearer ${token}`}})
   .then(res => {
-    if (res.data.success)
-      { alert('Le paiement a été fait avec succès.')}
+    console.log(res.data.forwardLink);
+    if (res.data.forwardLink)
+    {window.location=res.data.forwardLink}
     else 
       {alert('Le paiement a échoué.')}
       })
