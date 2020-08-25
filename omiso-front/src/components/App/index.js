@@ -39,7 +39,7 @@ return (
 <Header/> 
 <Home/>
 <Switch>
-        <Route path="/">
+        <Route exact path="/">
             <MenuItems addOrder={addOrder} /> 
           </Route>
           <Route path="/Connexion">

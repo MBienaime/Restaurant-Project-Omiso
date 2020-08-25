@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 
 // == Import Style
 import "./styles.css";
@@ -56,7 +57,7 @@ const Cart = ({ DataOrder, RemoveOrder, addOrder }) => {
             </thead>
             <tbody>
               {DataOrder.map((order) => (
-                <tr>
+                <tr key={uuidv4()}>
                   <td className="checkout-left-table-cell-description">
                     <div>
                       <div className="checkout-left-table-image"></div>
@@ -118,3 +119,4 @@ const Cart = ({ DataOrder, RemoveOrder, addOrder }) => {
 
 // == Export
 export default Cart;
+
