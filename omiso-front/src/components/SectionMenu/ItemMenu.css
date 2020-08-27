@@ -1,0 +1,60 @@
+.ItmeMenu{
+    border-color: rgb(229, 110, 45);
+    border-style: solid;
+    border-width: 1px;
+    max-height: 150px;
+    max-width: 350px;
+    display:flex;    
+    justify-content:space-between;
+    align-items: center;
+    margin: 30px 100px;
+}
+.ItmeMenuPhoto{
+    margin: 0;
+    transform: translate(60px, 0);
+
+}
+.ItmeMenuPrice{
+    border-color: rgb(229, 110, 45);    
+    border-left-style: solid ;
+    border-left-width: 1px;        
+    color:rgb(255, 255, 255) ; 
+    font-weight:bold;
+    font-size: 1.9em;
+    padding: 35px 0;
+}
+.ItmeMenuDescription{
+    margin: 0;
+    transform: translate(-60px, 0);    
+
+}
+.ItmeMenuDescriptionTitle{
+    margin:0px 0;
+    color:rgb(255, 255, 255);
+    font-weight:bold;
+    font-size: 1.7em;
+    
+}
+.ItmeMenuDescriptionCategory{
+    color: rgb(229, 110, 45); 
+    margin: 0;
+    font-weight:bold;
+}
+.ItmeMenuDescriptionDescrip{
+    margin: 5px,0;
+    color:rgb(255, 255, 255);
+    width: 200px;
+    overflow-wrap: break-word;
+    margin: 0;
+    
+}
+
+.ItmeMenuPhoto{
+    background-image: url('../../assets/image/sushi1.png');
+    background-repeat: no-repeat;    
+    background-size: contain;
+    background-position: center;
+    height: 200px;
+    width: 200px;
+
+}
