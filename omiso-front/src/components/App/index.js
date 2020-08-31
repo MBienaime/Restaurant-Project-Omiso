@@ -3,7 +3,16 @@ import React, { useState } from "react";
 import { Route, Switch } from "react-router-dom";
 
 // == Import Style
-import "./styles.scss";
+import './styles.scss';
+
+// Local imports 
+import Home from '../Home';
+import MenuItems from '../MenuItems';
+import Header from '../Header';
+import Cart from '../Cart';
+import Connection from '../Connection';
+import AdminPanel from '../AdminPanel/index';
+import SectionMenu from '../SectionMenu';
 
 // Local imports
 import Home from "../Home";
@@ -47,25 +56,25 @@ const App = () => {
       <Home />
       <Switch>
         <Route exact path="/">
-          <MenuItems addOrder={addOrder} />
-        </Route>
-        <Route path="/Connexion">
-          <Connection />
-        </Route>
-        <Route path="/Panier">
-          <Cart
-            DataOrder={usefilterorder}
-            addOrder={addOrder}
-            RemoveOrder={RemoveOrder}
-          />
-        </Route>
-      </Switch>
-      {/*<CardMenus/>*/}
 
-      <AdminPanel />
-    </>
-  );
-};
+            <SectionMenu addOrder={addOrder}/>
+          </Route>
+          <Route path="/Connexion">
+            <Connection />
+          </Route>
+          <Route path="/Panier">
+            <Cart  DataOrder={usefilterorder} addOrder={addOrder} RemoveOrder={RemoveOrder}/>
+          </Route>
+</Switch>
+{/*<CardMenus/>*/ }
+<MenuItems  /> 
+
+
+</>
+
+)}
+
+
 
 // == Export
 export default App;
