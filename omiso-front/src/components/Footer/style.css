@@ -8,7 +8,7 @@
 }
 .footer__content h4 {
   font-size: bolder;
-  color: var(--main-color);
+  color: var(--signature-color);
 }
 
 .footer__content p {
@@ -56,7 +56,7 @@
 
   .footer__content h4 {
     font-size: bolder;
-    color: var(--main-color);
+    color: var(--signature-color);
   }
   .footer__content--contact {
     display: flex;
