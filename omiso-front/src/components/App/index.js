@@ -12,15 +12,9 @@ import Header from '../Header';
 import Cart from '../Cart';
 import Connection from '../Connection';
 import AdminPanel from '../AdminPanel/index';
-import SectionMenu from '../SectionMenu';
+import SectionMenu from '../SectionMenu'
 
-// Local imports
-import Home from "../Home";
-import MenuItems from "../MenuItems";
-import Header from "../Header";
-import Cart from "../Cart";
-import Connection from "../Connection";
-import AdminPanel from "../AdminPanel/index";
+
 
 const App = () => {
   const [useorder, setorder] = useState([]);
@@ -66,8 +60,10 @@ const App = () => {
             <Cart  DataOrder={usefilterorder} addOrder={addOrder} RemoveOrder={RemoveOrder}/>
           </Route>
 </Switch>
+{/* < AdminPanel/> */}
 {/*<CardMenus/>*/ }
-<MenuItems  /> 
+{/* <MenuItems  />  */}
+
 
 
 </>

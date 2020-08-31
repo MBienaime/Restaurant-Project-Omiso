@@ -1,6 +1,7 @@
 // == Import npm
 import React from 'react';
 import ItemMenu from './ItemMenu'
+import Footer from '../Footer'
 
 // == Import Style
 import './styles.css';
@@ -34,9 +35,7 @@ return(
             <ItemMenu></ItemMenu>
         
     </div>
-    <div className='sectionMenuFooter'>
-
-    </div>
+    <Footer/>
 </div>
 
 )}

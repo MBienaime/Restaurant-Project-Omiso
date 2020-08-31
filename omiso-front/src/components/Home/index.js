@@ -8,32 +8,31 @@ import Header from "../Header";
 
 const Home = () => (
   <div className="home">
-  
-   <div className="presentation ">
-   
-  <div className="social_icons">
+<div className="introduction">
+
+    <div className="intro_text ">
+    <h1 >Click and Collect</h1>
+        <div className ="steps">
+       <p>Parcourez notre carte.</p>
+        <p>Ajoutez votre sélection au panier.</p>
+        <p>Connectez vous pour régler vos achats.</p>
+        <p>Récupérez votre commande sur place.</p>
+  </div>
+  <div className="home_btn" >
+  <button className="btn_menu "><a className="button-text" href="#Menu">Notre carte</a></button>
+  </div>   
+ </div>
+    
+     <div className="social_icons scale-in-hor-left">
      <a href="#" className="icon_link"><FaFacebookF className ="link_icons"/></a>
      <a href="#" className="icon_link"><FaTwitter className ="link_icons"/></a>
      <a href="#" className="icon_link"><FaInstagram className ="link_icons"/></a>
      <a href="#" className="icon_link"><FaTripadvisor className ="link_icons"/></a>
   </div>
 
+</div>
+</div>
 
-
-<div className="introduction scale-in-hor-left">
-    <div className="intro_text ">
-        <h1>Click and Collect</h1>
-       <p><span> 1  </span>Parcourez notre carte et choisissez parmis nos produits.</p>
-        <p><span> 2  </span>Ajoutez votre sélection au panier puis valider.</p>
-        <p><span> 3  </span>Connectez vous pour régler votre achat.</p>
-        <p><span> 4  </span>Récupérez votre commande sur place.</p>
-    </div>
-    
-        <button className="btn_menu"><a href="#Menu">Notre carte</a></button>
-</div>
-</div>
-  
-</div>
 )
 // == Export
 export default Home;
