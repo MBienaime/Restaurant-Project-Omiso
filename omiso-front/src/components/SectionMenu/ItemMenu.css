@@ -110,7 +110,7 @@
 
 }
 
-@media screen and (max-width: 750px)
+@media screen and (max-width: 500px)
 {    
     .ItemMenuDescription{
         margin: 0;

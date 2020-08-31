@@ -11,17 +11,21 @@ const SectionMenu = () =>{
 return(
 
 <div className="sectionMenus">
-    <div className='sectionMenuHeader'>
-         
-        <div className='sectionMenuHeaderCenter'></div>  
-        
-    </div> 
         <div className="sectionMenusCarteMenu">
-<ul><li>plats</li><li>Dessert</li><li>Entree</li><li>plats</li><li>plats</li></ul>
+<ul><li>Entree</li><li>Plats</li><li>Dessert</li><li>Boisson</li></ul>
         </div>
     <div className='sectionMenuCarte'>
 
         
+            <ItemMenu></ItemMenu>
+            <ItemMenu></ItemMenu>
+            <ItemMenu></ItemMenu>
+            <ItemMenu></ItemMenu>
+            <ItemMenu></ItemMenu>
+            <ItemMenu></ItemMenu>
+            <ItemMenu></ItemMenu>
+            <ItemMenu></ItemMenu>
+            <ItemMenu></ItemMenu>
             <ItemMenu></ItemMenu>
             <ItemMenu></ItemMenu>
             <ItemMenu></ItemMenu>

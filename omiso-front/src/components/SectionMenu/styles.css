@@ -2,7 +2,7 @@
 
 .sectionMenus{
     
-    background-image: url('../../assets/image/BackgroundMenu.jpg');
+    background-image: url('../../assets/image/font.jpg');
     background-repeat: no-repeat;    
     background-size: cover;
     background-position: center;
@@ -10,20 +10,16 @@
     width: auto; 
     display:flex;
     flex-direction: column;
+    justify-content: space-between;
    
 }
-.sectionMenuHeader{
-    height: 50%;
-    width: auto;
-    display:flex;
-    justify-content: center;
-}
+
 
 .sectionMenuCarte{
     display:flex;
-    height: 35%;
+    height: 55%;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
     overflow-y:scroll;   
 
 }
@@ -43,13 +39,14 @@
 
 
 .sectionMenuFooter{
-    background-color: goldenrod;    
+    background-color: rgb(199, 168, 90);    
     height: 5%;
 }
 
 .sectionMenusCarteMenu ul{
     display:flex;
     justify-content: space-around;
+    margin: 50px;
 }
 
 li{
