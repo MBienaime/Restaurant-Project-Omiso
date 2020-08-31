@@ -41,7 +41,7 @@ return (
 <Home/>
 <Switch>
         <Route exact path="/">
-            <MenuItems addOrder={addOrder} /> 
+            <SectionMenu addOrder={addOrder}/>
           </Route>
           <Route path="/Connexion">
             <Connection />
@@ -51,9 +51,9 @@ return (
           </Route>
 </Switch>
 {/*<CardMenus/>*/ }
+<MenuItems  /> 
 
 
-<SectionMenu/>
 </>
 
 )}

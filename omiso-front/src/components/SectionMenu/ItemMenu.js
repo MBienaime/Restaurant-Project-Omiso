@@ -5,10 +5,13 @@ import "./ItemMenu.css";
 
 // == Import npm
 const ItemMenu = () => (
-<div className='ItmeMenu'>
-<div className='ItmeMenuDescription'><h2 className='ItmeMenuDescriptionTitle' >title menu</h2> <p className='ItmeMenuDescriptionCategory'>category</p><p className="ItmeMenuDescriptionDescrip">descriptiotrbtrbyhrtbhtyhbtyhbtyhyththytbhybbhnjgcvjg</p> </div>
-<div className='ItmeMenuPrice'>5€</div>
-<div className='ItmeMenuPhoto'></div>
+<div className='ItemMenu'>
+<div className="ItemMenu-animate">
+<button className="ItemMenu-Button">ajouter</button>
+</div>
+<div className='ItemMenuDescription'><h2 className='ItemMenuDescriptionTitle' >title menu</h2> <p className='ItemMenuDescriptionCategory'>category</p><p className="ItemMenuDescriptionDescrip">descriptiotrbtrbyhrtbhtyhbtyhbtyhyththytbhybbhnjgcvjg</p> </div>
+<div className='ItemMenuPrice'>5€</div>
+<div className='ItemMenuPhoto'></div>
 </div>
 );
 // == Export

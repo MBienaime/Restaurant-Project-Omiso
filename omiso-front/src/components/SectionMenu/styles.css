@@ -1,3 +1,5 @@
+
+
 .sectionMenus{
     
     background-image: url('../../assets/image/BackgroundMenu.jpg');
@@ -19,11 +21,10 @@
 
 .sectionMenuCarte{
     display:flex;
-    height: 45%;
+    height: 35%;
     flex-wrap: wrap;
     justify-content: center;
-    
-    
+    overflow-y:scroll;   
 
 }
 
@@ -45,5 +46,26 @@
     background-color: goldenrod;    
     height: 5%;
 }
+
+.sectionMenusCarteMenu ul{
+    display:flex;
+    justify-content: space-around;
+}
+
+li{
+    border-color: rgb(229, 110, 45);
+    border-style: solid;
+    border-width: 2px;
+    max-height: 150px;
+    max-width: 350px;    
+    color: honeydew;  
+    padding: 5px 10px;
+    border-radius: 5px;
+
+}
+ul{
+    margin: 0 0 35px 0;
+}
+
 
 

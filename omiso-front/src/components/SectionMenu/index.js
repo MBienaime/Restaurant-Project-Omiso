@@ -15,8 +15,12 @@ return(
          
         <div className='sectionMenuHeaderCenter'></div>  
         
-    </div>
+    </div> 
+        <div className="sectionMenusCarteMenu">
+<ul><li>plats</li><li>Dessert</li><li>Entree</li><li>plats</li><li>plats</li></ul>
+        </div>
     <div className='sectionMenuCarte'>
+
         
             <ItemMenu></ItemMenu>
             <ItemMenu></ItemMenu>
