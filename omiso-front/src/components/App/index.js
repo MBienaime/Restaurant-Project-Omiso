@@ -13,6 +13,7 @@ import Header from '../Header';
 import Cart from '../Cart';
 import Connection from '../Connection';
 import AdminPanel from '../AdminPanel/index';
+import SectionMenu from '../SectionMenu';
 
 
 
@@ -40,7 +41,7 @@ return (
 <Home/>
 <Switch>
         <Route exact path="/">
-            <MenuItems addOrder={addOrder} /> 
+            <SectionMenu addOrder={addOrder}/>
           </Route>
           <Route path="/Connexion">
             <Connection />
@@ -50,9 +51,9 @@ return (
           </Route>
 </Switch>
 {/*<CardMenus/>*/ }
+<MenuItems  /> 
 
 
-<AdminPanel/>
 </>
 
 )}
