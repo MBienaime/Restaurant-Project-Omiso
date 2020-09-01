@@ -12,7 +12,8 @@ import Header from '../Header';
 import Cart from '../Cart';
 import Connection from '../Connection';
 import AdminPanel from '../AdminPanel/index';
-import SectionMenu from '../SectionMenu'
+import SectionMenu from '../SectionMenu';
+
 
 
 

@@ -1,6 +1,7 @@
 // == Import npm
 import React from 'react';
 import ItemMenu from './ItemMenu/ItemMenu'
+import Footer from '../Footer';
 
 // == Import Style
 import './styles.css';
