@@ -8,7 +8,7 @@ import Footer from '../Footer';
 // == Import Style
 import './styles.css';
 
-const SectionMenu = () =>{
+const SectionMenu = ({addOrder}) =>{
         
     const [data, setData] = useState([{_id:""}]);  
     const [category, setCategory] =useState("");
@@ -40,7 +40,7 @@ return(
         </div>
     <div className='sectionMenuCarte'>
 { 
-filterCategory(data,category).map( (data) =>(<ItemMenu data={data}></ItemMenu>))
+filterCategory(data,category).map( (data) =>(<ItemMenu data={data} addOrder={addOrder}></ItemMenu>))
 }
         
             
