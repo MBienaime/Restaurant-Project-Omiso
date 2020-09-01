@@ -10,6 +10,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }
 
 .nav_logo,
@@ -47,8 +48,8 @@
 .nav_link {
   text-decoration: none;
   font-size: 18px;
-  color: white;
 }
+
 .nav_link:hover {
   color: var(--signature-color);
 }

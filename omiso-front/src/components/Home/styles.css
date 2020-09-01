@@ -1,76 +1,84 @@
+
 /*********************************Presentation*****************************/
-
-
-.presentation {
-  background: url("../../assets/image/simple-bg.jpg") no-repeat center center/cover;
+.home {
+  background: url("../../assets/image/image.png") no-repeat center center/cover;
   width: 100%;
   height: 90vh;
-  margin: auto;
   display: flex;
-  justify-content: flex-end;
 }
 
-
 .introduction {
-  flex: 1;
-  margin: 50px;
+  padding: 2rem;
   display: flex;
+  flex: 1;
   flex-direction: column;
-  align-items: center;
+
+ 
+}
+
+.intro_text {
+  padding:50px 30px 0 ;
+  margin-right: 80px;
+  flex-direction: column;
+  align-self: flex-end;
+  text-align: center;
 }
 
 .intro_text h1 {
+  font-style:italic;
+  font-size: 30px;
+  padding-bottom: 30px;
   color: var(--signature-color);
-  font-size: 44px;
-  font-weight: 400;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
 }
 
-span {
-font-weight: bold;
-}
-
-.intro_text p {
-  font-size: 18px;
+.presentation h1,
+p {
+  color: var(--color-white);
+  
 }
 
 /*********************************Button*****************************/
-.btn_menu {
-  /* background-color: palegreen; */
-  width: 150px;
-  height: 50px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  border: 1px solid var(--signature-color);
-	background-color: var(--signature-color);
-  border-radius: 1.8rem;
-  text-transform: uppercase;
-  color: var(--color-white);
-	transition: transform 80ms ease-in;
-  margin-top: 100px;
+
+.home_btn {
+  margin-top: 50px;
 }
 
-.btn_menu:active  {
+.btn_menu {
+  background-color: var(--color-dark);
+  border-radius: 3px;
+  border: 1px solid  rgba(0, 0, 0, 0.1);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+}
+
+.btn_menu:active {
+  transform: scale(0.95);
+}
+
+.button-text {
+  color: var(--signature-color);
   transform: scale(0.95);
 }
 
 /*********************************Social-media icons*****************************/
 
 .social_icons {
-  /* background-color: blue; */
-  flex: 1;
-  margin: 0 auto;
-  padding: 9rem 3rem;
+  width: 100%;
+  margin: auto;
+  padding-right: 30px;
   display: flex;
-  justify-content: space-around;
-  flex-direction: column;
+  justify-content: flex-end;
+  flex-direction: row;
+  padding-top: 80px;
 }
 
 .icon_link {
   display: flex;
+  margin: 30px;
   font-size: 1.5rem;
   text-decoration: none;
   color: var(--signature-color);
@@ -87,8 +95,8 @@ font-weight: bold;
   margin: auto;
 }
 
-.link_icons:hover { 
-color: var(--color-white);
+.link_icons:hover {
+  color: var(--color-white);
 }
 
 .icon_link:focus {
@@ -99,32 +107,41 @@ color: var(--color-white);
 /*********************************Media queries*****************************/
 
 @media screen and (max-width: 1024px) {
-
   .social_icons {
     display: none;
   }
 
   .presentation {
     flex-direction: column;
-    height: fit-content;
   }
 
   .introduction {
-    text-align: center;
-   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .intro_text {
+    background-color: var(--signature-color);
+    position: absolute;
+    margin: 0 auto;
+    opacity: 0.9;
+    padding: 30px;
   }
 
   .intro_text h1 {
     font-size: 30px;
+    color: var(--dark-color);
   }
 
   .intro_text p {
     font-size: 18px;
+    font-weight: bold;
+    color: var(--dark-color);
   }
   .button {
     padding: 10px 0 0 0;
   }
-
 }
 
 /*********************************Animations*****************************/
@@ -156,13 +173,3 @@ color: var(--color-white);
 .scale-in-hor-left {
   animation: scale-in-hor-left 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2s both;
 }
-.scale-in-hor-left1 {
-  animation: scale-in-hor-left 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 4s both;
-}
-.scale-in-hor-left2 {
-  animation: scale-in-hor-left 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 6s both;
-}
-.scale-in-hor-left3 {
-  animation: scale-in-hor-left 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 8s both;
-}
-
