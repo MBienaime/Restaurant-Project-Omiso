@@ -28,10 +28,8 @@ const SectionMenu = ({addOrder}) =>{
       
       //getting menu data
       useEffect(getApiData, []) ;
-
       const filterCategory = (data, category)=>{if(!category){return data }else {return (data.filter((e)=>(e.category===category)))}};
-
-
+      
 return(
 
 <div className="sectionMenus">
@@ -41,9 +39,7 @@ return(
     <div className='sectionMenuCarte'>
 { 
 filterCategory(data,category).map( (data) =>(<ItemMenu data={data} addOrder={addOrder}></ItemMenu>))
-}
-        
-            
+}           
    
     </div>
     <Footer/>
