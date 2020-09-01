@@ -14,13 +14,6 @@ import Connection from '../Connection';
 import AdminPanel from '../AdminPanel/index';
 import SectionMenu from '../SectionMenu';
 
-// Local imports
-import Home from "../Home";
-import MenuItems from "../MenuItems";
-import Header from "../Header";
-import Cart from "../Cart";
-import Connection from "../Connection";
-import AdminPanel from "../AdminPanel/index";
 
 const App = () => {
   const [useorder, setorder] = useState([]);
@@ -67,7 +60,7 @@ const App = () => {
           </Route>
 </Switch>
 {/*<CardMenus/>*/ }
-<MenuItems  /> 
+
 
 
 </>

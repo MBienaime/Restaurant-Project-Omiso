@@ -1,13 +1,13 @@
 
 @font-face{
     font-family: 'DMSerifText';
-    src: url('../../assets/fonts/DMSerifText-Italic.ttf')
+    src: url('../../../assets/fonts/DMSerifText-Italic.ttf')
 
 }
 
 @font-face{
     font-family: 'SourceSansPro';
-    src: url('../../assets/fonts/SourceSansPro-SemiBold.ttf')
+    src: url('../../../assets/fonts/SourceSansPro-SemiBold.ttf')
 
 }
 .ItemMenu{
@@ -66,7 +66,7 @@
 }
 
 .ItemMenuPhoto{
-    background-image: url('../../assets/image/sushi1.png');
+    background-image: url('../../../assets/image/sushi1.png');
     background-repeat: no-repeat;    
     background-size: contain;
     background-position: center;
