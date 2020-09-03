@@ -1,5 +1,6 @@
 import axios from 'axios';
- 
+import React from 'react';
+import {Redirect  } from "react-router-dom";
 
  //API call : Signin
 export function handleUserInscription(user){   
@@ -23,7 +24,9 @@ export function handleUserInscription(user){
 	})
 	.then((e)=>{
 	  console.log(e.data.token);
-	  localStorage.setItem('UserTokenOmiso', e.data.token)
+	  localStorage.setItem('UserTokenOmiso', e.data.token);
+	  <Redirect to="/" push={true}/>
+
 	})
 	.catch( (e)=>console.log(e));
   }
