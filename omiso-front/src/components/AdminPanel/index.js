@@ -23,13 +23,13 @@ return(
     
         <ul>
           <li>
-            <Link to="/Menus">Menus</Link>
+            <Link to="/Administration/Menus">Menus</Link>
           </li>
           <li>
-            <Link to="/commande">Commandes</Link>
+            <Link to="/Administration/commande">Commandes</Link>
           </li>
           <li>
-            <Link to="/Utilisateurs">Utilisateurs</Link>
+            <Link to="/Administration/Utilisateurs">Utilisateurs</Link>
           </li>
         </ul>    
             
