@@ -17,6 +17,9 @@ return(
             <Link to="/">Accueil</Link>
           </li>
           <li className="nav_link">
+            <Link to="/Administration">Administration</Link>
+          </li>
+          <li className="nav_link">
             <Link to="/Contact">Contact</Link>
           </li>
           <li className="nav_link">

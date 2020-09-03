@@ -50,7 +50,6 @@ const App = () => {
       <Home />
       <Switch>
         <Route exact path="/">
-
             <SectionMenu addOrder={addOrder}/>
           </Route>
           <Route path="/Connexion">
@@ -59,8 +58,12 @@ const App = () => {
           <Route path="/Panier">
             <Cart  DataOrder={usefilterorder} addOrder={addOrder} RemoveOrder={RemoveOrder}/>
           </Route>
+          <Route path="/Administration">
+            < AdminPanel/>
+          </Route>
+
 </Switch>
- < AdminPanel/> 
+  
 {/*<CardMenus/>*/ }
 
 

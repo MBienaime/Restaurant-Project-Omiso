@@ -1,7 +1,8 @@
 // == Import npm
 import React from 'react';
 
-import {     Switch,    Route,    Link  } from "react-router-dom";
+import { Switch, Route, Link ,useRouteMatch } from "react-router-dom";
+
 
 import Menus from './Menus/Menus';
 import Orders from './Orders/Orders'
@@ -15,7 +16,7 @@ import './styles.css';
 // Local imports 
 
 const AdminPanel = () => {
-
+  const  { path, url } = useRouteMatch();
     
 return(
     <div className="adminPanel">  
@@ -30,18 +31,16 @@ return(
           <li>
             <Link to="/Utilisateurs">Utilisateurs</Link>
           </li>
-        </ul>        
+        </ul>    
+            
         <Switch> 
-        <Route exact path="/:id">
-            <Menus />
-          </Route>
-          <Route exact path="/Menus">
+          <Route exact path="/Administration/Menus">
             <Menus/>
           </Route>
-          <Route exact path="/commande">
+          <Route exact path="/Administration/commande">
              <Orders/>
           </Route>
-          <Route exact path="/Utilisateurs">
+          <Route exact path="/Administration/Utilisateurs">
              <Users/>
           </Route>
         </Switch> 
