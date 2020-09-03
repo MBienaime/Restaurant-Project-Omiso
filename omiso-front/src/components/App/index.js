@@ -60,7 +60,7 @@ const App = () => {
             <Cart  DataOrder={usefilterorder} addOrder={addOrder} RemoveOrder={RemoveOrder}/>
           </Route>
 </Switch>
-{/* < AdminPanel/> */}
+ < AdminPanel/> 
 {/*<CardMenus/>*/ }
 
 

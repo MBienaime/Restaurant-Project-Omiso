@@ -25,10 +25,10 @@ return(
             <Link to="/Menus">Menus</Link>
           </li>
           <li>
-            <Link to="/commande">Orders</Link>
+            <Link to="/commande">Commandes</Link>
           </li>
           <li>
-            <Link to="/Utilisateurs">Users</Link>
+            <Link to="/Utilisateurs">Utilisateurs</Link>
           </li>
         </ul>        
         <Switch> 
@@ -38,7 +38,7 @@ return(
           <Route exact path="/Menus">
             <Menus/>
           </Route>
-          <Route exact path="/commande/:id">
+          <Route exact path="/commande">
              <Orders/>
           </Route>
           <Route exact path="/Utilisateurs">
