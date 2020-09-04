@@ -18,7 +18,7 @@
     "@babel/preset-react": "^7.10.4",
     "@babel/register": "*",
     "babel-eslint": "*",
-    "babel-loader": "*",    
+    "babel-loader": "*",
     "bundle-stats-webpack-plugin": "^2.2.0",
     "chai": "*",
     "clean-webpack-plugin": "*",
@@ -57,7 +57,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "jwt-decode": "^2.2.0",
+    "jsonwebtoken": "^8.5.1",
     "prop-types": "*",
     "react": "*",
     "react-dom": "*",

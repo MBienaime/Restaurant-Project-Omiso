@@ -1,11 +1,11 @@
 // == Import npm
-import React, { useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import React, { useState } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
 // == Import Style
 import './styles.scss';
 
-// Local imports 
+// Local imports
 import Home from '../Home';
 import Header from '../Header';
 import Cart from '../Cart';
@@ -13,19 +13,27 @@ import Connection from '../Connection';
 import AdminPanel from '../AdminPanel/index';
 import SectionMenu from '../SectionMenu';
 
-
-
+const jwt = require('jsonwebtoken');
 
 const App = () => {
+// verify connexion and token
+  const checkAuth = () => {
+    if (localStorage.getItem('UserTokenOmiso')) {
+      console.log(jwt.verify(localStorage.getItem('UserTokenOmiso')));
+    }
+  };
+
+  checkAuth();
+
+  // order user
   const [useorder, setorder] = useState([]);
 
   const addOrder = (d) => {
     if (!useorder.some((e) => e._id === d._id)) {
       setorder([...useorder, { ...d, quantity: 1 }]);
-    } else {
-      const newdata = useorder.map((e) =>
-        e._id === d._id ? { ...e, quantity: e.quantity + 1 } : { ...e }
-      );
+    }
+    else {
+      const newdata = useorder.map((e) => (e._id === d._id ? { ...e, quantity: e.quantity + 1 } : { ...e }));
       setorder(newdata);
     }
   };
@@ -33,15 +41,14 @@ const App = () => {
   const RemoveOrder = (d) => {
     if (!useorder.some((e) => e._id === d._id)) {
       setorder([...useorder, { ...d, quantity: 1 }]);
-    } else {
-      const newdata = useorder.map((e) =>
-        e._id === d._id ? { ...e, quantity: e.quantity - 1 } : { ...e }
-      );
+    }
+    else {
+      const newdata = useorder.map((e) => (e._id === d._id ? { ...e, quantity: e.quantity - 1 } : { ...e }));
       setorder(newdata);
     }
   };
 
-  //selector order menu
+  // selector order menu
   const usefilterorder = useorder.filter((e) => e.quantity > 0);
 
   return (
@@ -50,29 +57,26 @@ const App = () => {
       <Home />
       <Switch>
         <Route exact path="/">
-            <SectionMenu addOrder={addOrder}/>
-          </Route>
-          <Route path="/Connexion">
-            <Connection />
-          </Route>
-          <Route path="/Panier">
-            <Cart  DataOrder={usefilterorder} addOrder={addOrder} RemoveOrder={RemoveOrder}/>
-          </Route>
-          <Route path="/Administration">
-            < AdminPanel/>
-          </Route>
+          <SectionMenu addOrder={addOrder} />
+        </Route>
+        <Route path="/Connexion">
+          <Connection />
+        </Route>
+        <Route path="/Panier">
+          <Cart DataOrder={usefilterorder} addOrder={addOrder} RemoveOrder={RemoveOrder} />
+        </Route>
+        <Route path="/Administration">
+          <AdminPanel />
+        </Route>
 
-</Switch>
-  
-{/*<CardMenus/>*/ }
+      </Switch>
 
+      {/* <CardMenus/> */ }
 
+    </>
 
-</>
-
-)}
-
-
+  );
+};
 
 // == Export
 export default App;
