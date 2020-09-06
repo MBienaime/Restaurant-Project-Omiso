@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import './style.css';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { handleUserInscription, handleUserConnection, handleUserforgetPassword } from './userAPI';
 
-window.localStorage.getItem('user');
-
 const Connection = () => {
+  const history = useHistory();
+
   const [user, setuser] = useState({
     email: '',
     lastmane: '',
     firstname: '',
     password: '',
     phone_number: '',
+
 	  });
 
   // users connection
@@ -130,7 +131,7 @@ const Connection = () => {
             <button
               className="container-button"
               onClick={(evt) => {
-                evt.preventDefault(); handleUserConnection(user); hideModalConnexion();
+                evt.preventDefault(); handleUserConnection(user); history.push('/');
               }}
             >
               Connexion

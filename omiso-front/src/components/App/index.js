@@ -1,5 +1,5 @@
 // == Import npm
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 // == Import Style
@@ -16,18 +16,33 @@ import SectionMenu from '../SectionMenu';
 const jwt = require('jsonwebtoken');
 
 const App = () => {
-// verify connexion and token
+  const [useAuth, setAuth] = useState({ connect: false });
+
+  // check connexion and token
   const checkAuth = () => {
-    if (localStorage.getItem('UserTokenOmiso')) {
-      console.log(jwt.verify(localStorage.getItem('UserTokenOmiso')));
+    if (localStorage.getItem('UserTokenOmiso') !== null) {
+      if (jwt.decode(localStorage.getItem('UserTokenOmiso')).exp > Date.now()) {
+        localStorage.removeItem('UserTokenOmiso');
+        setAuth({ ...useAuth, connect: false });
+      }
+      setAuth({ ...useAuth, connect: true, role: jwt.decode(localStorage.getItem('UserTokenOmiso')).role });
+    }
+    else {
+      setAuth({ ...useAuth, connect: false });
     }
   };
 
-  checkAuth();
+  const deconnected = () => {
+    localStorage.removeItem('UserTokenOmiso');
+    setAuth({ ...useAuth, connect: false });
+  };
+
+  useEffect(() => (checkAuth()), []);
 
   // order user
   const [useorder, setorder] = useState([]);
 
+  // addorder
   const addOrder = (d) => {
     if (!useorder.some((e) => e._id === d._id)) {
       setorder([...useorder, { ...d, quantity: 1 }]);
@@ -53,7 +68,7 @@ const App = () => {
 
   return (
     <>
-      <Header />
+      <Header useAuth={useAuth} deconnected={deconnected} />
       <Home />
       <Switch>
         <Route exact path="/">

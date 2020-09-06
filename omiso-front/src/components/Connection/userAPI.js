@@ -25,7 +25,6 @@ export function handleUserConnection(user) {
     .then((e) => {
 	  console.log(e.data.token);
 	  localStorage.setItem('UserTokenOmiso', e.data.token);
-  <Redirect to="/" push />;
     })
     .catch((e) => console.log(e));
 }
