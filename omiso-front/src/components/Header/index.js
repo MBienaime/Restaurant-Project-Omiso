@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 // == Import Style
 import './styles.css';
 
-
-
 const Header = ({ useAuth, deconnected }) => (
   <>
     <ul className="navbar">
@@ -15,9 +13,11 @@ const Header = ({ useAuth, deconnected }) => (
         <li className="nav_link">
           <Link to="/">Accueil</Link>
         </li>
-        <li className="nav_link">
-          <Link to="/Administration">Administration</Link>
-        </li>
+        {(useAuth.connect & useAuth.role === 'admin' || 'employée') ? (
+          <li className="nav_link">
+            <Link to="/Administration">Administration</Link>
+          </li>
+        ) : (<div />)}
         <li className="nav_link">
           <Link to="/Contact">Contact</Link>
         </li>

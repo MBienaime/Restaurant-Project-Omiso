@@ -23,10 +23,9 @@ export function handleUserConnection(user) {
 	  data: user,
   })
     .then((e) => {
-	  console.log(e.data.token);
-	  localStorage.setItem('UserTokenOmiso', e.data.token);
+      localStorage.setItem('UserTokenOmiso', e.data.token);
     })
-    .catch((e) => console.log(e));
+    .catch((e) => ({ connect: false }));
 }
 
 // API call : forget-password

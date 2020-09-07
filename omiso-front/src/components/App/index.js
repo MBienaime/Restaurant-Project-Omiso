@@ -23,13 +23,12 @@ const App = () => {
     if (localStorage.getItem('UserTokenOmiso') !== null) {
       if (jwt.decode(localStorage.getItem('UserTokenOmiso')).exp > Date.now()) {
         localStorage.removeItem('UserTokenOmiso');
-        setAuth({ ...useAuth, connect: false });
+        return ({ ...useAuth, connect: false });
       }
-      setAuth({ ...useAuth, connect: true, role: jwt.decode(localStorage.getItem('UserTokenOmiso')).role });
+      return ({ ...useAuth, connect: true, role: jwt.decode(localStorage.getItem('UserTokenOmiso')).role });
     }
-    else {
-      setAuth({ ...useAuth, connect: false });
-    }
+
+    return ({ ...useAuth, connect: false });
   };
 
   const deconnected = () => {
@@ -37,7 +36,7 @@ const App = () => {
     setAuth({ ...useAuth, connect: false });
   };
 
-  useEffect(() => (checkAuth()), []);
+  useEffect(() => (setAuth(checkAuth())), []);
 
   // order user
   const [useorder, setorder] = useState([]);
