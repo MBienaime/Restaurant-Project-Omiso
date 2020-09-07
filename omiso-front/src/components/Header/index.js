@@ -13,11 +13,11 @@ const Header = ({ useAuth, deconnected }) => (
         <li className="nav_link">
           <Link to="/">Accueil</Link>
         </li>
-        {(useAuth.connect & useAuth.role === 'admin' || 'employée') ? (
+        {(useAuth.connect & (useAuth.role === 'admin' || 'employée')) ? (
           <li className="nav_link">
             <Link to="/Administration">Administration</Link>
           </li>
-        ) : (<div />)}
+        ) : (<></>)}
         <li className="nav_link">
           <Link to="/Contact">Contact</Link>
         </li>
