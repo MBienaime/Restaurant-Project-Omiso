@@ -12,6 +12,7 @@ import Cart from '../Cart';
 import Connection from '../Connection';
 import AdminPanel from '../AdminPanel/index';
 import SectionMenu from '../SectionMenu';
+import ProtectedRoute from '../ProtectedRoute';
 
 const jwt = require('jsonwebtoken');
 
@@ -41,7 +42,7 @@ const App = () => {
   // order user
   const [useorder, setorder] = useState([]);
 
-  // addorder
+  // addOrder
   const addOrder = (d) => {
     if (!useorder.some((e) => e._id === d._id)) {
       setorder([...useorder, { ...d, quantity: 1 }]);
@@ -51,7 +52,7 @@ const App = () => {
       setorder(newdata);
     }
   };
-
+  // removeOrder
   const RemoveOrder = (d) => {
     if (!useorder.some((e) => e._id === d._id)) {
       setorder([...useorder, { ...d, quantity: 1 }]);
@@ -79,10 +80,7 @@ const App = () => {
         <Route path="/Panier">
           <Cart DataOrder={usefilterorder} addOrder={addOrder} RemoveOrder={RemoveOrder} />
         </Route>
-        <Route path="/Administration">
-          <AdminPanel />
-        </Route>
-
+        <ProtectedRoute path="/Administration" useAuth={useAuth} component={AdminPanel} />
       </Switch>
 
       {/* <CardMenus/> */ }
@@ -94,4 +92,3 @@ const App = () => {
 
 // == Export
 export default App;
-
