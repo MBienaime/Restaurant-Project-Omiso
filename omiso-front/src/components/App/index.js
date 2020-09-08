@@ -24,20 +24,24 @@ const App = () => {
     if (localStorage.getItem('UserTokenOmiso') !== null) {
       if (jwt.decode(localStorage.getItem('UserTokenOmiso')).exp > Date.now()) {
         localStorage.removeItem('UserTokenOmiso');
-        return ({ ...useAuth, connect: false });
+        setAuth({ ...useAuth, connect: false, role: ' ' });
       }
-      return ({ ...useAuth, connect: true, role: jwt.decode(localStorage.getItem('UserTokenOmiso')).role });
+      else {
+        setAuth({ ...useAuth, connect: true, role: jwt.decode(localStorage.getItem('UserTokenOmiso')).role });
+      }
     }
-
-    return ({ ...useAuth, connect: false });
+    else {
+      console.log('coucou');
+      setAuth({ ...useAuth, connect: false });
+    }
   };
 
   const deconnected = () => {
     localStorage.removeItem('UserTokenOmiso');
-    setAuth({ ...useAuth, connect: false });
+    setAuth({ ...useAuth, connect: false, role: ' ' });
   };
 
-  useEffect(() => (setAuth(checkAuth())), []);
+  useEffect(() => (checkAuth()), [checkAuth.connect]);
 
   // order user
   const [useorder, setorder] = useState([]);
@@ -75,7 +79,7 @@ const App = () => {
           <SectionMenu addOrder={addOrder} />
         </Route>
         <Route path="/Connexion">
-          <Connection />
+          <Connection checkAuth={checkAuth} />
         </Route>
         <Route path="/Panier">
           <Cart DataOrder={usefilterorder} addOrder={addOrder} RemoveOrder={RemoveOrder} />

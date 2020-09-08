@@ -1,6 +1,5 @@
 import axios from 'axios';
-import React from 'react';
-import { Redirect } from 'react-router-dom';
+
 
 // API call : Signin
 export function handleUserInscription(user) {
@@ -12,20 +11,6 @@ export function handleUserInscription(user) {
   })
     .then((e) => console.log(e))
     .catch((e) => console.log(e));
-}
-
-// API call : login
-export function handleUserConnection(user) {
-  const url = 'https://omiso.com/utilisateur/login';
-  axios({
-	  method: 'post',
-	  url,
-	  data: user,
-  })
-    .then((e) => {
-      localStorage.setItem('UserTokenOmiso', e.data.token);
-    })
-    .catch((e) => ({ connect: false }));
 }
 
 // API call : forget-password

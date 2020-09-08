@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import './style.css';
 import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
 
-import { handleUserInscription, handleUserConnection, handleUserforgetPassword } from './userAPI';
+import { handleUserInscription, handleUserforgetPassword } from './userAPI';
 
-const Connection = () => {
+const Connection = ({ checkAuth }) => {
   const history = useHistory();
 
   const [user, setuser] = useState({
@@ -16,7 +17,22 @@ const Connection = () => {
 
 	  });
 
-  // users connection
+  // API call : login
+
+  const handleUserConnection = (user) => {
+    const url = 'https://omiso.com/utilisateur/login';
+    axios({
+      method: 'post',
+      url,
+      data: user,
+    })
+      .then((e) => {
+        localStorage.setItem('UserTokenOmiso', e.data.token);
+        checkAuth();
+      })
+      .catch((e) => (console.log(e)));
+  };
+
   const handleInputChange = (e) => setuser({
     ...user,
     [e.currentTarget.name]: e.currentTarget.value,
