@@ -16,13 +16,13 @@ const Users = () => {
     const url = 'https://omiso.com/utilisateur/';
     axios.get(url, { headers: { Authorization: `Bearer ${token}` } })
       .then((resp) => {
-        setDataUsers(resp);
+        setDataUsers(resp.data.users);
       })
       .catch((error) => {
         console.log('error', error);
       });
   };
-
+  console.log(useDataUsers);
   // getting menu data
   useEffect(getApiDataUsers, []);
 
@@ -43,25 +43,27 @@ const Users = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                jean
-              </td>
-              <td>
-                dupont
-              </td>
-              <td>
-                jean.dupont@gmail.com
-              </td>
-              <td>
-                05260525
-              </td>
-              <td>
-                <button>Supprimer</button><br />
-                <button>Update</button>
-              </td>
+            {useDataUsers.map((e) => (
+              <tr>
+                <td>
+                  jean
+                </td>
+                <td>
+                  dupont
+                </td>
+                <td>
+                  jean.dupont@gmail.com
+                </td>
+                <td>
+                  05260525
+                </td>
+                <td>
+                  <button>Supprimer</button><br />
+                  <button>Update</button>
+                </td>
 
-            </tr>
+              </tr>
+            ))}
 
           </tbody>
 

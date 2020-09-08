@@ -20,8 +20,9 @@ paypal.configure({
 
 exports.getOrder = (req, res) => {
   Order.find()
-    .exec()
-    .then((doc) => { res.status(200).json(doc); })
+    .populate('id_User')
+    .populate('order_Menu.menu')
+    .then((doc) => { res.status(200).json(doc); console.log(doc); })
     .catch((err) => { res.status(500).json({ error: err }); });
 };
 

@@ -17,7 +17,7 @@ const Orders = () => {
     axios
       .get(url, { headers: { Authorization: `Bearer ${token}` } })
       .then((resp) => {
-        setDataOrder(resp);
+        setDataOrder(resp.data);
       })
       .catch((error) => {
         console.log('error', error);
@@ -41,17 +41,19 @@ const Orders = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>sgds546</td>
-              <td>06525214</td>
-              <td>lolol</td>
-              <td>39€</td>
-              <td>
-                <button>Supprimer</button>
-                <br />
-                <button>Update</button>
-              </td>
-            </tr>
+            { useDataOrder.map((e) => (
+              <tr>
+                <td>sgds546</td>
+                <td>06525214</td>
+                <td>lolol</td>
+                <td>39€</td>
+                <td>
+                  <button>Supprimer</button>
+                  <br />
+                  <button>Update</button>
+                </td>
+              </tr>
+            )) }
           </tbody>
         </table>
       </div>
