@@ -1,29 +1,30 @@
 // == Import npm
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 // == Import Style
-import "./styles.css";
+import './styles.css';
 
 // Local imports
 
 const Orders = () => {
   const [useDataOrder, setDataOrder] = useState([]);
 
-  //API call data menu
+  // API call data menu
   const getApiDataOrder = () => {
-    const url = `https://omiso.com/commande/`;
+    const token = window.localStorage.getItem('UserTokenOmiso');
+    const url = 'https://omiso.com/commande/';
     axios
-      .get(url)
+      .get(url, { headers: { Authorization: `Bearer ${token}` } })
       .then((resp) => {
         setDataOrder(resp);
       })
       .catch((error) => {
-        console.log("error", error);
+        console.log('error', error);
       });
   };
 
-  //getting menu data
+  // getting menu data
   useEffect(getApiDataOrder, []);
 
   return (
@@ -47,7 +48,7 @@ const Orders = () => {
               <td>39€</td>
               <td>
                 <button>Supprimer</button>
-                <br></br>
+                <br />
                 <button>Update</button>
               </td>
             </tr>
@@ -57,13 +58,13 @@ const Orders = () => {
       <div className="ResultSelectAdminMenu">
         <div>Commande</div>
 
-        <input type="text" id="Nom" name="Nom" required></input>
+        <input type="text" id="Nom" name="Nom" required />
 
-        <input type="text" id="Prenom" name="Prenom" required></input>
+        <input type="text" id="Prenom" name="Prenom" required />
 
-        <input type="text" id="Email" name="Email" required></input>
+        <input type="text" id="Email" name="Email" required />
 
-        <input type="text" id="TEL" name="TEL" required></input>
+        <input type="text" id="TEL" name="TEL" required />
       </div>
     </div>
   );

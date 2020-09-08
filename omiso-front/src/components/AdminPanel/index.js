@@ -15,28 +15,32 @@ import './styles.css';
 
 // Local imports
 
-const AdminPanel = (props) => (
+const AdminPanel = ({ useAuth }) => (
   <div className="adminPanel">
-    {console.log(props)}
+
     <ul>
-      <li>
-        <Link to="/Administration/Menus">Menus</Link>
-      </li>
+      {(useAuth.connect & (useAuth.role === 'admin')) ? (
+        <li className="nav_link">
+          <Link to="/Administration/Menus">Menus</Link>
+        </li>
+      ) : (<></>)}
       <li>
         <Link to="/Administration/commande">Commandes</Link>
       </li>
-      <li>
-        <Link to="/Administration/Utilisateurs">Utilisateurs</Link>
-      </li>
+      {(useAuth.connect & (useAuth.role === 'admin')) ? (
+        <li className="nav_link">
+          <Link to="/Administration/Utilisateurs">Utilisateurs</Link>
+        </li>
+      ) : (<></>)}
+
     </ul>
 
     <Switch>
-      <ProtectedRouteAdmin exact path="/Administration/Menus" component={Menus} />
+      <ProtectedRouteAdmin path="/Administration/Menus" component={Menus} useAuth={useAuth} />
       <Route exact path="/Administration/commande">
         <Orders />
       </Route>
-      <ProtectedRouteAdmin exact path="/Administration/Utilisateurs" component={Users} />
-
+      <ProtectedRouteAdmin path="/Administration/Utilisateurs" component={Users} useAuth={useAuth} />
     </Switch>
 
   </div>
