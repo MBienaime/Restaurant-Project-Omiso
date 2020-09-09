@@ -1,7 +1,7 @@
 // Import
 const multer = require('multer');
 
-const upload = multer({ dest: '../upload' });
+const upload = multer({ dest: '../Public/images/menus' });
 
 // Mime types of the files
 const MIME_TYPES = {
@@ -13,7 +13,7 @@ const MIME_TYPES = {
 // storing files to disk
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, 'upload');
+    callback(null, 'Public/images/menus');
   },
   filename: (req, file, callback) => {
     const extension = MIME_TYPES[file.mimetype];

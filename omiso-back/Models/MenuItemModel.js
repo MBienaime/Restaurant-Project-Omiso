@@ -8,7 +8,7 @@ const menuItemSchema = mongoose.Schema({
   description: { type: String, required: true },
   price: { type: Number, required: true },
   category: { type: String, required: ['Plat', 'Boisson', 'Entree', 'Dessert'] },
-  //image: { type: String },
+  urlImage: { type: String },
 });
 
 // Converts menuItemSchema into a Model + exports it

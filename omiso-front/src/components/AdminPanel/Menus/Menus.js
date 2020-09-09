@@ -33,7 +33,6 @@ const Menus = () => {
   const selectedImage = (e) => {
     setImage(e.target.files[0]);
   };
-  console.log(useImage);
 
   // handel input menu data
   useEffect(getApiData, []);
@@ -45,17 +44,22 @@ const Menus = () => {
 
   // add menu
   function handlesubmitMenu() {
+    const formData = new FormData();
+    formData.append('name', useAddDataMenu.name);
+    formData.append('description', useAddDataMenu.description);
+    formData.append('price', useAddDataMenu.prix);
+    formData.append('category', useAddDataMenu.category);
+    formData.append('image', useImage);
+
     const token = window.localStorage.getItem('UserTokenOmiso');
     axios.post(
       'https://omiso.com/menu/',
-      { ...useAddDataMenu },
+      formData,
       { headers: { Authorization: `Bearer ${token}` } },
     )
       .then((res) => {
         console.log(res);
-        setAddDataMenu({
-          name: '', decription: '', prix: 0, category: '',
-        });
+
         getApiData();
       })
       .catch((e) => console.log(e));

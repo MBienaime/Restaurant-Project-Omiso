@@ -36,15 +36,14 @@ exports.menuItems_get_all = (req, res) => {
 };
 
 exports.menuItems_create_item = (req, res) => {
+  console.log(req.file);
   const menuItem = new MenuItem({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
     description: req.body.description,
     price: req.body.price,
     category: req.body.category,
-    quantity: req.body.quantity,
-    status: req.body.status,
-    // image : req.file.path
+    //urlImage: req.file.path,
   });
 
   // Saves MenuItem in the database
@@ -59,17 +58,16 @@ exports.menuItems_create_item = (req, res) => {
           description: result.description,
           price: result.price,
           category: result.category,
-          quantity: result.quantity,
-          status: result.status,
-          request: {
-            type: 'GET',
-            url: `https://omiso.com/menu/${result._id}`,
-          },
+          //      request: {
+          //       type: 'GET',
+          //      url: `https://omiso.com/menu/${result._id}`,
+        //  },
         },
       });
     })
     .catch((err) => {
-      res.status(500).json({ error: err.message });
+      console.log(err);
+      res.status(500).json(err);
     });
 };
 
