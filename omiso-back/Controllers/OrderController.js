@@ -33,9 +33,8 @@ exports.postOrder = (req, res) => {
     _id: new mongoose.Types.ObjectId(),
     id_User: req.dataToken.userId,
     date_Order: Date(),
-    // total_Price,
-    total_Items: req.body.ListOrder.length,
-    order_Menu: req.body.ListOrder,
+    total_Items: req.body.Orders.menus.length,
+    order_Menu: req.body.Orders.menus,
   });
 
   OrderItem
@@ -71,7 +70,7 @@ exports.postOrder = (req, res) => {
             if (error) {
               throw error;
             } else {
-              Order.findByIdAndUpdate(e._id, { payment_id: payment.id })
+              Order.findByIdAndUpdate(e._id, { payment_id: payment.id, total_Price })
                 .then()
                 .catch((err) => { res.status(500).json({ error: err }); });
 

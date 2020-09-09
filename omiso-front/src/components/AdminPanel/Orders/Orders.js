@@ -9,7 +9,7 @@ import './styles.css';
 
 const Orders = () => {
   const [useDataOrder, setDataOrder] = useState([{ id_User: { email: '' } }]);
-  console.log(useDataOrder[76]);
+  console.log(useDataOrder);
   // API call data menu
   const getApiDataOrder = () => {
     const token = window.localStorage.getItem('UserTokenOmiso');
@@ -33,9 +33,9 @@ const Orders = () => {
         <table>
           <thead>
             <tr>
-              <th>Commande</th>
-              <th>TEL</th>
-              <th>Email</th>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>Téléphone</th>
               <th>Total</th>
               <th>Action</th>
             </tr>
@@ -43,10 +43,10 @@ const Orders = () => {
           <tbody>
             { useDataOrder.map((e) => (
               <tr>
-                <td>{e.id_User.email}</td>
-                <td>06525214</td>
-                <td>lolol</td>
-                <td>39€</td>
+                <td>{e.id_User.firstname}</td>
+                <td>{e.id_User.lastname}</td>
+                <td>{e.id_User.phone_number}</td> 
+                <td>{e.total_Price}</td>
                 <td>
                   <button>Supprimer</button>
                   <br />
