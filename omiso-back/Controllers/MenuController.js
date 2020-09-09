@@ -36,14 +36,14 @@ exports.menuItems_get_all = (req, res) => {
 };
 
 exports.menuItems_create_item = (req, res) => {
-  console.log(req.file);
+  console.log(req.file.filename);
   const menuItem = new MenuItem({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
     description: req.body.description,
     price: req.body.price,
     category: req.body.category,
-    //urlImage: req.file.path,
+    urlImage: `https://omiso.com/images/menus/${req.file.filename}`,
   });
 
   // Saves MenuItem in the database
@@ -58,10 +58,7 @@ exports.menuItems_create_item = (req, res) => {
           description: result.description,
           price: result.price,
           category: result.category,
-          //      request: {
-          //       type: 'GET',
-          //      url: `https://omiso.com/menu/${result._id}`,
-        //  },
+          urlImage: result.urlImage,
         },
       });
     })
