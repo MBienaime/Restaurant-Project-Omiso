@@ -36,7 +36,7 @@ exports.menuItems_get_all = (req, res) => {
 };
 
 exports.menuItems_create_item = (req, res) => {
-  console.log(req.file.filename);
+  
   const menuItem = new MenuItem({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,

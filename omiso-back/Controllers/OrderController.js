@@ -22,7 +22,7 @@ exports.getOrder = (req, res) => {
   Order.find()
     .populate('id_User')
     .populate('order_Menu.menu')
-    .then((doc) => { res.status(200).json(doc); console.log(doc); })
+    .then((doc) => { res.status(200).json(doc); })
     .catch((err) => { res.status(500).json({ error: err }); });
 };
 

@@ -15,13 +15,13 @@ const Menus = () => {
   });
   const [useDataMenus, setDataMenus] = useState([{ _id: '' }]);
   const [useImage, setImage] = useState(null);
-console.log(useDataMenus);
+ 
   // API call data menu
   const getApiData = () => {
     const url = 'https://omiso.com/menu/';
     axios.get(url)
       .then((resp) => {
-        console.log(resp);
+        
         setDataMenus(resp.data.menuItems);
       })
       .catch((error) => {
@@ -59,8 +59,6 @@ console.log(useDataMenus);
       { headers: { Authorization: `Bearer ${token}` } },
     )
       .then((res) => {
-        console.log(res);
-
         getApiData();
       })
       .catch((e) => console.log(e));
