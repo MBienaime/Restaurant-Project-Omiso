@@ -13,7 +13,7 @@ const Header = ({ useAuth, deconnected }) => (
         <li className="nav_link">
           <Link to="/">Accueil</Link>
         </li>
-        {(useAuth.connect & useAuth.role === 'admin' || 'employé') ? (
+        {((useAuth.connect) & (useAuth.role !== 'client')) ? (
           <li className="nav_link">
             <Link to="/Administration">Administration</Link>
           </li>

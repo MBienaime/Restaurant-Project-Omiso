@@ -17,7 +17,7 @@ import ProtectedRoute from '../ProtectedRoute';
 const jwt = require('jsonwebtoken');
 
 const App = () => {
-  const [useAuth, setAuth] = useState({ connect: false });
+  const [useAuth, setAuth] = useState({ connect: false, role: 'client' });
 
   // check connexion and token
   const checkAuth = () => {
