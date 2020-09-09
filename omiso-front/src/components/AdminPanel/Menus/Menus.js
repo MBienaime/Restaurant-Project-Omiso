@@ -15,12 +15,13 @@ const Menus = () => {
   });
   const [useDataMenus, setDataMenus] = useState([{ _id: '' }]);
   const [useImage, setImage] = useState(null);
-
+console.log(useDataMenus);
   // API call data menu
   const getApiData = () => {
     const url = 'https://omiso.com/menu/';
     axios.get(url)
       .then((resp) => {
+        console.log(resp);
         setDataMenus(resp.data.menuItems);
       })
       .catch((error) => {
@@ -97,6 +98,9 @@ const Menus = () => {
           <tbody>
             { useDataMenus.map((d) => (
               <tr key={uuidv4()}>
+                <td>
+                  <img src={d.urlImage} />
+                </td>
                 <td>
                   {d.name}
                 </td>

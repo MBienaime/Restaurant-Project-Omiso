@@ -7,7 +7,6 @@ const MenuItem = require('../Models/MenuItemModel');
 // Routes logic
 exports.menuItems_get_all = (req, res) => {
   MenuItem.find()
-    .select('_id name description price category quantity status image')
     .exec()
     .then((docs) => {
       const response = {
@@ -20,6 +19,7 @@ exports.menuItems_get_all = (req, res) => {
           category: doc.category,
           quantity: doc.quantity,
           status: doc.status,
+          urlImage: doc.urlImage,
           request: {
             type: 'GET',
             url: `https://omiso.com/menu/${doc._id}`,
