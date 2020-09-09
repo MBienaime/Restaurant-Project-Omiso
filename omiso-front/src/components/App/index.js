@@ -24,7 +24,7 @@ const App = () => {
     if (localStorage.getItem('UserTokenOmiso') !== null) {
       if (jwt.decode(localStorage.getItem('UserTokenOmiso')).exp > Date.now()) {
         localStorage.removeItem('UserTokenOmiso');
-        setAuth({ ...useAuth, connect: false, role: ' ' });
+        setAuth({ ...useAuth, connect: false });
       }
       else {
         setAuth({ ...useAuth, connect: true, role: jwt.decode(localStorage.getItem('UserTokenOmiso')).role });

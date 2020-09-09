@@ -8,8 +8,8 @@ import './styles.css';
 // Local imports
 
 const Orders = () => {
-  const [useDataOrder, setDataOrder] = useState([]);
-
+  const [useDataOrder, setDataOrder] = useState([{ id_User: { email: '' } }]);
+  console.log(useDataOrder[76]);
   // API call data menu
   const getApiDataOrder = () => {
     const token = window.localStorage.getItem('UserTokenOmiso');
@@ -43,7 +43,7 @@ const Orders = () => {
           <tbody>
             { useDataOrder.map((e) => (
               <tr>
-                <td>sgds546</td>
+                <td>{e.id_User.email}</td>
                 <td>06525214</td>
                 <td>lolol</td>
                 <td>39€</td>

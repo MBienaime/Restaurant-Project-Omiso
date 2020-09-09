@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 // == Import Style
 import './styles.css';
-
+import {FaTrashAlt} from 'react-icons/fa';
 // Local imports
 
 const Menus = () => {
@@ -112,7 +112,10 @@ const Menus = () => {
                   {d.description}
                 </td>
                 <td>
-                  <button onClick={() => handleRemoveMenu(d._id)}>Supprimer</button><br />
+                  <button onClick={() => handleRemoveMenu(d._id)}>
+
+                  <FaTrashAlt/>
+                  </button><br />
                 </td>
 
               </tr>
