@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 // API call : Signin
 export function handleUserInscription(user) {
   const url = 'https://omiso.com/utilisateur/inscription';

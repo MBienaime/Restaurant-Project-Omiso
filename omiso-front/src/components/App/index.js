@@ -31,7 +31,6 @@ const App = () => {
       }
     }
     else {
-      console.log('coucou');
       setAuth({ ...useAuth, connect: false });
     }
   };
@@ -41,7 +40,7 @@ const App = () => {
     setAuth({ ...useAuth, connect: false, role: ' ' });
   };
 
-  useEffect(() => (checkAuth()), [checkAuth.connect]);
+  useEffect(() => (checkAuth()), []);
 
   // order user
   const [useorder, setorder] = useState([]);

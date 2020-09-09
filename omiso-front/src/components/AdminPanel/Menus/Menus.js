@@ -9,10 +9,12 @@ import './styles.css';
 // Local imports
 
 const Menus = () => {
+  // state
   const [useAddDataMenu, setAddDataMenu] = useState({
     name: '', decription: '', prix: 0, category: '',
   });
   const [useDataMenus, setDataMenus] = useState([{ _id: '' }]);
+  const [useImage, setImage] = useState(null);
 
   // API call data menu
   const getApiData = () => {
@@ -26,7 +28,14 @@ const Menus = () => {
       });
   };
 
-  // getting menu data
+  // Selected image
+
+  const selectedImage = (e) => {
+    setImage(e.target.files[0]);
+  };
+  console.log(useImage);
+
+  // handel input menu data
   useEffect(getApiData, []);
 
   const handleInputChange = (e) => setAddDataMenu({
@@ -60,7 +69,6 @@ const Menus = () => {
       { headers: { Authorization: `Bearer ${token}` } },
     )
       .then((res) => {
-        console.log(res);
         getApiData();
       })
       .catch((e) => console.log(e));
@@ -120,7 +128,15 @@ const Menus = () => {
 
         <input type="text" id="categorie" name="category" placeholder="Catégorie..." required onChange={(e) => handleInputChange(e)} />
 
-        <input type="file" id="image" name="image" required />
+        <input
+          type="file"
+          id="image"
+          name="image"
+          required
+          onChange={(e) => {
+            selectedImage(e);
+          }}
+        />
 
         <button onClick={() => handlesubmitMenu()}>ajouter</button>
       </div>

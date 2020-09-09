@@ -22,7 +22,6 @@ const Users = () => {
         console.log('error', error);
       });
   };
-  console.log(useDataUsers);
   // getting menu data
   useEffect(getApiDataUsers, []);
 
