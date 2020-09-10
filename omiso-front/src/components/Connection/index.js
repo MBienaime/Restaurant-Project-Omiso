@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import React, { useState } from 'react';
 import './style.css';
 import { Link, useHistory } from 'react-router-dom';

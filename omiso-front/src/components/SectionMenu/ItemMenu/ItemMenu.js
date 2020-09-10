@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
 // == Import Style
 import './ItemMenu.css';
 

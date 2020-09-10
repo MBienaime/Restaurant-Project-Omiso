@@ -1,5 +1,6 @@
+/* eslint-disable no-underscore-dangle */
 // == Import npm
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';

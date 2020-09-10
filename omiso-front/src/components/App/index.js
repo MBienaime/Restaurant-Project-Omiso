@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 // == Import npm
 import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
@@ -51,7 +52,9 @@ const App = () => {
       setorder([...useorder, { ...d, quantity: 1 }]);
     }
     else {
-      const newdata = useorder.map((e) => (e._id === d._id ? { ...e, quantity: e.quantity + 1 } : { ...e }));
+      const newdata = useorder.map(
+        (e) => (e._id === d._id ? { ...e, quantity: e.quantity + 1 } : { ...e }),
+      );
       setorder(newdata);
     }
   };
@@ -61,7 +64,9 @@ const App = () => {
       setorder([...useorder, { ...d, quantity: 1 }]);
     }
     else {
-      const newdata = useorder.map((e) => (e._id === d._id ? { ...e, quantity: e.quantity - 1 } : { ...e }));
+      const newdata = useorder.map(
+        (e) => (e._id === d._id ? { ...e, quantity: e.quantity - 1 } : { ...e }),
+      );
       setorder(newdata);
     }
   };
