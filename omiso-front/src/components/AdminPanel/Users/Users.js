@@ -43,7 +43,7 @@ const Users = () => {
             </tr>
           </thead>
           <tbody>
-            {useDataUsers.map((e) => (
+            {useDataUsers.map(() => (
               <tr key={uuidv4()}>
                 <td>
                   jean
@@ -58,8 +58,8 @@ const Users = () => {
                   05260525
                 </td>
                 <td>
-                  <button>Supprimer</button><br />
-                  <button>Update</button>
+                  <button type="button">Supprimer</button><br />
+                  <button type="button">Update</button>
                 </td>
 
               </tr>

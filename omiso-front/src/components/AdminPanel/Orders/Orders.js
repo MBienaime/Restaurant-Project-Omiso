@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 // == Import Style
 import './styles.css';
-import { FaEdit, FaTrash } from 'react-icons/fa';
+import { FaTrash } from 'react-icons/fa';
 
 // Local imports
 
@@ -50,11 +50,11 @@ const Orders = () => {
                 <td>{e.id_User.phone_number}</td>
                 <td>{e.total_Price}</td>
                 <td>
-                  <button>
+                  <button type="button">
                     <FaTrash />
                   </button>
                   <br />
-                  <button>
+                  <button type="button">
                     Update
                   </button>
                 </td>

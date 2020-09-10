@@ -1,5 +1,6 @@
 // == Import npm
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import ItemMenu from './ItemMenu/ItemMenu';
@@ -41,7 +42,9 @@ const SectionMenu = ({ addOrder }) => {
       </div>
       <div className="sectionMenuCarte">
         {
-filterCategory(data, category).map((data) => (<ItemMenu data={data} addOrder={addOrder} key={uuidv4()} />))
+filterCategory(data, category).map(
+  (data) => (<ItemMenu data={data} addOrder={addOrder} key={uuidv4()} />),
+)
 }
 
       </div>
@@ -53,3 +56,8 @@ filterCategory(data, category).map((data) => (<ItemMenu data={data} addOrder={ad
 
 // == Export
 export default SectionMenu;
+
+SectionMenu.propTypes = {
+
+  addOrder: PropTypes.func.isRequired,
+};

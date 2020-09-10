@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const ProtectedRoute = ({ useAuth, component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={(props) => ((useAuth.connect & useAuth.role === 'admin' || 'employé') ? (<Component {...props} useAuth={useAuth} />) : (<Redirect to="/" />))}
+    render={(props) => ((useAuth.connect && useAuth.role === ('admin' || 'employé')) ? (<Component {...props} useAuth={useAuth} />) : (<Redirect to="/" />))}
   />
 );
 
@@ -13,5 +13,5 @@ export default ProtectedRoute;
 
 ProtectedRoute.propTypes = {
   useAuth: PropTypes.object.isRequired,
-  component: PropTypes.func.isRequired
-}
+  component: PropTypes.func.isRequired,
+};

@@ -75,6 +75,7 @@ const Cart = ({ DataOrder, RemoveOrder, addOrder }) => {
                   </td>
                   <td className="checkout-left-table-cell blod">
                     <button
+                      type="button"
                       className="checkout-left-table-buttonm"
                       onClick={() => RemoveOrder(order)}
                     >
@@ -82,6 +83,7 @@ const Cart = ({ DataOrder, RemoveOrder, addOrder }) => {
                     </button>
                     {order.quantity}
                     <button
+                      type="button"
                       className="checkout-left-table-buttonp"
                       onClick={() => addOrder(order)}
                     >
@@ -109,7 +111,7 @@ const Cart = ({ DataOrder, RemoveOrder, addOrder }) => {
           <a href="#"> TOTAL A REGLER </a>
           <span className="checkout-right-total">{sumOrder}€</span>
 
-          <button onClick={() => PaymentOrder()}>paiment </button>
+          <button type="button" onClick={() => PaymentOrder()}>paiment </button>
         </div>
         <Link to="/" className="close">
           X

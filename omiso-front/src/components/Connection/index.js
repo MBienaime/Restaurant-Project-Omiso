@@ -16,8 +16,7 @@ const Connection = ({ checkAuth }) => {
     firstname: '',
     password: '',
     phone_number: '',
-
-	  });
+  });
 
   // API call : login
 
@@ -45,8 +44,8 @@ const Connection = ({ checkAuth }) => {
   const Clickhandler = () => setShowPanel('right-panel-active');
 
   const [showPanelForgetPassword, setshowPanelForgetPassword] = useState('display-none-forget');
-  const handleClickForgetPassword_block = () => setshowPanelForgetPassword('display-block-forget ');
-  const handleClickForgetPassword_none = () => setshowPanelForgetPassword('display-none-forget ');
+  const handleClickForgetPasswordBlock = () => setshowPanelForgetPassword('display-block-forget ');
+  const handleClickForgetPasswordNone = () => setshowPanelForgetPassword('display-none-forget ');
 
   return (
     <div className="modal-main display-block">
@@ -61,9 +60,10 @@ const Connection = ({ checkAuth }) => {
             value={user.email}
           />
           <button
+            type="button"
             className="container-button"
             onClick={() => {
-              handleUserforgetPassword(user); handleClickForgetPassword_none();
+              handleUserforgetPassword(user); handleClickForgetPasswordNone();
             }}
           > Valider
           </button>
@@ -116,6 +116,7 @@ const Connection = ({ checkAuth }) => {
               value={user.phone_number}
             />
             <button
+              type="button"
               className="container-button"
               onClick={(evt) => {
                 evt.preventDefault(); handleUserInscription(user);
@@ -145,8 +146,9 @@ const Connection = ({ checkAuth }) => {
               placeholder="Mots de passe"
               value={user.password}
             />
-            <a href="#" onClick={() => handleClickForgetPassword_block()}>Mot de passe oublié ?</a>
+            <a href="#" onClick={() => handleClickForgetPasswordBlock()}>Mot de passe oublié ?</a>
             <button
+              type="button"
               className="container-button"
               onClick={(evt) => {
                 evt.preventDefault(); handleUserConnection(user); history.push('/');
@@ -162,14 +164,14 @@ const Connection = ({ checkAuth }) => {
             <div className="overlay-panel overlay-left">
               <h1>Bonjour!</h1>
               <p>Cliquez sur le bouton pour vous connecter</p>
-              <button className="container-button transparent" onClick={handleClick}>
+              <button type="button" className="container-button transparent" onClick={handleClick}>
                 Connexion
               </button>
             </div>
             <div className="overlay-panel overlay-right">
               <h1>Bienvenue!</h1>
               <p>Cliquez sur le bouton pour vous inscrire</p>
-              <button className="container-button transparent" onClick={Clickhandler}>
+              <button type="button" className="container-button transparent" onClick={Clickhandler}>
                 Inscription
               </button>
             </div>
