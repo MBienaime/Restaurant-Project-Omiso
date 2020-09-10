@@ -20,7 +20,7 @@ const AdminPanel = ({ useAuth }) => (
   <div className="adminPanel">
 
     <ul>
-      {(useAuth.connect && (useAuth.role === 'admin')) ? (
+      {(useAuth.connect & useAuth.role === 'admin') ? (
         <li className="nav_link">
           <Link to="/Administration/Menus">Menus</Link>
         </li>
@@ -28,7 +28,7 @@ const AdminPanel = ({ useAuth }) => (
       <li>
         <Link to="/Administration/commande">Commandes</Link>
       </li>
-      {(useAuth.connect && (useAuth.role === 'admin')) ? (
+      {(useAuth.connect & useAuth.role === 'admin') ? (
         <li className="nav_link">
           <Link to="/Administration/Utilisateurs">Utilisateurs</Link>
         </li>

@@ -79,7 +79,9 @@ const App = () => {
       <Header useAuth={useAuth} deconnected={deconnected} />
       <Home />
       <Switch>
-
+        <Route exact path="/">
+          <SectionMenu addOrder={addOrder} />
+        </Route>
         <Route path="/Connexion">
           <Connection checkAuth={checkAuth} />
         </Route>
@@ -87,9 +89,7 @@ const App = () => {
           <Cart DataOrder={usefilterorder} addOrder={addOrder} RemoveOrder={RemoveOrder} />
         </Route>
         <ProtectedRoute path="/Administration" useAuth={useAuth} component={AdminPanel} />
-        <Route path="/">
-          <SectionMenu addOrder={addOrder} />
-        </Route>
+
       </Switch>
 
       {/* <CardMenus/> */ }
