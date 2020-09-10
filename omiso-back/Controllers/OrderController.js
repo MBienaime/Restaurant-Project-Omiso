@@ -17,8 +17,8 @@ paypal.configure({
 });
 
 // Get Order
-
 exports.getOrder = (req, res) => {
+
   Order.find()
     .populate('id_User')
     .populate('order_Menu.menu')
@@ -27,7 +27,6 @@ exports.getOrder = (req, res) => {
 };
 
 // Post Order
-
 exports.postOrder = (req, res) => {
   const OrderItem = new Order({
     _id: new mongoose.Types.ObjectId(),
@@ -36,7 +35,7 @@ exports.postOrder = (req, res) => {
     total_Items: req.body.Orders.menus.length,
     order_Menu: req.body.Orders.menus,
   });
-
+ 
   OrderItem
     .save()
     .then((o) => {
@@ -88,7 +87,6 @@ exports.postOrder = (req, res) => {
 };
 
 // chekout success
-
 exports.checkout_success = (req, res) => {
   const payerId = req.query.PayerID;
   const { paymentId } = req.query;
@@ -118,13 +116,11 @@ exports.checkout_success = (req, res) => {
 };
 
 // checkout cancel
-
 exports.checkout_cancel = (req, res) => {
   res.redirect('/');
 };
 
 // Delete Order
-
 exports.deleteOrder = (req, res) => {
   Order.deleteOne({ _id: req.params.id })
     .exec()
@@ -133,7 +129,6 @@ exports.deleteOrder = (req, res) => {
 };
 
 // Get Order By id
-
 exports.getOrderById = (req, res) => {
   Order.findById(req.params.id)
     .exec()
@@ -141,6 +136,7 @@ exports.getOrderById = (req, res) => {
     .catch((err) => { res.status(404).json({ error: err }); });
 };
 
+// Update Order
 exports.updateOrderById = (req, res) => {
   Order.findById(req.params.id)
     .then((doc) => {
