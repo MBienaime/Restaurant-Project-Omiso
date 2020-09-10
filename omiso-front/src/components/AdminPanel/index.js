@@ -1,5 +1,6 @@
 // == Import npm
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {
   Switch, Route, Link,
@@ -49,3 +50,7 @@ const AdminPanel = ({ useAuth }) => (
 
 // == Export
 export default AdminPanel;
+
+AdminPanel.propTypes = {
+  useAuth: PropTypes.bool.isRequired,
+};

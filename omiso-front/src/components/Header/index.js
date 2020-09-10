@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { FaShoppingCart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
@@ -34,3 +35,8 @@ const Header = ({ useAuth, deconnected }) => (
 );
 // == Export
 export default Header;
+
+Header.propTypes = {
+  useAuth: PropTypes.object.isRequired,
+  deconnected: PropTypes.func.isRequired,
+};

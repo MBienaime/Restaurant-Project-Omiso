@@ -4,7 +4,7 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaTripadvisor } from 'react-icons/
 // == Import Style
 import "./styles.css";
 
-import Header from "../Header";
+
 
 const Home = () => (
   <div className="home">

@@ -1,6 +1,7 @@
 // == Import npm
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 // == Import Style
 import './styles.css';
@@ -43,7 +44,7 @@ const Users = () => {
           </thead>
           <tbody>
             {useDataUsers.map((e) => (
-              <tr>
+              <tr key={uuidv4()}>
                 <td>
                   jean
                 </td>

@@ -1,10 +1,11 @@
 // == Import npm
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 // == Import Style
 import './styles.css';
-import {FaEdit, FaTrash} from 'react-icons/fa';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
 // Local imports
 
@@ -43,14 +44,14 @@ const Orders = () => {
           </thead>
           <tbody>
             { useDataOrder.map((e) => (
-              <tr>
+              <tr key={uuidv4()}>
                 <td>{e.id_User.firstname}</td>
                 <td>{e.id_User.lastname}</td>
-                <td>{e.id_User.phone_number}</td> 
+                <td>{e.id_User.phone_number}</td>
                 <td>{e.total_Price}</td>
                 <td>
                   <button>
-                    <FaTrash/>
+                    <FaTrash />
                   </button>
                   <br />
                   <button>

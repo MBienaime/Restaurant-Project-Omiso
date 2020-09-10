@@ -3,6 +3,8 @@ import './style.css';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
+import PropTypes from 'prop-types';
+
 import { handleUserInscription, handleUserforgetPassword } from './userAPI';
 
 const Connection = ({ checkAuth }) => {
@@ -181,3 +183,7 @@ const Connection = ({ checkAuth }) => {
 };
 
 export default Connection;
+
+Connection.propTypes = {
+  checkAuth: PropTypes.func.isRequired,
+};
