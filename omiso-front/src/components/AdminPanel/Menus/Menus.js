@@ -14,6 +14,7 @@ const Menus = () => {
     name: '', decription: '', prix: 0, category: '',
   });
   const [useDataMenus, setDataMenus] = useState([{ _id: '' }]);
+
   const [useImage, setImage] = useState(null);
  
   // API call data menu
@@ -30,7 +31,6 @@ const Menus = () => {
   };
 
   // Selected image
-
   const selectedImage = (e) => {
     setImage(e.target.files[0]);
   };
@@ -76,6 +76,7 @@ const Menus = () => {
       })
       .catch((e) => console.log(e));
   }
+  
 
   return (
 

@@ -140,8 +140,7 @@ exports.getOrderById = (req, res) => {
 exports.updateOrderById = (req, res) => {
   Order.findById(req.params.id)
     .then((doc) => {
-      doc.idUser = req.body.idUser;
-      doc.OrderMenu = req.body.OrderMenu;
+      doc.status = !doc.status;     
       doc.save()
         .then((doc) => { res.status(200).json(doc); })
         .catch((err) => { res.status(500).json({ error: err }); });
