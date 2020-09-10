@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 // == Import Style
 import './styles.css';
-import {FaTrashAlt} from 'react-icons/fa';
+import { FaTrashAlt } from 'react-icons/fa';
 // Local imports
 
 const Menus = () => {
@@ -15,13 +15,12 @@ const Menus = () => {
   });
   const [useDataMenus, setDataMenus] = useState([{ _id: '' }]);
   const [useImage, setImage] = useState(null);
- 
+
   // API call data menu
   const getApiData = () => {
     const url = 'https://omiso.com/menu/';
     axios.get(url)
       .then((resp) => {
-        
         setDataMenus(resp.data.menuItems);
       })
       .catch((error) => {
@@ -114,7 +113,7 @@ const Menus = () => {
                 <td>
                   <button onClick={() => handleRemoveMenu(d._id)}>
 
-                  <FaTrashAlt/>
+                    <FaTrashAlt />
                   </button><br />
                 </td>
 

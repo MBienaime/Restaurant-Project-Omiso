@@ -4,6 +4,7 @@ import axios from 'axios';
 
 // == Import Style
 import './styles.css';
+import {FaEdit, FaTrash} from 'react-icons/fa';
 
 // Local imports
 
@@ -48,9 +49,13 @@ const Orders = () => {
                 <td>{e.id_User.phone_number}</td> 
                 <td>{e.total_Price}</td>
                 <td>
-                  <button>Supprimer</button>
+                  <button>
+                    <FaTrash/>
+                  </button>
                   <br />
-                  <button>Update</button>
+                  <button>
+                    Update
+                  </button>
                 </td>
               </tr>
             )) }
