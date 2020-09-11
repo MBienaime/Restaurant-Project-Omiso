@@ -16,14 +16,14 @@ const Orders = () => {
   const getApiDataOrder = () => {
     const token = window.localStorage.getItem('UserTokenOmiso');
     const url = 'https://omiso.com/commande/';
-    axios
+    console.log(axios
       .get(url, { headers: { Authorization: `Bearer ${token}` } })
       .then((resp) => {
         setDataOrder(resp.data);
       })
       .catch((error) => {
         console.log('error', error);
-      });
+      }));
   };
 
   // getting menu data
@@ -33,14 +33,18 @@ const Orders = () => {
   const toggleArchive = (e) => {
     const token = window.localStorage.getItem('UserTokenOmiso');
     const url = `https://omiso.com/commande/${e}`;
-    axios
-      .patch(url, { headers: { Authorization: `Bearer ${token}` } })
-      .then((resp) => {
 
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // parametre axios
+    const authOptions = {
+      method: 'PATCH',
+      url,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios(authOptions)
+      .then(() => getApiDataOrder())
+      .catch((e) => console.log(e));
   };
 
   return (
@@ -64,7 +68,7 @@ const Orders = () => {
                 <td>{e.id_User.phone_number}</td>
                 <td>{e.total_Price}€</td>
                 <td>
-                  { (false) ? (
+                  { (e.statusArchive) ? (
                     <button type="button" onClick={() => (toggleArchive(e._id))}>
                       <FaTrash />
                     </button>
