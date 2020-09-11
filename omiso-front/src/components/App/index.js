@@ -89,7 +89,6 @@ const App = () => {
           <Cart DataOrder={usefilterorder} addOrder={addOrder} RemoveOrder={RemoveOrder} />
         </Route>
         <ProtectedRoute path="/Administration" useAuth={useAuth} component={AdminPanel} />
-
       </Switch>
 
       {/* <CardMenus/> */ }

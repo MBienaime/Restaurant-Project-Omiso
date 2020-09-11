@@ -10,20 +10,20 @@ import { FaTrash } from 'react-icons/fa';
 // Local imports
 
 const Orders = () => {
-  const [useDataOrder, setDataOrder] = useState([{ id_User: { email: '' } }]);
-  console.log(useDataOrder);
   // API call data menu
+  const [useDataOrder, setDataOrder] = useState([{ id_User: { email: '' } }]);
+
   const getApiDataOrder = () => {
     const token = window.localStorage.getItem('UserTokenOmiso');
     const url = 'https://omiso.com/commande/';
-    console.log(axios
+    axios
       .get(url, { headers: { Authorization: `Bearer ${token}` } })
       .then((resp) => {
         setDataOrder(resp.data);
       })
       .catch((error) => {
         console.log('error', error);
-      }));
+      });
   };
 
   // getting menu data
@@ -42,15 +42,34 @@ const Orders = () => {
         Authorization: `Bearer ${token}`,
       },
     };
+    // send axios
     axios(authOptions)
       .then(() => getApiDataOrder())
       .catch((e) => console.log(e));
   };
 
+  // Select view Archive or en cours
+  const [useViewsArchive, setViewsArchive] = useState(false);
+
+  // selected views detail order
+  const [useDetailOrder, setDetailOrder] = useState({});
+
+  console.log(useDetailOrder);
   return (
     <div className="sectionAdminMenu">
       <div className="fetchAdminMenu">
         <table>
+          {(useViewsArchive)
+            ? (
+              <button type="button" onClick={() => setViewsArchive(!useViewsArchive)}>
+                En cours
+              </button>
+            )
+            : (
+              <button type="button" onClick={() => setViewsArchive(!useViewsArchive)}>
+                Archivé
+              </button>
+            )}
           <thead>
             <tr>
               <th>Nom</th>
@@ -61,8 +80,8 @@ const Orders = () => {
             </tr>
           </thead>
           <tbody>
-            { useDataOrder.map((e) => (
-              <tr key={uuidv4()}>
+            { useDataOrder.filter((e) => e.statusArchive === useViewsArchive).map((e) => (
+              <tr key={uuidv4()} onClick={() => setDetailOrder(e)}>
                 <td>{e.id_User.firstname}</td>
                 <td>{e.id_User.lastname}</td>
                 <td>{e.id_User.phone_number}</td>
@@ -74,7 +93,7 @@ const Orders = () => {
                     </button>
                   ) : (
                     <button type="button" onClick={() => (toggleArchive(e._id))}>
-                      Update
+                      En cours
                     </button>
                   )}
 
@@ -87,13 +106,11 @@ const Orders = () => {
       <div className="ResultSelectAdminMenu">
         <div>Commande</div>
 
-        <input type="text" id="Nom" name="Nom" required />
-
-        <input type="text" id="Prenom" name="Prenom" required />
-
-        <input type="text" id="Email" name="Email" required />
-
-        <input type="text" id="TEL" name="TEL" required />
+        {useDetailOrder.payment_id}
+        <br />
+        {useDetailOrder.statusArchive}
+        <br />
+        {useDetailOrder.total_Price}
       </div>
     </div>
   );
