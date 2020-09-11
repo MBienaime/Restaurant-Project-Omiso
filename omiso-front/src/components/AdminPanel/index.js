@@ -52,5 +52,5 @@ const AdminPanel = ({ useAuth }) => (
 export default AdminPanel;
 
 AdminPanel.propTypes = {
-  useAuth: PropTypes.bool.isRequired,
+  useAuth: PropTypes.object.isRequired,
 };

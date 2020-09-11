@@ -12,6 +12,7 @@ const oderSchema = mongoose.Schema({
   total_Items: { type: Number },
   order_Menu: [{ menu: { type: Schema.ObjectId, ref: 'Menu', required: true }, Number_MenuItem: { type: Number } }],
   payment_id: { type: String, default: '' },
+  statusArchive: { type: Boolean, default: 'false' },
 });
 
 // Converts menuItemSchema into a Model + exports it

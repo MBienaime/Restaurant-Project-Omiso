@@ -29,6 +29,20 @@ const Orders = () => {
   // getting menu data
   useEffect(getApiDataOrder, []);
 
+  //  toggle archive
+  const toggleArchive = (e) => {
+    const token = window.localStorage.getItem('UserTokenOmiso');
+    const url = `https://omiso.com/commande/${e}`;
+    axios
+      .patch(url, { headers: { Authorization: `Bearer ${token}` } })
+      .then((resp) => {
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="sectionAdminMenu">
       <div className="fetchAdminMenu">
@@ -48,15 +62,18 @@ const Orders = () => {
                 <td>{e.id_User.firstname}</td>
                 <td>{e.id_User.lastname}</td>
                 <td>{e.id_User.phone_number}</td>
-                <td>{e.total_Price}</td>
+                <td>{e.total_Price}€</td>
                 <td>
-                  <button type="button">
-                    <FaTrash />
-                  </button>
-                  <br />
-                  <button type="button">
-                    Update
-                  </button>
+                  { (false) ? (
+                    <button type="button" onClick={() => (toggleArchive(e._id))}>
+                      <FaTrash />
+                    </button>
+                  ) : (
+                    <button type="button" onClick={() => (toggleArchive(e._id))}>
+                      Update
+                    </button>
+                  )}
+
                 </td>
               </tr>
             )) }

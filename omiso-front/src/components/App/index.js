@@ -41,7 +41,7 @@ const App = () => {
     setAuth({ ...useAuth, connect: false, role: ' ' });
   };
 
-  useEffect(() => (checkAuth()), []);
+  useEffect(() => checkAuth(), []);
 
   // order user
   const [useorder, setorder] = useState([]);
