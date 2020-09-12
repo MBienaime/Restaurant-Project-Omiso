@@ -123,7 +123,6 @@ const Orders = () => {
                   {e.Number_MenuItem}
                   <br />
                   {e.menu.category}
-
                 </div>
               ))}
             </div>
