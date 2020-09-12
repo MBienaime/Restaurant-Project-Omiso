@@ -23,12 +23,14 @@ const App = () => {
   // check connexion and token
   const checkAuth = () => {
     if (localStorage.getItem('UserTokenOmiso') !== null) {
-      if (jwt.decode(localStorage.getItem('UserTokenOmiso')).exp > Date.now()) {
+      if (Date(jwt.decode(localStorage.getItem('UserTokenOmiso')).exp) < Date.now()) {
+        console.log("le token est expiree",Date(jwt.decode(localStorage.getItem('UserTokenOmiso')).exp), Date.now())
         localStorage.removeItem('UserTokenOmiso');
         setAuth({ ...useAuth, connect: false });
       }
       else {
         setAuth({ ...useAuth, connect: true, role: jwt.decode(localStorage.getItem('UserTokenOmiso')).role });
+        console.log("le token est valable",Date.now(), Date(jwt.decode(localStorage.getItem('UserTokenOmiso')).exp))
       }
     }
     else {

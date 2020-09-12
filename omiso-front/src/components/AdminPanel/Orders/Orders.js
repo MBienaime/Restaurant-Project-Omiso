@@ -52,24 +52,25 @@ const Orders = () => {
   const [useViewsArchive, setViewsArchive] = useState(false);
 
   // selected views detail order
-  const [useDetailOrder, setDetailOrder] = useState({});
+  const [useDetailOrder, setDetailOrder] = useState([]);
 
   console.log(useDetailOrder);
   return (
     <div className="sectionAdminMenu">
       <div className="fetchAdminMenu">
+        {(useViewsArchive)
+          ? (
+            <button type="button" onClick={() => setViewsArchive(!useViewsArchive)}>
+              En cours
+            </button>
+          )
+          : (
+            <button type="button" onClick={() => setViewsArchive(!useViewsArchive)}>
+              Archivé
+            </button>
+          )}
         <table>
-          {(useViewsArchive)
-            ? (
-              <button type="button" onClick={() => setViewsArchive(!useViewsArchive)}>
-                En cours
-              </button>
-            )
-            : (
-              <button type="button" onClick={() => setViewsArchive(!useViewsArchive)}>
-                Archivé
-              </button>
-            )}
+
           <thead>
             <tr>
               <th>Nom</th>
@@ -81,7 +82,7 @@ const Orders = () => {
           </thead>
           <tbody>
             { useDataOrder.filter((e) => e.statusArchive === useViewsArchive).map((e) => (
-              <tr key={uuidv4()} onClick={() => setDetailOrder(e)}>
+              <tr key={uuidv4()} onClick={() => setDetailOrder([e])}>
                 <td>{e.id_User.firstname}</td>
                 <td>{e.id_User.lastname}</td>
                 <td>{e.id_User.phone_number}</td>
@@ -106,11 +107,29 @@ const Orders = () => {
       <div className="ResultSelectAdminMenu">
         <div>Commande</div>
 
-        {useDetailOrder.payment_id}
-        <br />
-        {useDetailOrder.statusArchive}
-        <br />
-        {useDetailOrder.total_Price}
+        {useDetailOrder.map((e) => (
+          <div key={uuidv4()}>
+            <div>
+              <div>{e.id_User.firstname}</div>
+              <div>{e.id_User.lastname}</div>
+              <div>{e.id_User.phone_number}</div>
+              <div>{e.id_User.email}</div>
+            </div>
+            <div>
+              {e.order_Menu.map((e) => (
+                <div key={uuidv4()}>
+                  {e.menu.name}
+                  <br />
+                  {e.Number_MenuItem}
+                  <br />
+                  {e.menu.category}
+
+                </div>
+              ))}
+            </div>
+            <div>{e.total_Price}€</div>
+          </div>
+        ))}
       </div>
     </div>
   );
