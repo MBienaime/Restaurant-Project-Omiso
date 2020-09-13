@@ -40,7 +40,7 @@ const SectionMenu = ({ addOrder }) => {
 
     <div className="sectionMenus">
       <div className="sectionMenusCarteMenu">
-        <ul><li className="buttonMenu" onClick={() => (setCategory('entrée'))}>Entree</li><li className="buttonMenu" onClick={() => (setCategory('plat'))}>Plats</li><li className="buttonMenu" onClick={() => (setCategory('dessert'))}>Dessert</li><li className="buttonMenu" onClick={() => (setCategory('boisson'))}>Boisson</li></ul>
+        <ul><li className="buttonMenu" onClick={() => (setCategory('entree'))}>Entree</li><li className="buttonMenu" onClick={() => (setCategory('plat'))}>Plats</li><li className="buttonMenu" onClick={() => (setCategory('dessert'))}>Dessert</li><li className="buttonMenu" onClick={() => (setCategory('boisson'))}>Boisson</li></ul>
       </div>
       <div className="sectionMenuCarte">
         {

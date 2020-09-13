@@ -11,7 +11,7 @@ import { FaTrashAlt } from 'react-icons/fa';
 const Menus = () => {
   // state
   const [useAddDataMenu, setAddDataMenu] = useState({
-    name: '', description: '', prix: 0, category: 'Entree',
+    name: '', description: '', prix: 0, category: 'entree',
   });
   const [useDataMenus, setDataMenus] = useState([{ _id: '' }]);
   const [useImage, setImage] = useState({ preview: '', raw: '' });
@@ -142,10 +142,10 @@ const Menus = () => {
         <input type="text" id="prix" name="prix" placeholder="Prix..." required onChange={(e) => handleInputChange(e)} value={useAddDataMenu.prix} />
         <label htmlFor="category">Catégorie:</label>
         <select name="category" id="category" onChange={(e) => handleInputChange(e)} value={useAddDataMenu.category}>
-          <option value="Entree">Entree</option>
-          <option value="Plat">Plat</option>
-          <option value="Dessert">Dessert</option>
-          <option value="Boisson">Boisson</option>
+          <option value="entree">Entree</option>
+          <option value="plat">Plat</option>
+          <option value="dessert">Dessert</option>
+          <option value="boisson">Boisson</option>
         </select>
         <img src={useImage.preview} />
         <input
