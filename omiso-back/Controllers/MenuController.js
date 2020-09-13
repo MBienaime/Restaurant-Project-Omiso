@@ -42,8 +42,13 @@ exports.menuItems_create_item = (req, res) => {
     description: req.body.description,
     price: req.body.price,
     category: req.body.category,
-    urlImage: `https://omiso.com/images/menus/${req.file.filename}`,
   });
+  // check image
+  if (typeof req.file === 'undefined') {
+    menuItem.urlImage = ' ';
+  } else {
+    menuItem.urlImage = `https://omiso.com/images/menus/${req.file.filename}`;
+  }
 
   // Saves MenuItem in the database
   menuItem

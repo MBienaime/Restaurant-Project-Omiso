@@ -1,7 +1,7 @@
 // Import
 const multer = require('multer');
 
-//const upload = multer({ dest: '../Public/images/menus' });
+// const upload = multer({ dest: '../Public/images/menus' });
 
 // Mime types of the files
 const MIME_TYPES = {

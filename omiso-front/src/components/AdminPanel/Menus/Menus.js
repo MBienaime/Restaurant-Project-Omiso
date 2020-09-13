@@ -11,11 +11,11 @@ import { FaTrashAlt } from 'react-icons/fa';
 const Menus = () => {
   // state
   const [useAddDataMenu, setAddDataMenu] = useState({
-    name: '', decription: '', prix: 0, category: '',
+    name: '', description: '', prix: 0, category: '',
   });
   const [useDataMenus, setDataMenus] = useState([{ _id: '' }]);
-  const [useImage, setImage] = useState(null);
-
+  const [useImage, setImage] = useState({ preview: '', raw: '' });
+  console.log(useAddDataMenu);
   // API call data menu
   const getApiData = () => {
     const url = 'https://omiso.com/menu/';
@@ -31,11 +31,14 @@ const Menus = () => {
   // Selected image
 
   const selectedImage = (e) => {
-    setImage(e.target.files[0]);
+    setImage({
+      preview: URL.createObjectURL(e.target.files[0]),
+      raw: e.target.files[0],
+    });
   };
 
   // handel input menu data
-  useEffect(getApiData, []);
+  useEffect(getApiData, [useImage]);
 
   const handleInputChange = (e) => setAddDataMenu({
     ...useAddDataMenu,
@@ -49,7 +52,7 @@ const Menus = () => {
     formData.append('description', useAddDataMenu.description);
     formData.append('price', useAddDataMenu.prix);
     formData.append('category', useAddDataMenu.category);
-    formData.append('image', useImage);
+    formData.append('image', useImage.raw);
 
     const token = window.localStorage.getItem('UserTokenOmiso');
     axios.post(
@@ -57,8 +60,12 @@ const Menus = () => {
       formData,
       { headers: { Authorization: `Bearer ${token}` } },
     )
-      .then((res) => {
+      .then(() => {
+        setAddDataMenu({
+          name: '', description: '', prix: 0, category: '',
+        });
         getApiData();
+        setImage({ preview: ' ', raw: 'ff' });
       })
       .catch((e) => console.log(e));
   }
@@ -70,7 +77,7 @@ const Menus = () => {
       `https://omiso.com/menu/${id}`,
       { headers: { Authorization: `Bearer ${token}` } },
     )
-      .then((res) => {
+      .then(() => {
         getApiData();
       })
       .catch((e) => console.log(e));
@@ -128,14 +135,14 @@ const Menus = () => {
       <div className="ResultSelectAdminMenu">
         <div>Nouveau Menu</div>
 
-        <input type="text" id="titre" name="name" placeholder="Nom..." required onChange={(e) => handleInputChange(e)} />
+        <input type="text" id="titre" name="name" placeholder="Nom..." required onChange={(e) => handleInputChange(e)} value={useAddDataMenu.name} />
 
-        <input type="text" id="description" name="description" placeholder="Description..." required onChange={(e) => handleInputChange(e)} />
+        <input type="text" id="description" name="description" placeholder="Description..." required onChange={(e) => handleInputChange(e)} value={useAddDataMenu.description} />
 
-        <input type="text" id="prix" name="prix" placeholder="Prix..." required onChange={(e) => handleInputChange(e)} />
+        <input type="text" id="prix" name="prix" placeholder="Prix..." required onChange={(e) => handleInputChange(e)} value={useAddDataMenu.prix} />
 
-        <input type="text" id="categorie" name="category" placeholder="Catégorie..." required onChange={(e) => handleInputChange(e)} />
-
+        <input type="text" id="categorie" name="category" placeholder="Catégorie..." required onChange={(e) => handleInputChange(e)} value={useAddDataMenu.category} />
+        <img src={useImage.preview} />
         <input
           type="file"
           id="image"
@@ -144,6 +151,7 @@ const Menus = () => {
           onChange={(e) => {
             selectedImage(e);
           }}
+
         />
 
         <button onClick={() => handlesubmitMenu()}>ajouter</button>
