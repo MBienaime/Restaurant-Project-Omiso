@@ -248,8 +248,8 @@ exports.CheckToken = (req, res) => {
   const token = req.headers.authorization.split(' ')[1];
   jwt.verify(token, process.env.JWT_PASSWORD, (err, decoded) => {
     if (err) {
-      res.status(401).json({ authenticated: false });
+      res.status(401).json({ authenticated: false, role: '' });
     }
-    res.status(200).json({ authenticated: true });
+    res.status(200).json({ authenticated: true, role: decoded.role });
   });
 };

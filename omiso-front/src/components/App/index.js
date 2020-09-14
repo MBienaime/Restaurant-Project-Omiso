@@ -2,6 +2,7 @@
 // == Import npm
 import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import axios from 'axios';
 
 // == Import Style
 import './styles.scss';
@@ -19,19 +20,19 @@ const jwt = require('jsonwebtoken');
 
 const App = () => {
   const [useAuth, setAuth] = useState({ connect: false, role: 'client' });
-
+  console.log(useAuth);
   // check connexion and token
   const checkAuth = () => {
     if (localStorage.getItem('UserTokenOmiso') !== null) {
-      if (Date(jwt.decode(localStorage.getItem('UserTokenOmiso')).exp) < Date.now()) {
-        console.log("le token est expiree",Date(jwt.decode(localStorage.getItem('UserTokenOmiso')).exp), Date.now())
-        localStorage.removeItem('UserTokenOmiso');
-        setAuth({ ...useAuth, connect: false });
-      }
-      else {
-        setAuth({ ...useAuth, connect: true, role: jwt.decode(localStorage.getItem('UserTokenOmiso')).role });
-        console.log("le token est valable",Date.now(), Date(jwt.decode(localStorage.getItem('UserTokenOmiso')).exp))
-      }
+      const token = localStorage.getItem('UserTokenOmiso');
+      axios.get('https://omiso.com/utilisateur/verifier-Token',
+        { headers: { Authorization: `Bearer ${token}` } })
+        .then((resp) => {
+          setAuth({ role: resp.data.role, connect: resp.data.authenticated });
+        })
+        .catch(() => {
+          setAuth({ ...useAuth, connect: false });
+        });
     }
     else {
       setAuth({ ...useAuth, connect: false });
