@@ -241,3 +241,15 @@ exports.user_delete = (req, res) => {
       res.status(500).json({ error: err });
     });
 };
+
+// check User token
+
+exports.CheckToken = (req, res) => {
+  const token = req.headers.authorization.split(' ')[1];
+  jwt.verify(token, process.env.JWT_PASSWORD, (err, decoded) => {
+    if (err) {
+      res.status(401).json({ authenticated: false });
+    }
+    res.status(200).json({ authenticated: true });
+  });
+};
