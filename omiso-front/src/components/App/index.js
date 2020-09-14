@@ -20,7 +20,7 @@ const jwt = require('jsonwebtoken');
 
 const App = () => {
   const [useAuth, setAuth] = useState({ connect: false, role: 'client' });
-  console.log(useAuth);
+
   // check connexion and token
   const checkAuth = () => {
     if (localStorage.getItem('UserTokenOmiso') !== null) {

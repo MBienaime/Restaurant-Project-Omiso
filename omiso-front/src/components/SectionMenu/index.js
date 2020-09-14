@@ -13,7 +13,6 @@ import './styles.css';
 const SectionMenu = ({ addOrder }) => {
   const [data, setData] = useState([{ _id: '' }]);
   const [category, setCategory] = useState('');
-  console.log(data);
 
   // API call data menu
   const getApiData = () => {
