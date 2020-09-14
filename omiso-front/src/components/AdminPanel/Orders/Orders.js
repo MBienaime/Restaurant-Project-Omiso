@@ -60,7 +60,6 @@ const Orders = () => {
     total_Pricetotal_Price: '',
   });
 
-  console.log(useDetailOrder);
   return (
     <div className="sectionAdminMenu">
       <div className="fetchAdminMenu">
@@ -124,7 +123,7 @@ const Orders = () => {
           <div>
             {useDetailOrder.order_Menu.map((e) => (
               <div key={uuidv4()}>
-                { (e.menu !== 'null') ? (<div>Menu suprimer</div>) : (
+                { (e.menu == null) ? (<div>Menu suprimer</div>) : (
                   <div>
                     {e.menu.name}
                     <br />
