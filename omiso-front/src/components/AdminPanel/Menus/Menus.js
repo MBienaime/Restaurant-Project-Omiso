@@ -135,7 +135,7 @@ const Menus = () => {
       <div className="ResultSelectAdminMenu">
         <div>Nouveau Menu</div>
 
-        <input type="text" id="titre" name="name" placeholder="Nom..." required onChange={(e) => handleInputChange(e)} value={useAddDataMenu.name} />
+        <input type="text" id="titre" name="name" placeholder="Nom..." pattern="[a-z]{4,8}" required size="45" onChange={(e) => handleInputChange(e)} value={useAddDataMenu.name} />
 
         <input type="text" id="description" name="description" placeholder="Description..." required onChange={(e) => handleInputChange(e)} value={useAddDataMenu.description} />
 

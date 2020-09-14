@@ -16,7 +16,7 @@ const Header = ({ useAuth, deconnected }) => (
         </li>
         {(useAuth.connect && (useAuth.role !== 'client')) ? (
           <li className="nav_link">
-            <Link to="/Administration">Administration</Link>
+            <Link to="/Administration/commande">Administration</Link>
           </li>
         ) : (<></>)}
         <li className="nav_link">

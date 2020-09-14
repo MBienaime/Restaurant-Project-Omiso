@@ -10,6 +10,9 @@ import './styles.css';
 
 const Users = () => {
   const [useDataUsers, setDataUsers] = useState([]);
+  const [useSelectUser, setUseSelectUser] = useState({
+    _id: '', firstname: '', lastname: '', email: '', phone_number: '',
+  });
 
   // API call data menu
   const getApiDataUsers = () => {
@@ -39,27 +42,23 @@ const Users = () => {
               <th>Prenom</th>
               <th>Email</th>
               <th>TEL</th>
-              <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {useDataUsers.map(() => (
-              <tr key={uuidv4()}>
+            {useDataUsers.map((e) => (
+
+              <tr key={uuidv4()} onClick={() => setUseSelectUser(e)} className={(e._id == useSelectUser._id) ? ('selectUser') : ('')}>
                 <td>
-                  jean
+                  {e.firstname}
                 </td>
                 <td>
-                  dupont
+                  {e.lastname}
                 </td>
                 <td>
-                  jean.dupont@gmail.com
+                  {e.email}
                 </td>
                 <td>
-                  05260525
-                </td>
-                <td>
-                  <button type="button">Supprimer</button><br />
-                  <button type="button">Update</button>
+                  {e.phone_number}
                 </td>
 
               </tr>
@@ -73,13 +72,15 @@ const Users = () => {
       <div className="ResultSelectAdminMenu">
         <div>Utilisateur</div>
 
-        <input type="text" id="Nom" name="Nom" required />
+        <div>
+          <div>{ useSelectUser.firstname }</div>
+          <div>{ useSelectUser.lastname }</div>
+          <div>{ useSelectUser.email }</div>
+          <div>{ useSelectUser.phone_number }</div>
+        </div>
 
-        <input type="text" id="Prenom" name="Prenom" required />
-
-        <input type="text" id="Email" name="Email" required />
-
-        <input type="text" id="TEL" name="TEL" required />
+        <button type="button">Supprimer</button>
+        <button type="button">Upadte</button>
 
       </div>
     </div>
