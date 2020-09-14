@@ -1,5 +1,6 @@
 // Imports
 const express = require('express');
+
 const router = express.Router();
 
 // Middlewares
@@ -31,5 +32,9 @@ router.get('/mdp-reset-mail/:token', UserController.reset_password_mail);
 
 // Delete user by its id
 router.delete('/:userId', checkAuth, checkRoles(['admin']), UserController.user_delete);
+
+// Check Token from front
+
+router.post('/verifier-token', UserController.CheckToken);
 
 module.exports = router;
