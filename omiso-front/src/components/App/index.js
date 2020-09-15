@@ -8,7 +8,7 @@ import axios from 'axios';
 import './styles.scss';
 
 // Local imports
-import Home from '../Home';
+
 import Header from '../Header';
 import Cart from '../Cart';
 import Connection from '../Connection';
@@ -80,7 +80,7 @@ const App = () => {
   return (
     <>
       <Header useAuth={useAuth} deconnected={deconnected} />
-      <Home />
+
       <Switch>
         <Route exact path="/">
           <SectionMenu addOrder={addOrder} />

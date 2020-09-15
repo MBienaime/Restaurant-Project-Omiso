@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import ItemMenu from './ItemMenu/ItemMenu';
 import Footer from '../Footer';
-
+import Home from '../Home';
 // == Import Style
 import './styles.css';
 
@@ -36,22 +36,23 @@ const SectionMenu = ({ addOrder }) => {
   };
 
   return (
-
-    <div className="sectionMenus">
-      <div className="sectionMenusCarteMenu">
-        <ul><li className="buttonMenu" onClick={() => (setCategory('entree'))}>Entree</li><li className="buttonMenu" onClick={() => (setCategory('plat'))}>Plats</li><li className="buttonMenu" onClick={() => (setCategory('dessert'))}>Dessert</li><li className="buttonMenu" onClick={() => (setCategory('boisson'))}>Boisson</li></ul>
-      </div>
-      <div className="sectionMenuCarte">
-        {
+  <>
+<Home />
+      <div className="sectionMenus">
+        <div className="sectionMenusCarteMenu">
+          <ul><li className="buttonMenu" onClick={() => (setCategory('entree'))}>Entree</li><li className="buttonMenu" onClick={() => (setCategory('plat'))}>Plats</li><li className="buttonMenu" onClick={() => (setCategory('dessert'))}>Dessert</li><li className="buttonMenu" onClick={() => (setCategory('boisson'))}>Boisson</li></ul>
+        </div>
+        <div className="sectionMenuCarte">
+          {
 filterCategory(data, category).map(
   (data) => (<ItemMenu data={data} addOrder={addOrder} key={uuidv4()} />),
 )
 }
 
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
-
+ </>
   );
 };
 

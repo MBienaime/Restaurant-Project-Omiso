@@ -11,7 +11,7 @@ import { FaTrashAlt } from 'react-icons/fa';
 const Menus = () => {
   // state
   const [useAddDataMenu, setAddDataMenu] = useState({
-    name: '', description: '', prix: 0, category: 'entree',
+    name: '', description: '', prix: 0, category: 'plat',
   });
   const [useDataMenus, setDataMenus] = useState([{ _id: '' }]);
   const [useImage, setImage] = useState({ preview: '', raw: '' });
@@ -62,10 +62,10 @@ const Menus = () => {
     )
       .then(() => {
         setAddDataMenu({
-          name: '', description: '', prix: 0, category: '',
+          name: '', description: '', prix: 0, category: 'plat',
         });
         getApiData();
-        setImage({ preview: ' ', raw: 'ff' });
+        setImage({ preview: ' ', raw: null });
       })
       .catch((e) => console.log(e));
   }

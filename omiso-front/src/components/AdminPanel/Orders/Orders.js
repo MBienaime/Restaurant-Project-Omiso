@@ -12,7 +12,7 @@ import { FaTrash } from 'react-icons/fa';
 const Orders = () => {
   // API call data menu
   const [useDataOrder, setDataOrder] = useState([{ id_User: { email: '' } }]);
-
+console.log(useDataOrder);
   const getApiDataOrder = () => {
     const token = window.localStorage.getItem('UserTokenOmiso');
     const url = 'https://omiso.com/commande/';

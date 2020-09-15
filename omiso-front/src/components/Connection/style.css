@@ -225,7 +225,7 @@
     left:50%;
     transform: translate(-50%,-50%);
     border-radius: 20px;
-    z-index:12;
+    z-index:125;
   }
 
   
@@ -273,5 +273,6 @@
     display: none;
   }
 
+  
   /**/
   
