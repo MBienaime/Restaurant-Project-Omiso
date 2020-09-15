@@ -49,6 +49,7 @@ const Connection = ({ checkAuth }) => {
   const handleClickForgetPasswordNone = () => setshowPanelForgetPassword('display-none-forget ');
 
   return (
+    <div className="modal">
     <div className="modal-main display-block">
 
       <div className={`modal-forget ${showPanelForgetPassword}`}>
@@ -181,7 +182,7 @@ const Connection = ({ checkAuth }) => {
 
       </div>
     </div>
-
+    </div>
   );
 };
 

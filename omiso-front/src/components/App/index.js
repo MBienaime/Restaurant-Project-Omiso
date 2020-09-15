@@ -15,6 +15,7 @@ import Connection from '../Connection';
 import AdminPanel from '../AdminPanel/index';
 import SectionMenu from '../SectionMenu';
 import ProtectedRoute from '../ProtectedRoute';
+import Home from '../Home';
 
 const jwt = require('jsonwebtoken');
 
@@ -81,10 +82,11 @@ const App = () => {
     <>
       <Header useAuth={useAuth} deconnected={deconnected} />
 
+      <Route exact path="/">
+        <Home />
+        <SectionMenu addOrder={addOrder} />
+      </Route>
       <Switch>
-        <Route exact path="/">
-          <SectionMenu addOrder={addOrder} />
-        </Route>
         <Route path="/Connexion">
           <Connection checkAuth={checkAuth} />
         </Route>
