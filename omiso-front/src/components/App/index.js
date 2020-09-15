@@ -81,12 +81,11 @@ const App = () => {
   return (
     <>
       <Header useAuth={useAuth} deconnected={deconnected} />
-
-      <Route exact path="/">
-        <Home />
-        <SectionMenu addOrder={addOrder} />
-      </Route>
       <Switch>
+        <Route exact path="/">
+          <Home />
+          <SectionMenu addOrder={addOrder} />
+        </Route>
         <Route path="/Connexion">
           <Connection checkAuth={checkAuth} />
         </Route>
