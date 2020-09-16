@@ -12,7 +12,7 @@ import { FaTrash } from 'react-icons/fa';
 const Orders = () => {
   // API call data menu
   const [useDataOrder, setDataOrder] = useState([{ id_User: { email: '' } }]);
-    const getApiDataOrder = () => {
+  const getApiDataOrder = () => {
     const token = window.localStorage.getItem('UserTokenOmiso');
     const url = 'https://omiso.com/commande/';
     axios
@@ -57,8 +57,8 @@ const Orders = () => {
     order_Menu: [{ menu: '', Number_MenuItem: '', category: '' },
     ],
     total_Price: '',
-    comment:'',
-  }); 
+    comment: '',
+  });
 
   return (
     <div className="sectionAdminMenu">
@@ -110,36 +110,37 @@ const Orders = () => {
           </tbody>
         </table>
       </div>
-      <div className="ResultSelectAdminMenu">
+      <div className="OrderDetail">
         <div>Commande</div>
 
-        <div>
-          <div>
-            <div>{useDetailOrder.id_User.firstname}</div>
-            <div>{useDetailOrder.id_User.lastname}</div>
-            <div>{useDetailOrder.id_User.phone_number}</div>
-            <div>{useDetailOrder.id_User.email}</div>
+        <div className="OrderDetail_client">
+          <div>client:</div>
+          <div className="OrderDetail_client_contact">
+            <div>Nom: {useDetailOrder.id_User.firstname}</div>
+            <div>Prenom: {useDetailOrder.id_User.lastname}</div>
+            <div>Telephone: {useDetailOrder.id_User.phone_number}</div>
+            <div>Email: {useDetailOrder.id_User.email}</div>
           </div>
-          <div>
+        </div>
+        <div className="OrderDetail_order">
+          <div>Commande:</div>
+          <div className="OrderDetail_order_menu">
             {useDetailOrder.order_Menu.map((e) => (
-              <div key={uuidv4()}>
+              <div key={uuidv4()} className="OrderDetail_order_menu_item">
                 { (e.menu == null) ? (<div>Menu suprimer</div>) : (
-                  <div>
-                    {e.menu.name}
-                    <br />
-                    {e.Number_MenuItem}
-                    <br />
-                    {e.menu.category}
-                    <br />
-                    { useDetailOrder.comment}
-                  </div>
+                  <div>{`${e.menu.category}      ${e.menu.name}     X    ${e.Number_MenuItem}`}</div>
                 )}
               </div>
             ))}
           </div>
-          <div>{useDetailOrder.total_Price}€</div>
         </div>
-
+        <div className="OrderDetail_order_comment">
+          <div>Commentaire:</div>
+          <div className="OrderDetail_order_comment_detail">
+            {useDetailOrder.comment}
+          </div>
+        </div>
+        <div> {`TOTAL: ${useDetailOrder.total_Price || 0}€`}</div>
       </div>
     </div>
   );

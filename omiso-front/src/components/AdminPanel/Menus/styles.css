@@ -14,10 +14,8 @@
     
     width: 60%;
 }
-.ResultSelectAdminMenu{    
-    width: 40%;
 
-}
+
 table {
     display:flex;
     flex-direction: column;
@@ -63,6 +61,7 @@ td th{
     align-items: center;
     background-color: rgba(0, 0, 0, 0.363);
     height:90%;
+    width: 40%;
 
 }
 input {

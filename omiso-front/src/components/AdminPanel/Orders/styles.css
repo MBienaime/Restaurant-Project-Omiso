@@ -2,3 +2,58 @@
     background-color:rgba(238, 234, 228, 0.281);
     border-radius: 2px;
 }
+.OrderDetail{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: solid;
+    border-color: rgb(231, 223, 223);
+    border-radius: 20px;
+    padding: 10px;  
+    align-items: center;   
+    flex-direction: column;    
+    background-color: rgba(0, 0, 0, 0.363);
+    height:90%;
+    width: 40%;
+}
+.OrderDetail_client{
+    display: flex;    
+    align-items: flex-start;
+    flex-direction: column; 
+    width: 100%;  
+    height: 30%;     
+}
+.OrderDetail_client_contact{
+    display: flex;    
+    align-items: flex-start;
+    flex-direction: column; 
+    width: 100%;
+    padding: 5px;
+    border: azure solid 1px;
+    border-radius: 5px;
+}
+.OrderDetail_order{  
+    width: 100%; 
+    height: 70%; 
+    margin-top: 10px;
+        
+}
+.OrderDetail_order_menu{        
+    height: 70%; 
+}
+.OrderDetail_order_menu_item{
+    display: flex;
+    border-bottom: solid 1px white;
+    padding: 10px 5px;
+    margin: 0px 10px;
+    
+}
+.OrderDetail_order_comment{
+    width: 100%; 
+    height: 40%;
+}
+.OrderDetail_order_comment_detail{
+    border: azure solid 1px;
+    border-radius: 5px;
+    height: 50%;
+}
