@@ -12,8 +12,7 @@ import { FaTrash } from 'react-icons/fa';
 const Orders = () => {
   // API call data menu
   const [useDataOrder, setDataOrder] = useState([{ id_User: { email: '' } }]);
-console.log(useDataOrder);
-  const getApiDataOrder = () => {
+    const getApiDataOrder = () => {
     const token = window.localStorage.getItem('UserTokenOmiso');
     const url = 'https://omiso.com/commande/';
     axios
@@ -57,8 +56,9 @@ console.log(useDataOrder);
     id_User: { lastname: '', firstname: '', email: '' },
     order_Menu: [{ menu: '', Number_MenuItem: '', category: '' },
     ],
-    total_Pricetotal_Price: '',
-  });
+    total_Price: '',
+    comment:'',
+  }); 
 
   return (
     <div className="sectionAdminMenu">
@@ -130,6 +130,8 @@ console.log(useDataOrder);
                     {e.Number_MenuItem}
                     <br />
                     {e.menu.category}
+                    <br />
+                    { useDetailOrder.comment}
                   </div>
                 )}
               </div>

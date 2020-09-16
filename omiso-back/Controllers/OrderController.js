@@ -35,6 +35,7 @@ exports.postOrder = (req, res) => {
     date_Order: Date(),
     total_Items: req.body.Orders.menus.length,
     order_Menu: req.body.Orders.menus,
+    comment: req.body.Orders.comment,
   });
 
   OrderItem
