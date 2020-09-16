@@ -62,6 +62,7 @@ const Orders = () => {
 
   return (
     <div className="sectionAdminMenu">
+
       <div className="fetchAdminMenu">
         {(useViewsArchive)
           ? (
@@ -74,7 +75,6 @@ const Orders = () => {
               Archivé
             </button>
           )}
-
         <table>
 
           <thead>

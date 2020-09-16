@@ -18,14 +18,13 @@
 
 table {
     display:flex;
-    flex-direction: column;
-    
+    flex-direction: column;    
     width: auto;
     height:90%;
     border: solid;
     border-color: rgb(231, 223, 223);
     border-radius: 20px;
-    margin: 20px;
+    margin: 0px 20px;
     background-color: rgba(0, 0, 0, 0.363);
     
 }
