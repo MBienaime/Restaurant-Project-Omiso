@@ -114,7 +114,7 @@ const Orders = () => {
         <div>Commande</div>
 
         <div className="OrderDetail_client">
-          <div>client:</div>
+          <div>Client:</div>
           <div className="OrderDetail_client_contact">
             <div>Nom: {useDetailOrder.id_User.firstname}</div>
             <div>Prenom: {useDetailOrder.id_User.lastname}</div>
@@ -123,7 +123,7 @@ const Orders = () => {
           </div>
         </div>
         <div className="OrderDetail_order">
-          <div>Commande:</div>
+          <div>Commandes:</div>
           <div className="OrderDetail_order_menu">
             {useDetailOrder.order_Menu.map((e) => (
               <div key={uuidv4()} className="OrderDetail_order_menu_item">
@@ -140,7 +140,10 @@ const Orders = () => {
             {useDetailOrder.comment}
           </div>
         </div>
-        <div> {`TOTAL: ${useDetailOrder.total_Price || 0}€`}</div>
+        <div className="OrderDetail_order_Total">
+          <div>{`TOTAL: ${useDetailOrder.total_Price || 0}€`}</div>
+          <button>archivé</button>
+        </div>
       </div>
     </div>
   );
