@@ -55,7 +55,7 @@ exports.menuItems_create_item = (req, res) => {
     .save()
     .then((result) => {
       res.status(201).json({
-        message: 'Item created successfully',
+        message: 'Élément créé avec succès',
         createdMenuItem: {
           _id: result.id,
           name: result.name,
@@ -91,7 +91,7 @@ exports.menuItems_get_item = (req, res) => {
       } else {
         res
           .status(404)
-          .json({ message: 'No valid entry found for provided id' });
+          .json({ message: 'Aucune entrée trouvée ' });
       }
     })
     .catch((err) => {
@@ -112,7 +112,7 @@ exports.menuItems_update_item = (req, res) => {
     .exec()
     .then((result) => {
       res.status(200).json({
-        message: 'Item updated',
+        message: 'Élément mis à jour',
         request: {
           type: 'GET',
           url: `https://omiso.com/menu/${result._id}`,
@@ -133,7 +133,7 @@ exports.menuItems_delete_item = (req, res) => {
     .exec()
     .then(() => {
       res.status(200).json({
-        message: 'Item deleted',
+        message: 'Élément supprimé',
         // gives the possibility to create a new item
         request: {
           type: 'POST',

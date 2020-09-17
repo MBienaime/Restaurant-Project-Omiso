@@ -16,9 +16,10 @@ OrderRoute.route('/')
   .get(checkAuth, checkRoles(['admin', 'employé']), OrderController.getOrder)
   .post(checkAuth, checkRoles(['admin', 'client']), OrderController.postOrder);
 
-OrderRoute.route('/:id', checkAuth)
+OrderRoute.route('/:id')
   .delete(checkAuth, checkRoles(['admin']), OrderController.deleteOrder)
   .get(checkAuth, checkRoles(['admin', 'employé']), OrderController.getOrderById)
   .patch(checkAuth, checkRoles(['admin', 'employé']), OrderController.updateOrderById);
+
 
 module.exports = OrderRoute;

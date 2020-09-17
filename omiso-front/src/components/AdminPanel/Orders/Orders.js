@@ -5,11 +5,29 @@ import { v4 as uuidv4 } from 'uuid';
 
 // == Import Style
 import './styles.css';
-import { FaTrash } from 'react-icons/fa';
+
+import {FaToggleOn, FaToggleOff } from 'react-icons/fa';
+
 
 // Local imports
 
 const Orders = () => {
+
+
+  // State initialization
+  const [useDataOrder, setDataOrder] = useState([{ 
+    id_User: { 
+      email: '' ,
+      firstname: '', 
+      lastname: '', 
+      phone_number: '',
+      total_Price: null,
+      status: false,
+    },
+   }]);
+  console.log('useDataOrder:', useDataOrder);  
+
+
   // API call data menu
   const [useDataOrder, setDataOrder] = useState([{ id_User: { email: '' } }]);
 
@@ -32,7 +50,9 @@ const Orders = () => {
     axios
       .get(url, { headers: { Authorization: `Bearer ${token}` } })
       .then((resp) => {
+        console.log('getApiData resp :', resp)
         setDataOrder(resp.data);
+        console.log("resp.data.id_User :", resp.data.id_User)
       })
       .catch((error) => {
         console.log('error', error);
@@ -41,6 +61,7 @@ const Orders = () => {
 
   // getting menu data
   useEffect(getApiDataOrder, []);
+
 
   //  toggle archive
   const toggleArchive = (e) => {
@@ -64,12 +85,14 @@ const Orders = () => {
   };
 
   console.log(useDetailOrder.statusArchive);
+
   return (
     <div className="sectionAdminMenu">
 
       <div className="fetchAdminMenu">
 
         <table>
+
 
           <thead>        {(useViewsArchive)
             ? (
@@ -82,6 +105,7 @@ const Orders = () => {
                 Commande Archivé
               </button>
             )}
+
             <tr>
               <th>Nom</th>
               <th>Prénom</th>
@@ -91,22 +115,19 @@ const Orders = () => {
             </tr>
           </thead>
           <tbody>
-            { useDataOrder.filter((e) => e.statusArchive === useViewsArchive).map((e) => (
-              <tr key={uuidv4()} onClick={() => setDetailOrder(e)} className={(e._id == useDetailOrder._id) ? ('selectOrder') : ('')}>
+
+            { useDataOrder.map((e) => (
+              <tr key={uuidv4()}>
                 <td>{e.id_User.firstname}</td>
                 <td>{e.id_User.lastname}</td>
-                <td>{e.id_User.phone_number}</td>
+                <td>{e.id_User.phone_number}</td> 
                 <td>{e.total_Price}€</td>
-                <td>
-                  { (e.statusArchive) ? (
-                    <button type="button" onClick={() => (toggleArchive(e._id))}>
-                      <FaTrash />
-                    </button>
-                  ) : (
-                    <button type="button" onClick={() => (toggleArchive(e._id))}>
-                      En cours
-                    </button>
-                  )}
+                <td className ="btn">
+                  <br />
+                  <button className = " btn-fa">
+                  {(e.status)?(<FaToggleOn onClick={()=>orderArchive(e._id)}/>):(<FaToggleOff onClick={()=>orderArchive(e._id)}/>)}                  
+                  </button>
+                  
 
                 </td>
               </tr>
@@ -116,6 +137,9 @@ const Orders = () => {
       </div>
       <div className="OrderDetail">
         <div>Commande</div>
+        
+        <input type="text" id="Nom" name="Nom" required   />
+
 
         <div className="OrderDetail_client">
           <div>Client:</div>
@@ -148,7 +172,12 @@ const Orders = () => {
           <div>{`TOTAL: ${useDetailOrder.total_Price || 0}€`}</div>
           <button type="button" onClick={() => (toggleArchive(useDetailOrder._id))}>ARCHIVE</button>
         </div>
+
       </div>
+
+      
+
+        
     </div>
   );
 };

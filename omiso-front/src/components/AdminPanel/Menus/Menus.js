@@ -14,8 +14,10 @@ const Menus = () => {
     name: '', description: '', prix: 0, category: 'plat',
   });
   const [useDataMenus, setDataMenus] = useState([{ _id: '' }]);
+
   const [useImage, setImage] = useState({ preview: null, raw: null });
   console.log(useAddDataMenu);
+
   // API call data menu
   const getApiData = () => {
     const url = 'https://omiso.com/menu/';
@@ -29,7 +31,6 @@ const Menus = () => {
   };
 
   // Selected image
-
   const selectedImage = (e) => {
     setImage({
       preview: URL.createObjectURL(e.target.files[0]),
@@ -82,6 +83,7 @@ const Menus = () => {
       })
       .catch((e) => console.log(e));
   }
+  
 
   return (
 
