@@ -1,18 +1,21 @@
+/* eslint-disable no-underscore-dangle */
 // == Import npm
 import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import axios from 'axios';
 
 // == Import Style
 import './styles.scss';
 
 // Local imports
-import Home from '../Home';
+
 import Header from '../Header';
 import Cart from '../Cart';
 import Connection from '../Connection';
 import AdminPanel from '../AdminPanel/index';
 import SectionMenu from '../SectionMenu';
 import ProtectedRoute from '../ProtectedRoute';
+import Home from '../Home';
 
 const jwt = require('jsonwebtoken');
 
@@ -22,13 +25,15 @@ const App = () => {
   // check connexion and token
   const checkAuth = () => {
     if (localStorage.getItem('UserTokenOmiso') !== null) {
-      if (jwt.decode(localStorage.getItem('UserTokenOmiso')).exp > Date.now()) {
-        localStorage.removeItem('UserTokenOmiso');
-        setAuth({ ...useAuth, connect: false });
-      }
-      else {
-        setAuth({ ...useAuth, connect: true, role: jwt.decode(localStorage.getItem('UserTokenOmiso')).role });
-      }
+      const token = localStorage.getItem('UserTokenOmiso');
+      axios.get('https://omiso.com/utilisateur/verifier-Token',
+        { headers: { Authorization: `Bearer ${token}` } })
+        .then((resp) => {
+          setAuth({ role: resp.data.role, connect: resp.data.authenticated });
+        })
+        .catch(() => {
+          setAuth({ ...useAuth, connect: false });
+        });
     }
     else {
       setAuth({ ...useAuth, connect: false });
@@ -40,7 +45,7 @@ const App = () => {
     setAuth({ ...useAuth, connect: false, role: ' ' });
   };
 
-  useEffect(() => (checkAuth()), []);
+  useEffect(() => checkAuth(), []);
 
   // order user
   const [useorder, setorder] = useState([]);
@@ -51,7 +56,9 @@ const App = () => {
       setorder([...useorder, { ...d, quantity: 1 }]);
     }
     else {
-      const newdata = useorder.map((e) => (e._id === d._id ? { ...e, quantity: e.quantity + 1 } : { ...e }));
+      const newdata = useorder.map(
+        (e) => (e._id === d._id ? { ...e, quantity: e.quantity + 1 } : { ...e }),
+      );
       setorder(newdata);
     }
   };
@@ -61,7 +68,9 @@ const App = () => {
       setorder([...useorder, { ...d, quantity: 1 }]);
     }
     else {
-      const newdata = useorder.map((e) => (e._id === d._id ? { ...e, quantity: e.quantity - 1 } : { ...e }));
+      const newdata = useorder.map(
+        (e) => (e._id === d._id ? { ...e, quantity: e.quantity - 1 } : { ...e }),
+      );
       setorder(newdata);
     }
   };
@@ -72,9 +81,9 @@ const App = () => {
   return (
     <>
       <Header useAuth={useAuth} deconnected={deconnected} />
-      <Home />
       <Switch>
         <Route exact path="/">
+          <Home />
           <SectionMenu addOrder={addOrder} />
         </Route>
         <Route path="/Connexion">

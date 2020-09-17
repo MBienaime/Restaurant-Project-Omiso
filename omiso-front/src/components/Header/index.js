@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { FaShoppingCart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
@@ -13,9 +14,9 @@ const Header = ({ useAuth, deconnected }) => (
         <li className="nav_link">
           <Link to="/">Accueil</Link>
         </li>
-        {((useAuth.connect) & (useAuth.role !== 'client')) ? (
+        {(useAuth.connect && (useAuth.role !== 'client')) ? (
           <li className="nav_link">
-            <Link to="/Administration">Administration</Link>
+            <Link to="/Administration/commande">Administration</Link>
           </li>
         ) : (<></>)}
         <li className="nav_link">
@@ -34,3 +35,8 @@ const Header = ({ useAuth, deconnected }) => (
 );
 // == Export
 export default Header;
+
+Header.propTypes = {
+  useAuth: PropTypes.object.isRequired,
+  deconnected: PropTypes.func.isRequired,
+};

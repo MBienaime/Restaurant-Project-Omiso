@@ -7,7 +7,7 @@ const menuItemSchema = mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
   price: { type: Number, required: true },
-  category: { type: String, required: ['Plat', 'Boisson', 'Entree', 'Dessert'] },
+  category: { type: String, required: ['plat', 'boisson', 'entree', 'dessert'] },
   urlImage: { type: String },
 });
 

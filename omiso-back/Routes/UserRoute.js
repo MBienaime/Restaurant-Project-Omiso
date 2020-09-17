@@ -1,5 +1,6 @@
 // Imports
 const express = require('express');
+
 const router = express.Router();
 
 // Middlewares
@@ -11,6 +12,9 @@ const UserController = require('../Controllers/UserController');
 
 // Find all users
 router.get('/', checkAuth, checkRoles(['admin', 'employé']), UserController.user_get_all);
+// Check Token from front
+
+router.get('/verifier-token', UserController.CheckToken);
 
 // Find user by id
 router.get('/:userId', checkAuth, checkRoles(['admin', 'employé']), UserController.user_get_user);
@@ -31,5 +35,7 @@ router.get('/mdp-reset-mail/:token', UserController.reset_password_mail);
 
 // Delete user by its id
 router.delete('/:userId', checkAuth, checkRoles(['admin']), UserController.user_delete);
+
+
 
 module.exports = router;

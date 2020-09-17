@@ -5,11 +5,14 @@ import { v4 as uuidv4 } from 'uuid';
 
 // == Import Style
 import './styles.css';
+
 import {FaToggleOn, FaToggleOff } from 'react-icons/fa';
+
 
 // Local imports
 
 const Orders = () => {
+
 
   // State initialization
   const [useDataOrder, setDataOrder] = useState([{ 
@@ -24,7 +27,23 @@ const Orders = () => {
    }]);
   console.log('useDataOrder:', useDataOrder);  
 
+
   // API call data menu
+  const [useDataOrder, setDataOrder] = useState([{ id_User: { email: '' } }]);
+
+  // Select view Archive or en cours
+  const [useViewsArchive, setViewsArchive] = useState(false);
+
+  // selected views detail order
+  const [useDetailOrder, setDetailOrder] = useState({
+    _id: '',
+    id_User: { lastname: '', firstname: '', email: '' },
+    order_Menu: [{ menu: '', Number_MenuItem: '', category: '' },
+    ],
+    total_Price: '',
+    comment: '',
+  });
+
   const getApiDataOrder = () => {
     const token = window.localStorage.getItem('UserTokenOmiso');
     const url = 'https://omiso.com/commande/';
@@ -43,23 +62,50 @@ const Orders = () => {
   // getting menu data
   useEffect(getApiDataOrder, []);
 
-// order archive
 
-const orderArchive = (e)=>{
-  const token = window.localStorage.getItem('UserTokenOmiso');
-  const url = `https://omiso.com/commande/${e}`;
-  console.log('url', url);
-  axios.patch(url, { headers: { Authorization: `Bearer ${token}` } })
-  .then(getApiDataOrder())
-  .catch((e)=>(console.log('erreur',e)))
+  //  toggle archive
+  const toggleArchive = (e) => {
+    const token = window.localStorage.getItem('UserTokenOmiso');
+    const url = `https://omiso.com/commande/${e}`;
 
-}
+    // parametre axios
+    const authOptions = {
+      method: 'PATCH',
+      url,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    // send axios
+    axios(authOptions)
+      .then((e) => {
+        getApiDataOrder();
+      })
+      .catch((e) => console.log(e));
+  };
+
+  console.log(useDetailOrder.statusArchive);
+
   return (
     <div className="sectionAdminMenu">
+
       <div className="fetchAdminMenu">
+
         <table>
-          <div>Archiver</div>          
-          <thead>
+
+
+          <thead>        {(useViewsArchive)
+            ? (
+              <button type="button" onClick={() => setViewsArchive(!useViewsArchive)}>
+                Commande en cours
+              </button>
+            )
+            : (
+              <button type="button" onClick={() => setViewsArchive(!useViewsArchive)}>
+                Commande Archivé
+              </button>
+            )}
+
             <tr>
               <th>Nom</th>
               <th>Prénom</th>
@@ -69,6 +115,7 @@ const orderArchive = (e)=>{
             </tr>
           </thead>
           <tbody>
+
             { useDataOrder.map((e) => (
               <tr key={uuidv4()}>
                 <td>{e.id_User.firstname}</td>
@@ -81,26 +128,51 @@ const orderArchive = (e)=>{
                   {(e.status)?(<FaToggleOn onClick={()=>orderArchive(e._id)}/>):(<FaToggleOff onClick={()=>orderArchive(e._id)}/>)}                  
                   </button>
                   
+
                 </td>
               </tr>
             )) }
           </tbody>
         </table>
       </div>
-      <div className="ResultSelectAdminMenu">
+      <div className="OrderDetail">
         <div>Commande</div>
         
         <input type="text" id="Nom" name="Nom" required   />
 
-        <input type="text" id="Prenom" name="Prenom"  required />
 
-        <input type="text" id="TEL" name="TEL"   required />
+        <div className="OrderDetail_client">
+          <div>Client:</div>
+          <div className="OrderDetail_client_contact">
+            <div>Nom: {useDetailOrder.id_User.firstname}</div>
+            <div>Prenom: {useDetailOrder.id_User.lastname}</div>
+            <div>Telephone: {useDetailOrder.id_User.phone_number}</div>
+            <div>Email: {useDetailOrder.id_User.email}</div>
+          </div>
+        </div>
+        <div className="OrderDetail_order">
+          <div>Commandes:</div>
+          <div className="OrderDetail_order_menu">
+            {useDetailOrder.order_Menu.map((e) => (
+              <div key={uuidv4()} className="OrderDetail_order_menu_item">
+                { (e.menu == null) ? (<div>Menu suprimer</div>) : (
+                  <div>{`${e.menu.category}      ${e.menu.name}     X    ${e.Number_MenuItem}`}</div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="OrderDetail_order_comment">
+          <div>Commentaire:</div>
+          <div className="OrderDetail_order_comment_detail">
+            {useDetailOrder.comment}
+          </div>
+        </div>
+        <div className="OrderDetail_order_Total">
+          <div>{`TOTAL: ${useDetailOrder.total_Price || 0}€`}</div>
+          <button type="button" onClick={() => (toggleArchive(useDetailOrder._id))}>ARCHIVE</button>
+        </div>
 
-        <input type="text" id="description" name="description"   required />
-
-        <input type="text" id="Total" name="Total"  required />
-
-      
       </div>
 
       

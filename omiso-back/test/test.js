@@ -132,6 +132,8 @@ describe('Unit Test API Omiso', () => {
           description: 'test description',
           price: 4,
           category: 'Plat',
+          file: { filename: 'tesd' },
+
         };
 
         chai.request(app)
@@ -160,7 +162,7 @@ describe('Unit Test API Omiso', () => {
           });
       });
 
-      it('Admin shouldGET menu by id ', (done) => {
+      it('Admin should GET menu by id ', (done) => {
         Menu.findOne({ name: 'testMenu' })
           .then((doc) => {
             chai.request(app)

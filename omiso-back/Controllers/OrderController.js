@@ -34,6 +34,7 @@ exports.postOrder = (req, res) => {
     date_Order: Date(),
     total_Items: req.body.Orders.menus.length,
     order_Menu: req.body.Orders.menus,
+    comment: req.body.Orders.comment,
   });
  
   OrderItem
@@ -140,7 +141,9 @@ exports.getOrderById = (req, res) => {
 exports.updateOrderById = (req, res) => {
   Order.findById(req.params.id)
     .then((doc) => {
+
       doc.status = !doc.status;     
+
       doc.save()
         .then((doc) => { res.status(200).json(doc); })
         .catch((err) => { res.status(500).json({ error: err }); });

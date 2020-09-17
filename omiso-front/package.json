@@ -35,7 +35,7 @@
     "eslint-plugin-jsx-a11y": "*",
     "eslint-plugin-react": "*",
     "eslint-plugin-react-hooks": "*",
-    "file-loader": "*",
+    "file-loader": "*",    
     "html-webpack-plugin": "*",
     "ignore-styles": "^5.0.1",
     "image-webpack-loader": "*",

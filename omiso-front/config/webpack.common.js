@@ -1,14 +1,14 @@
-const paths = require('./paths');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const paths = require('./paths');
 
 module.exports = {
   entry: [
     // SCSS
-    paths.assets + '/styles/index.css',
+    `${paths.assets}/styles/index.css`,
     // JS
-    paths.src + '/index.js',
+    `${paths.src}/index.js`,
   ],
 
   resolve: {
@@ -29,14 +29,14 @@ module.exports = {
     }),
 
     new HtmlWebpackPlugin({
-      favicon: paths.assets + '/favicon.ico',
-      template: paths.assets + '/index.html',
+      favicon: `${paths.assets}/favicon.ico`,
+      template: `${paths.assets}/index.html`,
     }),
   ],
 
   module: {
     rules: [
-      //JS
+      // JS
       {
         test: /\.js$/,
         exclude: /node_modules/,

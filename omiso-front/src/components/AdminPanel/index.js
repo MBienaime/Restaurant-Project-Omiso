@@ -1,5 +1,6 @@
 // == Import npm
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {
   Switch, Route, Link,
@@ -19,7 +20,7 @@ const AdminPanel = ({ useAuth }) => (
   <div className="adminPanel">
 
     <ul>
-      {(useAuth.connect & (useAuth.role === 'admin')) ? (
+      {(useAuth.connect & useAuth.role === 'admin') ? (
         <li className="nav_link">
           <Link to="/Administration/Menus">Menus</Link>
         </li>
@@ -27,7 +28,7 @@ const AdminPanel = ({ useAuth }) => (
       <li>
         <Link to="/Administration/commande">Commandes</Link>
       </li>
-      {(useAuth.connect & (useAuth.role === 'admin')) ? (
+      {(useAuth.connect & useAuth.role === 'admin') ? (
         <li className="nav_link">
           <Link to="/Administration/Utilisateurs">Utilisateurs</Link>
         </li>
@@ -49,3 +50,7 @@ const AdminPanel = ({ useAuth }) => (
 
 // == Export
 export default AdminPanel;
+
+AdminPanel.propTypes = {
+  useAuth: PropTypes.object.isRequired,
+};
