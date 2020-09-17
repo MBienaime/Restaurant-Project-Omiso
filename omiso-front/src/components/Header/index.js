@@ -20,7 +20,7 @@ const Header = ({ useAuth, deconnected }) => (
           </li>
         ) : (<></>)}
         <li className="nav_link">
-          <Link to="/Contact">Contact</Link>
+          <a href="#Footer">Contact</a>
         </li>
         <li className="nav_link">
           {(useAuth.connect) ? (<a onClick={() => (deconnected())}>Deconnexion</a>) : (<Link to="/Connexion">Connexion</Link>)}
