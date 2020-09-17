@@ -7,8 +7,8 @@
     "lint:fix": "eslint --fix src/**/*.js",
     "clean": "rm -rf dist",
     "clean:all": "rm -rf dist node_modules yarn.lock package-lock.json",
-    "test": " NODE_PATH=./ mocha --require test/.setup.js test/**/*.test.js",
-    "test:watch": "NODE_PATH=./ mocha --watch --require test/.setup.js test/**/*.test.js"
+    "test": " mocha --require test/setup.js test/**/*.test.js",
+    "test:watch": "NODE_PATH=./ mocha --watch --require /test/.setup.js test/**/*.test.js"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
