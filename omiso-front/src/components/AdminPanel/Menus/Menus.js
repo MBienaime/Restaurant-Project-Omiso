@@ -14,7 +14,7 @@ const Menus = () => {
     name: '', description: '', prix: 0, category: 'plat',
   });
   const [useDataMenus, setDataMenus] = useState([{ _id: '' }]);
-  const [useImage, setImage] = useState({ preview: '', raw: '' });
+  const [useImage, setImage] = useState({ preview: null, raw: null });
   console.log(useAddDataMenu);
   // API call data menu
   const getApiData = () => {
@@ -133,7 +133,7 @@ const Menus = () => {
 
       </div>
       <div className="ResultSelectAdminMenu">
-        <div>Nouveau Menu</div>
+        <div className="ResultSelectAdminMenu_title">Nouveau Menu</div>
 
         <input type="text" id="titre" name="name" placeholder="Nom..." pattern="[a-z]{4,8}" required size="45" onChange={(e) => handleInputChange(e)} value={useAddDataMenu.name} />
 
@@ -141,24 +141,30 @@ const Menus = () => {
 
         <input type="text" id="prix" name="prix" placeholder="Prix..." required onChange={(e) => handleInputChange(e)} value={useAddDataMenu.prix} />
         <label htmlFor="category">Catégorie:</label>
-        <select name="category" id="category" onChange={(e) => handleInputChange(e)} value={useAddDataMenu.category}>
-          <option value="entree">Entree</option>
-          <option value="plat">Plat</option>
-          <option value="dessert">Dessert</option>
-          <option value="boisson">Boisson</option>
+        <select className="ResultSelectAdminMenu_select" name="category" id="category" onChange={(e) => handleInputChange(e)} value={useAddDataMenu.category}>
+          <option className="ResultSelectAdminMenu_select" value="entree">Entree</option>
+          <option className="ResultSelectAdminMenu_select" value="plat">Plat</option>
+          <option className="ResultSelectAdminMenu_select" value="dessert">Dessert</option>
+          <option className="ResultSelectAdminMenu_select" value="boisson">Boisson</option>
         </select>
-        <img src={useImage.preview} />
-        <input
-          type="file"
-          id="image"
-          name="image"
-          onChange={(e) => {
-            selectedImage(e);
-          }}
+        <div className="ResultSelectAdminMenu_imagesViews">
 
-        />
+          {(useImage.raw == null) ? (
+            <input
+              className="ResultSelectAdminMenu_imagesViews_input"
+              type="file"
+              id="image"
+              name="image"
+              onChange={(e) => {
+                selectedImage(e);
+              }}
+            />
+          ) : (
+            <img className="ResultSelectAdminMenu_imagesViews_image" src={useImage.preview} />
+          )}
 
-        <button onClick={() => handlesubmitMenu()}>ajouter</button>
+        </div>
+        <button className="ResultSelectAdminMenu_imagesViews_button" onClick={() => handlesubmitMenu()}>ajouter</button>
       </div>
     </div>
 

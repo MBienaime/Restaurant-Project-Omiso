@@ -74,3 +74,16 @@
     width: 100%;
     font-size:xx-large;
 }
+thead{
+    display: flex;
+    flex-direction: column;
+    font-size:x-large;
+    padding: 0 20px;
+    }
+
+    .OrderDetail_order_button_green{
+        background-color: teal;
+    }
+    .OrderDetail_order_button{
+        background-color: slategrey;
+    }

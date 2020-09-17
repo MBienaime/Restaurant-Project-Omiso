@@ -12,6 +12,20 @@ import { FaTrash } from 'react-icons/fa';
 const Orders = () => {
   // API call data menu
   const [useDataOrder, setDataOrder] = useState([{ id_User: { email: '' } }]);
+
+  // Select view Archive or en cours
+  const [useViewsArchive, setViewsArchive] = useState(false);
+
+  // selected views detail order
+  const [useDetailOrder, setDetailOrder] = useState({
+    _id: '',
+    id_User: { lastname: '', firstname: '', email: '' },
+    order_Menu: [{ menu: '', Number_MenuItem: '', category: '' },
+    ],
+    total_Price: '',
+    comment: '',
+  });
+
   const getApiDataOrder = () => {
     const token = window.localStorage.getItem('UserTokenOmiso');
     const url = 'https://omiso.com/commande/';
@@ -43,41 +57,31 @@ const Orders = () => {
     };
     // send axios
     axios(authOptions)
-      .then(() => getApiDataOrder())
+      .then((e) => {
+        getApiDataOrder();
+      })
       .catch((e) => console.log(e));
   };
 
-  // Select view Archive or en cours
-  const [useViewsArchive, setViewsArchive] = useState(false);
-
-  // selected views detail order
-  const [useDetailOrder, setDetailOrder] = useState({
-    _id: '',
-    id_User: { lastname: '', firstname: '', email: '' },
-    order_Menu: [{ menu: '', Number_MenuItem: '', category: '' },
-    ],
-    total_Price: '',
-    comment: '',
-  });
-
+  console.log(useDetailOrder.statusArchive);
   return (
     <div className="sectionAdminMenu">
 
       <div className="fetchAdminMenu">
-        {(useViewsArchive)
-          ? (
-            <button type="button" onClick={() => setViewsArchive(!useViewsArchive)}>
-              En cours
-            </button>
-          )
-          : (
-            <button type="button" onClick={() => setViewsArchive(!useViewsArchive)}>
-              Archivé
-            </button>
-          )}
+
         <table>
 
-          <thead>
+          <thead>        {(useViewsArchive)
+            ? (
+              <button type="button" onClick={() => setViewsArchive(!useViewsArchive)}>
+                Commande en cours
+              </button>
+            )
+            : (
+              <button type="button" onClick={() => setViewsArchive(!useViewsArchive)}>
+                Commande Archivé
+              </button>
+            )}
             <tr>
               <th>Nom</th>
               <th>Prénom</th>
@@ -142,7 +146,7 @@ const Orders = () => {
         </div>
         <div className="OrderDetail_order_Total">
           <div>{`TOTAL: ${useDetailOrder.total_Price || 0}€`}</div>
-          <button>archivé</button>
+          <button type="button" onClick={() => (toggleArchive(useDetailOrder._id))}>ARCHIVE</button>
         </div>
       </div>
     </div>
