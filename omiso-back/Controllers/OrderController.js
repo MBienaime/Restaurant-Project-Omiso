@@ -108,7 +108,7 @@ exports.checkout_success = (req, res) => {
         if (error) {
           throw error;
         } else {
-          res.status(200).json({ message: 'success' });
+          res.status(200).json({ message: 'Paiement effectué avec succès' });
         }
       });
     })

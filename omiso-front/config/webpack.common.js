@@ -20,12 +20,13 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin({
-      patterns:[
-      {
-        from: paths.static,
-        to: '',
-      },
-    ]}),
+      patterns: [
+        {
+          from: paths.static,
+          to: '',
+        },
+      ],
+    }),
 
     new HtmlWebpackPlugin({
       favicon: paths.assets + '/favicon.ico',
