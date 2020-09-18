@@ -22,17 +22,11 @@ exports.user_get_all = (req, res) => {
   User.find()
     .select('firstname lastname email _id ')
     .exec()
-    .then((docs) => {
+    .then((doc) => {     
       const response = {
-        count: docs.length,
-        users: docs.map((doc) => ({
-          ...doc._doc,
-          request: {
-            type: 'GET',
-            url: `https://omiso.com/utilisateur/${doc._id}`,
-          },
-        })),
+        users: doc      
       };
+   
       res.status(200).json(response);
     })
     .catch((err) => {
@@ -44,17 +38,11 @@ exports.user_get_all = (req, res) => {
 exports.user_get_user = (req, res) => {
   const id = req.params.userId;
   User.findById(id)
-    .select('firstname lastname email _id ')
     .exec()
     .then((doc) => {
       if (doc) {
         res.status(200).json({
-          User: doc,
-          request: {
-            type: 'GET',
-            description: '',
-            url: `https://omiso.com/utilisateur/${doc._id}`,
-          },
+          User: doc,         
         });
       } else {
         res
@@ -267,7 +255,6 @@ exports.user_delete = (req, res) => {
 };
 
 // check User token
-
 exports.CheckToken = (req, res) => {
   const token = req.headers.authorization.split(' ')[1];
   jwt.verify(token, process.env.JWT_PASSWORD, (err, decoded) => {
