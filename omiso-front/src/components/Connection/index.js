@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
 import React, { useState } from 'react';
 import './style.css';
-import { Link, history } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import PropTypes from 'prop-types';
@@ -181,7 +181,7 @@ const Connection = ({ checkAuth }) => {
                 type="button"
                 className="container-button"
                 onClick={(evt) => {
-                  evt.preventDefault(); handleUserConnection(user); history.push('/');
+                  evt.preventDefault(); handleUserConnection(user);
                 }}
               >
                 Connexion
