@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 // == Import Style
 import './styles.css';
 
-const Header = ({ auth, deconnected }) => (
+const Navigation = ({ auth, deconnected }) => (
   <>
     <ul className="navbar">
       <div className="nav_logo" />
@@ -34,9 +34,9 @@ const Header = ({ auth, deconnected }) => (
   </>
 );
 // == Export
-export default Header;
+export default Navigation;
 
-Header.propTypes = {
+Navigation.propTypes = {
   auth: PropTypes.object.isRequired,
   deconnected: PropTypes.func.isRequired,
 };

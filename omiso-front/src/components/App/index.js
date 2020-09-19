@@ -9,12 +9,12 @@ import './styles.scss';
 
 // Local imports
 
-import Header from '../Header';
+import Navigation from '../Navigation';
 import Cart from '../Cart';
 import Connection from '../Connection';
 import AdminPanel from '../AdminPanel/index';
 import SectionMenu from '../SectionMenu';
-import ProtectedRoute from '../ProtectedRoute';
+import ProtectedRoute from './protectedRoute';
 import Home from '../Home';
 
 const jwt = require('jsonwebtoken');
@@ -80,7 +80,7 @@ const App = () => {
 
   return (
     <>
-      <Header auth={auth} deconnected={deconnected} />
+      <Navigation auth={auth} deconnected={deconnected} />
       <Switch>
         <Route exact path="/">
           <Home />
