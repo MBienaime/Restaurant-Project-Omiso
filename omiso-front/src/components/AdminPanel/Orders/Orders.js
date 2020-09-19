@@ -12,7 +12,7 @@ import { FaToggleOn, FaToggleOff } from 'react-icons/fa';
 
 const Orders = () => {
   // State initialization
-  const [useDataOrder, setDataOrder] = useState([{
+  const [dataOrder, setDataOrder] = useState([{
     id_User: {
       email: '',
       firstname: '',
@@ -22,7 +22,7 @@ const Orders = () => {
       status: false,
     },
   }]);
-  console.log('useDataOrder:', useDataOrder);
+ 
 
   // Select view Archive or en cours
   const [viewsArchive, setViewsArchive] = useState(false);
@@ -57,6 +57,7 @@ const Orders = () => {
 
   //  toggle archive
   const toggleArchive = (e) => {
+    console.log(e);
     const token = window.localStorage.getItem('UserTokenOmiso');
     const url = `https://omiso.com/commande/${e}`;
 
@@ -70,7 +71,7 @@ const Orders = () => {
     };
     // send axios
     axios(authOptions)
-      .then((e) => {
+      .then(() => {
         getApiDataOrder();
       })
       .catch((e) => console.log(e));
@@ -79,50 +80,48 @@ const Orders = () => {
   return (
     <div className="sectionAdminMenu">
 
-      <div className="fetchAdminMenu">
+      <table className="sectionAdminMenu_table">
 
-        <table>
+        <thead>        {(viewsArchive)
+          ? (
+            <button type="button" onClick={() => setViewsArchive(!viewsArchive)}>
+              Commande en cours
+            </button>
+          )
+          : (
+            <button type="button" onClick={() => setViewsArchive(!viewsArchive)}>
+              Commande Archivé
+            </button>
+          )}
 
-          <thead>        {(viewsArchive)
-            ? (
-              <button type="button" onClick={() => setViewsArchive(!viewsArchive)}>
-                Commande en cours
-              </button>
-            )
-            : (
-              <button type="button" onClick={() => setViewsArchive(!viewsArchive)}>
-                Commande Archivé
-              </button>
-            )}
+          <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Téléphone</th>
+            <th>Total</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
 
-            <tr>
-              <th>Nom</th>
-              <th>Prénom</th>
-              <th>Téléphone</th>
-              <th>Total</th>
-              <th>Action</th>
+          { dataOrder.map((e) => (
+            <tr key={uuidv4()} >
+              <td>{e.id_User.firstname}</td>
+              <td>{e.id_User.lastname}</td>
+              <td>{e.id_User.phone_number}</td>
+              <td>{e.total_Price}€</td>
+              <td className="btn">
+                <br />
+                <button className=" btn-fa">
+                  {(e.status) ? (<FaToggleOn onClick={(e) => toggleArchive(e._id)} />) : (<FaToggleOff onClick={(e) => toggleArchive(e._id)} />)}
+                </button>
+
+              </td>
             </tr>
-          </thead>
-          <tbody>
+          )) }
+        </tbody>
+      </table>
 
-            { useDataOrder.map((e) => (
-              <tr key={uuidv4()}>
-                <td>{e.id_User.firstname}</td>
-                <td>{e.id_User.lastname}</td>
-                <td>{e.id_User.phone_number}</td>
-                <td>{e.total_Price}€</td>
-                <td className="btn">
-                  <br />
-                  <button className=" btn-fa">
-                    {(e.status) ? (<FaToggleOn onClick={() => orderArchive(e._id)} />) : (<FaToggleOff onClick={() => orderArchive(e._id)} />)}
-                  </button>
-
-                </td>
-              </tr>
-            )) }
-          </tbody>
-        </table>
-      </div>
       <div className="OrderDetail">
         <div>Commande</div>
 

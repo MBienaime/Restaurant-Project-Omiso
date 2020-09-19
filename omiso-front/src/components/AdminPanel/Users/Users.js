@@ -31,44 +31,41 @@ const Users = () => {
 
   return (
 
-    <div className="sectionAdminMenu">
+    <div className="sectionAdminUser">
 
-      <div className="fetchAdminMenu">
+      <table className="sectionAdminUser_table">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Email</th>
+            <th>TEL</th>
+          </tr>
+        </thead>
+        <tbody>
+          {dataUsers.map((e) => (
 
-        <table>
-          <thead>
-            <tr>
-              <th>Nom</th>
-              <th>Prenom</th>
-              <th>Email</th>
-              <th>TEL</th>
+            <tr key={uuidv4()} onClick={() => setselectUser(e)} className={(e._id == selectUser._id) ? ('selectUser') : ('')}>
+              <td>
+                {e.firstname}
+              </td>
+              <td>
+                {e.lastname}
+              </td>
+              <td>
+                {e.email}
+              </td>
+              <td>
+                {e.phone_number}
+              </td>
+
             </tr>
-          </thead>
-          <tbody>
-            {dataUsers.map((e) => (
+          ))}
 
-              <tr key={uuidv4()} onClick={() => setselectUser(e)} className={(e._id == selectUser._id) ? ('selectUser') : ('')}>
-                <td>
-                  {e.firstname}
-                </td>
-                <td>
-                  {e.lastname}
-                </td>
-                <td>
-                  {e.email}
-                </td>
-                <td>
-                  {e.phone_number}
-                </td>
+        </tbody>
 
-              </tr>
-            ))}
+      </table>
 
-          </tbody>
-
-        </table>
-
-      </div>
       <div className="ResultSelectAdminMenu">
         <div>Utilisateur</div>
 
