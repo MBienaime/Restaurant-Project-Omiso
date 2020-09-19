@@ -1,16 +1,15 @@
 /* eslint-disable no-shadow */
 import React, { useState } from 'react';
 import './style.css';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, history } from 'react-router-dom';
 import axios from 'axios';
 
 import PropTypes from 'prop-types';
 
-import { handleUserforgetPassword } from './userAPI';
-
 const Connection = ({ checkAuth }) => {
-  const history = useHistory();
+  //* declaration State *//
 
+  // State User
   const [user, setuser] = useState({
     email: '',
     lastmane: '',
@@ -18,11 +17,21 @@ const Connection = ({ checkAuth }) => {
     password: '',
     phone_number: '',
   });
-
+  // State showpanel active connection
   const [showPanel, setShowPanel] = useState('right-panel-active');
+  // State show modal forget password
+  const [showPanelForgetPassword, setshowPanelForgetPassword] = useState('display-none-forget');
+
+  //* declaration function *//
+
   const handleClick = () => setShowPanel(' ');
   const Clickhandler = () => setShowPanel('right-panel-active');
-
+  const handleClickForgetPasswordBlock = () => setshowPanelForgetPassword('display-block-forget ');
+  const handleClickForgetPasswordNone = () => setshowPanelForgetPassword('display-none-forget ');
+  const handleInputChange = (e) => setuser({
+    ...user,
+    [e.currentTarget.name]: e.currentTarget.value,
+  });
   // API call : login
 
   const handleUserConnection = (user) => {
@@ -53,14 +62,19 @@ const Connection = ({ checkAuth }) => {
       .catch((e) => console.log(e));
   };
 
-  const handleInputChange = (e) => setuser({
-    ...user,
-    [e.currentTarget.name]: e.currentTarget.value,
-  });
-
-  const [showPanelForgetPassword, setshowPanelForgetPassword] = useState('display-none-forget');
-  const handleClickForgetPasswordBlock = () => setshowPanelForgetPassword('display-block-forget ');
-  const handleClickForgetPasswordNone = () => setshowPanelForgetPassword('display-none-forget ');
+  // API call : forget-password
+  const handleUserforgetPassword = (user) => {
+    const url = 'https://omiso.com/utilisateur/mdp-oublie';
+    axios({
+      method: 'put',
+      url,
+      data: user,
+    })
+      .then((e) => {
+        console.log(e);
+      })
+      .catch((e) => console.log(e));
+  };
 
   return (
     <div className="modal">

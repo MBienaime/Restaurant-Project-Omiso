@@ -10,23 +10,31 @@ import PropTypes from 'prop-types';
 import './styles.css';
 
 const Cart = ({ DataOrder, RemoveOrder, addOrder }) => {
+  //* declaration State *//
+
+  // state comment
   const [comment, setComment] = useState('Ici votre commentaire...');
 
+  //* declaration fucntion *//
+
+  // function handle change comment
   const handleChange = (event) => {
     setComment(event.target.value);
   };
+
+  // function sum order for views cart
   const sumOrder = DataOrder.map((e) => e.quantity * e.price)
     .reduce((total, number) => total + number, 0)
     .toFixed(2);
 
+  // function call to api (axios)
   const PaymentOrder = () => {
     const ListOrder = DataOrder.map((e) => ({
       menu: e._id,
       Number_MenuItem: e.quantity,
     }));
-    const Orders = { menus: ListOrder, comment: comment };
+    const Orders = { menus: ListOrder, comment };
     const token = window.localStorage.getItem('UserTokenOmiso');
-    console.log(token);
 
     Axios.post(
       'https://omiso.com/commande/',
@@ -34,7 +42,6 @@ const Cart = ({ DataOrder, RemoveOrder, addOrder }) => {
       { headers: { Authorization: `Bearer ${token}` } },
     )
       .then((res) => {
-        console.log(res.data.forwardLink);
         if (res.data.forwardLink) {
           window.location = res.data.forwardLink;
         }
@@ -44,7 +51,6 @@ const Cart = ({ DataOrder, RemoveOrder, addOrder }) => {
       })
       .catch((e) => console.log(e));
   };
-
   return (
     <div className="modal display-block">
       <div className="checkout modal-main">

@@ -17,12 +17,17 @@ import SectionMenu from '../SectionMenu';
 import ProtectedRoute from './protectedRoute';
 import Home from '../Home';
 
-const jwt = require('jsonwebtoken');
-
 const App = () => {
-  const [auth, setAuth] = useState({ connect: false, role: 'client' });
+  //* declaration State*//
 
-  // check connexion and token
+  // authentification user
+  const [auth, setAuth] = useState({ connect: false, role: 'client' });
+  // order user
+  const [order, setorder] = useState([]);
+
+  //* declaration Function *//
+
+  // function check token for connection
   const checkAuth = () => {
     if (localStorage.getItem('UserTokenOmiso') !== null) {
       const token = localStorage.getItem('UserTokenOmiso');
@@ -40,17 +45,13 @@ const App = () => {
     }
   };
 
+  // function deconnected user
   const deconnected = () => {
     localStorage.removeItem('UserTokenOmiso');
     setAuth({ ...auth, connect: false, role: ' ' });
   };
 
-  useEffect(() => checkAuth(), []);
-
-  // order user
-  const [order, setorder] = useState([]);
-
-  // addOrder
+  // function add Order on state order
   const addOrder = (d) => {
     if (!order.some((e) => e._id === d._id)) {
       setorder([...order, { ...d, quantity: 1 }]);
@@ -62,7 +63,7 @@ const App = () => {
       setorder(newdata);
     }
   };
-  // removeOrder
+  // function remove Order on state order
   const RemoveOrder = (d) => {
     if (!order.some((e) => e._id === d._id)) {
       setorder([...order, { ...d, quantity: 1 }]);
@@ -75,8 +76,11 @@ const App = () => {
     }
   };
 
-  // selector order menu
+  // function selector order menu
   const usefilterorder = order.filter((e) => e.quantity > 0);
+
+  //* Declaration useffect *//
+  useEffect(() => checkAuth(), []);
 
   return (
     <>
@@ -95,12 +99,10 @@ const App = () => {
         <ProtectedRoute path="/Administration" auth={auth} component={AdminPanel} />
       </Switch>
 
-      {/* <CardMenus/> */ }
-
     </>
 
   );
 };
 
-// == Export
+// == Export compoment
 export default App;

@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema({
   address: { type: String },
   postal_code: { type: String },
   city: { type: String },
-  role: { type: String, required: ['admin', 'client', 'employé'], default: 'admin' },
+  role: { type: String, required: ['admin', 'client', 'employé'], default: 'client' },
   resetLinkToken: { type: String, default: ' ' },
 });
 
