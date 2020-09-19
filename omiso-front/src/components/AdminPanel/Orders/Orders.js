@@ -22,7 +22,6 @@ const Orders = () => {
       status: false,
     },
   }]);
- 
 
   // Select view Archive or en cours
   const [viewsArchive, setViewsArchive] = useState(false);
@@ -45,7 +44,6 @@ const Orders = () => {
       .then((resp) => {
         console.log('getApiData resp :', resp);
         setDataOrder(resp.data);
-        console.log('resp.data.id_User :', resp.data.id_User);
       })
       .catch((error) => {
         console.log('error', error);
@@ -105,7 +103,7 @@ const Orders = () => {
         <tbody>
 
           { dataOrder.map((e) => (
-            <tr key={uuidv4()} >
+            <tr key={uuidv4()} onClick={() => setDetailOrder(e)}>
               <td>{e.id_User.firstname}</td>
               <td>{e.id_User.lastname}</td>
               <td>{e.id_User.phone_number}</td>
@@ -113,7 +111,7 @@ const Orders = () => {
               <td className="btn">
                 <br />
                 <button className=" btn-fa">
-                  {(e.status) ? (<FaToggleOn onClick={(e) => toggleArchive(e._id)} />) : (<FaToggleOff onClick={(e) => toggleArchive(e._id)} />)}
+                  {(e.status) ? (<FaToggleOn onClick={() => toggleArchive(e._id)} />) : (<FaToggleOff onClick={() => toggleArchive(e._id)} />)}
                 </button>
 
               </td>
@@ -124,8 +122,6 @@ const Orders = () => {
 
       <div className="OrderDetail">
         <div>Commande</div>
-
-        <input type="text" id="Nom" name="Nom" required />
 
         <div className="OrderDetail_client">
           <div>Client:</div>
@@ -151,12 +147,12 @@ const Orders = () => {
         <div className="OrderDetail_order_comment">
           <div>Commentaire:</div>
           <div className="OrderDetail_order_comment_detail">
-            {detailOrder.comment}
+            {detailOrder._id}
           </div>
         </div>
         <div className="OrderDetail_order_Total">
           <div>{`TOTAL: ${detailOrder.total_Price || 0}€`}</div>
-          <button type="button" onClick={() => (toggleArchive(detailOrder._id))}>ARCHIVE</button>
+          <button type="button">{(detailOrder.status) ? (<FaToggleOn onClick={() => toggleArchive(detailOrder._id)} />) : (<FaToggleOff onClick={() => toggleArchive(detailOrder._id)} />)}</button>
         </div>
 
       </div>
