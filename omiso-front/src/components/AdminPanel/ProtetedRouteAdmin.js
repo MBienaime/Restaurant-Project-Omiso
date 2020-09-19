@@ -1,7 +1,8 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const ProtectedRouteAdmin = ({ component: Component, useAuth, ...rest }) => (
+const ProtectedRouteAdmin = ({ component: Component, auth, ...rest }) => (
   <Route
     {...rest}
     render={(props) => <Component {...props} />}
@@ -9,3 +10,8 @@ const ProtectedRouteAdmin = ({ component: Component, useAuth, ...rest }) => (
 );
 
 export default ProtectedRouteAdmin;
+
+ProtectedRouteAdmin.propTypes = {
+  auth: PropTypes.object.isRequired,
+  component: PropTypes.isRequired,
+};

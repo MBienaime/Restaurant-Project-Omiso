@@ -16,11 +16,11 @@ import './styles.css';
 
 // Local imports
 
-const AdminPanel = ({ useAuth }) => (
+const AdminPanel = ({ auth }) => (
   <div className="adminPanel">
 
     <ul>
-      {(useAuth.connect & useAuth.role === 'admin') ? (
+      {(auth.connect & auth.role === 'admin') ? (
         <li className="nav_link">
           <Link to="/Administration/Menus">Menus</Link>
         </li>
@@ -28,7 +28,7 @@ const AdminPanel = ({ useAuth }) => (
       <li>
         <Link to="/Administration/commande">Commandes</Link>
       </li>
-      {(useAuth.connect & useAuth.role === 'admin') ? (
+      {(auth.connect & auth.role === 'admin') ? (
         <li className="nav_link">
           <Link to="/Administration/Utilisateurs">Utilisateurs</Link>
         </li>
@@ -37,11 +37,11 @@ const AdminPanel = ({ useAuth }) => (
     </ul>
 
     <Switch>
-      <ProtectedRouteAdmin path="/Administration/Menus" component={Menus} useAuth={useAuth} />
+      <ProtectedRouteAdmin path="/Administration/Menus" component={Menus} auth={auth} />
       <Route exact path="/Administration/commande">
         <Orders />
       </Route>
-      <ProtectedRouteAdmin path="/Administration/Utilisateurs" component={Users} useAuth={useAuth} />
+      <ProtectedRouteAdmin path="/Administration/Utilisateurs" component={Users} auth={auth} />
     </Switch>
 
   </div>
@@ -52,5 +52,5 @@ const AdminPanel = ({ useAuth }) => (
 export default AdminPanel;
 
 AdminPanel.propTypes = {
-  useAuth: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
 };

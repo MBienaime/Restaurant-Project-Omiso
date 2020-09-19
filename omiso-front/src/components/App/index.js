@@ -9,20 +9,25 @@ import './styles.scss';
 
 // Local imports
 
-import Header from '../Header';
+import Navigation from '../Navigation';
 import Cart from '../Cart';
 import Connection from '../Connection';
 import AdminPanel from '../AdminPanel/index';
 import SectionMenu from '../SectionMenu';
-import ProtectedRoute from '../ProtectedRoute';
+import ProtectedRoute from './protectedRoute';
 import Home from '../Home';
 
-const jwt = require('jsonwebtoken');
-
 const App = () => {
-  const [useAuth, setAuth] = useState({ connect: false, role: 'client' });
+  //* declaration State*//
 
-  // check connexion and token
+  // authentification user
+  const [auth, setAuth] = useState({ connect: false, role: 'client' });
+  // order user
+  const [order, setorder] = useState([]);
+
+  //* declaration Function *//
+
+  // function check token for connection
   const checkAuth = () => {
     if (localStorage.getItem('UserTokenOmiso') !== null) {
       const token = localStorage.getItem('UserTokenOmiso');
@@ -32,55 +37,54 @@ const App = () => {
           setAuth({ role: resp.data.role, connect: resp.data.authenticated });
         })
         .catch(() => {
-          setAuth({ ...useAuth, connect: false });
+          setAuth({ ...auth, connect: false });
         });
     }
     else {
-      setAuth({ ...useAuth, connect: false });
+      setAuth({ ...auth, connect: false });
     }
   };
 
+  // function deconnected user
   const deconnected = () => {
     localStorage.removeItem('UserTokenOmiso');
-    setAuth({ ...useAuth, connect: false, role: ' ' });
+    setAuth({ ...auth, connect: false, role: ' ' });
   };
 
-  useEffect(() => checkAuth(), []);
-
-  // order user
-  const [useorder, setorder] = useState([]);
-
-  // addOrder
+  // function add Order on state order
   const addOrder = (d) => {
-    if (!useorder.some((e) => e._id === d._id)) {
-      setorder([...useorder, { ...d, quantity: 1 }]);
+    if (!order.some((e) => e._id === d._id)) {
+      setorder([...order, { ...d, quantity: 1 }]);
     }
     else {
-      const newdata = useorder.map(
+      const newdata = order.map(
         (e) => (e._id === d._id ? { ...e, quantity: e.quantity + 1 } : { ...e }),
       );
       setorder(newdata);
     }
   };
-  // removeOrder
+  // function remove Order on state order
   const RemoveOrder = (d) => {
-    if (!useorder.some((e) => e._id === d._id)) {
-      setorder([...useorder, { ...d, quantity: 1 }]);
+    if (!order.some((e) => e._id === d._id)) {
+      setorder([...order, { ...d, quantity: 1 }]);
     }
     else {
-      const newdata = useorder.map(
+      const newdata = order.map(
         (e) => (e._id === d._id ? { ...e, quantity: e.quantity - 1 } : { ...e }),
       );
       setorder(newdata);
     }
   };
 
-  // selector order menu
-  const usefilterorder = useorder.filter((e) => e.quantity > 0);
+  // function selector order menu
+  const usefilterorder = order.filter((e) => e.quantity > 0);
+
+  //* Declaration useffect *//
+  useEffect(() => checkAuth(), []);
 
   return (
     <>
-      <Header useAuth={useAuth} deconnected={deconnected} />
+      <Navigation auth={auth} deconnected={deconnected} />
       <Switch>
         <Route exact path="/">
           <Home />
@@ -92,15 +96,13 @@ const App = () => {
         <Route path="/Panier">
           <Cart DataOrder={usefilterorder} addOrder={addOrder} RemoveOrder={RemoveOrder} />
         </Route>
-        <ProtectedRoute path="/Administration" useAuth={useAuth} component={AdminPanel} />
+        <ProtectedRoute path="/Administration" auth={auth} component={AdminPanel} />
       </Switch>
-
-      {/* <CardMenus/> */ }
 
     </>
 
   );
 };
 
-// == Export
+// == Export compoment
 export default App;

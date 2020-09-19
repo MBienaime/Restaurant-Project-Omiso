@@ -23,7 +23,7 @@ mongoose
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH');
   next();
 });
 
@@ -33,9 +33,9 @@ app.use(express.json());
 
 // Routes
 
+// Reset password page view
 app.set('views', `${__dirname}/public/views`);
 app.engine('html', require('ejs').renderFile);
-
 app.set('view engine', 'html');
 
 app.use('/', express.static(`${__dirname}/public`));

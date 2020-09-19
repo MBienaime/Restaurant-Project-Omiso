@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 // == Import Style
 import './styles.css';
 
-const Header = ({ useAuth, deconnected }) => (
+const Navigation = ({ auth, deconnected }) => (
   <>
     <ul className="navbar">
       <div className="nav_logo" />
@@ -14,7 +14,7 @@ const Header = ({ useAuth, deconnected }) => (
         <li className="nav_link">
           <Link to="/">Accueil</Link>
         </li>
-        {(useAuth.connect && (useAuth.role !== 'client')) ? (
+        {(auth.connect && (auth.role !== 'client')) ? (
           <li className="nav_link">
             <Link to="/Administration/commande">Administration</Link>
           </li>
@@ -23,7 +23,7 @@ const Header = ({ useAuth, deconnected }) => (
           <a href="#Footer">Contact</a>
         </li>
         <li className="nav_link">
-          {(useAuth.connect) ? (<a onClick={() => (deconnected())}>Deconnexion</a>) : (<Link to="/Connexion">Connexion</Link>)}
+          {(auth.connect) ? (<a onClick={() => (deconnected())}>Deconnexion</a>) : (<Link to="/Connexion">Connexion</Link>)}
         </li>
         <li className="nav_link">
           <Link to="/Panier"><FaShoppingCart /></Link>
@@ -34,9 +34,9 @@ const Header = ({ useAuth, deconnected }) => (
   </>
 );
 // == Export
-export default Header;
+export default Navigation;
 
-Header.propTypes = {
-  useAuth: PropTypes.object.isRequired,
+Navigation.propTypes = {
+  auth: PropTypes.object.isRequired,
   deconnected: PropTypes.func.isRequired,
 };

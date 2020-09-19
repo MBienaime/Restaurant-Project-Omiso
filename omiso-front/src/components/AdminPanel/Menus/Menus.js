@@ -10,13 +10,12 @@ import { FaTrashAlt } from 'react-icons/fa';
 
 const Menus = () => {
   // state
-  const [useAddDataMenu, setAddDataMenu] = useState({
+  const [AddDataMenu, setAddDataMenu] = useState({
     name: '', description: '', prix: 0, category: 'plat',
   });
-  const [useDataMenus, setDataMenus] = useState([{ _id: '' }]);
+  const [DataMenus, setDataMenus] = useState([{ _id: '' }]);
 
-  const [useImage, setImage] = useState({ preview: null, raw: null });
-  console.log(useAddDataMenu);
+  const [Image, setImage] = useState({ preview: null, raw: null });
 
   // API call data menu
   const getApiData = () => {
@@ -39,21 +38,21 @@ const Menus = () => {
   };
 
   // handel input menu data
-  useEffect(getApiData, [useImage]);
+  useEffect(getApiData, [Image]);
 
   const handleInputChange = (e) => setAddDataMenu({
-    ...useAddDataMenu,
+    ...AddDataMenu,
     [e.currentTarget.name]: e.currentTarget.value,
   });
 
   // add menu
   function handlesubmitMenu() {
     const formData = new FormData();
-    formData.append('name', useAddDataMenu.name);
-    formData.append('description', useAddDataMenu.description);
-    formData.append('price', useAddDataMenu.prix);
-    formData.append('category', useAddDataMenu.category);
-    formData.append('image', useImage.raw);
+    formData.append('name', AddDataMenu.name);
+    formData.append('description', AddDataMenu.description);
+    formData.append('price', AddDataMenu.prix);
+    formData.append('category', AddDataMenu.category);
+    formData.append('image', Image.raw);
 
     const token = window.localStorage.getItem('UserTokenOmiso');
     axios.post(
@@ -83,67 +82,63 @@ const Menus = () => {
       })
       .catch((e) => console.log(e));
   }
-  
 
   return (
 
     <div className="sectionAdminMenu">
 
-      <div className="fetchAdminMenu">
+      <table className="adminMenu_table">
+        <thead>
+          <tr>
+            <th>Plats</th>
+            <th>Prix</th>
+            <th>Catagorie</th>
+            <th>Description</th>
+            <th>action</th>
+          </tr>
+        </thead>
+        <tbody>
+          { DataMenus.map((d) => (
+            <tr key={uuidv4()}>
+              <td>
+                <img src={d.urlImage} />
+              </td>
+              <td>
+                {d.name}
+              </td>
+              <td>
+                {d.price} €
+              </td>
+              <td>
+                {d.category}
+              </td>
+              <td>
+                {d.description}
+              </td>
+              <td>
+                <button onClick={() => handleRemoveMenu(d._id)}>
 
-        <table>
-          <thead>
-            <tr>
-              <th>Plats</th>
-              <th>Prix</th>
-              <th>Catagorie</th>
-              <th>Description</th>
-              <th>action</th>
+                  <FaTrashAlt />
+                </button><br />
+              </td>
+
             </tr>
-          </thead>
-          <tbody>
-            { useDataMenus.map((d) => (
-              <tr key={uuidv4()}>
-                <td>
-                  <img src={d.urlImage} />
-                </td>
-                <td>
-                  {d.name}
-                </td>
-                <td>
-                  {d.price} €
-                </td>
-                <td>
-                  {d.category}
-                </td>
-                <td>
-                  {d.description}
-                </td>
-                <td>
-                  <button onClick={() => handleRemoveMenu(d._id)}>
 
-                    <FaTrashAlt />
-                  </button><br />
-                </td>
+          )) }
+        </tbody>
 
-              </tr>
+      </table>
 
-            )) }
-          </tbody>
-
-        </table>
-
-      </div>
       <div className="ResultSelectAdminMenu">
         <div className="ResultSelectAdminMenu_title">Nouveau Menu</div>
 
-        <input type="text" id="titre" name="name" placeholder="Nom..." pattern="[a-z]{4,8}" required size="45" onChange={(e) => handleInputChange(e)} value={useAddDataMenu.name} />
+        <input type="text" id="titre" name="name" placeholder="Nom..." pattern="[a-z]{4,8}" required size="45" onChange={(e) => handleInputChange(e)} value={AddDataMenu.name} />
 
-        <input type="text" id="description" name="description" placeholder="Description..." required onChange={(e) => handleInputChange(e)} value={useAddDataMenu.description} />
+        <input type="text" id="description" name="description" placeholder="Description..." required onChange={(e) => handleInputChange(e)} value={AddDataMenu.description} />
 
-        <input type="text" id="prix" name="prix" placeholder="Prix..." required onChange={(e) => handleInputChange(e)} value={useAddDataMenu.prix} />
+        <input type="text" id="prix" name="prix" placeholder="Prix..." required onChange={(e) => handleInputChange(e)} value={AddDataMenu.prix} />
         <label htmlFor="category">Catégorie:</label>
-        <select className="ResultSelectAdminMenu_select" name="category" id="category" onChange={(e) => handleInputChange(e)} value={useAddDataMenu.category}>
+        <select className="ResultSelectAdminMenu_select" name="category" id="category" onChange={(e) => handleInputChange(e)} value={AddDataMenu.category}>
           <option className="ResultSelectAdminMenu_select" value="entree">Entree</option>
           <option className="ResultSelectAdminMenu_select" value="plat">Plat</option>
           <option className="ResultSelectAdminMenu_select" value="dessert">Dessert</option>
@@ -151,7 +146,7 @@ const Menus = () => {
         </select>
         <div className="ResultSelectAdminMenu_imagesViews">
 
-          {(useImage.raw == null) ? (
+          {(Image.raw == null) ? (
             <input
               className="ResultSelectAdminMenu_imagesViews_input"
               type="file"
@@ -162,7 +157,7 @@ const Menus = () => {
               }}
             />
           ) : (
-            <img className="ResultSelectAdminMenu_imagesViews_image" src={useImage.preview} />
+            <img className="ResultSelectAdminMenu_imagesViews_image" src={Image.preview} />
           )}
 
         </div>

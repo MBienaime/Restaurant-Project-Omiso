@@ -11,8 +11,13 @@ import Footer from '../Footer';
 import './styles.css';
 
 const SectionMenu = ({ addOrder }) => {
+  //* declaration State *//
+  // state data from api
   const [data, setData] = useState([{ _id: '' }]);
+  // state choise category
   const [category, setCategory] = useState('');
+
+  //* declaration function *//
 
   // API call data menu
   const getApiData = () => {
@@ -27,16 +32,16 @@ const SectionMenu = ({ addOrder }) => {
       });
   };
 
-  // getting menu data
-  useEffect(getApiData, []);
+  // get filter menu from category
   const filterCategory = (data, category) => {
     if (!category) {
       return data;
     } return (data.filter((e) => (e.category === category)));
   };
-
+  //* declaration useffect *//
+  useEffect(getApiData, []);
   return (
-  <>
+    <>
 
       <div className="sectionMenus">
         <div className="sectionMenusCarteMenu">
@@ -52,7 +57,7 @@ filterCategory(data, category).map(
         </div>
         <Footer />
       </div>
- </>
+    </>
   );
 };
 

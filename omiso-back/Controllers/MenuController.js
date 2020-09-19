@@ -6,7 +6,7 @@ const MenuItem = require('../Models/MenuItemModel');
 
 // Routes logic
 exports.menuItems_get_all = (req, res) => {
-  MenuItem.find()
+  MenuItem.find() 
     .exec()
     .then((docs) => {
       const response = {
@@ -19,11 +19,7 @@ exports.menuItems_get_all = (req, res) => {
           category: doc.category,
           quantity: doc.quantity,
           status: doc.status,
-          urlImage: doc.urlImage,
-          request: {
-            type: 'GET',
-            url: `https://omiso.com/menu/${doc._id}`,
-          },
+          urlImage: doc.urlImage,    
         })),
       };
       res.status(200).json(response);
@@ -56,14 +52,6 @@ exports.menuItems_create_item = (req, res) => {
     .then((result) => {
       res.status(201).json({
         message: 'Élément créé avec succès',
-        createdMenuItem: {
-          _id: result.id,
-          name: result.name,
-          description: result.description,
-          price: result.price,
-          category: result.category,
-          urlImage: result.urlImage,
-        },
       });
     })
     .catch((err) => {
@@ -82,11 +70,6 @@ exports.menuItems_get_item = (req, res) => {
       if (doc) {
         res.status(200).json({
           menuItem: doc,
-          request: {
-            type: 'GET',
-            description: '',
-            url: `https://omiso.com/menu/${doc._id}`,
-          },
         });
       } else {
         res
@@ -113,10 +96,6 @@ exports.menuItems_update_item = (req, res) => {
     .then((result) => {
       res.status(200).json({
         message: 'Élément mis à jour',
-        request: {
-          type: 'GET',
-          url: `https://omiso.com/menu/${result._id}`,
-        },
       });
     })
     .catch((err) => {
@@ -133,21 +112,8 @@ exports.menuItems_delete_item = (req, res) => {
     .exec()
     .then(() => {
       res.status(200).json({
-        message: 'Élément supprimé',
-        // gives the possibility to create a new item
-        request: {
-          type: 'POST',
-          url: 'https://omiso.com/menu/',
-          body: {
-            name: String,
-            description: String,
-            price: Number,
-            category: String,
-            quantity: Number,
-            status: String,
-          },
-        },
-      });
+        message: 'Élément supprimé',      
+       })    
     })
     .catch((err) => {
       res.status(500).json({

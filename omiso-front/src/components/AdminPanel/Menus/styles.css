@@ -1,26 +1,17 @@
 .sectionAdminMenu{
     display: flex;
-    height: 90vh;
-    width: 100%;
-    
-    color: rgb(241, 229, 229);
-    
-   
-    
+    height: 800px;
+    width: 100%;    
+    color: rgb(241, 229, 229);   
     
 }
 
-.fetchAdminMenu{
-    
-    width: 60%;
-}
 
-
-table {
+.adminMenu_table{
     display:flex;
     flex-direction: column;    
-    width: auto;
-    height:90%;
+    width: 100%;
+    height:100%;
     border: solid;
     border-color: rgb(231, 223, 223);
     border-radius: 20px;
@@ -32,7 +23,7 @@ thead tbody{
     display:flex;
     flex-direction: column;    
     width: 100%;
-    height: 400px;
+    height: 100%;
     justify-content: center;
     align-items: center;
 }
@@ -58,8 +49,8 @@ td th{
     flex-direction: column;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.363);
-    height:90%;
-    width: 40%;
+    height:100%;
+    width: 60%;
 
 }
 input {

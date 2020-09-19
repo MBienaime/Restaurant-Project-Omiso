@@ -6,11 +6,10 @@ import axios from 'axios';
 
 import PropTypes from 'prop-types';
 
-import { handleUserforgetPassword } from './userAPI';
-
 const Connection = ({ checkAuth }) => {
-  const history = useHistory();
+  //* declaration State *//
 
+  // State User
   const [user, setuser] = useState({
     email: '',
     lastmane: '',
@@ -18,11 +17,21 @@ const Connection = ({ checkAuth }) => {
     password: '',
     phone_number: '',
   });
-
+  // State showpanel active connection
   const [showPanel, setShowPanel] = useState('right-panel-active');
+  // State show modal forget password
+  const [showPanelForgetPassword, setshowPanelForgetPassword] = useState('display-none-forget');
+
+  //* declaration function *//
+  const history = useHistory();
   const handleClick = () => setShowPanel(' ');
   const Clickhandler = () => setShowPanel('right-panel-active');
-
+  const handleClickForgetPasswordBlock = () => setshowPanelForgetPassword('display-block-forget ');
+  const handleClickForgetPasswordNone = () => setshowPanelForgetPassword('display-none-forget ');
+  const handleInputChange = (e) => setuser({
+    ...user,
+    [e.currentTarget.name]: e.currentTarget.value,
+  });
   // API call : login
 
   const handleUserConnection = (user) => {
@@ -35,6 +44,7 @@ const Connection = ({ checkAuth }) => {
       .then((e) => {
         localStorage.setItem('UserTokenOmiso', e.data.token);
         checkAuth();
+        history.push('/');
       })
       .catch((e) => (console.log(e)));
   };
@@ -53,14 +63,19 @@ const Connection = ({ checkAuth }) => {
       .catch((e) => console.log(e));
   };
 
-  const handleInputChange = (e) => setuser({
-    ...user,
-    [e.currentTarget.name]: e.currentTarget.value,
-  });
-
-  const [showPanelForgetPassword, setshowPanelForgetPassword] = useState('display-none-forget');
-  const handleClickForgetPasswordBlock = () => setshowPanelForgetPassword('display-block-forget ');
-  const handleClickForgetPasswordNone = () => setshowPanelForgetPassword('display-none-forget ');
+  // API call : forget-password
+  const handleUserforgetPassword = (user) => {
+    const url = 'https://omiso.com/utilisateur/mdp-oublie';
+    axios({
+      method: 'put',
+      url,
+      data: user,
+    })
+      .then((e) => {
+        console.log(e);
+      })
+      .catch((e) => console.log(e));
+  };
 
   return (
     <div className="modal">
@@ -167,14 +182,13 @@ const Connection = ({ checkAuth }) => {
                 type="button"
                 className="container-button"
                 onClick={(evt) => {
-                  evt.preventDefault(); handleUserConnection(user); history.push('/');
+                  evt.preventDefault(); handleUserConnection(user);
                 }}
               >
                 Connexion
               </button>
             </form>
           </div>
-
           <div className="overlay-container">
             <div className="overlay">
               <div className="overlay-panel overlay-left">
@@ -193,7 +207,6 @@ const Connection = ({ checkAuth }) => {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
