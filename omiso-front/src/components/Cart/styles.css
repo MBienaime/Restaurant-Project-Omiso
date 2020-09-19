@@ -72,7 +72,7 @@
     background-position: center
 
 }
-table {
+.checkout-left-table {
     display: flex;
     flex-direction: column;
     margin:auto;

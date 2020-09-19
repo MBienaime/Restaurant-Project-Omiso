@@ -87,51 +87,48 @@ const Menus = () => {
 
     <div className="sectionAdminMenu">
 
-      <div className="fetchAdminMenu">
+      <table className="adminMenu_table">
+        <thead>
+          <tr>
+            <th>Plats</th>
+            <th>Prix</th>
+            <th>Catagorie</th>
+            <th>Description</th>
+            <th>action</th>
+          </tr>
+        </thead>
+        <tbody>
+          { DataMenus.map((d) => (
+            <tr key={uuidv4()}>
+              <td>
+                <img src={d.urlImage} />
+              </td>
+              <td>
+                {d.name}
+              </td>
+              <td>
+                {d.price} €
+              </td>
+              <td>
+                {d.category}
+              </td>
+              <td>
+                {d.description}
+              </td>
+              <td>
+                <button onClick={() => handleRemoveMenu(d._id)}>
 
-        <table>
-          <thead>
-            <tr>
-              <th>Plats</th>
-              <th>Prix</th>
-              <th>Catagorie</th>
-              <th>Description</th>
-              <th>action</th>
+                  <FaTrashAlt />
+                </button><br />
+              </td>
+
             </tr>
-          </thead>
-          <tbody>
-            { DataMenus.map((d) => (
-              <tr key={uuidv4()}>
-                <td>
-                  <img src={d.urlImage} />
-                </td>
-                <td>
-                  {d.name}
-                </td>
-                <td>
-                  {d.price} €
-                </td>
-                <td>
-                  {d.category}
-                </td>
-                <td>
-                  {d.description}
-                </td>
-                <td>
-                  <button onClick={() => handleRemoveMenu(d._id)}>
 
-                    <FaTrashAlt />
-                  </button><br />
-                </td>
+          )) }
+        </tbody>
 
-              </tr>
+      </table>
 
-            )) }
-          </tbody>
-
-        </table>
-
-      </div>
       <div className="ResultSelectAdminMenu">
         <div className="ResultSelectAdminMenu_title">Nouveau Menu</div>
 
