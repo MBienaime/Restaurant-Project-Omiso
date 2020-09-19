@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import './styles.css';
 
 const Cart = ({ DataOrder, RemoveOrder, addOrder }) => {
-  const [useComment, setComment] = useState('Ici votre commentaire...');
+  const [comment, setComment] = useState('Ici votre commentaire...');
 
   const handleChange = (event) => {
     setComment(event.target.value);
@@ -24,7 +24,7 @@ const Cart = ({ DataOrder, RemoveOrder, addOrder }) => {
       menu: e._id,
       Number_MenuItem: e.quantity,
     }));
-    const Orders = { menus: ListOrder, comment: useComment };
+    const Orders = { menus: ListOrder, comment: comment };
     const token = window.localStorage.getItem('UserTokenOmiso');
     console.log(token);
 
@@ -103,7 +103,7 @@ const Cart = ({ DataOrder, RemoveOrder, addOrder }) => {
             Ajouter un Commentaire
             <input
               className="checkout-left-input"
-              value={useComment}
+              value={comment}
               onChange={(e) => handleChange(e)}
             />
           </div>

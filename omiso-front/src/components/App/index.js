@@ -20,7 +20,7 @@ import Home from '../Home';
 const jwt = require('jsonwebtoken');
 
 const App = () => {
-  const [useAuth, setAuth] = useState({ connect: false, role: 'client' });
+  const [auth, setAuth] = useState({ connect: false, role: 'client' });
 
   // check connexion and token
   const checkAuth = () => {
@@ -32,31 +32,31 @@ const App = () => {
           setAuth({ role: resp.data.role, connect: resp.data.authenticated });
         })
         .catch(() => {
-          setAuth({ ...useAuth, connect: false });
+          setAuth({ ...auth, connect: false });
         });
     }
     else {
-      setAuth({ ...useAuth, connect: false });
+      setAuth({ ...auth, connect: false });
     }
   };
 
   const deconnected = () => {
     localStorage.removeItem('UserTokenOmiso');
-    setAuth({ ...useAuth, connect: false, role: ' ' });
+    setAuth({ ...auth, connect: false, role: ' ' });
   };
 
   useEffect(() => checkAuth(), []);
 
   // order user
-  const [useorder, setorder] = useState([]);
+  const [order, setorder] = useState([]);
 
   // addOrder
   const addOrder = (d) => {
-    if (!useorder.some((e) => e._id === d._id)) {
-      setorder([...useorder, { ...d, quantity: 1 }]);
+    if (!order.some((e) => e._id === d._id)) {
+      setorder([...order, { ...d, quantity: 1 }]);
     }
     else {
-      const newdata = useorder.map(
+      const newdata = order.map(
         (e) => (e._id === d._id ? { ...e, quantity: e.quantity + 1 } : { ...e }),
       );
       setorder(newdata);
@@ -64,11 +64,11 @@ const App = () => {
   };
   // removeOrder
   const RemoveOrder = (d) => {
-    if (!useorder.some((e) => e._id === d._id)) {
-      setorder([...useorder, { ...d, quantity: 1 }]);
+    if (!order.some((e) => e._id === d._id)) {
+      setorder([...order, { ...d, quantity: 1 }]);
     }
     else {
-      const newdata = useorder.map(
+      const newdata = order.map(
         (e) => (e._id === d._id ? { ...e, quantity: e.quantity - 1 } : { ...e }),
       );
       setorder(newdata);
@@ -76,11 +76,11 @@ const App = () => {
   };
 
   // selector order menu
-  const usefilterorder = useorder.filter((e) => e.quantity > 0);
+  const usefilterorder = order.filter((e) => e.quantity > 0);
 
   return (
     <>
-      <Header useAuth={useAuth} deconnected={deconnected} />
+      <Header auth={auth} deconnected={deconnected} />
       <Switch>
         <Route exact path="/">
           <Home />
@@ -92,7 +92,7 @@ const App = () => {
         <Route path="/Panier">
           <Cart DataOrder={usefilterorder} addOrder={addOrder} RemoveOrder={RemoveOrder} />
         </Route>
-        <ProtectedRoute path="/Administration" useAuth={useAuth} component={AdminPanel} />
+        <ProtectedRoute path="/Administration" auth={auth} component={AdminPanel} />
       </Switch>
 
       {/* <CardMenus/> */ }

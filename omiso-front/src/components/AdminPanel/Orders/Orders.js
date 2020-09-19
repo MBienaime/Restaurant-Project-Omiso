@@ -25,10 +25,10 @@ const Orders = () => {
   console.log('useDataOrder:', useDataOrder);
 
   // Select view Archive or en cours
-  const [useViewsArchive, setViewsArchive] = useState(false);
+  const [viewsArchive, setViewsArchive] = useState(false);
 
   // selected views detail order
-  const [useDetailOrder, setDetailOrder] = useState({
+  const [detailOrder, setDetailOrder] = useState({
     _id: '',
     id_User: { lastname: '', firstname: '', email: '' },
     order_Menu: [{ menu: '', Number_MenuItem: '', category: '' },
@@ -76,8 +76,6 @@ const Orders = () => {
       .catch((e) => console.log(e));
   };
 
-  console.log(useDetailOrder.statusArchive);
-
   return (
     <div className="sectionAdminMenu">
 
@@ -85,14 +83,14 @@ const Orders = () => {
 
         <table>
 
-          <thead>        {(useViewsArchive)
+          <thead>        {(viewsArchive)
             ? (
-              <button type="button" onClick={() => setViewsArchive(!useViewsArchive)}>
+              <button type="button" onClick={() => setViewsArchive(!viewsArchive)}>
                 Commande en cours
               </button>
             )
             : (
-              <button type="button" onClick={() => setViewsArchive(!useViewsArchive)}>
+              <button type="button" onClick={() => setViewsArchive(!viewsArchive)}>
                 Commande Archivé
               </button>
             )}
@@ -133,16 +131,16 @@ const Orders = () => {
         <div className="OrderDetail_client">
           <div>Client:</div>
           <div className="OrderDetail_client_contact">
-            <div>Nom: {useDetailOrder.id_User.firstname}</div>
-            <div>Prenom: {useDetailOrder.id_User.lastname}</div>
-            <div>Telephone: {useDetailOrder.id_User.phone_number}</div>
-            <div>Email: {useDetailOrder.id_User.email}</div>
+            <div>Nom: {detailOrder.id_User.firstname}</div>
+            <div>Prenom: {detailOrder.id_User.lastname}</div>
+            <div>Telephone: {detailOrder.id_User.phone_number}</div>
+            <div>Email: {detailOrder.id_User.email}</div>
           </div>
         </div>
         <div className="OrderDetail_order">
           <div>Commandes:</div>
           <div className="OrderDetail_order_menu">
-            {useDetailOrder.order_Menu.map((e) => (
+            {detailOrder.order_Menu.map((e) => (
               <div key={uuidv4()} className="OrderDetail_order_menu_item">
                 { (e.menu == null) ? (<div>Menu suprimer</div>) : (
                   <div>{`${e.menu.category}      ${e.menu.name}     X    ${e.Number_MenuItem}`}</div>
@@ -154,12 +152,12 @@ const Orders = () => {
         <div className="OrderDetail_order_comment">
           <div>Commentaire:</div>
           <div className="OrderDetail_order_comment_detail">
-            {useDetailOrder.comment}
+            {detailOrder.comment}
           </div>
         </div>
         <div className="OrderDetail_order_Total">
-          <div>{`TOTAL: ${useDetailOrder.total_Price || 0}€`}</div>
-          <button type="button" onClick={() => (toggleArchive(useDetailOrder._id))}>ARCHIVE</button>
+          <div>{`TOTAL: ${detailOrder.total_Price || 0}€`}</div>
+          <button type="button" onClick={() => (toggleArchive(detailOrder._id))}>ARCHIVE</button>
         </div>
 
       </div>

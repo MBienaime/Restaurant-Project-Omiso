@@ -9,8 +9,8 @@ import './styles.css';
 // Local imports
 
 const Users = () => {
-  const [useDataUsers, setDataUsers] = useState([]);
-  const [useSelectUser, setUseSelectUser] = useState({
+  const [dataUsers, setDataUsers] = useState([]);
+  const [selectUser, setselectUser] = useState({
     _id: '', firstname: '', lastname: '', email: '', phone_number: '',
   });
 
@@ -45,9 +45,9 @@ const Users = () => {
             </tr>
           </thead>
           <tbody>
-            {useDataUsers.map((e) => (
+            {dataUsers.map((e) => (
 
-              <tr key={uuidv4()} onClick={() => setUseSelectUser(e)} className={(e._id == useSelectUser._id) ? ('selectUser') : ('')}>
+              <tr key={uuidv4()} onClick={() => setselectUser(e)} className={(e._id == selectUser._id) ? ('selectUser') : ('')}>
                 <td>
                   {e.firstname}
                 </td>
@@ -73,10 +73,10 @@ const Users = () => {
         <div>Utilisateur</div>
 
         <div>
-          <div>{ useSelectUser.firstname }</div>
-          <div>{ useSelectUser.lastname }</div>
-          <div>{ useSelectUser.email }</div>
-          <div>{ useSelectUser.phone_number }</div>
+          <div>{ selectUser.firstname }</div>
+          <div>{ selectUser.lastname }</div>
+          <div>{ selectUser.email }</div>
+          <div>{ selectUser.phone_number }</div>
         </div>
 
         <button type="button">Supprimer</button>

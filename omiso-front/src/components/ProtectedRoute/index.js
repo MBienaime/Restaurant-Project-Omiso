@@ -2,16 +2,16 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const ProtectedRoute = ({ useAuth, component: Component, ...rest }) => (
+const ProtectedRoute = ({ auth, component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={(props) => ((useAuth.connect & useAuth.role !== 'client') ? (<Component {...props} useAuth={useAuth} />) : (<Redirect to="/" />))}
+    render={(props) => ((auth.connect & auth.role !== 'client') ? (<Component {...props} auth={auth} />) : (<Redirect to="/" />))}
   />
 );
 
 export default ProtectedRoute;
 
 ProtectedRoute.propTypes = {
-  useAuth: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
   component: PropTypes.func.isRequired,
 };
