@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
 import React, { useState } from 'react';
 import './style.css';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 import PropTypes from 'prop-types';
@@ -23,7 +23,7 @@ const Connection = ({ checkAuth }) => {
   const [showPanelForgetPassword, setshowPanelForgetPassword] = useState('display-none-forget');
 
   //* declaration function *//
-
+  const history = useHistory();
   const handleClick = () => setShowPanel(' ');
   const Clickhandler = () => setShowPanel('right-panel-active');
   const handleClickForgetPasswordBlock = () => setshowPanelForgetPassword('display-block-forget ');
@@ -44,6 +44,7 @@ const Connection = ({ checkAuth }) => {
       .then((e) => {
         localStorage.setItem('UserTokenOmiso', e.data.token);
         checkAuth();
+        history.push('/');
       })
       .catch((e) => (console.log(e)));
   };
@@ -188,7 +189,6 @@ const Connection = ({ checkAuth }) => {
               </button>
             </form>
           </div>
-
           <div className="overlay-container">
             <div className="overlay">
               <div className="overlay-panel overlay-left">
@@ -207,7 +207,6 @@ const Connection = ({ checkAuth }) => {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
