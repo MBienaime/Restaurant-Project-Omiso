@@ -17,9 +17,10 @@
     max-height: 125px;
     max-width: 300px;
     display:flex;    
-    justify-content:space-around;
+    
     align-items: center;
-    margin: 10px 70px;
+   padding: 10px 10px;
+   margin: 10px 50px;
     border-radius: 15px;
     position: relative;
 }
@@ -38,7 +39,7 @@
     font-family:'DMSerifText';
 }
 .ItemMenuDescription{
-    margin: 0;
+   padding-left: 10;
     transform: translate(-60px, 0);    
 
 }
@@ -90,10 +91,7 @@
 }
 .ItemMenu-animate:hover  {      
     opacity: 1;  
-    transition: 1s;
-
-
-    
+    transition: 1s;    
 }
 .ItemMenu-Button{
 
@@ -116,4 +114,65 @@
         padding: 5px;       
         transform: translate(0, 0);   
     }  
+
+    .ItemMenuPrice{
+        border-color: rgb(229, 110, 45);    
+        border-left-style: solid ;
+        border-left-width: 2px;        
+        color:rgb(255, 255, 255) ; 
+        font-weight:bold;
+        font-size: 1.1em;        
+        font-family:'DMSerifText';
+    }
+    .ItemMenuDescriptionDescrip{
+        margin: 0;
+        color:rgb(255, 255, 255);
+        width: 150px;
+        overflow-wrap: break-word;   
+        font-weight:bold;
+        size: 0.1em;    
+    }
+    .ItemMenuPhoto{
+        background-image: url('../../../assets/image/sushi1.png');
+        background-repeat: no-repeat;    
+        background-size: contain;
+        background-position: center;
+        height: 80px;
+        width: 80px;
+    }
+
+    .ItemMenu-animate{
+        height: 100%;
+        width: 100%;   
+        position: absolute; 
+        bottom:0;    
+        opacity: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;   
+        z-index: 1;
+    }
+    .ItemMenuDescriptionTitle{
+        height: 30px;    
+        color:rgb(255, 255, 255);
+        font-weight:bold;
+        font-size: 1.3em;
+        font-family:'DMSerifText';
+        
+    }
+
+    .ItemMenu-animate:hover  {      
+        opacity: 1;  
+        transition: 1s;    
+    }
+    .ItemMenu{
+        border-color: rgb(229, 110, 45);
+        border-style: solid;
+        border-width: 2px 0 2px 0;
+        max-height: 125px;
+        max-width: 300px;
+        display:flex;
+        border-radius: 15px;
+        position: relative;
+    }
 }

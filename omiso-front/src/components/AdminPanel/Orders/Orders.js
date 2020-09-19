@@ -147,7 +147,7 @@ const Orders = () => {
         <div className="OrderDetail_order_comment">
           <div>Commentaire:</div>
           <div className="OrderDetail_order_comment_detail">
-            {detailOrder._id}
+            {detailOrder.comment}
           </div>
         </div>
         <div className="OrderDetail_order_Total">

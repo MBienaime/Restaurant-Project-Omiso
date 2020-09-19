@@ -129,14 +129,14 @@ const Menus = () => {
 
       </table>
 
-      <div className="ResultSelectAdminMenu">
+      <form className="ResultSelectAdminMenu">
         <div className="ResultSelectAdminMenu_title">Nouveau Menu</div>
 
-        <input type="text" id="titre" name="name" placeholder="Nom..." pattern="[a-z]{4,8}" required size="45" onChange={(e) => handleInputChange(e)} value={AddDataMenu.name} />
+        <input type="text" id="titre" name="name" placeholder="Nom..." pattern="[a-z]{4,8}" required maxLength="12" onChange={(e) => handleInputChange(e)} value={AddDataMenu.name} />
 
-        <input type="text" id="description" name="description" placeholder="Description..." required onChange={(e) => handleInputChange(e)} value={AddDataMenu.description} />
+        <input type="text" id="description" name="description" placeholder="Description..." required maxLength="32" onChange={(e) => handleInputChange(e)} value={AddDataMenu.description} />
 
-        <input type="text" id="prix" name="prix" placeholder="Prix..." required onChange={(e) => handleInputChange(e)} value={AddDataMenu.prix} />
+        <input type="text" id="prix" name="prix" placeholder="Prix..." required maxLength="2" onChange={(e) => handleInputChange(e)} value={AddDataMenu.prix} />
         <label htmlFor="category">Catégorie:</label>
         <select className="ResultSelectAdminMenu_select" name="category" id="category" onChange={(e) => handleInputChange(e)} value={AddDataMenu.category}>
           <option className="ResultSelectAdminMenu_select" value="entree">Entree</option>
@@ -162,7 +162,7 @@ const Menus = () => {
 
         </div>
         <button className="ResultSelectAdminMenu_imagesViews_button" onClick={() => handlesubmitMenu()}>ajouter</button>
-      </div>
+      </form>
     </div>
 
   );
