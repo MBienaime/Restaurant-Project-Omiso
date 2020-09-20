@@ -53,7 +53,7 @@ const Users = () => {
           password2: '',
           phone_number: '0000000000',
           role: 'employé',
-        })
+        });
       })
       .catch((e) => console.log(e));
   }
@@ -93,8 +93,7 @@ const Users = () => {
           </tr>
         </thead>
         <tbody>
-          {dataUsers.map((e) => (
-
+          {dataUsers.filter((e) => (e.role !== 'client')).map((e) => (
             <tr key={uuidv4()}>
               <td>
                 {e.firstname}
@@ -131,9 +130,9 @@ const Users = () => {
           <input type="password" id="password" name="password" placeholder="mots de passe..." required maxLength="32" onChange={(e) => handleInputChange(e)} value={addUser.password} />
           <input type="password" id="password2" name="password2" placeholder="mots de passe..." required maxLength="32" onChange={(e) => handleInputChange(e)} value={addUser.password2} />
 
-          <select className="ResultSelectAdminUser_select" name="role" id="role" onChange={(e) => handleInputChange(e)} value={addUser.role}>
+          <select className="ResultSelectAdminUser_select" name="role" id="role" onChange={(e) => handleInputChange(e)} defaultValue={addUser.role}>
             <option className="ResultSelectAdminUser_select" value="admin">Administrateur</option>
-            <option className="ResultSelectAdminUser_select" selected value="employé">Employé</option>
+            <option className="ResultSelectAdminUser_select" value="employé">Employé</option>
             <option className="ResultSelectAdminUser_select" value="client">Client</option>
           </select>
 
