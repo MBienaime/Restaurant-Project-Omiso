@@ -22,11 +22,11 @@ exports.user_get_all = (req, res) => {
   User.find()
     .select('firstname lastname email _id ')
     .exec()
-    .then((doc) => {     
+    .then((doc) => {
       const response = {
-        users: doc      
+        users: doc,
       };
-   
+
       res.status(200).json(response);
     })
     .catch((err) => {
@@ -42,14 +42,13 @@ exports.user_get_user = (req, res) => {
     .then((doc) => {
       if (doc) {
         res.status(200).json({
-          User: doc,         
+          User: doc,
         });
       } else {
         res
           .status(404)
 
-          .json({ message: "Aucune entrée trouvée" });
-
+          .json({ message: 'Aucune entrée trouvée' });
       }
     })
     .catch((err) => {
@@ -65,9 +64,7 @@ exports.user_signup = (req, res) => {
     .exec()
     .then((user) => {
       if (user.length >= 1) {
-
-        return res.status(409).json({ message: "Cet email existe déjà" });
-
+        return res.status(409).json({ message: 'Cet email existe déjà' });
       }
 
       bcrypt.hash(req.body.password, 10, (err, hash) => {
@@ -90,9 +87,7 @@ exports.user_signup = (req, res) => {
         newUser
           .save()
           .then(() => {
-
-            res.status(201).json({ message: "Compte créé avec succès" });
-
+            res.status(201).json({ message: 'Compte créé avec succès' });
           })
           .catch((error) => {
             res.status(500).json({ error });
@@ -108,16 +103,12 @@ exports.user_login = (req, res) => {
     .exec()
     .then((user) => {
       if (user.length < 1) {
-
-        return res.status(401).json({ message: "Echec connexion" });
-
+        return res.status(401).json({ message: 'Echec connexion' });
       }
 
       bcrypt.compare(req.body.password, user[0].password, (err, result) => {
         if (err) {
-
-          return res.status(401).json({ message: "Echec connexion" });
-
+          return res.status(401).json({ message: 'Echec connexion' });
         }
         if (result) {
           const token = jwt.sign(
@@ -126,11 +117,9 @@ exports.user_login = (req, res) => {
             { expiresIn: '1h' },
           );
 
-
-          return res.status(200).json({ message: "Connexion réussie", token });
+          return res.status(200).json({ message: 'Connexion réussie', token });
         }
-        res.status(401).json({ message: "Echec connexion" });
-
+        res.status(401).json({ message: 'Echec connexion' });
       });
     })
     .catch((err) => {
@@ -150,7 +139,6 @@ exports.forget_password = (req, res) => {
           .status(400)
 
           .json({ error: "L'utilisateur avec cet e-mail n'existe pas" });
-
       }
 
       // Creates token
@@ -161,9 +149,9 @@ exports.forget_password = (req, res) => {
       // Creates data to be sent and pass token in url
       const data = {
 
-        from: "no-reply@restaurant-omiso.com",
+        from: 'no-reply@restaurant-omiso.com',
         to: email,
-        subject: "Réinitialisation de votre mot de passe",
+        subject: 'Réinitialisation de votre mot de passe',
 
         html: `
       <h4>Votre demande de réinitialisation de mot de passe</h4>
@@ -173,9 +161,7 @@ exports.forget_password = (req, res) => {
       // token stored in user
       User.updateOne({ resetLinkToken: token }, (error) => {
         if (error) {
-
-          return res.status(400).json({ error: "Erreur lien" });
-
+          return res.status(400).json({ error: 'Erreur lien' });
         }
 
         // send email to user
@@ -184,8 +170,7 @@ exports.forget_password = (req, res) => {
             return res.json({ err });
           }
 
-          return res.json({ message: "Email envoyé" });
-
+          return res.json({ message: 'Email envoyé' });
         });
       });
     });
@@ -221,9 +206,7 @@ exports.reset_password = (req, res) => {
             Object.assign(user, obj);
             user.save((err) => {
               if (err) {
-
-                return res.status(400).json({ error: "Erreur lors de la réinitialisation du mot de passe" });
-
+                return res.status(400).json({ error: 'Erreur lors de la réinitialisation du mot de passe' });
               }
             });
           });
@@ -245,9 +228,7 @@ exports.user_delete = (req, res) => {
   User.deleteOne({ _id: req.body.userId })
     .exec()
     .then(() => {
-
-      res.status(200).json({ message: "Utilisateur supprimé" });
-
+      res.status(200).json({ message: 'Utilisateur supprimé' });
     })
     .catch((err) => {
       res.status(500).json({ error: err });
@@ -257,6 +238,7 @@ exports.user_delete = (req, res) => {
 // check User token
 exports.CheckToken = (req, res) => {
   const token = req.headers.authorization.split(' ')[1];
+
   jwt.verify(token, process.env.JWT_PASSWORD, (err, decoded) => {
     if (err) {
       res.status(401).json({ authenticated: false, role: '' });

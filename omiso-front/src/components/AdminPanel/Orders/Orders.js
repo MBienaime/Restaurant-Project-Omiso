@@ -29,11 +29,6 @@ const Orders = () => {
   // selected views detail order
   const [detailOrder, setDetailOrder] = useState({
     _id: '',
-    id_User: { lastname: '', firstname: '', email: '' },
-    order_Menu: [{ menu: '', Number_MenuItem: '', category: '' },
-    ],
-    total_Price: '',
-    comment: '',
   });
 
   const getApiDataOrder = () => {
@@ -75,6 +70,13 @@ const Orders = () => {
       .catch((e) => console.log(e));
   };
 
+  // get filter order by id
+  const filterCategory = (data, id) => {
+    if (!id) {
+      return data;
+    } return (data.filter((e) => (e._id === id)));
+  };
+
   return (
     <div className="sectionAdminMenu">
 
@@ -103,7 +105,7 @@ const Orders = () => {
         <tbody>
 
           { dataOrder.map((e) => (
-            <tr key={uuidv4()} onClick={() => setDetailOrder(e)}>
+            <tr key={uuidv4()} onClick={() => setDetailOrder(e._id)}>
               <td>{e.id_User.firstname}</td>
               <td>{e.id_User.lastname}</td>
               <td>{e.id_User.phone_number}</td>
@@ -123,41 +125,43 @@ const Orders = () => {
       <div className="OrderDetail">
         <div>Commande</div>
 
-        <div className="OrderDetail_client">
-          <div>Client:</div>
-          <div className="OrderDetail_client_contact">
-            <div>Nom: {detailOrder.id_User.firstname}</div>
-            <div>Prenom: {detailOrder.id_User.lastname}</div>
-            <div>Telephone: {detailOrder.id_User.phone_number}</div>
-            <div>Email: {detailOrder.id_User.email}</div>
-          </div>
-        </div>
-        <div className="OrderDetail_order">
-          <div>Commandes:</div>
-          <div className="OrderDetail_order_menu">
-            {detailOrder.order_Menu.map((e) => (
-              <div key={uuidv4()} className="OrderDetail_order_menu_item">
-                { (e.menu == null) ? (<div>Menu suprimer</div>) : (
-                  <div>{`${e.menu.category}      ${e.menu.name}     X    ${e.Number_MenuItem}`}</div>
-                )}
+        {filterCategory(dataOrder, detailOrder).map((el) => (
+          <div className="OrderDetail_client" key={uuidv4()}>
+            <div>Client:</div>
+            <div className="OrderDetail_client_contact">
+              <div>Nom: {el.id_User.firstname}</div>
+              <div>Prenom: {el.id_User.lastname}</div>
+              <div>Telephone: {el.id_User.phone_number}</div>
+              <div>Email: {el.id_User.email}</div>
+            </div>
+
+            <div className="OrderDetail_order">
+              <div>Commandes:</div>
+              <div className="OrderDetail_order_menu">
+                {el.order_Menu.map((e) => (
+                  <div key={uuidv4()} className="OrderDetail_order_menu_item">
+                    { (e.menu == null) ? (<div>Menu suprimer</div>) : (
+                      <div>{`${e.menu.category}      ${e.menu.name}     X    ${e.Number_MenuItem}`}</div>
+                    )}
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+            <div className="OrderDetail_order_comment">
+              <div>Commentaire:</div>
+              <div className="OrderDetail_order_comment_detail">
+                {el.comment}
+              </div>
+            </div>
+            <div className="OrderDetail_order_Total">
+              <div>{`TOTAL: ${el.total_Price || 0}€`}</div>
+              <button type="button">{(el.status) ? (<FaToggleOn onClick={() => toggleArchive(el._id)} />) : (<FaToggleOff onClick={() => toggleArchive(el._id)} />)}</button>
+            </div>
           </div>
-        </div>
-        <div className="OrderDetail_order_comment">
-          <div>Commentaire:</div>
-          <div className="OrderDetail_order_comment_detail">
-            {detailOrder.comment}
-          </div>
-        </div>
-        <div className="OrderDetail_order_Total">
-          <div>{`TOTAL: ${detailOrder.total_Price || 0}€`}</div>
-          <button type="button">{(detailOrder.status) ? (<FaToggleOn onClick={() => toggleArchive(detailOrder._id)} />) : (<FaToggleOff onClick={() => toggleArchive(detailOrder._id)} />)}</button>
-        </div>
-
+        ))}
       </div>
-
     </div>
+
   );
 };
 

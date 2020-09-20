@@ -5,8 +5,7 @@
 }
 .OrderDetail{
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex-direction: column;    
     border: solid;
     border-color: rgb(231, 223, 223);
     border-radius: 20px;
@@ -101,5 +100,5 @@ thead{
     }
 
     .sectionAdminMenu{
-        height: 800px;
+        height: 1000px;
     }

@@ -13,5 +13,5 @@ export default ProtectedRouteAdmin;
 
 ProtectedRouteAdmin.propTypes = {
   auth: PropTypes.object.isRequired,
-  component: PropTypes.isRequired,
+  component: PropTypes.func.isRequired,
 };
