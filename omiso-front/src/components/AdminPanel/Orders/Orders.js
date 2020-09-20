@@ -83,18 +83,21 @@ const Orders = () => {
 
       <table className="sectionAdminMenu_table">
 
-        <thead>        {(viewsArchive)
-          ? (
-            <button type="button" onClick={() => setViewsArchive(!viewsArchive)}>
-              Commande en cours
-            </button>
-          )
-          : (
-            <button type="button" onClick={() => setViewsArchive(!viewsArchive)}>
-              Commande Archivé
-            </button>
-          )}
-
+        <thead>
+          <tr>
+            <td>   {(viewsArchive)
+              ? (
+                <button type="button" onClick={() => setViewsArchive(!viewsArchive)}>
+                  Commande en cours
+                </button>
+              )
+              : (
+                <button type="button" onClick={() => setViewsArchive(!viewsArchive)}>
+                  Commande Archivé
+                </button>
+              )}
+            </td>
+          </tr>
           <tr>
             <th>Nom</th>
             <th>Prénom</th>

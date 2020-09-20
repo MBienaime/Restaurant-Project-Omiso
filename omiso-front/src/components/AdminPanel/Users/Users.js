@@ -11,8 +11,15 @@ import './styles.css';
 
 const Users = () => {
   const [dataUsers, setDataUsers] = useState([]);
-  const [addUser, setAddUser] = useState({});
-
+  const [addUser, setAddUser] = useState({
+    email: '',
+    firstname: '',
+    lastname: '',
+    password: '',
+    password2: '',
+    role:'Employé'
+  });
+  console.log(addUser);
   // API call data menu
   const getApiDataUsers = () => {
     const token = window.localStorage.getItem('UserTokenOmiso');
@@ -40,7 +47,10 @@ const Users = () => {
       })
       .catch((e) => console.log(e));
   }
-  console.log(dataUsers);
+  const handleInputChange = (e) => setAddUser({
+    ...addUser,
+    [e.currentTarget.name]: e.currentTarget.value,
+  });
 
   return (
 
@@ -59,7 +69,7 @@ const Users = () => {
         <tbody>
           {dataUsers.map((e) => (
 
-            <tr key={uuidv4()} onClick={() => setselectUser(e)}>
+            <tr key={uuidv4()}>
               <td>
                 {e.firstname}
               </td>
@@ -89,18 +99,16 @@ const Users = () => {
         <div>Utilisateur</div>
 
         <div>
-          <input type="text" id="firstname" name="firstname" placeholder="Nom..." required maxLength="32" />
-          <input type="text" id="lastname" name="lastname" placeholder="Prenom..." required maxLength="32" />
-          <input type="email" id="email" name="email" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" placeholder="Email..." required maxLength="32" />
-          <input type="password" id="password" name="password" placeholder="mots de passe..." required maxLength="32" />
-          <input type="password" id="password2" name="password2" placeholder="mots de passe..." required maxLength="32" />
+          <input type="text" id="firstname" name="firstname" placeholder="Nom..." required maxLength="32" onChange={(e) => handleInputChange(e)} value={addUser.firstname} />
+          <input type="text" id="lastname" name="lastname" placeholder="Prenom..." required maxLength="32" onChange={(e) => handleInputChange(e)} value={addUser.lastname} />
+          <input type="email" id="email" name="email" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" placeholder="Email..." required maxLength="32" onChange={(e) => handleInputChange(e)} value={addUser.email} />
+          <input type="password" id="password" name="password" placeholder="mots de passe..." required maxLength="32" onChange={(e) => handleInputChange(e)} value={addUser.password} />
+          <input type="password" id="password2" name="password2" placeholder="mots de passe..." required maxLength="32" onChange={(e) => handleInputChange(e)} value={addUser.password2} />
 
-          <label htmlFor="category">Catégorie:</label>
-          <select className="ResultSelectAdminUser_select" name="category" id="category">
+          <select className="ResultSelectAdminUser_select" name="role" id="role" onChange={(e) => handleInputChange(e)} value={addUser.role}>
             <option className="ResultSelectAdminUser_select" value="admin">Administrateur</option>
             <option className="ResultSelectAdminUser_select" value="employé">Employé</option>
             <option className="ResultSelectAdminUser_select" value="client">Client</option>
-
           </select>
 
         </div>
