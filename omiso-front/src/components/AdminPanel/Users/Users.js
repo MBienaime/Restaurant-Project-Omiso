@@ -141,8 +141,7 @@ const Users = () => {
           <input type="email" id="email" name="email" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" placeholder="Email..." required maxLength="32" onChange={(e) => handleInputChange(e)} value={addUser.email} />
           <input className={(checkPassword(addUser.password, addUser.password2) ? ('') : ('inputfailpassword'))} type="password" id="password" name="password" placeholder="mots de passe..." required maxLength="32" onChange={(e) => handleInputChange(e)} value={addUser.password} />
           <input className={(checkPassword(addUser.password, addUser.password2) ? ('') : ('inputfailpassword'))} type="password" id="password2" name="password2" placeholder="mots de passe..." required maxLength="32" onChange={(e) => handleInputChange(e)} value={addUser.password2} />
-
-          <select className="ResultSelectAdminUser_select" name="role" id="role" onChange={(e) => handleInputChange(e)} defaultValue={addUser.role}>
+          <select className="ResultSelectAdminUser_select" name="role" id="role" onChange={(e) => handleInputChange(e)} value={addUser.role}>
             <option className="ResultSelectAdminUser_select" value="admin">Administrateur</option>
             <option className="ResultSelectAdminUser_select" value="employé">Employé</option>
             <option className="ResultSelectAdminUser_select" value="client">Client</option>

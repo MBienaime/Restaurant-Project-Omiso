@@ -11,7 +11,7 @@ import { FaTrashAlt } from 'react-icons/fa';
 const Menus = () => {
   // state
   const [AddDataMenu, setAddDataMenu] = useState({
-    name: '', description: '', prix: 0, category: '',
+    name: '', description: '', prix: 0, category: 'plat',
   });
   const [DataMenus, setDataMenus] = useState([{ _id: '' }]);
   const [Image, setImage] = useState({ preview: null, raw: null });
@@ -138,8 +138,9 @@ const Menus = () => {
         <input type="text" id="prix" name="prix" placeholder="Prix..." required maxLength="2" onChange={(e) => handleInputChange(e)} value={AddDataMenu.prix} />
         <label htmlFor="category">Catégorie:</label>
         <select className="ResultSelectAdminMenu_select" name="category" id="category" onChange={(e) => handleInputChange(e)} value={AddDataMenu.category}>
+
           <option className="ResultSelectAdminMenu_select" value="entree">Entree</option>
-          <option className="ResultSelectAdminMenu_select" selected value="plat">Plat</option>
+          <option className="ResultSelectAdminMenu_select" value="plat">Plat</option>
           <option className="ResultSelectAdminMenu_select" value="dessert">Dessert</option>
           <option className="ResultSelectAdminMenu_select" value="boisson">Boisson</option>
         </select>
