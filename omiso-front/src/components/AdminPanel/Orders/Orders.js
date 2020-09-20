@@ -30,6 +30,7 @@ const Orders = () => {
   const [detailOrder, setDetailOrder] = useState({
     _id: '',
   });
+  console.log(detailOrder);
 
   const getApiDataOrder = () => {
     const token = window.localStorage.getItem('UserTokenOmiso');
@@ -104,8 +105,8 @@ const Orders = () => {
         </thead>
         <tbody>
 
-          { dataOrder.map((e) => (
-            <tr key={uuidv4()} onClick={() => setDetailOrder(e._id)}>
+          { dataOrder.filter((ele) => ele.status == viewsArchive).map((e) => (
+            <tr key={uuidv4()} onClick={() => setDetailOrder(e._id)} className={(e._id == detailOrder) ? ('selectOrder') : ('')}>
               <td>{e.id_User.firstname}</td>
               <td>{e.id_User.lastname}</td>
               <td>{e.id_User.phone_number}</td>
@@ -124,9 +125,13 @@ const Orders = () => {
 
       <div className="OrderDetail">
         <div>Commande</div>
-
         {filterCategory(dataOrder, detailOrder).map((el) => (
+
           <div className="OrderDetail_client" key={uuidv4()}>
+
+            <div>{(el.status) ? ('En cours :') : ('Archivés :')} </div>
+            <button type="button">{(el.status) ? (<FaToggleOn onClick={() => toggleArchive(el._id)} />) : (<FaToggleOff onClick={() => toggleArchive(el._id)} />)}</button>
+
             <div>Client:</div>
             <div className="OrderDetail_client_contact">
               <div>Nom: {el.id_User.firstname}</div>
@@ -155,7 +160,7 @@ const Orders = () => {
             </div>
             <div className="OrderDetail_order_Total">
               <div>{`TOTAL: ${el.total_Price || 0}€`}</div>
-              <button type="button">{(el.status) ? (<FaToggleOn onClick={() => toggleArchive(el._id)} />) : (<FaToggleOff onClick={() => toggleArchive(el._id)} />)}</button>
+
             </div>
           </div>
         ))}
