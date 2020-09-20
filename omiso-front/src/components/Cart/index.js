@@ -13,7 +13,7 @@ const Cart = ({ DataOrder, RemoveOrder, addOrder }) => {
   //* declaration State *//
 
   // state comment
-  const [comment, setComment] = useState('Ici votre commentaire...');
+  const [comment, setComment] = useState('');
 
   //* declaration fucntion *//
 
@@ -108,6 +108,7 @@ const Cart = ({ DataOrder, RemoveOrder, addOrder }) => {
           <div className="checkout-left-comment">
             Ajouter un Commentaire
             <input
+              placeholder=" Ajouter un Commentaire..."
               className="checkout-left-input"
               value={comment}
               onChange={(e) => handleChange(e)}
