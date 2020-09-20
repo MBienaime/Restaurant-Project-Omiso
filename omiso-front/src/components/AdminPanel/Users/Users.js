@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import { FaTrashAlt } from 'react-icons/fa';
 
 // == Import Style
 import './styles.css';
@@ -10,9 +11,6 @@ import './styles.css';
 
 const Users = () => {
   const [dataUsers, setDataUsers] = useState([]);
-  const [selectUser, setselectUser] = useState({
-    _id: '', firstname: '', lastname: '', email: '', phone_number: '',
-  });
 
   // API call data menu
   const getApiDataUsers = () => {
@@ -29,6 +27,19 @@ const Users = () => {
   // getting menu data
   useEffect(getApiDataUsers, []);
 
+  // remove user
+  function handleRemoveUser(id) {
+    const token = window.localStorage.getItem('UserTokenOmiso');
+    axios.delete(
+      `https://omiso.com/utilisateur/${id}`,
+      { headers: { Authorization: `Bearer ${token}` } },
+    )
+      .then(() => {
+        getApiDataUsers();
+      })
+      .catch((e) => console.log(e));
+  }
+
   return (
 
     <div className="sectionAdminUser">
@@ -40,12 +51,13 @@ const Users = () => {
             <th>Prenom</th>
             <th>Email</th>
             <th>Role</th>
+            <th>action</th>
           </tr>
         </thead>
         <tbody>
           {dataUsers.map((e) => (
 
-            <tr key={uuidv4()} onClick={() => setselectUser(e)} className={(e._id == selectUser._id) ? ('selectUser') : ('')}>
+            <tr key={uuidv4()} onClick={() => setselectUser(e)}>
               <td>
                 {e.firstname}
               </td>
@@ -57,6 +69,11 @@ const Users = () => {
               </td>
               <td>
                 {e.phone_number}
+              </td>
+              <td>
+                <button onClick={() => handleRemoveUser(e._id)}>
+                  <FaTrashAlt />
+                </button>
               </td>
 
             </tr>
@@ -70,10 +87,12 @@ const Users = () => {
         <div>Utilisateur</div>
 
         <div>
-          <div>{ selectUser.firstname }</div>
-          <div>{ selectUser.lastname }</div>
-          <div>{ selectUser.email }</div>
-          <div>{ selectUser.phone_number }</div>
+          <input type="text" id="titre" name="name" placeholder="Nom..." required maxLength="12" />
+
+          <input type="text" id="description" name="description" placeholder="Description..." required maxLength="32" />
+
+          <input type="text" id="prix" name="prix" placeholder="Prix..." required maxLength="2" />
+
         </div>
 
         <button type="button">Supprimer</button>

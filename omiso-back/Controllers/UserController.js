@@ -225,7 +225,7 @@ exports.reset_password_mail = (req, res) => {
 
 // Delete user by its id
 exports.user_delete = (req, res) => {
-  User.deleteOne({ _id: req.body.userId })
+  User.deleteOne({ _id: req.params.userId })
     .exec()
     .then(() => {
       res.status(200).json({ message: 'Utilisateur supprimé' });
