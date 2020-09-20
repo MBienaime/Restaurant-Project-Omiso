@@ -129,7 +129,7 @@ const Orders = () => {
 
           <div className="OrderDetail_client" key={uuidv4()}>
 
-            <div>{(el.status) ? ('En cours :') : ('Archivés :')} </div>
+            <div>{(el.status) ? ('En cours :') : ('Archivés : ')} </div>
             <button type="button">{(el.status) ? (<FaToggleOn onClick={() => toggleArchive(el._id)} />) : (<FaToggleOff onClick={() => toggleArchive(el._id)} />)}</button>
 
             <div>Client:</div>
