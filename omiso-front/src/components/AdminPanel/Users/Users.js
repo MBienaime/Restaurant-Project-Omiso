@@ -64,8 +64,20 @@ const Users = () => {
     [e.currentTarget.name]: e.currentTarget.value,
   });
 
+  // check password
+  const checkPassword = (password1, password2) => {
+    if (password1 !== password2) {
+      return false;
+    }
+    return true;
+  };
+
   // API call : Signin
   const handleUserInscription = (user) => {
+    if (checkPassword(user.password, user.password2)) {
+      return console.log('ok');
+    }
+
     const url = 'https://omiso.com/utilisateur/inscription';
     axios({
       method: 'post',
@@ -127,8 +139,8 @@ const Users = () => {
           <input type="text" id="firstname" name="firstname" placeholder="Nom..." required maxLength="32" onChange={(e) => handleInputChange(e)} value={addUser.firstname} />
           <input type="text" id="lastname" name="lastname" placeholder="Prenom..." required maxLength="32" onChange={(e) => handleInputChange(e)} value={addUser.lastname} />
           <input type="email" id="email" name="email" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" placeholder="Email..." required maxLength="32" onChange={(e) => handleInputChange(e)} value={addUser.email} />
-          <input type="password" id="password" name="password" placeholder="mots de passe..." required maxLength="32" onChange={(e) => handleInputChange(e)} value={addUser.password} />
-          <input type="password" id="password2" name="password2" placeholder="mots de passe..." required maxLength="32" onChange={(e) => handleInputChange(e)} value={addUser.password2} />
+          <input className={(checkPassword(addUser.password, addUser.password2) ? ('') : ('inputfailpassword'))} type="password" id="password" name="password" placeholder="mots de passe..." required maxLength="32" onChange={(e) => handleInputChange(e)} value={addUser.password} />
+          <input className={(checkPassword(addUser.password, addUser.password2) ? ('') : ('inputfailpassword'))} type="password" id="password2" name="password2" placeholder="mots de passe..." required maxLength="32" onChange={(e) => handleInputChange(e)} value={addUser.password2} />
 
           <select className="ResultSelectAdminUser_select" name="role" id="role" onChange={(e) => handleInputChange(e)} defaultValue={addUser.role}>
             <option className="ResultSelectAdminUser_select" value="admin">Administrateur</option>

@@ -46,8 +46,8 @@ td th{
     border-color: rgb(231, 223, 223);
     border-radius: 20px;     
     display: flex;
-    flex-direction: column;   
-    justify-content: start; 
+    justify-content: flex-start;
+    flex-direction: column;
     background-color: rgba(0, 0, 0, 0.363);
     height:100%;
     width: 60%;
