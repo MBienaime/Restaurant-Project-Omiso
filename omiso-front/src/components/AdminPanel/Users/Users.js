@@ -17,9 +17,10 @@ const Users = () => {
     lastname: '',
     password: '',
     password2: '',
+    phone_number: '0000000000',
     role: 'employé',
   });
-  console.log(addUser);
+
   // API call data menu
   const getApiDataUsers = () => {
     const token = window.localStorage.getItem('UserTokenOmiso');
@@ -44,13 +45,38 @@ const Users = () => {
     )
       .then(() => {
         getApiDataUsers();
+        setAddUser({
+          email: '',
+          firstname: '',
+          lastname: '',
+          password: '',
+          password2: '',
+          phone_number: '0000000000',
+          role: 'employé',
+        })
       })
       .catch((e) => console.log(e));
   }
+
+  // handlechange input
   const handleInputChange = (e) => setAddUser({
     ...addUser,
     [e.currentTarget.name]: e.currentTarget.value,
   });
+
+  // API call : Signin
+  const handleUserInscription = (user) => {
+    const url = 'https://omiso.com/utilisateur/inscription';
+    axios({
+      method: 'post',
+      url,
+      data: user,
+    })
+      .then((e) => {
+        console.log(e); getApiDataUsers();
+      })
+      .catch((e) => console.log(e));
+  };
 
   return (
 
@@ -113,7 +139,13 @@ const Users = () => {
 
         </div>
 
-        <button type="button">ajouter</button>
+        <button
+          type="button"
+          onClick={(evt) => {
+            evt.preventDefault(); handleUserInscription(addUser);
+          }}
+        >ajouter
+        </button>
 
       </div>
     </div>

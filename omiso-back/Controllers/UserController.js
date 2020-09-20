@@ -58,6 +58,7 @@ exports.user_get_user = (req, res) => {
 
 // Sign Up route : creates a new user
 exports.user_signup = (req, res) => {
+  console.log(req.body);
   // Checking if email already exists
   const { email } = req.body;
   User.find({ email })
@@ -90,7 +91,7 @@ exports.user_signup = (req, res) => {
             res.status(201).json({ message: 'Compte créé avec succès' });
           })
           .catch((error) => {
-            res.status(500).json({ error });
+            res.status(500).json(error);
           });
       });
     });
