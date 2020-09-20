@@ -17,7 +17,7 @@ const Users = () => {
     lastname: '',
     password: '',
     password2: '',
-    role:'Employé'
+    role: 'employé',
   });
   console.log(addUser);
   // API call data menu
@@ -107,7 +107,7 @@ const Users = () => {
 
           <select className="ResultSelectAdminUser_select" name="role" id="role" onChange={(e) => handleInputChange(e)} value={addUser.role}>
             <option className="ResultSelectAdminUser_select" value="admin">Administrateur</option>
-            <option className="ResultSelectAdminUser_select" value="employé">Employé</option>
+            <option className="ResultSelectAdminUser_select" selected value="employé">Employé</option>
             <option className="ResultSelectAdminUser_select" value="client">Client</option>
           </select>
 
