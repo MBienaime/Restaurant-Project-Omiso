@@ -20,7 +20,7 @@ const User = require('../Models/UserModel');
 // find all users
 exports.user_get_all = (req, res) => {
   User.find()
-    .select('firstname lastname email _id ')
+    .select('firstname lastname email _id role')
     .exec()
     .then((doc) => {
       const response = {

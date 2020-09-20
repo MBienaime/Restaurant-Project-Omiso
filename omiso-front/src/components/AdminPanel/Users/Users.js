@@ -11,6 +11,7 @@ import './styles.css';
 
 const Users = () => {
   const [dataUsers, setDataUsers] = useState([]);
+  const [addUser, setAddUser] = useState({});
 
   // API call data menu
   const getApiDataUsers = () => {
@@ -39,6 +40,7 @@ const Users = () => {
       })
       .catch((e) => console.log(e));
   }
+  console.log(dataUsers);
 
   return (
 
@@ -68,7 +70,7 @@ const Users = () => {
                 {e.email}
               </td>
               <td>
-                {e.phone_number}
+                {e.role}
               </td>
               <td>
                 <button onClick={() => handleRemoveUser(e._id)}>
@@ -87,16 +89,23 @@ const Users = () => {
         <div>Utilisateur</div>
 
         <div>
-          <input type="text" id="titre" name="name" placeholder="Nom..." required maxLength="12" />
+          <input type="text" id="firstname" name="firstname" placeholder="Nom..." required maxLength="32" />
+          <input type="text" id="lastname" name="lastname" placeholder="Prenom..." required maxLength="32" />
+          <input type="email" id="email" name="email" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" placeholder="Email..." required maxLength="32" />
+          <input type="password" id="password" name="password" placeholder="mots de passe..." required maxLength="32" />
+          <input type="password" id="password2" name="password2" placeholder="mots de passe..." required maxLength="32" />
 
-          <input type="text" id="description" name="description" placeholder="Description..." required maxLength="32" />
+          <label htmlFor="category">Catégorie:</label>
+          <select className="ResultSelectAdminUser_select" name="category" id="category">
+            <option className="ResultSelectAdminUser_select" value="admin">Administrateur</option>
+            <option className="ResultSelectAdminUser_select" value="employé">Employé</option>
+            <option className="ResultSelectAdminUser_select" value="client">Client</option>
 
-          <input type="text" id="prix" name="prix" placeholder="Prix..." required maxLength="2" />
+          </select>
 
         </div>
 
-        <button type="button">Supprimer</button>
-        <button type="button">Upadte</button>
+        <button type="button">ajouter</button>
 
       </div>
     </div>
