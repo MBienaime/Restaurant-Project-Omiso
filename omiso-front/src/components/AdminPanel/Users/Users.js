@@ -72,12 +72,12 @@ const Users = () => {
     return true;
   };
 
+
   // API call : Signin
   const handleUserInscription = (user) => {
-    if (checkPassword(user.password, user.password2)) {
-      return console.log('ok');
+    if (!checkPassword(user.password, user.password2)) {
+      alert('verifier votre mots de passe');
     }
-
     const url = 'https://omiso.com/utilisateur/inscription';
     axios({
       method: 'post',
