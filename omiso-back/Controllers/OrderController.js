@@ -28,6 +28,7 @@ exports.getOrder = (req, res) => {
 
 // Post Order
 exports.postOrder = (req, res) => {
+  console.log(req.body)
   const OrderItem = new Order({
     _id: new mongoose.Types.ObjectId(),
     id_User: req.dataToken.userId,
