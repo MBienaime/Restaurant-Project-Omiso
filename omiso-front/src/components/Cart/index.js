@@ -69,7 +69,7 @@ const Cart = ({ DataOrder, RemoveOrder, addOrder }) => {
                 <tr key={uuidv4()}>
                   <td className="checkout-left-table-cell-description">
                     <div>
-                      <div className="checkout-left-table-image" />
+                      <img src={order.urlImage} className="ItemMenuPhoto" />
                       <span className="checkout-left-table-title">
                         {order.category}
                       </span>
