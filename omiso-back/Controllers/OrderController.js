@@ -18,7 +18,6 @@ paypal.configure({
 
 // Get Order
 exports.getOrder = (req, res) => {
-
   Order.find()
     .populate('id_User')
     .populate('order_Menu.menu')
@@ -28,7 +27,6 @@ exports.getOrder = (req, res) => {
 
 // Post Order
 exports.postOrder = (req, res) => {
-  console.log(req.body)
   const OrderItem = new Order({
     _id: new mongoose.Types.ObjectId(),
     id_User: req.dataToken.userId,
@@ -37,7 +35,7 @@ exports.postOrder = (req, res) => {
     order_Menu: req.body.Orders.menus,
     comment: req.body.Orders.comment,
   });
- 
+
   OrderItem
     .save()
     .then((o) => {
@@ -142,8 +140,7 @@ exports.getOrderById = (req, res) => {
 exports.updateOrderById = (req, res) => {
   Order.findById(req.params.id)
     .then((doc) => {
-
-      doc.status = !doc.status;     
+      doc.status = !doc.status;
 
       doc.save()
         .then((doc) => { res.status(200).json(doc); })

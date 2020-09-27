@@ -11,8 +11,7 @@ const MenuRouter = require('./Routes/MenuRoute');
 const userRouter = require('./Routes/UserRoute');
 
 // connection to DataBase
-mongoose
-  .connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:27017/${process.env.DB}`, {
+mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:27017/${process.env.DB}`, {
 
     useNewUrlParser: true,
     useUnifiedTopology: true,
