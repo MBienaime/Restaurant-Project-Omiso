@@ -10,9 +10,7 @@ describe('rendering components', () => {
   });
   it('renders Header component without crashing', () => {
     const wrapper = shallow(<App />);
-    const header = shallow(<Header/>);
-    expect(wrapper.contains(header).toEqual(true))
+    const header = shallow(<Header />);
+    expect(wrapper.contains(header).toEqual(true));
   });
-
-
 });
