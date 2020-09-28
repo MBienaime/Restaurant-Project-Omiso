@@ -64,7 +64,7 @@ describe('Test interface user', () => {
   });
 
   it('user should GET all menu ', (done) => {
-    chai.request(app)
+    chai.request(app) 
       .get('/menu')
       .end((err, res) => {
         expect(res).to.have.status(200);
