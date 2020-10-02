@@ -5,9 +5,8 @@
 // Import models Data Base
 const mongoose = require('mongoose');
 const paypal = require('paypal-rest-sdk');
+const { validationResult } = require('express-validator');
 const Order = require('../Models/OrderModel');
-const User = require('../Models/UserModel');
-const Menu = require('../Models/OrderModel');
 
 // Configuration paypal
 paypal.configure({
@@ -27,6 +26,10 @@ exports.getOrder = (req, res) => {
 
 // Post Order
 exports.postOrder = (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
   const OrderItem = new Order({
     _id: new mongoose.Types.ObjectId(),
     id_User: req.dataToken.userId,

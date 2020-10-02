@@ -2,11 +2,12 @@
 /* eslint-disable no-underscore-dangle */
 // Imports
 const mongoose = require('mongoose');
+const { validationResult } = require('express-validator');
 const MenuItem = require('../Models/MenuItemModel');
 
 // Routes logic
 exports.menuItems_get_all = (req, res) => {
-  MenuItem.find() 
+  MenuItem.find()
     .exec()
     .then((docs) => {
       const response = {
@@ -19,7 +20,7 @@ exports.menuItems_get_all = (req, res) => {
           category: doc.category,
           quantity: doc.quantity,
           status: doc.status,
-          urlImage: doc.urlImage,    
+          urlImage: doc.urlImage,
         })),
       };
       res.status(200).json(response);
@@ -32,7 +33,11 @@ exports.menuItems_get_all = (req, res) => {
 };
 
 exports.menuItems_create_item = (req, res) => {
-  const menuItem = new MenuItem({
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+   const menuItem = new MenuItem({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
     description: req.body.description,
@@ -112,8 +117,8 @@ exports.menuItems_delete_item = (req, res) => {
     .exec()
     .then(() => {
       res.status(200).json({
-        message: 'Élément supprimé',      
-       })    
+        message: 'Élément supprimé',
+      });
     })
     .catch((err) => {
       res.status(500).json({

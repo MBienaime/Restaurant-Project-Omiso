@@ -5,7 +5,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const path = require('path');
+const { validationResult } = require('express-validator');
 
 // Mailgun  import and configuration
 const mailgun = require('mailgun-js')({
@@ -58,6 +58,10 @@ exports.user_get_user = (req, res) => {
 
 // Sign Up route : creates a new user
 exports.user_signup = (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
   // Checking if email already exists
   const { email } = req.body;
   User.find({ email })

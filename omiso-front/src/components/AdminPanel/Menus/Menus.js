@@ -45,7 +45,8 @@ const Menus = () => {
   });
 
   // add menu
-  function handlesubmitMenu() {
+  function handlesubmitMenu(e) {
+e.preventDefault();
     const formData = new FormData();
     formData.append('name', AddDataMenu.name);
     formData.append('description', AddDataMenu.description);
@@ -161,7 +162,7 @@ const Menus = () => {
           )}
 
         </div>
-        <button className="ResultSelectAdminMenu_imagesViews_button" onClick={() => handlesubmitMenu()}>ajouter</button>
+        <button className="ResultSelectAdminMenu_imagesViews_button" onClick={(e) => handlesubmitMenu(e)}>ajouter</button>
       </form>
     </div>
 
