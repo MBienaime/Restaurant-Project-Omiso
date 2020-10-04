@@ -2,7 +2,9 @@
 /* eslint-disable no-underscore-dangle */
 // Imports
 const mongoose = require('mongoose');
+
 const { validationResult } = require('express-validator');
+
 const MenuItem = require('../Models/MenuItemModel');
 
 // Routes logic
@@ -37,7 +39,7 @@ exports.menuItems_create_item = (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() });
   }
-   const menuItem = new MenuItem({
+  const menuItem = new MenuItem({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
     description: req.body.description,
