@@ -158,3 +158,13 @@ th .checkout-left-table-cell-description {
   .display-none {
     display: none;
   }
+
+  .payment_icon{
+    font-size: 50px;
+    color: rgb(44, 42, 42);
+  
+  }
+  .payment-btn {
+    border: none;
+    background:transparent;
+  }

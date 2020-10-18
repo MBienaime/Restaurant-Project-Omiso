@@ -13,9 +13,9 @@ const userRouter = require('./Routes/UserRoute');
 // connection to DataBase
 mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:27017/${process.env.DB}`, {
 
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
@@ -35,6 +35,7 @@ app.use(express.json());
 // Reset password page view
 app.set('views', `${__dirname}/public/views`);
 app.engine('html', require('ejs').renderFile);
+
 app.set('view engine', 'html');
 
 app.use('/', express.static(`${__dirname}/public`));

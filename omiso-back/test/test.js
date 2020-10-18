@@ -28,7 +28,7 @@ describe('Test interface user', () => {
       lastname: 'utilisateur test',
       firstname: 'uilisateur test',
       password: 'toto',
-      phone_number: '065520605252',
+      phone_number: '0655414114',
     };
     chai.request(app)
       .post('/utilisateur/inscription')
