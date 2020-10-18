@@ -116,11 +116,13 @@ th .checkout-left-table-cell-description {
        border:none;
        font-size: xx-large;
        font-weight: bold;
+       background: transparent;
    }
 .checkout-left-table-buttonm{
     border:none;
     font-size: xx-large;
     font-weight:bolder ;
+    background: transparent;
 }
 
 .blod {
@@ -168,8 +170,7 @@ th .checkout-left-table-cell-description {
     border: none;
     background:transparent;
   }
-.ItemCartPhoto{
-  
+.ItemCartPhoto{  
     background-repeat: no-repeat;    
     background-size: contain;
     background-position: center;

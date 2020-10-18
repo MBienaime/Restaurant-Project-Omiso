@@ -19,7 +19,7 @@ const Home = () => (
           <p>Récupérez votre commande sur place.</p>
         </div>
         <div className="home_btn">
-          <button type="button" className="btn_menu "><a className="button-text" href="#Menu">Notre carte</a></button>
+          <button type="button" className="btn_menu "><a className="button-text" href="#Menu" >Notre carte</a></button>
         </div>
       </div>
 
