@@ -5,7 +5,7 @@ import Axios from 'axios';
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
-import {FaCcPaypal} from 'react-icons/fa';
+import { FaCcPaypal } from 'react-icons/fa';
 
 // == Import Style
 import './styles.css';
@@ -70,7 +70,7 @@ const Cart = ({ DataOrder, RemoveOrder, addOrder }) => {
                 <tr key={uuidv4()}>
                   <td className="checkout-left-table-cell-description">
                     <div>
-                      <img src={order.urlImage} className="ItemMenuPhoto" />
+                      <img src={order.urlImage} className="ItemCartPhoto" />
                       <span className="checkout-left-table-title">
                         {order.category}
                       </span>
@@ -120,7 +120,7 @@ const Cart = ({ DataOrder, RemoveOrder, addOrder }) => {
           <a href="#"> TOTAL A REGLER </a>
           <span className="checkout-right-total">{sumOrder}€</span>
 
-          <button className = "payment-btn" type="button" onClick={() => PaymentOrder()}><FaCcPaypal className="payment_icon" /> </button>
+          <button className="payment-btn" type="button" onClick={() => PaymentOrder()}><FaCcPaypal className="payment_icon" /> </button>
         </div>
         <Link to="/" className="close">
           X
