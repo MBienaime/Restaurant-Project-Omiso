@@ -46,7 +46,7 @@ const Menus = () => {
 
   // add menu
   function handlesubmitMenu(e) {
-e.preventDefault();
+    e.preventDefault();
     const formData = new FormData();
     formData.append('name', AddDataMenu.name);
     formData.append('description', AddDataMenu.description);
@@ -145,23 +145,19 @@ e.preventDefault();
           <option className="ResultSelectAdminMenu_select" value="dessert">Dessert</option>
           <option className="ResultSelectAdminMenu_select" value="boisson">Boisson</option>
         </select>
-        <div className="ResultSelectAdminMenu_imagesViews">
 
-          {(Image.raw == null) ? (
-            <input
-              className="ResultSelectAdminMenu_imagesViews_input"
-              type="file"
-              id="image"
-              name="image"
-              onChange={(e) => {
-                selectedImage(e);
-              }}
-            />
-          ) : (
-            <img className="ResultSelectAdminMenu_imagesViews_image" src={Image.preview} />
-          )}
+        <input
+          className="ResultSelectAdminMenu_imagesViews_input"
+          type="file"
+          id="image"
+          name="image"
+          onChange={(e) => {
+            selectedImage(e);
+          }}
+        />
 
-        </div>
+        <img className="ResultSelectAdminMenu_imagesViews_image" src={Image.preview} />
+
         <button className="ResultSelectAdminMenu_imagesViews_button" onClick={(e) => handlesubmitMenu(e)}>ajouter</button>
       </form>
     </div>
