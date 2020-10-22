@@ -175,6 +175,7 @@ th .checkout-left-table-cell-description {
     background-size: contain;
     background-position: center;
     height: 40px;
-    width: 40px;
+    width: auto;
+    border: 15px;
 
 }
