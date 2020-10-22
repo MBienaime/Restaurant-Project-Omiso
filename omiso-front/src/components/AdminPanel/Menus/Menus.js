@@ -101,7 +101,7 @@ const Menus = () => {
           { DataMenus.map((d) => (
             <tr key={uuidv4()}>
               <td>
-                <img src={d.urlImage} />
+                <img className="ItemMenuPhoto_adminMenu" src={d.urlImage} />
               </td>
               <td>
                 {d.name}
