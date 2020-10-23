@@ -18,6 +18,7 @@
 .sectionMenuCarte{
     display:flex;
     height: 55%;
+    padding:50px;
     flex-wrap: wrap;
     justify-content: space-around;
     overflow-y:scroll;   
