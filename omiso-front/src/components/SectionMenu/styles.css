@@ -39,10 +39,11 @@
 
 
 
-.sectionMenusCarteMenu ul{
+.sectionMenusCarteMenu {
     display:flex;
     justify-content: space-around;
     margin: 50px;
+    width: 50%;
 }
 
 .buttonMenu{
