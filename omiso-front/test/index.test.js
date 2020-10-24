@@ -1,14 +1,18 @@
 import React from 'react';
-import expect from 'chai';
-import { shallow } from 'enzyme';
-import App from '../src/components/App';
-import Navigation from '../src/components/Navigation';
+import { expect } from 'chai';
 
-describe('rendering components', () => {
-  it('renders App without crashing', () => {
-    shallow(<App />);
+import { shallow } from 'enzyme';
+
+import ItemMenu from '../src/components/SectionMenu/ItemMenu/ItemMenu';
+
+describe('Test ItemMenu', () => {
+  const wrapper = shallow(<ItemMenu data={{}} />);
+
+  it('Should have table ', () => {
+    expect(wrapper.contains([])).to.equal(true);
   });
-  it('renders Navigation component without crashing', () => {
-    shallow(<Navigation />);
+
+  it('Should have a "ItemMenu" class', () => {
+    expect(wrapper.hasClass('ItemMenu')).to.equal(true);
   });
 });

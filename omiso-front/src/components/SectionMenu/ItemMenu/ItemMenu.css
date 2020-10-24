@@ -54,7 +54,7 @@
 .ItemMenuDescriptionCategory{
     color: rgb(229, 110, 45); 
     margin: 0;
-    
+    text-transform: capitalize;
     font-family: 'SourceSansPro';
 }
 .ItemMenuDescriptionDescrip{
