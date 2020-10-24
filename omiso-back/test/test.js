@@ -12,12 +12,8 @@ const app = require('../app');
 chai.use(chaihttp);
 
 describe('Test interface user', () => {
-  before(() => {
+  after(() => {
     User.deleteMany({ email: 'usertest@gmail.com' })
-      .then()
-      .catch((e) => { console.log(e); });
-
-    Order.deleteMany({ comment: 'test order' })
       .then()
       .catch((e) => { console.log(e); });
   });
@@ -63,32 +59,5 @@ describe('Test interface user', () => {
       });
   });
 
-  it('user should GET all menu ', (done) => {
-    chai.request(app) 
-      .get('/menu')
-      .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body.menuItems).to.be.an('array');
-        expect(res.body.menuItems[0]).to.have.property('price');
-        expect(res.body.menuItems[0]).to.have.property('category');
-        expect(res.body.menuItems[0]).to.have.property('name');
-        expect(res.body.menuItems[0]).to.have.property('urlImage');
-        done();
-      });
-  });
 
-  it('user should POST Order', (done) => {
-    const postOrder = {
-      Orders:
-         { menus: [{ menu: '5f66fc6d279f073aa8e0bf38', Number_MenuItem: 4 }], comment: 'test order' },
-    };
-    chai.request(app)
-      .post('/commande')
-      .set('Authorization', `bearer ${tokentest}`)
-      .send(postOrder)
-      .end((err, res) => {
-        expect(res).to.have.status(200);
-      });
-    setTimeout(done(), 3000);
-  });
 });

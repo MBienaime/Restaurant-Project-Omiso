@@ -74,7 +74,7 @@ const Users = () => {
 
 
   // API call : Signin
-  const handleUserInscription = (user) => {
+  const handleUserRegistration = (user) => {
     if (!checkPassword(user.password, user.password2)) {
       alert('verifier votre mots de passe');
     }
@@ -152,7 +152,7 @@ const Users = () => {
         <button
           type="button"
           onClick={(evt) => {
-            evt.preventDefault(); handleUserInscription(addUser);
+            evt.preventDefault(); handleUserRegistration(addUser);
           }}
         >ajouter
         </button>

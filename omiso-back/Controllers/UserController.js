@@ -141,7 +141,6 @@ exports.forget_password = (req, res) => {
       if (!user) {
         return res
           .status(400)
-
           .json({ error: "L'utilisateur avec cet e-mail n'existe pas" });
       }
 

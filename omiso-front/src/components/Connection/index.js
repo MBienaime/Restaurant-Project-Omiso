@@ -50,7 +50,7 @@ const Connection = ({ checkAuth }) => {
   };
 
   // API call : Signin
-  const handleUserInscription = (user) => {
+  const handleUserRegistration = (user) => {
     const url = 'https://omiso.com/utilisateur/inscription';
     axios({
       method: 'post',
@@ -150,7 +150,7 @@ const Connection = ({ checkAuth }) => {
                 type="button"
                 className="container-button"
                 onClick={(evt) => {
-                  evt.preventDefault(); handleUserInscription(user);
+                  evt.preventDefault(); handleUserRegistration(user);
                 }}
               >
                 Inscription
