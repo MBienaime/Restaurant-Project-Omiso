@@ -72,7 +72,6 @@ const Users = () => {
     return true;
   };
 
-
   // API call : Signin
   const handleUserRegistration = (user) => {
     if (!checkPassword(user.password, user.password2)) {
@@ -144,7 +143,7 @@ const Users = () => {
           <select className="ResultSelectAdminUser_select" name="role" id="role" onChange={(e) => handleInputChange(e)} value={addUser.role}>
             <option className="ResultSelectAdminUser_select" value="admin">Administrateur</option>
             <option className="ResultSelectAdminUser_select" value="employé">Employé</option>
-            <option className="ResultSelectAdminUser_select" value="client">Client</option>
+
           </select>
 
         </div>
