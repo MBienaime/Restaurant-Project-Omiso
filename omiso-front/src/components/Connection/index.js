@@ -111,7 +111,7 @@ const Connection = ({ checkAuth }) => {
                 type="text"
                 name="lastname"
                 onChange={(e) => handleInputChange(e)}
-                placeholder="Nom"
+                placeholder="Prénom"
                 value={user.lastname}
               />
 
@@ -119,7 +119,7 @@ const Connection = ({ checkAuth }) => {
                 type="text"
                 name="firstname"
                 onChange={(e) => handleInputChange(e)}
-                placeholder="Prénom"
+                placeholder="Nom"
                 value={user.firstname}
               />
 
