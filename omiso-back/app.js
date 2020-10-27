@@ -3,6 +3,7 @@ const express = require('express');
 
 const app = express();
 const mongoose = require('mongoose');
+const mongoSanitize = require('express-mongo-sanitize');
 
 // import routes
 const path = require('path');
@@ -30,6 +31,8 @@ app.use((req, res, next) => {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// sanitize mongo
+app.use(mongoSanitize());
 // Routes
 
 // Reset password page view
