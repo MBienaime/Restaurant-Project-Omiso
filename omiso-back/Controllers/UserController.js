@@ -141,7 +141,6 @@ exports.forget_password = (req, res) => {
       if (!user) {
         return res
           .status(400)
-
           .json({ error: "L'utilisateur avec cet e-mail n'existe pas" });
       }
 
@@ -242,11 +241,11 @@ exports.user_delete = (req, res) => {
 // check User token
 exports.CheckToken = (req, res) => {
   const token = req.headers.authorization.split(' ')[1];
-
-  jwt.verify(token, process.env.JWT_PASSWORD, (err, decoded) => {
-    if (err) {
-      res.status(401).json({ authenticated: false, role: '' });
-    }
-    res.status(200).json({ authenticated: true, role: decoded.role });
-  });
+  try {
+    jwt.verify(token, process.env.JWT_PASSWORD, (err, decoded) => {
+      res.status(200).json({ authenticated: true, role: decoded.role });
+    });
+  } catch {
+    res.status(401).json({ authenticated: false, role: '' });
+  }
 };

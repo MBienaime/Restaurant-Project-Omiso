@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-
+import Home from '../src/components/Home'
 import App from '../src/components/App';
 
 describe('rendering components', () => {
@@ -9,11 +9,6 @@ describe('rendering components', () => {
     shallow(<App />);
   });
 
-  it('renders Header component without crashing', () => {
-    const wrapper = shallow(<App />);
-    const header = shallow(<Header />);
-    expect(wrapper.contains(header)).toEqual(true);
-  });
   it('renders Home component without crashing', () => {
     const wrapper = shallow(<App />);
     const home = shallow(<Home />);

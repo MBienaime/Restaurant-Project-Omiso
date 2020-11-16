@@ -18,6 +18,7 @@
 .sectionMenuCarte{
     display:flex;
     height: 55%;
+    padding:50px;
     flex-wrap: wrap;
     justify-content: space-around;
     overflow-y:scroll;   
@@ -38,10 +39,11 @@
 
 
 
-.sectionMenusCarteMenu ul{
+.sectionMenusCarteMenu {
     display:flex;
     justify-content: space-around;
     margin: 50px;
+    width: 50%;
 }
 
 .buttonMenu{
@@ -53,6 +55,7 @@
     color: honeydew;  
     padding: 5px 10px;
     border-radius: 5px;
+    cursor: pointer;
 
 }
 ul{

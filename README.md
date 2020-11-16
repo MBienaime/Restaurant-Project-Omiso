@@ -23,3 +23,4 @@ La durée de ce projet a été d’un mois, il s'agissait de concevoir puis de d
 - Développer les composants d’accès aux données 
 - Sécuriser la partie back end d’une application web et web mobile
 
+
