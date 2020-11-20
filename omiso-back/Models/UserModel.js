@@ -1,7 +1,7 @@
 // import
 const mongoose = require('mongoose');
 
-// Schema defines the shape of the documents in the dataBase collection
+// Schema defines the shape of the documents in the dataBase Collection
 const userSchema = mongoose.Schema({
   // _id: mongoose.Schema.Types.ObjectId,
   email: {
