@@ -88,12 +88,12 @@ const Orders = () => {
             <td>   {(viewsArchive)
               ? (
                 <button type="button" onClick={() => setViewsArchive(!viewsArchive)}>
-                  Commande en cours
+                  Commande Archivé
                 </button>
               )
               : (
                 <button type="button" onClick={() => setViewsArchive(!viewsArchive)}>
-                  Commande Archivé
+                  Commande en cours
                 </button>
               )}
             </td>
@@ -132,7 +132,7 @@ const Orders = () => {
 
           <div className="OrderDetail_client" key={uuidv4()}>
 
-            <div>{(el.status) ? ('En cours :') : ('Archivés : ')} </div>
+            <div>{(el.status) ? ('Archivés : ') : ('En cours : ')} </div>
             <button type="button">{(el.status) ? (<FaToggleOn onClick={() => toggleArchive(el._id)} />) : (<FaToggleOff onClick={() => toggleArchive(el._id)} />)}</button>
 
             <div>Client:</div>

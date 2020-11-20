@@ -15,7 +15,7 @@ paypal.configure({
   client_secret: process.env.PAYMENT_CLIENT_SECRET,
 });
 
-// Get Order
+// Get all Order
 exports.getOrder = (req, res) => {
   Order.find()
     .populate('id_User')

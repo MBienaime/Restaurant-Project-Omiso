@@ -1529,6 +1529,11 @@ execa@^0.7.0:
     signal-exit "^3.0.0"
     strip-eof "^1.0.0"
 
+express-mongo-sanitize@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/express-mongo-sanitize/-/express-mongo-sanitize-2.0.0.tgz#0be68c6d5e3828553e0de08b786ba6439d88bf0f"
+  integrity sha512-tqGqnKsibDfKqypC6QDYjp4VRLqtTlwuHDfK7KECZvq9fDOq8yi0MdzCJe2DWhv54/IoQV+7uXR7h9eD+Fc5LA==
+
 express-validator@^6.6.1:
   version "6.6.1"
   resolved "https://registry.yarnpkg.com/express-validator/-/express-validator-6.6.1.tgz#c53046f615d27fcb78be786e018dcd60bd9c6c5c"

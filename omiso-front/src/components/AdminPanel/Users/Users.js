@@ -72,9 +72,8 @@ const Users = () => {
     return true;
   };
 
-
   // API call : Signin
-  const handleUserInscription = (user) => {
+  const handleUserRegistration = (user) => {
     if (!checkPassword(user.password, user.password2)) {
       alert('verifier votre mots de passe');
     }
@@ -144,7 +143,7 @@ const Users = () => {
           <select className="ResultSelectAdminUser_select" name="role" id="role" onChange={(e) => handleInputChange(e)} value={addUser.role}>
             <option className="ResultSelectAdminUser_select" value="admin">Administrateur</option>
             <option className="ResultSelectAdminUser_select" value="employé">Employé</option>
-            <option className="ResultSelectAdminUser_select" value="client">Client</option>
+
           </select>
 
         </div>
@@ -152,7 +151,7 @@ const Users = () => {
         <button
           type="button"
           onClick={(evt) => {
-            evt.preventDefault(); handleUserInscription(addUser);
+            evt.preventDefault(); handleUserRegistration(addUser);
           }}
         >ajouter
         </button>

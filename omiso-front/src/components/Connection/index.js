@@ -50,7 +50,7 @@ const Connection = ({ checkAuth }) => {
   };
 
   // API call : Signin
-  const handleUserInscription = (user) => {
+  const handleUserRegistration = (user) => {
     const url = 'https://omiso.com/utilisateur/inscription';
     axios({
       method: 'post',
@@ -111,7 +111,7 @@ const Connection = ({ checkAuth }) => {
                 type="text"
                 name="lastname"
                 onChange={(e) => handleInputChange(e)}
-                placeholder="Nom"
+                placeholder="Prénom"
                 value={user.lastname}
               />
 
@@ -119,7 +119,7 @@ const Connection = ({ checkAuth }) => {
                 type="text"
                 name="firstname"
                 onChange={(e) => handleInputChange(e)}
-                placeholder="Prénom"
+                placeholder="Nom"
                 value={user.firstname}
               />
 
@@ -150,7 +150,7 @@ const Connection = ({ checkAuth }) => {
                 type="button"
                 className="container-button"
                 onClick={(evt) => {
-                  evt.preventDefault(); handleUserInscription(user);
+                  evt.preventDefault(); handleUserRegistration(user);
                 }}
               >
                 Inscription

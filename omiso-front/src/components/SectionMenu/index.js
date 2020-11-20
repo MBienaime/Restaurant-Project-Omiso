@@ -44,9 +44,9 @@ const SectionMenu = ({ addOrder }) => {
     <>
 
       <div className="sectionMenus" id="Menu">
-        <div className="sectionMenusCarteMenu">
-          <ul><li className="buttonMenu" onClick={() => (setCategory('entree'))}>Entree</li><li className="buttonMenu" onClick={() => (setCategory('plat'))}>Plats</li><li className="buttonMenu" onClick={() => (setCategory('dessert'))}>Dessert</li><li className="buttonMenu" onClick={() => (setCategory('boisson'))}>Boisson</li></ul>
-        </div>
+
+        <ul className="sectionMenusCarteMenu"><li className="buttonMenu" onClick={() => (setCategory('entree'))}>Entree</li><li className="buttonMenu" onClick={() => (setCategory('plat'))}>Plats</li><li className="buttonMenu" onClick={() => (setCategory('dessert'))}>Dessert</li><li className="buttonMenu" onClick={() => (setCategory('boisson'))}>Boisson</li></ul>
+
         <div className="sectionMenuCarte">
           {
 filterCategory(data, category).map(
