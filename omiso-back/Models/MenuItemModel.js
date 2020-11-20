@@ -1,7 +1,7 @@
 // Import
 const mongoose = require('mongoose');
 
-// Schema defines the shape of the documents in the dataBase collection
+// Schema defines the shape of the documents in the dataBase Collection
 const menuItemSchema = mongoose.Schema({
   // _id: mongoose.Schema.Types.ObjectId,
   name: { type: String, required: true },
@@ -11,5 +11,5 @@ const menuItemSchema = mongoose.Schema({
   urlImage: { type: String },
 });
 
-// Converts menuItemSchema into a Model + exports it
+// Converts menuItemSchema into a Model + exports it 
 module.exports = mongoose.model('Menu', menuItemSchema);
