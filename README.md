@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Le projet "restaurant Omiso" s’inscrit dans la continuité de ma formation au sein de l'école [O'clock]('https://oclock.io/') et qui s'est clôturée par l’élaboration d’un travail, en équipe, dans des conditions réelles d’entreprise. 
+Le projet "restaurant Omiso" s’inscrit dans la continuité de ma formation au sein de l'école [O'clock](https://oclock.io/) et qui s'est clôturée par l’élaboration d’un travail, en équipe, dans des conditions réelles d’entreprise. 
 
 La durée de ce projet a été d’un mois, il s'agissait de concevoir puis de développer la partie backend et frontend d’une application web et web mobile. 
 <br/>
@@ -23,4 +23,20 @@ La durée de ce projet a été d’un mois, il s'agissait de concevoir puis de d
 - Développer les composants d’accès aux données 
 - Sécuriser la partie back end d’une application web et web mobile
 
+<br/>
 
+##  Liste des technologies utilisées
+
+- Frontend : 
+    - React 
+    - React-Router
+    - Axios
+    - JWT
+
+<br/>
+
+- Backend : 
+    - Node
+    - Express
+    - MongoDB
+    - JWT
