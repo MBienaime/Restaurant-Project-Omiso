@@ -1,0 +1,177 @@
+
+@font-face{
+    font-family: 'DMSerifText';
+    src: url('../../../assets/fonts/DMSerifText-Italic.ttf')
+
+}
+
+@font-face{
+    font-family: 'SourceSansPro';
+    src: url('../../../assets/fonts/SourceSansPro-SemiBold.ttf')
+
+}
+.ItemMenu{
+    border-color: rgb(229, 110, 45);
+    border-style: solid;
+    border-width: 2px 0 2px 0;
+    max-height: 125px;
+    max-width: 300px;
+    display:flex;    
+    
+    align-items: center;
+   padding: 10px 10px;
+   margin: 10px 50px;
+    border-radius: 15px;
+    position: relative;
+}
+.ItemMenuPhoto{    
+    transform: translate(40px, 0);
+
+}
+.ItemMenuPrice{
+    border-color: rgb(229, 110, 45);    
+    border-left-style: solid ;
+    border-left-width: 2px;        
+    color:rgb(255, 255, 255) ; 
+    font-weight:bold;
+    font-size: 1.9em;
+    padding: 25px 0;
+    font-family:'DMSerifText';
+}
+.ItemMenuDescription{
+   padding-left: 10;
+    transform: translate(-60px, 0);    
+
+}
+.ItemMenuDescriptionTitle{
+    height: 30px;    
+    color:rgb(255, 255, 255);
+    font-weight:bold;
+    font-size: 1.7em;
+    font-family:'DMSerifText';
+    
+}
+.ItemMenuDescriptionCategory{
+    color: rgb(229, 110, 45); 
+    margin: 0;
+    text-transform: capitalize;
+    font-family: 'SourceSansPro';
+}
+.ItemMenuDescriptionDescrip{
+    margin: 0;
+    color:rgb(255, 255, 255);
+    width: 150px;
+    overflow-wrap: break-word;   
+    font-weight:bold;
+    size: 0.1em;    
+}
+
+.ItemMenuPhoto{
+  
+    background-repeat: no-repeat;    
+    background-size: contain;
+    background-position: center;
+    height: 80px;
+    width: auto;
+    
+
+}
+.ItemMenu-animate{
+    height: 100%;
+    width: 100%;   
+    position: absolute; 
+    bottom:0;    
+    opacity: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;   
+    z-index: 1;
+    
+    
+}
+.ItemMenu-animate:hover  {      
+    opacity: 1;  
+    transition: 1s;    
+}
+.ItemMenu-Button{
+
+    border-color: rgb(229, 110, 45);
+    border-style: solid;    
+    border-width: 2px;
+    max-height: 150px;
+    max-width: 350px;        
+    padding: 5px 10px;
+    border-radius: 5px;   
+    background-color:rgb(229, 110, 45) ;
+   
+
+}
+
+@media screen and (max-width: 500px)
+{    
+    .ItemMenuDescription{
+        margin: 0;
+        padding: 5px;       
+        transform: translate(0, 0);   
+    }  
+
+    .ItemMenuPrice{
+        border-color: rgb(229, 110, 45);    
+        border-left-style: solid ;
+        border-left-width: 2px;        
+        color:rgb(255, 255, 255) ; 
+        font-weight:bold;
+        font-size: 1.1em;        
+        font-family:'DMSerifText';
+    }
+    .ItemMenuDescriptionDescrip{
+        margin: 0;
+        color:rgb(255, 255, 255);
+        width: 150px;
+        overflow-wrap: break-word;   
+        font-weight:bold;
+        size: 0.1em;    
+    }
+    .ItemMenuPhoto{
+        background-repeat: no-repeat;    
+        background-size: contain;
+        background-position: center;
+        height: 80px;
+        width: auto;
+    }
+
+    .ItemMenu-animate{
+        height: 100%;
+        width: 100%;   
+        position: absolute; 
+        bottom:0;    
+        opacity: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;   
+        z-index: 1;
+    }
+    .ItemMenuDescriptionTitle{
+        height: 30px;    
+        color:rgb(255, 255, 255);
+        font-weight:bold;
+        font-size: 1.3em;
+        font-family:'DMSerifText';
+        
+    }
+
+    .ItemMenu-animate:hover  {      
+        opacity: 1;  
+        transition: 1s;    
+    }
+    .ItemMenu{
+        border-color: rgb(229, 110, 45);
+        border-style: solid;
+        border-width: 2px 0 2px 0;
+        max-height: 125px;
+        max-width: 300px;
+        display:flex;
+        border-radius: 15px;
+        position: relative;
+    }
+}

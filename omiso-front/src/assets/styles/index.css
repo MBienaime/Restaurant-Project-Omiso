@@ -1,33 +1,15 @@
 @import 'reset';
 
-@font-face {
-  font-family: 'Roboto';
-  src: url(../fonts/Roboto-Regular.ttf);
-}
 
 /* Specific */
-body {
-  font-size: 1rem;
-  /*font-family: 'Roboto', sans-serif;*/
 
-  background: url(../../assets/image/Background-light-opac.png);
-  font-family: 'Lobster', cursive, sans-serif;
-  background-repeat: no-repeat;
-  background-position: 20% 26%;
-  background-attachment: fixed;
-  background-size: cover;
-}
+body{
+    height:100%; /* force the BODY element to match the height of the HTML element */
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: bold;
-  line-height: 1.2;
-  font-size: 1.2rem;
 }
+#root{
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 1200px;    
+      }
 
-#root {
- height: 100vh;
-}
-
-@media only screen and (min-width: 768px) {
-  body { background-position: 30% 90%; };
-}

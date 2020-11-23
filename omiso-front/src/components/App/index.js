@@ -1,95 +1,112 @@
-// == Import npm
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-
-// == Import
-import Footer from '../Footer';
-import Header from '../Header';
-import Main from '../Main';
-import SectionMenu from '../../containers/SectionMenu';
-import Inscription from '../Modal/Inscription';
-import Connexion from '../Modal/Connexion';
-import OrderValidation from '../Modal/OrderValidation';
-import OrderManagementPage from '../../containers/OrderManagementPage';
+/* eslint-disable no-underscore-dangle */
+//Import npm
+import React, { useState, useEffect } from "react";
+import { Route, Switch } from "react-router-dom";
+import axios from "axios";
 
 // == Import Style
-import './styles.scss';
+import "./styles.scss";
 
-// commande recuperation API
-// == Import npm
-const App = ({
-  fetchItems,
-  offModalConnexion,
-  onModalInscription,
-  offModalInscription,
-  offModalOrder,
-  userLogin,
-  userInscription,
-  showModal,
-  userIsLogged,
-  checkAuthentification,
-  sendOrders,
-}) => {
-  useEffect(fetchItems, []);
- 
-  useEffect(checkAuthentification, []);
+// Local imports
+import Navigation from "../Navigation";
+import Cart from "../Cart";
+import Connection from "../Connection";
+import AdminPanel from "../AdminPanel/index";
+import SectionMenu from "../SectionMenu";
+import ProtectedRoute from "./protectedRoute";
+import Home from "../Home";
 
-  // systeme de route affichage
+const App = () => {
+  //* declaration State*//
 
+  // authentification user
+  const [auth, setAuth] = useState({ connect: false, role: "client" });
+  // order user
+  const [order, setorder] = useState([]);
+
+  //* declaration Function *//
+
+  // function check token for connection
+  const checkAuth = () => {
+    if (localStorage.getItem("UserTokenOmiso") !== null) {
+      const token = localStorage.getItem("UserTokenOmiso");
+      axios
+        .get("https://omiso.com/utilisateur/verifier-Token", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((resp) => {
+          setAuth({ role: resp.data.role, connect: resp.data.authenticated });
+        })
+        .catch(() => {
+          setAuth({ ...auth, connect: false });
+        });
+    } else {
+      setAuth({ ...auth, connect: false });
+    }
+  };
+
+  // function deconnected user
+  const deconnected = () => {
+    localStorage.removeItem("UserTokenOmiso");
+    setAuth({ ...auth, connect: false, role: " " });
+  };
+
+  // function add Order on state order
+  const addOrder = (d) => {
+    if (!order.some((e) => e._id === d._id)) {
+      setorder([...order, { ...d, quantity: 1 }]);
+    } else {
+      const newdata = order.map((e) =>
+        e._id === d._id ? { ...e, quantity: e.quantity + 1 } : { ...e }
+      );
+      setorder(newdata);
+    }
+  };
+  // function remove Order on state order
+  const RemoveOrder = (d) => {
+    if (!order.some((e) => e._id === d._id)) {
+      setorder([...order, { ...d, quantity: 1 }]);
+    } else {
+      const newdata = order.map((e) =>
+        e._id === d._id ? { ...e, quantity: e.quantity - 1 } : { ...e }
+      );
+      setorder(newdata);
+    }
+  };
+
+  // function selector order menu
+  const usefilterorder = order.filter((e) => e.quantity > 0);
+
+  //* Declaration useffect *//
+  useEffect(() => checkAuth(), []);
 
   return (
-    <div className="app">
-      <Header userIsLogged={userIsLogged} />
-      <Inscription
-        showModal={showModal.showModalInscription}
-        offModalInscription={offModalInscription}
-        userInscription={userInscription}
-      />
-      <Connexion
-        showModal={showModal.showModalConnexion}
-        offModalConnexion={offModalConnexion}
-        onModalInscription={onModalInscription}
-        userLogin={userLogin}
-      />
-
-
-      {!userIsLogged.isAuthUser && (<Main />)}
-
-      {userIsLogged.isAuthUser ? (
-        userIsLogged.role === 'ROLE_EMPLOYEE' ? (
-          <OrderManagementPage />
-        ) : (
-          <SectionMenu />
-        )
-      ) : (
-
-        <SectionMenu />
-
-      )}
-
-      <OrderValidation showModal={showModal.showModalOrder} offModalOrder={offModalOrder} sendOrders={sendOrders} />
-
-
-      <Footer userIsLogged={userIsLogged}/>
-    </div>
-
+    <>
+      <Navigation auth={auth} deconnected={deconnected} />
+      <Switch>
+        <Route exact path="/">
+          <Home />
+          <SectionMenu addOrder={addOrder} />
+        </Route>
+        <Route path="/Connexion">
+          <Connection checkAuth={checkAuth} />
+        </Route>
+        <Route path="/Panier">
+          <Cart
+            DataOrder={usefilterorder}
+            addOrder={addOrder}
+            RemoveOrder={RemoveOrder}
+          />
+        </Route>
+        <ProtectedRoute
+          path="/Administration"
+          auth={auth}
+          component={AdminPanel}
+        />
+      </Switch>
+    </>
   );
 };
 
-App.propsTypes = {
-  fetchItems: PropTypes.func.isRequired,
-  offModalConnexion: PropTypes.func.isRequired,
-  onModalInscription: PropTypes.func.isRequired,
-  offModalInscription: PropTypes.func.isRequired,
-  userLogin: PropTypes.func.isRequired,
-  receiveOrder: PropTypes.func.isRequired,
-  userInscription: PropTypes.func.isRequired,
-  showModal: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.object,
-    PropTypes.func,
-  ]),
-};
-
-// == Export
+// == Export compoment
 export default App;

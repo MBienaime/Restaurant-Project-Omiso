@@ -1,0 +1,11 @@
+#DATA BASE
+DB_HOST="localhost"
+BD_USER=
+DB_PASSWORD=
+
+#JWT
+JWT_PASSWORD="test"
+
+
+#BCRIPT
+BC_PASSWORD="BCtest"

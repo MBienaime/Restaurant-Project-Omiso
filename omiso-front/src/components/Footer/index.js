@@ -1,45 +1,49 @@
-// == Import npm
-import React from 'react';
-import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
+import React from "react";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaTripadvisor,
+} from "react-icons/fa";
 
-import './style.scss';
+import "./style.css";
 
+const Footer = () => (
+  <div className="footer" id="Footer">
+    <div className="footer__content">
+      <div className="footer__content--about">
+        <h4 className="footer__title">A propos</h4>
+        <p>Le restaurant est ouvert du lundi au Samedi</p>
+        <p>Le midi de 11h45 à 14h00</p>
+        <p>Le soir de 18h45 à 23h00</p>
+      </div>
 
-// == Composant
-const Footer = ({ userIsLogged }) => {
-  if (userIsLogged.role === 'ROLE_EMPLOYEE') return null;
+      <div className="footer__content--contact">
+        <h4 className="footer__title">Nous contacter</h4>
+        <p>1 place de la gare</p>
+        <p>+33102030405</p>
+        <a>omiso@restaurant.com</a>
+      </div>
 
-  return (  
-  <div className="footer">
-    <div className="icones text-center ">
-
-      <a target="blank" className="col-4 icone" href="https://fr-fr.facebook.com/"><FaFacebook /></a>
-
-      <a target="blank" className="col-4 icone" href="https://twitter.com/"><FaTwitter /></a>
-
-      <a target="blank" className="col-4 icone" href="https://www.instagram.com/"><FaInstagram /></a>
+      <div className="footer__content--socials">
+        <h4 className="footer__title">Suivez-nous</h4>
+        <div className="social__media">
+          <a href="#" className="icon">
+            <FaFacebookF />
+          </a>
+          <a href="#" className="icon">
+            <FaTwitter />
+          </a>
+          <a href="#" className="icon">
+            <FaInstagram />
+          </a>
+          <a href="#" className="icon">
+            <FaTripadvisor />
+          </a>
+        </div>
+      </div>
     </div>
-
-
-    <div className="info">
-      <h5 className="addressTitle">Adresse :</h5>
-      <h6 className="address">O'Miso</h6>
-      <p className="address">21 route du miso</p>
-      <p className="address">makis 01 234</p>
-      <p className="address"> téléphone : 01 01 02 03 04</p>
-    </div>
-
-    <div className="info divTime">
-      <h5 className="addressTitleTime">Horaires :</h5>
-      <h6 className="address time">Nous sommes heureux de vous accueillir</h6>
-      <p className="address time">Tous les jours de midi à 23h00 </p>
-      <p className="address time">Sauf le dimanche</p>
-    </div>
-
-
   </div>
-)
-};
+);
 
-// == Export
 export default Footer;

@@ -1,0 +1,66 @@
+
+
+.sectionMenus{
+    
+    background-image: url('../../assets/image/font.jpg');
+    background-repeat: no-repeat;    
+    background-size: cover;
+    background-position: center;
+    height: 1500px;  
+    width: 1000; 
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+   
+}
+
+
+.sectionMenuCarte{
+    display:flex;
+    height: 55%;
+    padding:50px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    overflow-y:scroll;   
+
+}
+
+.sectionMenuHeaderCenter{    
+    height: auto;
+    width: 80%;
+    margin: 60px 0;
+    opacity: 0.7;
+    background-image: url('../../assets/image/TitreMenu.png');
+    background-repeat: no-repeat;    
+    background-size: contain;
+    background-position: center;
+}
+
+
+
+
+.sectionMenusCarteMenu {
+    display:flex;
+    justify-content: space-around;
+    margin: 50px;
+    width: 50%;
+}
+
+.buttonMenu{
+    border-color: rgb(229, 110, 45);
+    border-style: solid;
+    border-width: 2px;
+    max-height: 150px;
+    max-width: 350px;    
+    color: honeydew;  
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+ul{
+    margin: 0 0 35px 0;
+}
+
+
+

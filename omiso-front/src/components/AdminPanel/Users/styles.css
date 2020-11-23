@@ -1,0 +1,42 @@
+.selectUser{
+    background-color:rgba(238, 234, 228, 0.281);
+    border-radius: 2px;
+}
+
+.sectionAdminUser{
+    display: flex;
+    height: 1000px;
+    width: 100%;    
+    color: rgb(241, 229, 229); 
+}
+.sectionAdminUser_table{
+    display:flex;
+    flex-direction: column;    
+    width: 100%;
+    height:100%;
+    border: solid;
+    border-color: rgb(231, 223, 223);
+    border-radius: 20px;
+    margin: 0px 20px;
+    background-color: rgba(0, 0, 0, 0.363);
+}
+
+.ResultSelectAdminMenu{
+    display: flex;
+    flex-direction: column;    
+    border: solid;
+    border-color: rgb(231, 223, 223);
+    border-radius: 20px;
+    padding: 10px;  
+    align-items: center;   
+    flex-direction: column;    
+    background-color: rgba(0, 0, 0, 0.363);
+    height:100%;
+    width: 60%;
+    font-size:x-large;
+}
+
+.inputfailpassword{
+    box-shadow: inset  0 0 15px tomato;
+    
+}
